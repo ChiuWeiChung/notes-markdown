@@ -1,0 +1,267 @@
+# DOM中的一些心得筆記整理
+
+## querySelectorAll 以及getElementsBy... 的差異
+
+#### 進行DOM manipulation時，有許多方法可以選取html內的element，需要注意的是，透過 document.querySelectorAll()`所回傳的資料內容是靜態的，後續對該元素進行DOM操作不會改變該變數的內容。
+
+``` html
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        const ul = document.querySelector('ul');
+        const li = document.querySelectorAll('li');
+        ul.appendChild(document.createElement('li'));
+        console.log(ul.childElementCount); //4
+        console.log(li); // NodeList(3)[li,li,li] 沒有隨著DOM操作而更動內容
+    </script>
+</body>
+```
+
+#### 但若透過 `document.getElementsBy...()` 回傳的資料是動態的，隨著DOM的操作會更新其內容，如下方範例。
+
+``` html
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        const ul = document.querySelector('ul');
+        const li = document.getElementsByTagName('li');
+        ul.appendChild(document.createElement('li'));
+        console.log(ul.childElementCount); //4
+        console.log(li); // HTMLCollection(4)[li,li,li,li]
+    </script>
+</body>
+```
+
+## 創造或插入元素
+
+#### 若要透過DOM創造新的element，可以透過 `document.createElement()` ，但需要注意的是，若將它傳入一變數時，它會是個獨立的個體，無法同時間存在於不同位置。
+
+``` html
+<body>
+    <div class="class1">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    </div>
+    <script>
+        const class1 = document.querySelector('.class1');
+        const newDiv = document.createElement('div');
+        newDiv.textContent = 'hi, this is newDiv element';
+        class1.prepend(newDiv); //將newDiv作為class1的第一個子元素
+        class1.append(newDiv); //將newDiv作為class1的最後一個子元素
+        class1.before(newDiv); //將newDiv作為class1上方的兄弟元素 
+        class1.after(newDiv); //將newDiv作為class1下方的兄弟元素
+    </script>
+</body>
+```
+
+## 刪除元素
+
+#### 透過 `remove()` 可去除html內的元素，在前期版本因為只有 `removeChild()` ，所以需要使用tricky的方法，透過 `parentElement` 選取其父層元素。
+
+``` html
+<body>
+    <div class="parent-class">
+        <div class="child-class1">
+            this is child class1
+        </div>
+        <div class="child-class2">
+            this is child class2
+        </div>
+    </div>
+    <script>
+        const childClass2 = document.querySelector('.child-class2');
+        childClass2.remove();
+
+        // childClass2.parentElement.removeChild(childClass2);  早期方法
+    </script>
+</body>
+```
+
+## 改變/獲取Style資訊
+
+#### 透過 `element.style.xxx` 來改變元素的style，倘若要獲取元素已存在的style資訊，可以透過 `getComputedStyle()` 來得到。
+
+``` html
+<body>
+    <div class="parent-class" style="background-color:steelblue">
+        <div class="child-class1" style="color:orangered">
+            this is child class1
+        </div>
+        <div class="child-class2">
+            this is child class2
+        </div>
+    </div>
+    <script>
+        const parentClass = document.querySelector(".parent-class");
+        console.log(getComputedStyle(parentClass).backgroundColor); //"rgb(70, 130, 180)"
+        console.log(getComputedStyle(parentClass).height); //36px
+        parentClass.style.height = "40px";
+        console.log(getComputedStyle(parentClass).height); //40ox
+    </script>
+</body>
+```
+
+#### 倘若CSS file內有設置CSS Variable，也可以透過DOM改變其內容。
+
+``` js
+// -----------in css file----------
+// :root{
+//     --color-primary: #5ec576;
+// }
+
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+```
+
+## HTML 屬性(Attribute)
+
+#### 要取得element內的attribute的方式有兩種，一種是為 `element.attributeName` 方式得到，另一種可以透過 `element.getAttribute(attributeName` )，兩種方式差異在於，若選取的attribute內容為文件位址時，第一種方式得到的是絕對位置，第二種得到的是相對位置。
+
+``` html
+<body>
+    <img src="img/picture.jpg" alt="my picture" class="picture-1" data-img="1" />
+    <script>
+        const img = document.querySelector('img');
+        console.log(img.src); // file:///C:/Users/username/Desktop/xxxxxxxx/img/picture.jpg
+        console.log(img.getAttribute('src')); // img/picture.jpg
+    </script>
+</body>
+```
+
+## HTML 資料屬性 (Data Attribute)
+
+#### 算是經常被使用的功能，將一些簡單的資料以data attribute(data-xxx)形式儲存在html element之內，其中xxx可以任意命名，並且透過DOM()方式( `element.dataset.xxx` )來存取。
+
+``` html
+<body>
+    <img src="img/picture.jpg" alt="my picture" class="picture-1" data-img="1" />
+    <img src="img/picture2.jpg" alt="my picture" class="picture-1" data-img="2" />
+    <img src="img/picture3.jpg" alt="my picture" class="picture-1" data-img="3" />
+    <script>
+        const imgs = document.querySelectorAll('img');
+        // 也可以透過data-attribute選取特定元素
+        // imgs = document.querySelectorAll('img[data-img]') 
+        imgs.forEach(el => console.log(el.dataset.img));
+        //1
+        //2
+        //3
+    </script>
+</body>
+```
+
+## Class的用法
+
+#### 透過 `element.classList.xxx` 對該元素做新增、刪除、切換class等功能。
+
+``` js
+
+element.classList.add('a'); // 新增class a 至element元素
+element.classList.remove('c'); //將a class自element元素內移除
+element.classList.toggle('c');  
+element.classList.contains('c');
+
+// Be careful to use this
+element.className = 'rick'; // 將會覆蓋元素既有的class，因此該元素只有rick這個class
+```
+
+## 事件監聽的種類
+
+#### `addEventListener` 可以重複使用，而第二種方法 `.onevent` 重複使用會覆蓋前一個event，現在大多都使用第一種方式來定義元素的事件處理器。
+
+``` js
+const h1 = document.querySelector('h1');
+
+h1.addEventListener('mouseenter', function(e) {
+    alert('addEventListener: Great!');
+});
+
+h1.onmouseenter = function(e) { // old school way
+    alert('addEventListener: Great!');
+};
+```
+
+#### 若要將Event Listener 移除的話可以透過 `removeEventListener` 來達到。
+
+``` html
+<body>
+    <div class="parent-class" style="background-color:steelblue">
+        <div class="child-class1" style="color:orangered">
+            this is child class1
+        </div>
+    </div>
+    <script>
+        const child1 = document.querySelector('.child-class1');
+        const eventHandler = function(e) {
+            console.log('this is click event');
+        }
+        child1.addEventListener('click', eventHandler);
+        setTimeout(() => {              // 5秒後移除child1內的事件處理器
+            console.log('child1 event handler is removed!')
+            child1.removeEventListener('click', eventHandler);
+        }, 5000)
+    </script>
+</body>
+```
+
+#### 第三種方法則是在HTML文件中添加，但此方法並不被鼓勵使用，畢竟還是希望JavaScript與HTLM文件可以分離開來。
+
+``` html
+<h1 onClick="alert('h1 is clicked')">
+    Hi, This is header 1.
+</h1>
+```
+
+
+
+<!-- ``` js
+console.log(document.documentElement); // all html document
+console.log(document.head); 
+console.log(document.body); 
+
+const allSections = document.querySelectorAll('.section'); 
+console.log(allSections); // NodeList (It won't update itself when dom changed )
+
+document.querySelector('img[data-something]'; )
+
+document.getElementById('section--1'); 
+const allButtons = document.getElementsByTagName('button'); 
+console.log(allBUttons); // HTMLCollection (It will update when dom changed)
+
+const btn = document.getElementsByClassName('btn'); 
+console.log(btn) // HTMLCollections
+``` -->
+
+<!-- #### `message` is actually a live element livin in the dom, it can't be at multiple places at the same time. It just like a person who can't be at two places simultaneously. So we can use prepend and append method not only to insert elements but also to move them because they can only exist at one place at a time.
+
+``` js
+const header = document.querySelector('.header'); 
+const message = document.createElement('div'); 
+message.classList.add('cookie-message'); 
+// message.textContent='We use cookied for improved functionality and analytics.'; 
+message.innerHTML = 'We use cookied for improved functionality and analytics.<button class="btn btn--close-cookie">Got it!</button>'; 
+
+header.prepend(message); // adds the elements as the first child of this element
+header.append(message); // adds the elements as the last child of this element
+header.before(message); // as the sibling before header element
+header.after(message); // as the sibling after header element
+``` -->
+
+<!-- #### `remove()` method is new method. before this method exist, all we could do is to remove child element
+``` js
+document.querySelector('.btn--close-cookie').addEventListener('click', function() {
+
+    message.remove();
+    // message.parentElement.removeChild(message); 較早期的方法
+
+})
+``` -->
