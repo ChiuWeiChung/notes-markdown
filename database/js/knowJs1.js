@@ -1,6 +1,9 @@
 export const render = ()=>{
     const title = "了解JavaScript的背後Part1 (特性介紹)";
     const url = "#javascript/knowJs1";
+    const date = "20201217";
+    const desc = "HTML檔案內的script tag，其存放位置會影響到JavaScript code的執行時機，當開啟一網頁時，HTML文件會從最頂部(head)開始並逐一往底部進行解析(Parse)，當解析完畢時，也就是DOMcontentLoaded事件發生的時機，而關於DOMContentLoaded事件，在[MDN](https://developer.mozilla.org/zh-TW/docs/Web/Events/DOMContentLoaded)中的解釋是 `當document被完整的讀取跟解析後就會被觸發,不會等待 stylesheets, 圖片和subframes完成讀取` ，也就是HTML檔案由上至下完整被解析後才會觸發。";
+    
     const markup = `
     <div class="article-column" >
         <div class="board container-fluid note-content mt-4">
@@ -43,7 +46,6 @@ export const render = ()=>{
         </div>
     </div>
     `;
-    // elements.board.insertAdjacentHTML("afterbegin",markup);
 
     return {title,markup,url};
 }
