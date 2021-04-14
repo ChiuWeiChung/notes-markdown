@@ -184,3 +184,5 @@ ted.setData('Ted',1990,'Taiwanese');
 console.log(ted.__proto__); //{setData: ƒ}
 console.log(ted.__proto__.__proto__); // {calcAge: ƒ, setData: ƒ}
 ```
+###### 參考資料
+* [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)

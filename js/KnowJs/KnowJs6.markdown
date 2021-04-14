@@ -78,3 +78,6 @@ console.log(rick.family); // ["Jason", "Emily", "Bob"]
 console.log(anotherRick.family); // ["Jason", "Emily", "Bob", "John"]
 ```
 
+###### 參考資料
+* [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)
+

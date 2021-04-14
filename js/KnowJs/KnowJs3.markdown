@@ -141,3 +141,6 @@ first();
 * 在JavaScript中，變數在哪裡可以被存取主要是由Function Scope以及Block Scope所宣告的位置做決定
 * 每一個Scope都可以存取其外部的Scope的變數，即為Scope Chain
 * Scope Chain與函式被呼叫的順序無關，僅與宣告時所存在的位置有關
+
+###### 參考資料
+* [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)

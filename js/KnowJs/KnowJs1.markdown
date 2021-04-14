@@ -15,7 +15,7 @@
 * Just-In-Time Compilation: 結合Compiler以及Interpreter的優點，並優化執行速度，近年有些瀏覽器(Google的V8 engine)已導入JIT Compiler。
 
 ## 3. One Single Thread & Non-blocking event loop
-#### One Single Thread主要是在描述JavaScript面對多項任務時是如何處理;在下方方程式碼輸出結果可以推論得知，輸出的順序與呼叫的順序是一致的，表現出JavaScript處理程式碼時是逐行進行(line by line)，所以在一個時間點只能夠處理一件事情，即為one single thread;然而這樣的特性可能會使人認為，若遇到需要花時間處理的任務(ex: 透過Google Map提取地圖資訊，需要時間等待)，是不是就會拖延到後面的作業了呢? 其實不然，因為JavsScript特別之處在於擁有Event Loop(事件循環)的特性，藉由Event Loop將待執行的任務拖至`Background`下執行。聽起來非常抽象，因為尚需要解釋到JavaScript的運行機制(Runtime)，這部分我把它放在[JavaScript如何運行及理論 (Part 2)](/#javascript/knowjs2)來討論。
+#### One Single Thread主要是在描述JavaScript面對多項任務時是如何處理;在下方方程式碼輸出結果可以推論得知，輸出的順序與呼叫的順序是一致的，表現出JavaScript處理程式碼時是逐行進行(line by line)，所以在一個時間點只能夠處理一件事情，即為one single thread;然而這樣的特性可能會使人認為，若遇到需要花時間處理的任務(ex: 透過Google Map提取地圖資訊，需要時間等待)，是不是就會拖延到後面的作業了呢? 其實不然，因為JavsScript特別之處在於擁有Event Loop(事件循環)的特性，藉由Event Loop將待執行的任務拖至`background`下執行。接續 JavaScript如何運行及理論 (Part 2)。
 
 ```js
 const first = function (){

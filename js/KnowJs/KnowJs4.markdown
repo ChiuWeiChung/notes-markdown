@@ -48,5 +48,8 @@ if (name==="Rick"){
 |以let 或 const宣告的變數                           |No         |uninitialized, TDZ|Block              |
 
 
+###### 參考資料
+* [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)
+
 
 

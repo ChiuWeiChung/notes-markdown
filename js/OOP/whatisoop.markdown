@@ -1,4 +1,4 @@
-# JavaScript中的Prototype觀念
+# JavaScript中的Prototype筆記心得
 
 ## 物件導向語言(OOP)
 
@@ -19,7 +19,7 @@ console.log(arr1.__proto__.constructor === arr2.__proto__.constructor) //true
 
 ## JS中的Prototype(原型)與Inheritance(繼承)
 
-#### 承接上面提到的arr陣列，arr可以透過 `.push` 在陣列內新增元素，然而， push指令並非真的來自陣列arr本身，透過 `.hasOwnProperty` 即可證明arr陣列本身並沒有 `push` 的property，事實上，陣列之所以可以直接使用push指令，是因為Prototypal Inheritance(原型繼承)的特性，push指令是來自陣列arr的prototype所提供的，也可以想像成arr委託它的prototype幫忙執行push這個指令，因此也可以稱為原型委派(Prototypal Delegation)。
+#### 承接上面提到的arr陣列，arr可以透過 `.push` 在陣列內新增元素，然而， push指令並非來自陣列arr本身，透過 `.hasOwnProperty` 即可證明arr陣列本身並沒有 名為`push` 的property，事實上，陣列之所以可以使用push指令，是因為Prototypal Inheritance(原型繼承)的特性，push指令是來自陣列arr的prototype所提供的，也可以想像成arr委託它的prototype幫忙執行push這個指令，因此也可以稱為原型委派(Prototypal Delegation)。
 
 #### 如下方示意圖顯示，Inhheritance(繼承)的好處在於，當我們創建數個陣列時(arr1, arr2, ...)，每一個陣列的property就不需要存放相同的property(如push, find, filter...)，只要透過共同的prototype(Array prototype)提供即可，以此避免每個物件存放著相同的method，此外，建構子的prototype與被實體化物件的prototype是一樣的，要確認建構子的prototype可以透過指令 `.prototype` ，但要確認實體化物件的prototype則需要透過指令.__proto__。
 
@@ -52,6 +52,9 @@ console.log(arr.__proto__.__proto__.__proto__) // null
 
 ![prototype chain](https://github.com/ChiuWeiChung/IMGTANK/blob/main/prototype/prototypechain.jpg?raw=true)
 
+
+###### 參考資料
+* [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)
 <!-- #### constructor function與物件、prototype的關係，如下方的圖示所呈現，當我們建立了一個叫做Person的constructor function，透過 `new Person()` 建立了一個名為mike的物件，並且確認建構子Person的prototype( `Person.prototype` )以及mike的prototype( `mike.__proto__` )，可以發現都指向同一個prototype。
 ![prototype]()
 ```js

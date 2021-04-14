@@ -134,4 +134,5 @@ const obj = {
 };
 obj.calcAge();
 ```
-
+###### 參考資料
+* [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)
