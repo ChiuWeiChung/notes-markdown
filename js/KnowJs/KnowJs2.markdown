@@ -53,14 +53,14 @@ first();
 
 ## JavaScript Runtime =`JavaScript Engine` + `WEB APIs` + `Callback Queue`.
 #### 然而僅有`1.JavaScript Engine`是不夠的，還需要`2.WEB APIs`以及`3.Callback Queue`才可以建構完整的Runtime，原因是在進行DOM或是Timer function(如setTimeout())、Fetch API method的時候，需要WEB APIs來提供並搭配Callback Queue，因此在下一段就來介紹這兩個元素的重要性。
-`DOM、timer function(setTimeout())、navigator.geolocation method等方法是獨立於JavaScript之外，主要是由瀏覽器的WEB APIs所提供。`
-* `JavaScript Engine`: 
+1. JavaScript Engine: 
     #### 為JavaScript提供Call Stack以及Heap，其中Call Stack用來執行環境的堆疊及儲存簡單數據(Primitives)，Heap則負責儲存複雜數據如物件; [Execution Stack&Heap筆記](/#javascript/knowJs6)
-* `WEB APIs`: 
+2. WEB APIs: 
     #### JavaScript可以透過瀏覽器的global window object與WEB APIs，使用DOM、call timer function等功能
-* `Callback Queue`: 
+3. Callback Queue: 
     #### 用來存放準備執行的callback functions
 
+`NOte: DOM、timer function(setTimeout())、navigator.geolocation method等方法是獨立於JavaScript之外，主要是由瀏覽器的WEB APIs所提供。`
 
 ## JavaScript的執行流程
 #### 在下方，我參照了[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)課程製作了一張gif來描述這個流程，我們知道JavaScript處理程式碼時是以one single thread方式，一行程式碼處理完再接著下一行; 例如:觸發了一個`onClick`的event(來自WEB APIs提供的DOM event listener)，此時`onClick`的callback function會先被置放於`Callbacl Queue`當中排隊，此時透過Event loop(事件環)的機制以偵測Call Stack內部的任務(Execution 1-3)都被執行完畢後，callback function才會被移至Stack中執行。
