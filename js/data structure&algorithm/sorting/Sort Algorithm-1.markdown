@@ -1,4 +1,4 @@
-# 排序法的筆記-1 (Bubble, Selection, Insertion)
+# 排序法演算法筆記-1 (Bubble, Selection, Insertion)
 
 #### 在這裡紀錄學習Data Structure& Algorithm的學習筆記，在這邊會記錄三種排序的演算法，分別為 1. Bubble Sort, 2. Selection Sort, 3. Insertion Sort.
 
@@ -23,7 +23,7 @@ bubbleSort(arr);
 
 ## 1-2. 優化後的Bubble sort
 
-#### 在bubbleSort內定義一個用來監控的變數 `noSwaps` ，假如最近的一次loop沒有進行陣列上的交換，則立即跳出loop，避免後續無意義的運算
+#### 在Bubble Sortt內定義一個用來監控的變數 `noSwaps` ，假如最近的一次loop沒有進行陣列上的交換，則立即跳出loop，避免後續無意義的運算
 
 ``` js
 function bubbleSort(arr) {
@@ -73,3 +73,58 @@ const arr = [44, 5, 38, 19, 47, 15]
 console.log(selectionSort(arr))
 console.log(selectionSort([11, 3, 54, 23, 2, 4, 5, 1]))
 ```
+
+## 3. Insertion Sort
+
+#### 最糟的情況為O(n^2)
+
+``` js
+function insertionSort(arr) {
+    let loopNum = 0;
+    for (let i = 1; i < arr.length; i++) {
+        let tempIndex = i;
+        for (let j = i - 1; j >= 0; j--) {
+            if (arr[j] > arr[tempIndex]) {
+                [arr[tempIndex], arr[j]] = [arr[j], arr[tempIndex]];
+                tempIndex = j;
+                loopNum++;
+            }
+        }
+    }
+    console.log('fun1', loopNum)
+    return arr;
+}
+const arr = [2, 1, 9, 7, 6, 4];
+console.log(insertionSort(arr))
+```
+
+``` js
+function insertionSort(arr) {
+    let loopNum = 0
+    for (let i = 1; i < arr.length; i++) {
+        let currentVal = arr[i];
+        for (var j = i - 1; j >= 0 && arr[j] > currentVal; j--) {
+            arr[j + 1] = arr[j]
+            loopNum++
+        }
+        arr[j + 1] = currentVal
+    }
+    console.log('fun2', loopNum)
+    return arr;
+}
+const arr = [2, 1, 9, 7, 6, 4];
+console.log(insertionSort(arr))
+```
+
+## 比較上述三種演算法的 Big O Time Complexity
+
+  Algorithm     | Best condition| Average  |   Worst  | Space complexity
+  ----------    |:-------------:|:--------:|:--------:|:-----------:
+  Bubble Sort   |     O(n)      |   O(n^2) |   O(n^2) |     O(1)
+  Insertion Sort|     O(n)      |   O(n^2) |   O(n^2) |     O(1)
+  Selection Sort|     O(n^2)    |   O(n^2) |   O(n^2) |     O(1)
+
+* Sorting is fundamental!
+* Bubble, Selection, INsertion are all roughly equivalent
+* All have average time complexities taht are quadratic
+* We can do better ...but we need more complex algorithms

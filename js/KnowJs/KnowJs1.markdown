@@ -11,7 +11,7 @@
 ## 2. Just-In-Time Compiled
 #### 在上一段有談到因為High-Level是人類比較看得懂的語言，在執行過程需要透過翻譯才可以與電腦溝通，於是這邊來討論Source Code是如何透過翻譯轉成電腦可以理解的語言，一般而言可分為`Compilation(編譯)` & `Interpretation(直譯)` &`Just-In-Time Compilation(即時編譯)`:
 * Compiler : 在代碼執行前，先將Source Code全部一次轉換成機器可以理解的語言。 優點:速度快，可獨立運行; 缺點:除錯速度慢; 代表:C語言。
-* Interpreter : Source Code會一行一行的(step by step)轉為Machine Code。 優點:靈活性高; 缺點:速度較Compiler慢，需要執行環境(Execution context)才可執行; 代表:JavaScript
+* Interpreter : Source Code會一行一行的(step by step)轉為Machine Code。 優點:靈活性高; 缺點:速度較Compiler慢，需要執行環境(Execution context)才可執行; 代表:JavaScript。
 * Just-In-Time Compilation: 結合Compiler以及Interpreter的優點，並優化執行速度，近年有些瀏覽器(Google的V8 engine)已導入JIT Compiler。
 
 ## 3. One Single Thread & Non-blocking event loop

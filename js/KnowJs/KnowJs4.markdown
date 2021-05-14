@@ -14,9 +14,10 @@ function hi(){
 console.log(sayHi); //undefined  
 var sayHi = "hihi";
 ```
-#### 雖然這樣的機制可以在以var宣告變數之前就呼叫它，但應該要盡量避免使用，避免下方的悲劇發生，因為
+#### 雖然這樣的機制可以在以var宣告變數之前就呼叫它，但應該要盡量避免使用，避免下方的悲劇發生。
 ```js
 if(!database) deleteShoppingCart();
+// database在if statement後才透過var宣告，在此之前database被提升，其值仍為undefined。
 var database = 10;
 function deleteData(){
     console.log("All data deleted!");

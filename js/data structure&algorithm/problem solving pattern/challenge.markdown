@@ -86,7 +86,7 @@ console.log(averagePair([-1, 0, 3, 4, 5, 6], 4.1)) //false
 console.log(averagePair([], 4)) //false
 ```
 
-#### Multiple Pointers - isSubsequence
+## Multiple Pointers - isSubsequence
 
 #### Write a function called isSubsequence which takes in two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. In other words, the function should check whether the characters in the first string appear somewhere in the second string, without their order changing.
 

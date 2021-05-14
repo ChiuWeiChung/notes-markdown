@@ -16,7 +16,7 @@
 ## 三種在JavaScript的Scope
 
 ### 1.Global Scope
-#### 簡單定義的話，就是在所有`function以及block以外`所宣告的變數。
+#### 簡單定義的話，就是在`function及block以外`所宣告的變數。
 ```js
 const cat = "Jumo";
 const weight = "15kg";
@@ -37,17 +37,17 @@ console.log(birthday); // ReferenceError: birthday is not defined
 
 ### 3.Block Scope (ES6)
 
-#### Block Scope是在ES2015中才導入的scope，定義在大括號(如if statement、for-loop的大括號)內部的變數只能在其內部被存取，這邊指的變數包含`const`、`let`(但不包含`var`，利用`var`宣告的變數屬於function scope)。因為Block Scope的出現，在`strict mode`的情況下，函式宣告也會被block scope限制。
+#### Block Scope是在ES2015中才導入的scope，定義在大括號(如if statement、for loop的大括號)內部的變數只能在其內部被存取，這邊指的變數包含`const`、`let`(但不包含`var`，利用`var`宣告的變數屬於function scope)。因為Block Scope的出現，在`strict mode`的情況下，函式宣告也會被block scope限制。
 `NOTE:Object literal的大括號不屬於block scope`
 
 ```js
 'use strict'
 var age = 20;
 if( age >= 18){
-    const isAdult = true;  // can only be accessed inside the if statement
-    let canVote = true; // can only accessed inside the if statement
-    var gotoBar = true; // var variables are function scope, can be accessed outside block scope
-    function getLicense(){
+    const isAdult = true;  // 只能在if內部被存取
+    let canVote = true; // 只能在if內部被存取
+    var gotoBar = true; // var屬於function scope，可以在block scope外部存取
+    function getLicense(){ // strict mode情況下，函式宣告(function declaration)也屬於block scope
         console.log("you are adult, go to get a drive license!")
     };
 };
@@ -58,10 +58,11 @@ console.log(gotoBar); //true
 getLicense(); //getLicense is not defined
 ```
 ## Scope Chain
-#### Scope Chain是什麼?我們可以把它想像成一條`單行道`，當JavaScript所尋找的變數不存在當前的scope時，就會向外部的scope尋找，因為是單行道，所以不會往內層scope尋找，這就是所謂的Scope Chain!!，如下面範例中有許多的function scope&block scope，在內部各處都宣告了變數，可以發現在`沒有重複宣告相同變數名稱的情況下，處於內部的scope都能存取外部scope的變數`，如下圖所呈現。
+#### Scope Chain是什麼?我們可以把它想像成一條`單行道`，倘若scope內找不到目標變數時，Javascript就會向外部的scope尋找(單行道，僅向外部尋找)，這就是所謂的Scope Chain!!，如下面範例中有許多的Function scope&Block scope，在內部各處都宣告了變數，可以發現在`沒有重複宣告變數的情況下，處於內部的scope都能存取外部scope的變數`，如下圖所呈現。
 
 ```js
 'use strict';
+const firstName = "Rick";
 function calcAge(birthYear){
     const currentYear = new Date().getFullYear();
     const age = currentYear -birthYear;
@@ -83,7 +84,6 @@ function calcAge(birthYear){
     printAge();
     return age;
 }
-const firstName = "Rick";
 calcAge(1991);
 // console.log(age);  //ReferenceError
 // printAge(); //ReferenceError

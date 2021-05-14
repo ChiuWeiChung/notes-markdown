@@ -1,8 +1,20 @@
 ## Sliding Window
 
-#### This pattern involves creating a window which can either be an array or number from one position to another. Depending on a ceratin condition, the window either increases or closes(and a new window is created). Very useful for keeping track of a subset of data in an array/string etc.
+
+#### 此手法透過建立一個window(可以是array, index)，透過不同情況下來修改window，用以追蹤subset data。
+
+## Example 1 
+
+#### 定義一個函式，其接收一陣列以及數字(arr, n)，該函式會回傳陣列內n個數字總和的最大值。
 
 #### Navie way, Time complexity =>  N^2
+
+
+```js
+maxSubarraySum([10,2,11,3,3],2) // 14
+maxSubarraySum([1,21,5,7,3],3) // 33
+maxSubarraySum([1,3,5,7,9,31,2,45,31],3) // 78
+```
 
 ``` js
 function maxSubarraySum(arr, num) {
@@ -22,6 +34,7 @@ function maxSubarraySum(arr, num) {
 ```
 
 #### Refactored, Time complexity => N
+
 ``` js
 function maxSubarraySum(arr, num) {
     let maxSum = 0
@@ -38,5 +51,3 @@ function maxSubarraySum(arr, num) {
     return maxSum
 }
 ```
-
-

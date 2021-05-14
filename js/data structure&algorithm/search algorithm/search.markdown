@@ -1,6 +1,6 @@
-## Linear search
+## 線性搜尋演算法 (Linear search)
 
-#### Time complexity => O(N)
+#### 時間複雜度(Time complexity)=> O(N)
 
 ``` js
 function linearSearch(arr, num) {
@@ -12,7 +12,7 @@ function linearSearch(arr, num) {
 linearSearch([34, 21, 37, 98], 98) // 3
 ```
 
-## Binary Search
+## 二分搜尋演算法 (Binary Search)
 
 ``` js
 function binarySearch(arr, num) {
@@ -49,4 +49,23 @@ function binarySearch(arr, num) {
     console.log(start,end)
     return arr[middle] === num ? middle : -1
 }
+```
+## Naive String Search
+
+#### 尋找有多少次目標字串出現在主要字串當中
+
+```js
+function naiveStringSearch(str, target) {
+    let count = 0;
+    for (let i = 0; i <= str.length - target.length; i++) {
+        for (let j = 0; j < target.length; j++) {
+            if (str[i + j] !== target[j]) break
+            if (j === target.length - 1) count++
+        }
+    }
+    return count;
+
+}
+naiveStringSearch('wowomgzomg', 'omg')
+
 ```
