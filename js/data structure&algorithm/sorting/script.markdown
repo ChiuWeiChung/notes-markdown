@@ -1,4 +1,4 @@
-# 排序演萬法
+# 排序演算法
 
 ## Javascript Sort Method
 

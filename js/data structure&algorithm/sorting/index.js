@@ -99,4 +99,96 @@ function mergeSort(arr) {
     return merge(left, right)
 }
 
-mergeSort([1,5,8,4,2,5,7,9,3,2,1])
+mergeSort([1, 5, 8, 4, 2, 5, 7, 9, 3, 2, 1])
+// 
+
+
+
+
+
+
+
+
+// 4
+// pivot([8,3,5,15,4,21,7]) //[7, 3, 5, 4, 8, 21, 15]
+
+function quickSort(arr, left = 0, right = arr.length - 1) {
+    if (left < right) {
+        let pivotIndex = pivot(arr, left, right)
+        //left
+        quickSort(arr, left, pivotIndex - 1)
+        //right
+        quickSort(arr, pivotIndex + 1, right)
+    }
+
+    return arr
+}
+
+function pivot(arr, start = 0, end = arr.length - 1) {
+    let index = start;
+    let pivot = arr[start];
+    for (let i = start + 1; i < end + 1; i++) {
+        if (pivot > arr[i]) {
+            index++;
+            [arr[index], arr[i]] = [arr[i], arr[index]];
+        }
+    }
+    [arr[start], arr[index]] = [arr[index], arr[start]];
+    return index;
+}
+
+function quickSort(arr, left = 0, right = arr.length - 1) {
+    if (left < right) {
+        let pivotIndex = pivot(arr, left, right);
+        quickSort(arr, left, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, right)
+    }
+    return arr
+}
+
+
+const arr = [8, 3, 5, 15, 4, 21, 7];
+quickSort(arr);
+//[7, 3, 5, 4, 8, 21, 15]
+
+// =====================================================================
+// =====================================================================
+// =====================================================================
+// =====================================================================
+// =====================================================================
+
+function getDigit(num, index) {
+    return Math.floor(Math.abs(num) / Math.pow(10, index) % 10)
+}
+// =========定義一函式，回傳input中的num有幾位數===========
+function digitCount(num) {
+    if (num === 0) return 1
+    return Math.floor(Math.log10(num)) + 1
+}
+
+// =========定義一函式，回傳input中的陣列(array)內的位數最大值=================
+function mostDigits(arr) {
+    let max = -Infinity;
+    for (let i = 0; i < arr.length; i++) {
+        let countDigits = digitCount(arr[i]);
+        max = Math.max(max, countDigits)
+    }
+    return max
+}
+
+
+function radixSort(arr) {
+    let loopTime = mostDigits(arr);
+    for (let i = 0; i < loopTime; i++) {
+        let digitArr = Array.from({ length: 10 }, () => []);
+        for (let j = 0; j < arr.length; j++) {
+            let digits = getDigit(arr[j], i);
+            digitArr[digits].push(arr[j]);
+        }
+        arr = [].concat(...digitArr)
+    }
+    return arr;
+}
+
+radixSort([43221, 1, 10, 9680, 577, 9420, 7, 5622])
+

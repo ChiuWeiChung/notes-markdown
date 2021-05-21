@@ -1,12 +1,14 @@
 # 排序法演算法筆記-1 (Bubble, Selection, Insertion)
 
-#### 在這裡紀錄學習Data Structure& Algorithm的學習筆記，在這邊會記錄三種排序的演算法，分別為 1. Bubble Sort, 2. Selection Sort, 3. Insertion Sort.
+#### 在這裡紀錄學習Data Structure& Algorithm的學習筆記，在這邊會記錄三種排序的演算法，分別為 1. Bubble Sort, 2. Selection Sort, 3. Insertion Sort.。
 
 ## 1. Bubble sort
 
-#### 將陣列內的數字，兩兩作比對，數字較小移到前面，反之則不動，持續進行，其時間複雜度在一般情況下為O(n^2)，但是若針對 `幾乎已排列完成` ，的數列而言，時間複雜度則是O(n)
+#### 將陣列內的數字，兩兩作比對，數字較小移到前面，反之則不動，持續進行，時間複雜度在一般情況下為O(n^2)，但是若針對 `幾乎已排列完成` 的數列而言，時間複雜度則是O(n)。
 
 ``` js
+const arr = [8, 1, 2, 3, 4, 5, 6, 7];
+
 function bubbleSort(arr) {
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length - i - 1; j++) {
@@ -17,26 +19,24 @@ function bubbleSort(arr) {
     }
     return arr
 }
-const arr = [8, 1, 2, 3, 4, 5, 6, 7];
 bubbleSort(arr);
 ```
 
-## 1-2. 優化後的Bubble sort
+## 1-2 優化後的Bubble sort
 
-#### 在Bubble Sortt內定義一個用來監控的變數 `noSwaps` ，假如最近的一次loop沒有進行陣列上的交換，則立即跳出loop，避免後續無意義的運算
+#### 在Bubble Sortt內定義一個用來監控的變數 `noSwaps` ，假如最近的一次loop沒有進行陣列上的交換，則立即跳出loop，避免後續無意義的運算。
 
 ``` js
+const arr = [8, 1, 2, 3, 4, 5, 6, 7];
+
 function bubbleSort(arr) {
     var noSwawps;
     for (let i = arr.length; i > 0; i--) {
-        // 先定義為true
-        noSwaps = true
+        noSwaps = true // 先定義為true
         for (let j = 0; j < i - 1; j++) {
-            console.log(arr, arr[j], arr[j + 1])
             if (arr[j] > arr[j + 1]) {
                 [arr[j + 1], arr[j]] = [arr[j], arr[j + 1]]
-                // 若有進行交換，則傳回false
-                noSwaps = false
+                noSwaps = false // 若有進行交換，則傳回false
             }
         }
         // 倘若最近一次loop沒有進行交換(noSwaps = true)，則跳出迴圈
@@ -44,17 +44,15 @@ function bubbleSort(arr) {
     }
     return arr
 }
-const arr = [8, 1, 2, 3, 4, 5, 6, 7];
 bubbleSort(arr);
 ```
 
 ## 2. Selection Sort 
 
-#### 該演算法的概念是透過每一步都將陣列內的最小值放到陣列的最前頭，最好以及最壞的情況下，它的時間複雜度皆為O(n^2)，
+#### 該演算法的概念是透過每一步都將陣列內的最小值放到陣列的最前頭，最好以及最壞的情況下，它的時間複雜度皆為O(n^2)。
 
 ``` js
 function selectionSort(arr) {
-
     for (let i = 0; i < arr.length; i++) {
         let minIndex = i;
         for (let j = i + 1; j < arr.length; j++) {
@@ -70,50 +68,44 @@ function selectionSort(arr) {
 }
 
 const arr = [44, 5, 38, 19, 47, 15]
-console.log(selectionSort(arr))
-console.log(selectionSort([11, 3, 54, 23, 2, 4, 5, 1]))
+selectionSort(arr)
 ```
 
 ## 3. Insertion Sort
 
-#### 最糟的情況為O(n^2)
+#### 概念是擇一數字放置於比它大的左邊，比它小的右邊，時間複雜度是O(n^2)，但是若針對 `幾乎已排列完成` 的數列而言，時間複雜度則是O(n)。
 
 ``` js
 function insertionSort(arr) {
-    let loopNum = 0;
     for (let i = 1; i < arr.length; i++) {
         let tempIndex = i;
         for (let j = i - 1; j >= 0; j--) {
             if (arr[j] > arr[tempIndex]) {
                 [arr[tempIndex], arr[j]] = [arr[j], arr[tempIndex]];
                 tempIndex = j;
-                loopNum++;
             }
         }
+        console.log(arr);
     }
-    console.log('fun1', loopNum)
     return arr;
 }
 const arr = [2, 1, 9, 7, 6, 4];
-console.log(insertionSort(arr))
+insertionSort(arr)
 ```
-
+#### 也可以寫成
 ``` js
 function insertionSort(arr) {
-    let loopNum = 0
     for (let i = 1; i < arr.length; i++) {
         let currentVal = arr[i];
         for (var j = i - 1; j >= 0 && arr[j] > currentVal; j--) {
             arr[j + 1] = arr[j]
-            loopNum++
         }
         arr[j + 1] = currentVal
     }
-    console.log('fun2', loopNum)
     return arr;
 }
 const arr = [2, 1, 9, 7, 6, 4];
-console.log(insertionSort(arr))
+insertionSort(arr)
 ```
 
 ## 比較上述三種演算法的 Big O Time Complexity
@@ -125,6 +117,6 @@ console.log(insertionSort(arr))
   Selection Sort|     O(n^2)    |   O(n^2) |   O(n^2) |     O(1)
 
 * Sorting is fundamental!
-* Bubble, Selection, INsertion are all roughly equivalent
-* All have average time complexities taht are quadratic
-* We can do better ...but we need more complex algorithms
+
+#### 基本上Bubble, Selection, Insertion三種方法的時間複雜度在一般的情況下(隨機排列的數字)，都是一樣的(O(n^2))，若要將其降至O(n^2)以下，就需要靠較複雜的演算法，相關比較記錄在[排序法演算法筆記-2]()
+
