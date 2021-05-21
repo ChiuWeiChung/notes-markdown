@@ -41,21 +41,15 @@ class Stack {
     }
 }
 
-
 const stack = new Stack()
 
-// stack.unshift(1)
-// stack.unshift(2)
-// stack.unshift(3)
-// console.log(stack.shift())
-// console.log(stack.shift())
-// console.log(stack.shift())
-// console.log(stack)
-// stack.shift()
-// console.log(stack)
-// stack.shift()
-// console.log(stack)
-
+stack.unshift(1)
+stack.unshift(2)
+stack.unshift(3)
+console.log(stack.shift())
+console.log(stack.shift())
+console.log(stack.shift())
+console.log(stack)
 
 class Queue {
     constructor() {
