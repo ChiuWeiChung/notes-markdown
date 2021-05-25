@@ -18,5 +18,5 @@
 
 ## PreOrder, InOrder in DFS
 
-* PreOrder: It can be useful if tring to clone or dulplicate a tree.
+* PreOrder: It can be useful if string to clone or dulplicate a tree.
 * InOrder: It can be useful for creating orderd data.

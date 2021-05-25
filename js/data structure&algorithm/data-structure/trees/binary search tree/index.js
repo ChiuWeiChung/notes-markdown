@@ -10,29 +10,6 @@ class BinarySearchTree {
     constructor() {
         this.root = null;
     }
-
-    // insert(val) {
-    //     let node = new Node(val)
-    //     if (!this.root) {
-    //         this.root = node;
-    //         return this;
-    //     }
-    //     let currentNode = this.root;
-    //     function help(currentNode) {
-    //         if (currentNode.val === val) return undefined
-    //             if (val > currentNode.val) {
-    //                 if (!currentNode.right) return currentNode.right = node;
-    //                 currentNode = currentNode.right;
-    //             } else {
-    //                 if (!currentNode.left) return currentNode.left = node;
-    //                 currentNode = currentNode.left;
-    //             }
-    //         return help(currentNode)
-    //     }
-    //     help(currentNode);
-    //     return this;
-    // }
-
     insert(val) {
         let newNode = new Node(val);
         if (!this.root) {
@@ -74,7 +51,29 @@ class BinarySearchTree {
         if (!found) return false
         return currentNode
     }
-
+    /// ================recursive way =========================
+    // insert(val) {
+    //     let node = new Node(val)
+    //     if (!this.root) {
+    //         this.root = node;
+    //         return this;
+    //     }
+    //     let currentNode = this.root;
+    //     function help(currentNode) {
+    //         if (currentNode.val === val) return undefined
+    //         if (val > currentNode.val) {
+    //             if (!currentNode.right) return currentNode.right = node;
+    //             currentNode = currentNode.right;
+    //         } else {
+    //             if (!currentNode.left) return currentNode.left = node;
+    //             currentNode = currentNode.left;
+    //         }
+    //         return help(currentNode)
+    //     }
+    //     help(currentNode);
+    //     return this;
+    // }
+    // ====================================================================
 }
 
 var Tree = new BinarySearchTree();
@@ -87,6 +86,5 @@ Tree.insert(16);
 Tree.insert(16);
 Tree.insert(7);
 
-// console.log(Tree);
-console.log(Tree.find(5));
+console.log(Tree.find(5))//Node {val: 5, left: Node, right: Node}
 

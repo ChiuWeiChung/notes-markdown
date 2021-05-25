@@ -89,20 +89,6 @@ class BinarySearchTree {
         }
         return data;
     }
-    // =======Structure============
-    //          10
-    //         /   \
-    //        6    15
-    //       / \     \
-    //      3   8    20
-    // ===============================
-    // step : 0 data=[] queue=[10]
-    // step : 1 data=[10] queue=[6,15]
-    // step : 2 data=[10,6] queue=[15,3,8]
-    // step : 3 data=[10,6,15] queue=[3,8,20]
-    // step : 4 data=[10,6,15,3] queue=[8,20]
-    // step : 5 data=[10,6,15,3,8] queue=[20]
-    // step : 6 data=[10,6,15,3,8,20] queue=[]
 
     DFSPreOrder() {
         let currentNode = this.root;
@@ -130,20 +116,9 @@ class BinarySearchTree {
             if (currentNode.right) help(currentNode.right)
             data.push(currentNode.val);
         }
-
         help(currentNode);
         return data;
-
     }
-
-    //          10
-    //         /   \
-    //        6    15
-    //       / \     \
-    //      3   8    20
-    //       \
-    //        4
-   
     DFSInOrder() {
         let data = [];
         let currentNode = this.root;
@@ -164,19 +139,23 @@ class BinarySearchTree {
 }
 
 var Tree = new BinarySearchTree();
-Tree.insert(10);
-Tree.insert(6)
-Tree.insert(15)
-Tree.insert(3)
-Tree.insert(8)
-Tree.insert(20)
+                  // =======Structure============
+Tree.insert(10);  //          10
+Tree.insert(6)    //         /   \
+Tree.insert(15)   //        6     15
+Tree.insert(3)    //       / \    /  \
+Tree.insert(8)    //      3   8  14  20
+Tree.insert(20)   //         /  /    / \
+Tree.insert(17)   //        7  12   17  31
+Tree.insert(31)   //                /    /   
+Tree.insert(28)   //               16   28   
+Tree.insert(14)   // ===============================
+Tree.insert(7)
+Tree.insert(12)
+Tree.insert(16)
 
-// console.log(Tree);
-// console.log(Tree.find(5));
-// console.log(Tree.BFS());
-// [10,6,3,8,15,20]
-// console.log(Tree.DFSPreOrder());
-console.log(Tree.DFSPostOrder());
-// console.log(Tree.DFSInOrder());
-
+// Tree.BFS(); //[10, 6, 15, 3, 8, 14, 20, 7, 12, 17, 31, 16, 28]
+// Tree.DFSPreOrder(); //[10, 6, 3, 8, 7, 15, 14, 12, 20, 17, 16, 31, 28]
+// Tree.DFSPostOrder(); //[3, 7, 8, 6, 12, 14, 16, 17, 28, 31, 20, 15, 10]
+// Tree.DFSInOrder(); //[3, 6, 7, 8, 10, 12, 14, 15, 16, 17, 20, 28, 31]
 

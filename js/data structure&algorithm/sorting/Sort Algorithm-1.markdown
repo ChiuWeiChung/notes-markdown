@@ -85,7 +85,6 @@ function insertionSort(arr) {
                 tempIndex = j;
             }
         }
-        console.log(arr);
     }
     return arr;
 }
@@ -108,6 +107,16 @@ const arr = [2, 1, 9, 7, 6, 4];
 insertionSort(arr)
 ```
 
+```js       
+// ==========Insertion Sort==========
+// arr = [2, 1, 9, 7, 6, 4];  original
+// arr = [1, 2, 9, 7, 6, 4];  i = 1
+// arr = [1, 2, 9, 7, 6, 4];  i = 2
+// arr = [1, 2, 7, 9, 6, 4];  i = 3
+// arr = [1, 2, 6, 7, 9, 4];  i = 4
+// arr = [1, 2, 4, 6, 7, 9];  i = 5
+```
+
 ## 比較上述三種演算法的 Big O Time Complexity
 
   Algorithm     | Best condition| Average  |   Worst  | Space complexity
@@ -115,8 +124,6 @@ insertionSort(arr)
   Bubble Sort   |     O(n)      |   O(n^2) |   O(n^2) |     O(1)
   Insertion Sort|     O(n)      |   O(n^2) |   O(n^2) |     O(1)
   Selection Sort|     O(n^2)    |   O(n^2) |   O(n^2) |     O(1)
-
-* Sorting is fundamental!
 
 #### 基本上Bubble, Selection, Insertion三種方法的時間複雜度在一般的情況下(隨機排列的數字)，都是一樣的(O(n^2))，若要將其降至O(n^2)以下，就需要靠較複雜的演算法，相關比較記錄在[排序法演算法筆記-2]()
 

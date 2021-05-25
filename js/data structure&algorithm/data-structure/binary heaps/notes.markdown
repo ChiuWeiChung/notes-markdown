@@ -38,7 +38,7 @@
 ## Why do we need to know this
 
 * Binarys heaps are used to implement `priority queues`, which are very commonly used data structures.
-* They are also used quite a bit, with greaph traversal algorithms.
+* They are also used quite a bit, with graph traversal algorithms.
 
 ## What is Priority Queue?
 
