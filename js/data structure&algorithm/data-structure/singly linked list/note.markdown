@@ -241,7 +241,7 @@ class SinglyLinkedList {
 //                                 prev  temp  next
 ```
 
-## Singly Linked List的Big O Notation
+## 單向鏈結串列(Singly Linked List)的時間複雜度
 
 #### 當一組資料需要頻繁的在前端或尾端(head, tail)進行新增(Insertion)或是刪除(Removal)的動作時，Singly Linked List可以是個很好的替代方案 (相較於使用Array而言)，原因在針對Array進行前端的新增(Array.shift( ))或刪減(Array.unshift( ))時，Array上所有的資料次序會因此變動(a[1]->a[0], a[2]->a[1]...)，因此時間複雜度為O(n)，若是透過Singly Linked List來操作時，時間複雜度為O(1)。 
 

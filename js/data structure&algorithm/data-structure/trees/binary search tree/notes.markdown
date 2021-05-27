@@ -146,7 +146,7 @@ class BinarySearchTree {
 }
 ```
 
-## 二元搜尋樹的時間複雜度
+## 二元搜尋樹(Binary Search Tree)的時間複雜度
 
 #### 插入(insert)以及尋找(find)這兩個函式所需要的時間複雜度為O(log n)，其中log是以2為底的對數，因此當資料數量變成兩倍時，插入及搜尋的時間所需要的迭代次數僅會增加一次。
 
@@ -173,7 +173,7 @@ Tree.insert(5)
 //                  right(5)
 ```
 
-## 樹的走訪 (Tree Traversal)
+## 樹的遍歷 (Tree Traversal)
 
 #### Tree Traversal可以透過兩種方式達到，分別是 `1. 深度優先搜尋(Depth-first Search, DFS)` 以及 `2. 廣度優先搜尋(Breadth-first Search, BFS)` ，兩者的時間複雜度是一樣的，然而，對於 `結構較寬` 的樹而言，廣度優先搜尋會消耗較多的記憶體(space)，而深度優先搜尋則是在 `結構較深` 的樹會佔據較多的記憶體。
 ```js
@@ -260,7 +260,7 @@ class BinarySearchTree {
 Tree.DFSPostOrder(); //[3, 8, 6, 20, 15, 10]
 ```
 
-## 2-2 深度優先搜尋(Depth-first Search, DFS)-中序遍歷(InOrder)
+## 2-3 深度優先搜尋(Depth-first Search, DFS)-中序遍歷(InOrder)
 
 #### 中序遍歷(InOrder)可以用來回傳已排列的資料
 

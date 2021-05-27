@@ -8,6 +8,7 @@
 //     return total;
 // }
 
+// console.log(hash('hello', 13));
 
 // function hash(key, arrayLen) {
 //     let total = 0;
@@ -20,7 +21,6 @@
 //     return total;
 // }
 
-// console.log(hash('hello', 13));
 // console.log(hash('goodbye', 13));
 
 
@@ -53,40 +53,34 @@ class HashTable {  //With Separate Chaining
     get(key) {
         let index = this._hash(key);
         if (!this.keyMap[index]) return undefined;
-        for (let i = 0; i < this.keyMap[index].length; i++) {
-            if (this.keyMap[index][i][0] === key) {
-                return this.keyMap[index][i][1]
-            }
-        }
-        // return this.keyMap[index].find(el => el[0] === key)
+        // for (let i = 0; i < this.keyMap[index].length; i++) {
+        //     if (this.keyMap[index][i][0] === key) {
+        //         return this.keyMap[index][i][1]
+        //     }
+        // }
+        return this.keyMap[index].find(el => el[0] === key)[1];
     }
 
     values() {
         let valuesArr = [];
-        for (let i = 0; i < this.keyMap.length; i++) {
-            if (this.keyMap[i]) {
-                for (let j = 0; j < this.keyMap[i].length; j++) {
-                    if (!valuesArr.includes(this.keyMap[i][j][1])) {
-                        valuesArr.push(this.keyMap[i][j][1])
-                    }
-                }
+        this.keyMap.forEach(el => {
+            if (el) {
+                el.forEach(item => {
+                    if (!valuesArr.includes(item[1])) valuesArr.push(item[1])
+                })
             }
-        }
-
+        })
         return valuesArr;
     }
     keys() {
         let keysArr = [];
-        for (let i = 0; i < this.keyMap.length; i++) {
-            if (this.keyMap[i]) {
-                for (let j = 0; j < this.keyMap[i].length; j++) {
-                    if (!keysArr.includes(this.keyMap[i][j][0])) {
-                        keysArr.push(this.keyMap[i][j][0])
-                    }
-                }
+        this.keyMap.forEach(el => {
+            if (el) {
+                el.forEach(item => {
+                    if (!keysArr.includes(item[0])) keysArr.push(item[0])
+                })
             }
-        }
-
+        })
         return keysArr;
     }
 
@@ -114,9 +108,6 @@ hash.set('plum', '#DDA0DD')
 hash.set('purple', '#DDA0DD')
 hash.set('violet', '#DDA0DD')
 
-// console.log(hash.get('yellow')); //#FFFF00
-// console.log(hash.get('plum')); // DDA0DD
-// console.log(hash.get('marron')) //#800000
-
-console.log(hash.values());
-console.log(hash.keys());
+// hash.get('yellow'); //#FFFF00
+hash.values(); //["#FFFF00", "#808000", "#DDA0DD", "#FA8072", "#800000", "#F08080", "#C71585"]
+// hash.keys();//["yellow", "olive", "violet", "salmon", "marron", "plum", "lightcoral", "mediumvioletred", "purple"]

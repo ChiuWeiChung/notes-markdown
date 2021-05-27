@@ -219,7 +219,7 @@ class DoublyLinkedList {
 }
 ```
 
-## Doubly Linked List的Big O Notation
+## 雙向鏈結串列(Doubly Linked List)的時間複雜度
 
 #### Doubly linked list在各項操作上的時間複雜度基本上與Singly linked list相當，比較特別的是在Searching部分，Doubly linked list由於可以依照index的大小來決定由前端(head)或是尾端(tail)開始尋找，因此所花的時間為Singly linked list的一半，也就是O(n/2)，但仍然寫成O(n)。
 
