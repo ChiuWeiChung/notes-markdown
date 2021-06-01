@@ -1,4 +1,4 @@
-# Graph Traversal 
+## Graph Traversal 
 
 ## Graph Traversal Uses
 * Peer to peer networking

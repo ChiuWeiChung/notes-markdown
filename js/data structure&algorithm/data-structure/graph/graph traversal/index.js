@@ -36,22 +36,6 @@ class Graph {
         delete this.adjacencyList[vertex];
     }
     depthFirstRecursive(start) {
-        // if (!this.adjacencyList[start]) return undefined
-        // const visitedObj = { [start]: true };
-        // const result = [];
-        // result.push(start);
-        // const dfs = (vertex) => {
-        //     this.adjacencyList[vertex].forEach((el) => {
-        //         if (!visitedObj[el]) {
-        //             result.push(el);
-        //             visitedObj[el] = true;
-        //             dfs(el)
-        //         }
-        //     })
-        // }
-        // dfs(start)
-
-        // =============Anotoher Way==============
         let visitedObj = {};
         let result = [];
         const dfs = (vertex) => {
@@ -67,15 +51,13 @@ class Graph {
     }
 
     depthFirstIterative(start) {
+        // 透過Stack控制遍歷的排程(Last In, First Out)
         if (!this.adjacencyList[start]) return null;
         let stack = [start];
         let visitedObj = {};
         let result = [];
-
         visitedObj[start] = true;
-
         while (stack.length !== 0) {
-            console.log(stack);
             let vertex = stack.pop();
             result.push(vertex);
             this.adjacencyList[vertex].forEach(el => {
@@ -89,13 +71,12 @@ class Graph {
     }
 
     breadthFirstSearch(start) {
-        // using queue strcture
+        // 透過Queue控制遍歷的排程(First In, First Out)
         if (!this.adjacencyList[start]) return null;
         const queue = [start];
         const result = [];
         const visitedObj = {};
         visitedObj[start] = true;
-
         while (queue.length) {
             let vertex = queue.shift();
             result.push(vertex);

@@ -175,9 +175,9 @@ Tree.insert(5)
 
 ## 樹的遍歷 (Tree Traversal)
 
-#### Tree Traversal可以透過兩種方式達到，分別是 `1. 深度優先搜尋(Depth-first Search, DFS)` 以及 `2. 廣度優先搜尋(Breadth-first Search, BFS)` ，兩者的時間複雜度是一樣的，然而，對於 `結構較寬` 的樹而言，廣度優先搜尋會消耗較多的記憶體(space)，而深度優先搜尋則是在 `結構較深` 的樹會佔據較多的記憶體。
+#### Tree Traversal可以透過兩種方式達到，分別是`1. 廣度優先搜尋(Breadth-first Search, BFS)`以及 `2. 深度優先搜尋(Depth-first Search, DFS)` ，BFS會從Root開始，針對其每一層的child Node遍歷，遍歷完畢才會進行下一層Child Node的遍歷(先進行橫向遍歷，再進行縱向);DFS則是以樹的縱向先進行遍歷，而後才是橫向;兩者的時間複雜度是一樣的，然而，對於 `結構較寬` 的樹而言，廣度優先搜尋會消耗較多的記憶體(space)，而深度優先搜尋則是在 `結構較深` 的樹會佔據較多的記憶體。
 ```js
-                  // ====Structure====
+//建構二元搜尋樹==========結構=========
 Tree.insert(10);  //      10
 Tree.insert(6)    //     /   \
 Tree.insert(15)   //    6    15
@@ -190,11 +190,11 @@ Tree.insert(20)   // =================
 class BinarySearchTree {
     ...
     BFS() {
+        // 透過Queue的概念處理遍歷的排程 (First In First Out)
         let data = [];
         let queue = [];
         let node = this.root;
         queue.push(node);
-        // FIFO Queue (First In First Out)
         while (queue.length) {
             node = queue.shift();
             data.push(node.val);
@@ -205,6 +205,10 @@ class BinarySearchTree {
     }
 }
 Tree.BFS(); //[10, 6, 15, 3, 8, 20]
+```
+#### queue Array在BFS內的演變如下。
+```js
+
 // step : 0 data=[] queue=[10]
 // step : 1 data=[10] queue=[6,15]
 // step : 2 data=[10,6] queue=[15,3,8]
@@ -213,7 +217,6 @@ Tree.BFS(); //[10, 6, 15, 3, 8, 20]
 // step : 5 data=[10,6,15,3,8] queue=[20]
 // step : 6 data=[10,6,15,3,8,20] queue=[]
 ```
-
 ## 2-1 深度優先搜尋(Depth-first Search, DFS)-前序遍歷(PreOrder)
 
 #### 前序遍歷(PreOrder)函式所回傳的陣列，可以用來複製一模一樣的樹結構。
@@ -262,7 +265,7 @@ Tree.DFSPostOrder(); //[3, 8, 6, 20, 15, 10]
 
 ## 2-3 深度優先搜尋(Depth-first Search, DFS)-中序遍歷(InOrder)
 
-#### 中序遍歷(InOrder)可以用來回傳已排列的資料
+#### 中序遍歷(InOrder)可以用來回傳已排列的資料。
 
 ```js
 class BinarySearchTree {
