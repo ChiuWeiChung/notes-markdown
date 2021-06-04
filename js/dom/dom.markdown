@@ -190,7 +190,7 @@ h1.onmouseenter = function(e) { // old school way
 };
 ```
 
-#### 若要將Event Listener 移除的話可以透過 `removeEventListener` 來達到。
+#### 若要將Event Listener 移除的話可以透過 `removeEventListener` 來實現。
 
 ``` html
 <body>
