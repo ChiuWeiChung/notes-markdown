@@ -35,11 +35,11 @@ PersonCl.prototype.greet = function() {
 rick.greet()
 ```
 
-#### Classes are not hoisted
+Classes are not hoisted
 
-#### classes are also first-class citizen
+classes are also first-class citizen
 
-#### classes are executed in strict mode
+classes are executed in strict mode
 
 ## Getters and Setters
 

@@ -9,7 +9,7 @@
 * 結合`merging`以及`sorting`兩種方法
 * 將Array拆成無數個小array(length=2 or 1)，並將其重組成新的陣列
 
-#### 先定義merge method，該function接受 `兩個各別已排序之陣列` ，將其合併成一個已排序的大陣列。
+先定義merge method，該function接受 `兩個各別已排序之陣列` ，將其合併成一個已排序的大陣列。
 
 ``` js
 function merge(arr1, arr2) {
@@ -74,7 +74,7 @@ mergeSort(arr)
 
 ## 1-2 Merge Sort的 Big O notation
 
-#### 由於Merge Sort是將一個陣列拆分成無數個長度為1的小陣列，此過程所需的次數為log(陣列總長)，其中的log為以2為底的對數，假如是長度為8的陣列，將其拆分成各個長度為1的小陣列所需次數為3次，再將所有小陣列組合成一個已排的大陣列所需的次數為8次(總長度)，因此對於一個長度為8的陣列而言，透過Merge Sort處理的時間複雜度為24次(8 X log8=24); 其時間複雜度相較於Bubble、Selection、Insertion的時間複雜度(O(n^2))，但犧牲的是空間複雜度提升至O(n)
+由於Merge Sort是將一個陣列拆分成無數個長度為1的小陣列，此過程所需的次數為log(陣列總長)，其中的log為以2為底的對數，假如是長度為8的陣列，將其拆分成各個長度為1的小陣列所需次數為3次，再將所有小陣列組合成一個已排的大陣列所需的次數為8次(總長度)，因此對於一個長度為8的陣列而言，透過Merge Sort處理的時間複雜度為24次(8 X log8=24); 其時間複雜度相較於Bubble、Selection、Insertion的時間複雜度(O(n^2))，但犧牲的是空間複雜度提升至O(n)
 
   Algorithm     | Best condition| Average  |   Worst  | Space complexity
   ----------    |:-------------:|:--------:|:--------:|:-----------:
@@ -85,7 +85,7 @@ mergeSort(arr)
 
 ## 2. Quick Sort
 
-#### 概念是在陣列中先選定一數字做為pivot(下方例子以arr[0]作為pivot)，並將小於pivot的數字放在其左方，大於pivot的數字放置於其右方。
+概念是在陣列中先選定一數字做為pivot(下方例子以arr[0]作為pivot)，並將小於pivot的數字放在其左方，大於pivot的數字放置於其右方。
 
 ``` js
 // ====將input內的arr[0]定為pivot，並回傳最後pivot的Index====
@@ -103,6 +103,7 @@ function pivot(arr, start = 0, end = arr.length - 1) {
     [arr[start], arr[index]] = [arr[index], arr[start]]
     return index
 }
+
 // ========定義quickSort function，將pivot function納入========
 function quickSort(arr, left = 0, right = arr.length - 1) {
     if (left < right) {
@@ -138,7 +139,7 @@ quickSort(arr) // [1, 2, 3, 4, 5, 6, 9, 12]
 
 ## 2-2 Quick Sort的Big O notation
 
-#### 一般情況下(隨機排列的陣列)，其實時間複雜度為O(nlogn)，但最糟的情況會發生在 `已近乎排列的陣列` 上，因為對於 `已近乎排列的陣列` 而言，arr[0]有極大機率是是陣列內最小的數字，又因為最初的pivot是選在arr[0]，因此有可能導致pivot function回傳的pivotIndex仍為0，也因此所需要的迭代次數就會增加，時間複雜度變為O(n^2)。
+一般情況下(隨機排列的陣列)，其實時間複雜度為O(nlogn)，但最糟的情況會發生在 `已近乎排列的陣列` 上，因為對於 `已近乎排列的陣列` 而言，arr[0]有極大機率是是陣列內最小的數字，又因為最初的pivot是選在arr[0]，因此有可能導致pivot function回傳的pivotIndex仍為0，也因此所需要的迭代次數就會增加，時間複雜度變為O(n^2)。
 
   Algorithm     | Best condition| Average  |   Worst  | Space complexity
   ----------    |:-------------:|:--------:|:--------:|:-----------:
@@ -148,7 +149,7 @@ quickSort(arr) // [1, 2, 3, 4, 5, 6, 9, 12]
 
 ## 3. Radix Sort
 
-#### Radix Sort(基數排序法)比較特別，屬於 `non-comparative`的排序演算法，針對每一位數來達到排序的目的，下方code中的getDigit function接收input(num &index)，並回傳該num在某位數(index)的值。
+Radix Sort(基數排序法)比較特別，屬於 `non-comparative`的排序演算法，針對每一位數來達到排序的目的，下方code中的getDigit function接收input(num &index)，並回傳該num在某位數(index)的值。
 
 ``` js
 // ========回傳input中的num在特定位數(index)的值========
@@ -212,7 +213,7 @@ radixSort([43221, 1, 20, 322, 9420, 7, 99])
 
 ## 3-3 Radix Sort的Big O notation
 
-#### O(nk)中的n表示陣列的長度，k則表示陣列中最大數字的位數(digits)，由於在任何情況下的時間複雜度皆相同(O(nk))。
+O(nk)中的n表示陣列的長度，k則表示陣列中最大數字的位數(digits)，由於在任何情況下的時間複雜度皆相同(O(nk))。
 
    Algorithm  | Best condition| Average  |   Worst  | Space complexity
   ----------  |:-------------:|:--------:|:--------:|:-----------:

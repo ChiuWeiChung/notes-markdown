@@ -1,6 +1,6 @@
 # Javascript中的內建函式 (Call, Bind, Apply)筆記
 
-#### 物件之間，可以透過call, bind, apply來調用自身沒有的函式，並綁定this keyword。
+物件之間，可以透過call, bind, apply來調用自身沒有的函式，並綁定this keyword。
 
 ``` js
 var john = {
@@ -23,7 +23,7 @@ var emily = {
 }
 ```
 
-#### call, apply會立即執行，第一個argument為欲綁定this的物件，call與apply的差別只在於apply在第二個argument形式為array
+call, apply會立即執行，第一個argument為欲綁定this的物件，call與apply的差別只在於apply在第二個argument形式為array
 
 ``` js
 // -----   CALL METHOD  ----------------  call、 apply 皆是回傳function執行結果
@@ -31,7 +31,7 @@ john.presentation.call(emily, "friendly", "afternoon");
 john.presentation.apply(emily, ["friendly", "afternoon"]);
 ```
 
-#### 透過bind將method做為值傳入變數中
+透過bind將method做為值傳入變數中
 
 ``` js
 // --------    BIND METHOD     ------------

@@ -1,10 +1,10 @@
 # Hoisting and TDZ
 
 ## Hoisting
-#### Makes some types of variables accessible/usable in the code before they are acrually declared. "Variables lifted to the top of their scope".
+Makes some types of variables accessible/usable in the code before they are acrually declared. "Variables lifted to the top of their scope".
 
 ## What's behind the scenes?
-#### `Before execution`, code is scanned for variable declarations, and for each variable, a new property is created in the variable environment object.
+`Before execution`, code is scanned for variable declarations, and for each variable, a new property is created in the variable environment object.
 
 |                                 |HOISTED?   |INITIAL VALUE  |SCOPE                   |
 |---------------------------------|-----------|---------------     |-------------------|

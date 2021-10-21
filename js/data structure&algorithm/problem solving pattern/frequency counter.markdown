@@ -1,12 +1,12 @@
 ## Frequency Counter 手法
 
-#### 該方法透過loop，將陣列內的每一個值傳入物件作為其中一個property。用以避免出現O(n^2)
+該方法透過loop，將陣列內的每一個值傳入物件作為其中一個property。用以避免出現O(n^2)
 
 ## Example 1
 
-#### 定義一個函式，其接收兩個陣列，倘若其中一陣列內的值的平方可以對應另一陣列的值，且值的出現次數相同，則回傳true，若不然，則回傳false
+定義一個函式，其接收兩個陣列，倘若其中一陣列內的值的平方可以對應另一陣列的值，且值的出現次數相同，則回傳true，若不然，則回傳false
 
-#### 較粗糙的手法，Time Complexity => N^2
+較粗糙的手法，Time Complexity => N^2
 
 ``` js
 same([1, 4, 9], [1, 2, 3]); //true
@@ -28,7 +28,7 @@ function same(arr1, arr2) {
 }
 ```
 
-#### 優化後的函式，Time Complexity=> N
+優化後的函式，Time Complexity=> N
 
 ``` js
 function same(arr1, arr2) {
@@ -58,7 +58,7 @@ function same(arr1, arr2) {
 
 ## Anagrams condition(易位構詞遊戲)，定義一個函式，其接收兩個string，確認兩個string是否互為anagrams。
 
-#### 我的方法，Time complexity 為N
+我的方法，Time complexity 為N
 
 ```js
 validAnagram('fried','fired') //true
@@ -86,7 +86,7 @@ function validAnagram(str1, str2) {
 }
 ```
 
-#### 其他方法，Time complexity 為N
+其他方法，Time complexity 為N
 
 ``` js
 function validAnagram(str1, str2) {

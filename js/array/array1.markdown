@@ -1,7 +1,7 @@
 # JavaScript中的各種陣列方法(Array Method)
 
 ## Slice Method
-#### 擷取陣列內的元素，此方法不會改變原陣列內元素。
+擷取陣列內的元素，此方法不會改變原陣列內元素。
 ``` js
 // slice method slice(beginIndex,endIndex)
 let arr = [1, 3, 5, 7, 9, 11];
@@ -15,7 +15,7 @@ console.log([...arr]); //[1,3,5,7,9,11]  using spread operator also do the same 
 ```
 
 ## Splice Methhod
-#### 可以刪除既有元素並或加入新元素來改變原陣列的內容。
+可以刪除既有元素並或加入新元素來改變原陣列的內容。
 ``` js
 // splice method   splice(index,number,value)
 let arr = [1, 3, 5, 7, 9, 11];
@@ -26,7 +26,7 @@ console.log(arr); //[1,7,9]
 ```
 
 ## Reverse Method
-#### 將陣列順序反轉。
+將陣列順序反轉。
 ``` js
 let arr = ['a', 'b', 'c', 'd', 'e']
 let arr2 = ['f', 'g', 'h', 'i', 'j']
@@ -35,7 +35,7 @@ console.log(arr); //['e', 'd', 'c', 'b', 'a']
 ```
 
 ## Concat Method
-#### 將陣列與陣列合併成新的陣列，此方法不會影響原陣列。   
+將陣列與陣列合併成新的陣列，此方法不會影響原陣列。   
 ``` js
 let arr = ['a', 'b', 'c', 'd', 'e']
 let arr2 = ['f', 'g', 'h', 'i', 'j']
@@ -45,7 +45,7 @@ console.log([...arr, ...arr2]); //["a", "b", "c", "d", "e", "f", "g", "h", "i", 
 ```
 
 ## Join Method
-####　將陣列內的所有元素連接，並且回傳成字串。
+將陣列內的所有元素連接，並且回傳成字串。
 ``` js
 let arr = ['a', 'b', 'c', 'd', 'e']
 console.log(arr.join('-')) //a-b-c-d-e

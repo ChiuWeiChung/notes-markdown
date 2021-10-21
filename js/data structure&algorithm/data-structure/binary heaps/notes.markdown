@@ -2,7 +2,8 @@
 
 ## 介紹
 
-#### 二元堆積(Binary Heap)的結構與二元搜尋樹(Binary Search Tree)非常相似，其中二元堆積又可以分成 1. Max Binary Heap以及 2. Min Binary Heap，Max Binary Heap的Parent Node的值永遠比他的Child Node還大，反之，Min Binary Heap的Child Node的值永遠比他的Parent Node還大。
+
+二元堆積(Binary Heap)的結構與二元搜尋樹(Binary Search Tree)非常相似，其中二元堆積又可以分成 1. Max Binary Heap以及 2. Min Binary Heap，Max Binary Heap的Parent Node的值永遠比他的Child Node還大，反之，Min Binary Heap的Child Node的值永遠比他的Parent Node還大。
 
 ## 二元堆積(Binary Heap)的特性
 
@@ -35,13 +36,16 @@
 ```
 
 ## 以JavaScript實現Max Binary Heap
-#### Binary Heap可以透過Array的方式來模擬，假設某一個Node的index=N，則它兩個Child的index分別為(2N+1)以及(2N+2)，透過這樣的關係即可建構Binary Heap的資料結構
+
+Binary Heap可以透過Array的方式來模擬，假設某一個Node的index=N，則它兩個Child的index分別為(2N+1)以及(2N+2)，透過這樣的關係即可建構Binary Heap的資料結構
+
 ```js
 class MaxBinaryHeap {
     constructor() {
         this.values = []
     }
 ```
+
 ## 新增(Insert)及排序(Bubble Up)
 
 ```js
@@ -50,9 +54,9 @@ class MaxBinaryHeap {
         let currentIndex = this.values.length;
         if (!currentIndex) return this.values.push(val);
         //先將資料放在陣列最後端
-        this.values.push(val); 
+        this.values.push(val);
         //透過bubbleUp機制將資料提升至正確的位置
-        this.bubbleUp(currentIndex); 
+        this.bubbleUp(currentIndex);
         return this
     }
 
@@ -110,8 +114,7 @@ class MaxBinaryHeap {
 
 ## 二元堆積(Binary Heap)的應用層面
 
-#### Binary Heap時常用來實現 1. 優先佇列(Priority Queue)以及 2.[圖遍歷(Graph Traversal Algorithm)]()的資料結構。其中的優先佇列(Priority Queue)是指資料內的每個元素都有優先值(Priority)的特性，因此可以透過優先值大小來決定哪一個元素要優先被處理，那些元素可以先擱置。
-
+Binary Heap時常用來實現 1. 優先佇列(Priority Queue)以及 2.[圖遍歷(Graph Traversal Algorithm)]()的資料結構。其中的優先佇列(Priority Queue)是指資料內的每個元素都有優先值(Priority)的特性，因此可以透過優先值大小來決定哪一個元素要優先被處理，那些元素可以先擱置。
 
 ## Binary Heap(二元堆積)的時間複雜度
 

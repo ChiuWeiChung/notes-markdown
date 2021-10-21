@@ -1,6 +1,6 @@
 ## 線性搜尋演算法 (Linear search)
 
-#### 時間複雜度(Time complexity)=> O(N)
+時間複雜度(Time complexity)=> O(N)
 
 ``` js
 function linearSearch(arr, num) {
@@ -52,7 +52,7 @@ function binarySearch(arr, num) {
 ```
 ## Naive String Search
 
-#### 尋找有多少次目標字串出現在主要字串當中
+尋找有多少次目標字串出現在主要字串當中
 
 ```js
 function naiveStringSearch(str, target) {

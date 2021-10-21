@@ -2,7 +2,7 @@
 
 ## 甚麼是遞回函式?
 
-#### 在函式內部再次呼叫該函式的一個過程 ，且在Javascript中有利用到遞迴的例子有許多:
+在函式內部再次呼叫該函式的一個過程 ，且在Javascript中有利用到遞迴的例子有許多:
 
 * (JSON.parse/JSON.stringify)
 * document.getElementById and DOM traversal algorithms
@@ -11,11 +11,11 @@
 
 ## Call Stack(執行堆疊, Execution Stack)
 
-#### 在[Execution Stack筆記](/#javascript/knowJs3)有提到，屬於一種資料結構，被JavaScript執行的function都會依序被放置於Call Stack上，當該函式執行結束或是遇到return時，就會從Call Stack上移除，透過這樣的機制，可將同個函式在Call Stack上持續堆疊，就可以形成遞迴函式。
+在[Execution Stack筆記](/#javascript/knowJs3)有提到，屬於一種資料結構，被JavaScript執行的function都會依序被放置於Call Stack上，當該函式執行結束或是遇到return時，就會從Call Stack上移除，透過這樣的機制，可將同個函式在Call Stack上持續堆疊，就可以形成遞迴函式。
 
 ## 如何執行遞迴?
 
-#### 下方的例子定義了一個 `countDown` 的函式，並在函式內部再執行一次 `countDown` ，並引入不同的input; 需要注意的是，為了避免函式永無止境的在Call Stack上堆疊(稱為Stack Overflow)而造成程式崩潰，需要在遞迴函式內定義Base Case，也就是該函式要在甚麼狀況、條件下結束(return)。
+下方的例子定義了一個 `countDown` 的函式，並在函式內部再執行一次 `countDown` ，並引入不同的input; 需要注意的是，為了避免函式永無止境的在Call Stack上堆疊(稱為Stack Overflow)而造成程式崩潰，需要在遞迴函式內定義Base Case，也就是該函式要在甚麼狀況、條件下結束(return)。
 
 ``` js
 // 遞迴
@@ -30,7 +30,7 @@ function countDown(num) {
 }
 ```
 
-#### 透過迭代方式(for loop)也可以達到遞迴的效果，因此在不同情況或是使用者習慣下，選擇要使用迭代或是遞迴。
+透過迭代方式(for loop)也可以達到遞迴的效果，因此在不同情況或是使用者習慣下，選擇要使用迭代或是遞迴。
 
 ``` js
 // 迭代
@@ -44,7 +44,7 @@ function countDown(num) {
 
 ## Helper method recursion
 
-#### 也可以在函式內另外定義一個helper method，該helper method才會是在Call Stack上持續堆疊直到遇見Base Case才結束的遞迴函式; 下方範例定義了一個函式，接收一個Array，並回傳Array內只含奇數的部分。
+也可以在函式內另外定義一個helper method，該helper method才會是在Call Stack上持續堆疊直到遇見Base Case才結束的遞迴函式; 下方範例定義了一個函式，接收一個Array，並回傳Array內只含奇數的部分。
 
 ``` js
 let resullt = [];
@@ -62,7 +62,7 @@ function collectOddValues(arr) {
 collectOddValues([1, 2, 3, 4, 5]) //[1,3,5]
 ```
 
-#### 也可以寫成沒有Helper method的遞迴函式
+也可以寫成沒有Helper method的遞迴函式
 
 ``` js
 function collectOddValues(arr) {
@@ -77,7 +77,7 @@ collectOddValues([1, 2, 3, 4, 5])//[1,3,5]
 
 <!-- ## Second recursive function
 
-#### Call stack illustration
+Call stack illustration
 
 ``` js
 function sumRange(num) {

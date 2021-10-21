@@ -2,14 +2,14 @@
 
 ## 雜湊表介紹
 
-#### 雜湊表(Hash Table)是用來儲存 `key-value` pairs的一種資料結構，有點類似陣列(Array)，但它的 `key` 並沒有順序(order)可言，此外，雜湊表在Search、Insert、Remove方面的處理速度都比陣列(Array)快上許多; 幾乎所有的程式語言都具有類似Hash Table的資料結構(例如Python的Dictionary，JavaScript的Object以及Map，Java的Maps，Ruby的Hashes)。好的Hash Table必須具備:
+雜湊表(Hash Table)是用來儲存 `key-value` pairs的一種資料結構，有點類似陣列(Array)，但它的 `key` 並沒有順序(order)可言，此外，雜湊表在Search、Insert、Remove方面的處理速度都比陣列(Array)快上許多; 幾乎所有的程式語言都具有類似Hash Table的資料結構(例如Python的Dictionary，JavaScript的Object以及Map，Java的Maps，Ruby的Hashes)。好的Hash Table必須具備:
 
 * 確定性(Deterministic): 倘若兩個雜湊值不同，則這兩個雜湊值的原始輸入也不會一樣。
 * 均勻分布(uniform distribution): 假設一個Hash Table的大小(Size)為N，並加入K組(K小於N)資料之後，每組資料都只能對應Table內所屬的Slot(雜湊值都不一樣)，倘若不同key的資料對應相同的Slot時，這種情況稱為雜湊碰撞(hash collision)。
 
 ## 雜湊碰撞(hash collision)以及如何盡量避免
 
-#### 如下方程式碼中的hash functions，不同的key(name以及weight)回傳了一樣的index，即是雜湊碰撞。倘若在函式內加入質數的話，可以讓碰撞的機率降低。
+如下方程式碼中的hash functions，不同的key(name以及weight)回傳了一樣的index，即是雜湊碰撞。倘若在函式內加入質數的話，可以讓碰撞的機率降低。
 
 ```js
 // 沒有引入Prime Number
@@ -47,14 +47,14 @@ hash('weight') //11
 
 ## 碰撞(Collision)發生時要如何處理?
 
-#### 可以透過1. Separate Chaining 或是2. Linear Probing來處理，其中Separate Chaining是將衝突的資料放在Table內的同一個Slot，而Linear Probing則是將衝突的資料放入相鄰且空的Slot。
+可以透過1. Separate Chaining 或是2. Linear Probing來處理，其中Separate Chaining是將衝突的資料放在Table內的同一個Slot，而Linear Probing則是將衝突的資料放入相鄰且空的Slot。
 
 1. Separate Chaining: Store multiple key-value pairs at the same index.
 2. Linear Probing: Find a collision, we search through the array to find the next empty slot. -->
 
 ## JavaScript實現雜湊表-Set Method
 
-#### 在下方程式碼中，為了處理雜湊碰撞(Hash Collision)的情況，使用Separate Chaining的處理方式。
+在下方程式碼中，為了處理雜湊碰撞(Hash Collision)的情況，使用Separate Chaining的處理方式。
 
 ```js
 class HashTable {
@@ -81,7 +81,7 @@ class HashTable {
 }
 ```
 ## Get Method
-#### 存取Table內的key所對應的value。
+存取Table內的key所對應的value。
 ```js
 class HashTable {
     ...
@@ -94,7 +94,7 @@ class HashTable {
 ```
 
 ## Keys and Values Method
-#### 用來回傳Table內所有的key以及value(不重複)。
+用來回傳Table內所有的key以及value(不重複)。
 ```js
 class HashTable {
     ...
@@ -157,7 +157,7 @@ hash.values(); //["#FFFF00", "#808000", "#DDA0DD", "#FA8072", "#800000", "#F0808
 * They are likearrays, but the keys are not ordered.
 * Unlike arrays, hash tables are fast for all of the following operations: finding values, adding new values, and removing values!
 
-#### Nearly every programming language has some sort of hash table data structure. Because of their speed, has talbes are very commonly used! Python has Dictionaries, Javascript has Objects and Maps, Java, Go & Scala have Maps, Ruby has Hashes.
+Nearly every programming language has some sort of hash table data structure. Because of their speed, has talbes are very commonly used! Python has Dictionaries, Javascript has Objects and Maps, Java, Go & Scala have Maps, Ruby has Hashes.
 
  ## What makes a good hash?
  * Fast (constant time).

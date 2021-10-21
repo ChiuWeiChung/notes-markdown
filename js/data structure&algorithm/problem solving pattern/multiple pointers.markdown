@@ -2,7 +2,7 @@
 
 ## Example 1:
 
-#### 在一個已排序好的陣列中，找出一對最先出現且和為0的數字。並回傳該組數字，若無符合則回傳undefined。
+在一個已排序好的陣列中，找出一對最先出現且和為0的數字。並回傳該組數字，若無符合則回傳undefined。
 
 ``` js
 sumZero([-3, -2, -1, 0, 1, 2, 3]) //[-3,3]
@@ -10,7 +10,7 @@ sumZero([-2, 0, 1, 3]) // undefined
 sumZero([1, 2, 3]) // undefined
 ```
 
-#### 較粗糙的解法，時間複雜度為O(n^2)
+較粗糙的解法，時間複雜度為O(n^2)
 
 ``` js
 function sumZero(arr) {
@@ -24,7 +24,7 @@ function sumZero(arr) {
 }
 ```
 
-#### 優化後的解法，時間複雜度為O(n)
+優化後的解法，時間複雜度為O(n)
 
 ``` js
 function sumZero(arr) {
@@ -44,7 +44,7 @@ function sumZero(arr) {
 
 ****
 ## Example 2:
-#### 回傳在一個已排列的陣列中，有多少個unique values
+回傳在一個已排列的陣列中，有多少個unique values
 
 
 ```js

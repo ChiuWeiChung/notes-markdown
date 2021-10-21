@@ -1,13 +1,13 @@
 ## Sliding Window
 
 
-#### 此手法透過建立一個window(可以是array, index)，透過不同情況下來修改window，用以追蹤subset data。
+此手法透過建立一個window(可以是array, index)，透過不同情況下來修改window，用以追蹤subset data。
 
 ## Example 1 
 
-#### 定義一個函式，其接收一陣列以及數字(arr, n)，該函式會回傳陣列內n個數字總和的最大值。
+定義一個函式，其接收一陣列以及數字(arr, n)，該函式會回傳陣列內n個數字總和的最大值。
 
-#### Navie way, Time complexity =>  N^2
+Navie way, Time complexity =>  N^2
 
 
 ```js
@@ -33,7 +33,7 @@ function maxSubarraySum(arr, num) {
 }
 ```
 
-#### Refactored, Time complexity => N
+Refactored, Time complexity => N
 
 ``` js
 function maxSubarraySum(arr, num) {

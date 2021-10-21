@@ -2,7 +2,7 @@
 
 ## 樹(Tree)的名詞(Terminology)介紹
 
-#### 樹(Tree)在與List不同，屬於非線性的一種資料結構，如下方示意圖。
+樹(Tree)在與List不同，屬於非線性的一種資料結構，如下方示意圖。
 
 * Root: 樹的頂端稱為root。
 * Child: A-D Nodes都是Root Node的Child。
@@ -32,15 +32,16 @@
 
 ## 二元樹(Binary tree)以及二元搜尋樹 (Binary search tree)
 
-#### 樹的種類有許多種，一般常見的樹為二元樹 (每個parent Node至多僅能含有兩個 children Node，)，其中的二元搜尋樹在搜尋(Searching)方面因為速度較快的特性而有廣泛的應用，其結構特性為:
+樹的種類有許多種，一般常見的樹為二元樹 (每個parent Node至多僅能含有兩個 children Node，)，其中的二元搜尋樹在搜尋(Searching)方面因為速度較快的特性而有廣泛的應用，其結構特性為:
 
 * 每個parent Node至多僅能含有兩個 children Node。
-* 每個parent Node的值都比其左方的child node的值小。
-* 每個parent Node的值都比其右方的child node的值大。
+* 左方child node的值比其parent Node小
+* 右方child node的值比其parent Node大
+
 
 ## 透過JavaScript實現二元搜尋樹(Binary Search Tree)
 
-#### 在設定上，樹的每一個節點(Node)都含有值(val)以及其Child Node(left和right)的性質，且在具有基本的功能包括:
+在設定上，樹的每一個節點(Node)都含有值(val)以及其Child Node(left和right)的性質，且在具有基本的功能包括:
 
 * 插入(Insert) : 在樹(Tree)上新增新的節點。
 * 尋找(Find) : 尋找並回傳在樹(Tree)上的節點。
@@ -148,12 +149,12 @@ class BinarySearchTree {
 
 ## 二元搜尋樹(Binary Search Tree)的時間複雜度
 
-#### 插入(insert)以及尋找(find)這兩個函式所需要的時間複雜度為O(log n)，其中log是以2為底的對數，因此當資料數量變成兩倍時，插入及搜尋的時間所需要的迭代次數僅會增加一次。
+插入(insert)以及尋找(find)這兩個函式所需要的時間複雜度為O(log n)，其中log是以2為底的對數，因此當資料數量變成兩倍時，插入及搜尋的時間所需要的迭代次數僅會增加一次。
 
 * Insertion - O(log n)
 * Searching - O(log n)
 
-#### 需要注意的是二元搜尋樹有個特例，也就是資料結構呈現線性的情況，如下方code，這時候的新增以及尋找的時間複雜度就會變成O(n)，倘若資料變成長鏈狀而非樹狀時，就要考慮是否改成線性的資料結構會比較合適。
+需要注意的是二元搜尋樹有個特例，也就是資料結構呈現線性的情況，如下方code，這時候的新增以及尋找的時間複雜度就會變成O(n)，倘若資料變成長鏈狀而非樹狀時，就要考慮是否改成線性的資料結構會比較合適。
 
 ```js
 Tree.insert(1)
@@ -175,7 +176,7 @@ Tree.insert(5)
 
 ## 樹的遍歷 (Tree Traversal)
 
-#### Tree Traversal可以透過兩種方式達到，分別是`1. 廣度優先搜尋(Breadth-first Search, BFS)`以及 `2. 深度優先搜尋(Depth-first Search, DFS)` ，BFS會從Root開始，針對其每一層的child Node遍歷，遍歷完畢才會進行下一層Child Node的遍歷(先進行橫向遍歷，再進行縱向);DFS則是以樹的縱向先進行遍歷，而後才是橫向;兩者的時間複雜度是一樣的，然而，對於 `結構較寬` 的樹而言，廣度優先搜尋會消耗較多的記憶體(space)，而深度優先搜尋則是在 `結構較深` 的樹會佔據較多的記憶體。
+Tree Traversal可以透過兩種方式達到，分別是`1. 廣度優先搜尋(Breadth-first Search, BFS)`以及 `2. 深度優先搜尋(Depth-first Search, DFS)` ，BFS會從Root開始，針對其每一層的child Node遍歷，遍歷完畢才會進行下一層Child Node的遍歷(先進行橫向遍歷，再進行縱向);DFS則是以樹的縱向先進行遍歷，而後才是橫向;兩者的時間複雜度是一樣的，然而，對於 `結構較寬` 的樹而言，廣度優先搜尋會消耗較多的記憶體(space)，而深度優先搜尋則是在 `結構較深` 的樹會佔據較多的記憶體。
 ```js
 //建構二元搜尋樹==========結構=========
 Tree.insert(10);  //      10
@@ -206,7 +207,7 @@ class BinarySearchTree {
 }
 Tree.BFS(); //[10, 6, 15, 3, 8, 20]
 ```
-#### queue Array在BFS內的演變如下。
+queue Array在BFS內的演變如下。
 ```js
 
 // step : 0 data=[] queue=[10]
@@ -219,7 +220,7 @@ Tree.BFS(); //[10, 6, 15, 3, 8, 20]
 ```
 ## 2-1 深度優先搜尋(Depth-first Search, DFS)-前序遍歷(PreOrder)
 
-#### 前序遍歷(PreOrder)函式所回傳的陣列，可以用來複製一模一樣的樹結構。
+前序遍歷(PreOrder)函式所回傳的陣列，可以用來複製一模一樣的樹結構。
 
 ```js
 class BinarySearchTree {
@@ -265,7 +266,7 @@ Tree.DFSPostOrder(); //[3, 8, 6, 20, 15, 10]
 
 ## 2-3 深度優先搜尋(Depth-first Search, DFS)-中序遍歷(InOrder)
 
-#### 中序遍歷(InOrder)可以用來回傳已排列的資料。
+中序遍歷(InOrder)可以用來回傳已排列的資料。
 
 ```js
 class BinarySearchTree {

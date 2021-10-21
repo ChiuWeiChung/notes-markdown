@@ -1,35 +1,31 @@
-# 一些資料處理手法的筆記(Multiple Pointers, Frequency Counter, Sliding Window)
+# 演算法手法筆記(Multiple Pointers, Frequency Counter, Sliding Window)
 
-## 1.Multiple pointers手法:
+## 1. Multiple pointers 手法:
 
-## Example 1:
+### Example 1:
 
-#### 在一個已排序好的陣列中，找出一對最先出現且和為0的數字。並回傳該組數字，若無符合則回傳undefined。
+ 在一個已排序好的陣列中，找出一對最先出現且和為0的數字。並回傳該組數字，若無符合則回傳undefined。
 
-``` js
+```js
 sumZero([-3, -2, -1, 0, 1, 2, 3]) //[-3,3]
 sumZero([-2, 0, 1, 3]) // undefined
 sumZero([1, 2, 3]) // undefined
 ```
 
-#### 較粗糙的解法，時間複雜度為O(n^2)
+ 下方程式碼中第一種解法(sumZero)較粗糙，時間複雜度為O(n^2)，第二種(optimizedSumZero)解法時間複雜度為O(n)
 
-``` js
+```js
 function sumZero(arr) {
     for (let i = 0; i < arr.length; i++) {
         for (let j = i + 1; j < arr.length; j++) {
-            if (arr[i] + arr[j] ===0 ) {
+            if (arr[i] + arr[j] === 0) {
                 return [arr[i], arr[j]]
             }
         }
     }
 }
-```
 
-#### 優化後的解法，時間複雜度為O(n)
-
-``` js
-function sumZero(arr) {
+function optimizedSumZero(arr) {
     let left = 0
     let right = arr.length - 1
     while (left < right) {
@@ -43,18 +39,12 @@ function sumZero(arr) {
     }
 }
 ```
-## Example 2:
-#### 回傳在一個已排列的陣列中，有多少個unique values
 
+### Example 2:
+
+ 針對一個已排列的陣列，並回傳其內部有多少個獨立的值(unique value)。
 
 ```js
-countUniqueValues([1,2,3,4,4,5,6,6]) // 6
-countUniqueValues([1,1,1]) // 1
-countUniqueValues([1,2,3,4,5]) // 5
-```
-
-
-``` js
 function countUniqueValues(arr) {
     let count = 0;
     for (let i = 0; i < arr.length; i++) {
@@ -64,26 +54,30 @@ function countUniqueValues(arr) {
     }
     return count
 }
+countUniqueValues([1, 2, 3, 4, 4, 5, 6, 6]) // 6
+countUniqueValues([1, 1, 1]) // 1
+countUniqueValues([1, 2, 3, 4, 5]) // 5
 ```
+
 ---
 
 ## 2. Frequency Counter 手法
 
-#### 該方法透過loop，將陣列內的每一個值傳入物件作為其中一個property。用以避免出現O(n^2)
+ 該方法透過loop，將陣列內的每一個值傳入物件作為其中一個property。用以避免出現O(n^2)
 
-## Example 1
+### Example 1
 
-#### 定義一個函式，其接收兩個陣列，倘若其中一陣列內的值的平方可以對應另一陣列的值，且值的出現次數相同，則回傳true，若不然，則回傳false
+ 定義一個函式，其接收兩個陣列，倘若其中一陣列內的值的平方可以對應另一陣列的值，且值的出現次數相同，則回傳true，若不然，則回傳false
 
-#### 較粗糙的手法，Time Complexity => N^2
-
-``` js
+```js
 same([1, 4, 9], [1, 2, 3]); //true
 same([16, 25, 36], [4, 5, 6]) //true
 same([4, 1, 49], [2, 1) //false
 ```
 
-``` js
+ 下方程式碼第一種方法(same)較粗糙，其時間複雜度為O(N^2)，優化後的方法(optimizedSame)時間複雜度為O(N)
+
+```js
 function same(arr1, arr2) {
     if (arr1.length !== arr2.length) return false
     for (let i = 0; i < arr1.length; i++) {
@@ -95,12 +89,8 @@ function same(arr1, arr2) {
     }
     return true
 }
-```
 
-#### 優化後的函式，Time Complexity=> N
-
-``` js
-function same(arr1, arr2) {
+function optimizedSame(arr1, arr2) {
     if (arr1.length !== arr2.length) return false
     let counter1 = {}
     let counter2 = {}
@@ -119,18 +109,23 @@ function same(arr1, arr2) {
         }
     }
     return true
-
 }
 ```
 
-## Example 2
+### Example 2: 
 
-## Anagrams condition(易位構詞遊戲)，定義一個函式，其接收兩個string，確認兩個string是否互為anagrams。
+Anagrams condition(易位構詞遊戲)，定義一個函式，其接收兩個string，確認兩個string是否互為anagrams。
 
-#### 我的方法，Time complexity 為N
+```js
+validAnagram('fried', 'fired') //true
+validAnagram('slient', 'listen') //true
+validAnagram('four', 'ourd') //false
+```
 
-``` js
-function validAnagram(str1, str2) {
+ 下方程式碼的兩種方法之時間複雜度皆為O(N)
+
+```js
+function validAnagram1(str1, str2) {
     if (str1.length !== str2.length) return false
     let obj1 = {}
     let obj2 = {}
@@ -145,55 +140,44 @@ function validAnagram(str1, str2) {
         if (obj1[key] !== obj2[key]) return false
     }
     return true
-
 }
-```
 
-#### 其他方法，Time complexity 為N
-
-``` js
-function validAnagram(str1, str2) {
+function validAnagram2(str1, str2) {
     if (str1.length !== str2.length) return false
     let letter = {}
     for (el of str1) {
         letter[el] ? letter[el]++ : letter[el] = 1
     }
-
     for (el of str2) {
         if (!letter[el]) return false
         letter[el]--
         // 當letter[el]的值為0時若for loop還沒結束，則代表兩字串不同
     }
     return true
-
 }
-```
-```js
-validAnagram('fried','fired') //true
-validAnagram('slient','listen') //true
-validAnagram('four','ourd') //false
 ```
 
 ---
-## Sliding Window
 
+## 3. Sliding Window 手法
 
-#### 此手法透過建立一個window(可以是array, index)，透過不同情況下來修改window，用以追蹤subset data。
+ 此手法透過建立一個window(可以是array, index)，透過不同情況下來修改window，用以追蹤subset data。
 
-## Example 1 
+### Example 1: 
 
-#### 定義一個函式，其接收一陣列以及數字(arr, n)，該函式會回傳陣列內n個數字總和的最大值。
+定義一個函式，其接收一陣列以及數字(arr, n)，該函式會回傳陣列內n個數字總和的最大值。
 
-#### Navie way, Time complexity =>  N^2
-
+ 
 
 ```js
-maxSubarraySum([10,2,11,3,3],2) // 14
-maxSubarraySum([1,21,5,7,3],3) // 33
-maxSubarraySum([1,3,5,7,9,31,2,45,31],3) // 78
+maxSubarraySum([10, 2, 11, 3, 3], 2) // 14
+maxSubarraySum([1, 21, 5, 7, 3], 3) // 33
+maxSubarraySum([1, 3, 5, 7, 9, 31, 2, 45, 31], 3) // 78
 ```
 
-``` js
+下方程式碼第一種方法(maxSubarraySum)較粗糙，其時間複雜度為O(N^2)，優化後的方法(optimizedMaxSubarraySum)時間複雜度為O(N)
+
+```js
 function maxSubarraySum(arr, num) {
     if (num > arr.length) return null
     var max = -Infinity
@@ -208,12 +192,8 @@ function maxSubarraySum(arr, num) {
     }
     return max;
 }
-```
 
-#### Refactored, Time complexity => N
-
-``` js
-function maxSubarraySum(arr, num) {
+function optimizedMaxSubarraySum(arr, num) {
     let maxSum = 0
     let tempSum = 0
     if (arr.length < num) return null

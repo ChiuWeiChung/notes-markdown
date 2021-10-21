@@ -2,13 +2,13 @@
 
 ## 甚麼是代克思托演算法?
 
-#### 是由荷蘭電腦科學家艾茲赫爾·戴克斯特拉在1956年發現的演算法，主要用途在 `尋找Graph內兩節點(Vertex)間的最短路徑` ，因此可以運用在GPS、傳染病路徑、交通訂票系統(尋找最便宜的車票)上面。
+是由荷蘭電腦科學家艾茲赫爾·戴克斯特拉在1956年發現的演算法，主要用途在 `尋找Graph內兩節點(Vertex)間的最短路徑` ，因此可以運用在GPS、傳染病路徑、交通訂票系統(尋找最便宜的車票)上面。
 
 ## 透過JavaScript實現-1. 建立Priority Queue
 
-#### 主要透過廣度優先搜尋(BFS)方法解決路徑問題，並且透過[PriorityQueue]()來決定每一次要拜訪節點(選擇擁有最短路徑的節點進行拜訪)，並計算起點經->節點->節點 `鄰居們` 的路徑是否較先前計算的短，並紀錄再distance物件內。
+主要透過廣度優先搜尋(BFS)方法解決路徑問題，並且透過[PriorityQueue]()來決定每一次要拜訪節點(選擇擁有最短路徑的節點進行拜訪)，並計算起點經->節點->節點 `鄰居們` 的路徑是否較先前計算的短，並紀錄再distance物件內。
 
-#### 下方程式碼呈現出簡易的Priority Queue結構，透過Javascript內建的排列函式(Array.sort, 時間複雜度O(nlogn))，將每一階段擁有最短路徑的節點排在陣列第一位。
+下方程式碼呈現出簡易的Priority Queue結構，透過Javascript內建的排列函式(Array.sort, 時間複雜度O(nlogn))，將每一階段擁有最短路徑的節點排在陣列第一位。
 
 ```js
 class PriorityQueue {
@@ -34,7 +34,7 @@ const node = new PriorityQueue();
 
 ## 透過JavaScript實現-2. 建立Graph
 
-#### 建立一個[Weighted Graph]()，儲存各節點與路徑資訊。
+建立一個[Weighted Graph]()，儲存各節點與路徑資訊。
 
 ```js
 class WeightedGraph {
@@ -61,7 +61,7 @@ class WeightedGraph {
 
 ## 透過JavaScript實現-3. 建立Dijkstra function
 
-#### 在WeigthedGraph Class中建立Dijkstra function，並在內部建立一個稱為node的PriorityQueue用來作為下一個要拜訪節點的依據。
+在WeigthedGraph Class中建立Dijkstra function，並在內部建立一個稱為node的PriorityQueue用來作為下一個要拜訪節點的依據。
 
 ```js
 class WeightedGraph {
@@ -128,7 +128,7 @@ class WeightedGraph {
 
 ## 測試結果
 
-#### 假設要尋找路徑的Graph結構如下圖，只要了解節點的數量以及各節點之間的路徑，即可透過Graph內的addVertex以及addEdge建構出來，如下方程式碼
+假設要尋找路徑的Graph結構如下圖，只要了解節點的數量以及各節點之間的路徑，即可透過Graph內的addVertex以及addEdge建構出來，如下方程式碼
 
 ```js
 //             
@@ -149,7 +149,7 @@ graph.Dijkstra('A', 'F'); // ["A", "C", "D", "E", "F"]
 ```
 
 ## 優化Priority Queue
-#### 由於上述的Priority Queue是透過JavaScript內的Array.prototoype.sort來實現，其時間複雜度為O(n log n)，因此可以將PriorityQueue改寫成Binary Heap的形式，此時的時間複雜度可以減少為O(log n)。
+由於上述的Priority Queue是透過JavaScript內的Array.prototoype.sort來實現，其時間複雜度為O(n log n)，因此可以將PriorityQueue改寫成Binary Heap的形式，此時的時間複雜度可以減少為O(log n)。
 ```js
 // 透過Binary Heap改寫Priority Queue
 

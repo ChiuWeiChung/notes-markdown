@@ -1,6 +1,6 @@
 # 資料結構筆記-雙向鏈結串列(Doubly linked list)
 
-####  與[Singly linked list]()屬於同一類別的資料結構，差別在於Doubly linked list可以進行雙向溝通(head至tail或是tail至head)，由於雙向溝通的特性，因此在搜尋(Searching)方面相較Singly linked list所花費的時間就減少了一半，但也因此會增加記憶體上的空間佔據。
+與[Singly linked list]()屬於同一類別的資料結構，差別在於Doubly linked list可以進行雙向溝通(head至tail或是tail至head)，由於雙向溝通的特性，因此在搜尋(Searching)方面相較Singly linked list所花費的時間就減少了一半，但也因此會增加記憶體上的空間佔據。
 
 ``` js
 class Node {
@@ -221,7 +221,7 @@ class DoublyLinkedList {
 
 ## 雙向鏈結串列(Doubly Linked List)的時間複雜度
 
-#### Doubly linked list在各項操作上的時間複雜度基本上與Singly linked list相當，比較特別的是在Searching部分，Doubly linked list由於可以依照index的大小來決定由前端(head)或是尾端(tail)開始尋找，因此所花的時間為Singly linked list的一半，也就是O(n/2)，但仍然寫成O(n)。
+Doubly linked list在各項操作上的時間複雜度基本上與Singly linked list相當，比較特別的是在Searching部分，Doubly linked list由於可以依照index的大小來決定由前端(head)或是尾端(tail)開始尋找，因此所花的時間為Singly linked list的一半，也就是O(n/2)，但仍然寫成O(n)。
 
 Data Structure| Insertion| Removal  | Searching| Access
   ----------  |:--------:|:--------:|:--------:|:-------:
