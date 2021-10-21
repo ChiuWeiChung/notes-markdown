@@ -41,12 +41,12 @@ if (name==="Rick"){
 ## 變數特性表格
 
  統整前幾篇記錄的心得，可以將var、const、let的宣告方式及函式宣告、函式表示式、箭頭函式、
-|                                                  |HOISTED?   |INITIAL VALUE  |SCOPE                   |
-|--------------------------------------------------|-----------|---------------     |-------------------|
-|函式宣告function declaration                       |YES        |Actual function     |Block@strict mode |
-|函式運算式或箭頭函式(function expressions & arrows) |      Depend on var or const/let                   |
-|以var宣告的變數                                    |YES        |undefined           |Function           |
-|以let 或 const宣告的變數                           |No         |uninitialized, TDZ|Block              |
+|                                                  |會不會被提升?|     INITIAL VALUE  |SCOPE              |
+|--------------------------------------------------|------------|---------------     |-------------------|
+|函式宣告 (function declaration)                    |YES         |Actual function     |Block@strict mode  |
+|函式運算式或箭頭函式(function expressions & arrows) |            Depend on var or const/let               |
+|以var宣告的變數                                    |YES         |undefined           |Function           |
+|以let 或 const宣告的變數                           |No          |uninitialized, TDZ  |Block              |
 
 
 ### 參考資料

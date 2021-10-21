@@ -24,7 +24,8 @@ const first = function (){
     b = second(2,3);        
     const c = a+b
     return c ;
-};  /// ---------------------------function first's scope
+};  
+
 const second = (x,y)=>{
     let d = 4
     return d

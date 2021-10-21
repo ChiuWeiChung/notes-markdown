@@ -2,13 +2,13 @@
 
 ## 冒泡事件
 
-所謂的冒泡事件，指的是當子元素的DOM Event被觸發時，引起父層元素、祖父元素、曾祖父元素... 的監聽事件也隨後被觸發，如[我的Codepen](https://codepen.io/rickchiu/pen/abmdYMW)所呈現，整個html結構有外而內分別是html、body、外層div、中間層div、內層div，當我分別在三層div中都加入 `click` 的event後，其callback function會將改變該元素的background-color，可以發現倘若點擊內層元素div時，中間層以及外層的event handler也被執行，這就是所謂的冒泡事件，`內層事件觸發也會引起父層元素事件被觸發。
+所謂的冒泡事件，指的是當子元素的DOM Event被觸發時，引起父層元素、祖父元素、曾祖父元素... 的監聽事件也隨後被觸發，如[我的Codepen](https://codepen.io/rickchiu/pen/abmdYMW)所呈現，整個html結構有外而內分別是html、body、外層div、中間層div、內層div，當我分別在三層div中都加入 **click** 的event後，其callback function會將改變該元素的background-color，可以發現倘若點擊內層元素div時，中間層以及外層的event handler也被執行，這就是所謂的冒泡事件，內層事件觸發也會引起父層元素事件被觸發。
 
 ## 冒泡/捕捉是如何發生的?
 
-如下方示意圖，當元素 `inner div` 被點擊時，事實上，click事件並不是一開始就出現在 `inner div` ，而是出現在DOM tree的最頂端，click事件會從DOM tree的頂端開始， `沿著inner div的父層元素` 一層一層的往內走，在抵達 `inner div` 之前的過程，稱為 `捕捉階段(Capturing Phase)` ，在這個階段，click事件拜訪過的的父層元素只要有含有 `click` 的DOM event就會被觸發，但由於在 `addEventListener()` 的預設值為false(冒泡事件)，所以click事件在捕捉階段並不會觸發父層元素的event handler。
+如下方示意圖，當元素 **inner div** 被點擊時，事實上，click事件並不是一開始就出現在 **inner div** ，而是出現在DOM tree的最頂端，click事件會從DOM tree的頂端開始， **沿著inner div的父層元素** 一層一層的往內走，在抵達 **inner div** 之前的過程，稱為 **捕捉階段(Capturing Phase)** ，在這個階段，click事件拜訪過的的父層元素只要有含有 **click** 的DOM event就會被觸發，但由於在 **addEventListener()** 的預設值為false(冒泡事件)，所以click事件在捕捉階段並不會觸發父層元素的event handler。
 
-當click事件抵達目標元素 `inner div` 時，稱為 `Target Phase` ，該階段會觸發目標元素的event handler，然而click事件的旅程尚未結束，因為從哪來就從哪回去，因此在抵達 `inner div` 後又會隨著原路回去，這個過程則稱為冒泡階段(Bubbling phase)，同樣地，click事件在回程路上也會觸發父層元素的event handler。
+當click事件抵達目標元素 **inner div** 時，稱為 **Target Phase** ，該階段會觸發目標元素的event handler，然而click事件的旅程尚未結束，因為從哪來就從哪回去，因此在抵達 **inner div** 後又會隨著原路回去，這個過程則稱為冒泡階段(Bubbling phase)，同樣地，click事件在回程路上也會觸發父層元素的event handler。
 
 ``` html
 <html>
@@ -72,7 +72,7 @@ inner.addEventListener('click', function() {
 
 ## 阻止冒泡發生
 
-可以在子元素的callback function內引入event參數(名稱任取)，並執行 `event.stopPropagation()` 即可阻止冒泡事件的發生
+可以在子元素的callback function內引入event參數(名稱任取)，並執行 **event.stopPropagation()** 即可阻止冒泡事件的發生
 
 ``` js
 inner.addEventListener('click', function(e) {
@@ -82,7 +82,7 @@ inner.addEventListener('click', function(e) {
 
 ## event.target永遠指向目標元素
 
-需要注意的是，冒泡事件過程中，每個監聽事件內的callack function中，它們的 `event.target` 都是指向被點擊的目標元素
+需要注意的是，冒泡事件過程中，每個監聽事件內的callack function中，它們的 **event.target** 都是指向被點擊的目標元素
 
 ``` js
 outer.addEventListener('click', function(event) {
@@ -108,7 +108,7 @@ inner.addEventListener('click', function(event) {
 
 ## 事件委派(Event Delegation)
 
-由於冒泡/捕捉的特性而延伸出的event handling模式，藉此可以減少 `addEventListener()` 的次數，假如有多個不同元素都有DOM event的需求，我們可以將event handler設定在他們共同的父層元素，並且透過if statement來確認事件發生在哪一個元素來實現。
+由於冒泡/捕捉的特性而延伸出的event handling模式，藉此可以減少 **addEventListener()** 的次數，假如有多個不同元素都有DOM event的需求，我們可以將event handler設定在他們共同的父層元素，並且透過if statement來確認事件發生在哪一個元素來實現。
 
 ``` html
 <html>

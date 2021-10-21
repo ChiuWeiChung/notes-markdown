@@ -1,5 +1,5 @@
 # JavaScript-AJAX FETCH 
-這篇主要紀錄使用AJAX `fetch()`來串接外部API的心得，以下以`.then()`&`catch()`來做示範。
+這篇主要紀錄使用AJAX筆記，利用**fetch()** 來串接外部API，並以**then( )** 以及**catch()** 來做示範。
 ```js
 function getWeather(woeid){
         fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`) // using cors proxy to bypss the cors issue
@@ -19,7 +19,7 @@ function getWeather(woeid){
 getWeather(4118);
 ```
 
-當然，也可以使用ES8的Async Await Function來改寫上述程式碼，並且透過`try`&`catch()`處理可能會出現的錯誤:
+當然，也可以使用ES8的Async Await Function來改寫上述程式碼，並且透過**try** 以及**catch()** 處理可能會出現的錯誤:
 
 ```js
 async function getWeatherAW(woeid){

@@ -1,9 +1,9 @@
 # 了解WEB SERVICE API應用
 
 ## 記錄自身對Web Service Api的理解
-在網路世界中時常聽到API，英文全名是(Application Programming Interfer, 應用程式介面)，網路上解釋有很多種;若要一句話簡單介紹的話，大概就是`[軟體與軟體之間的互動橋樑]`，開發者(developers)可以透過API將特定的功能添加到自己開發的軟體當中(想要海釣可以租借釣具，不必自己製作釣竿的概念)。
+在網路世界中時常聽到API，英文全名是(Application Programming Interfer, 應用程式介面)，網路上解釋有很多種;若要一句話簡單介紹的話，大概就是"**軟體與軟體之間的互動橋樑**"，開發者(developers)可以透過API將特定的功能添加到自己開發的軟體當中(想要海釣可以租借釣具，不必自己製作釣竿的概念)。
 
-`Web Service Api是API的一種，但在其他領域中的Api不見得就是Web Service Api`
+>Web Service Api是API的一種，但在其他領域中的Api不見得就是Web Service Api
 
 在前後端網頁工程當中，一談到API，大多指的是web service api，簡單而言就是透過adress (ex:URL) 向遙遠的Server端請求服務、提取資料等等...，又可以根據協定、資料形式的不同將分成:
 

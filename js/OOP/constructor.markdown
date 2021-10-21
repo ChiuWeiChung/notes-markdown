@@ -1,6 +1,6 @@
-# JavaScript中的Function Constructor、Class
+# JavaScript中的函式建構式 (Function Constructor) 以及類別 (Class)
 
-在[JavaScript的Prototype觀念]()中有談到Prototype的觀念以及物件是如何調用methods，而在這裡會記錄JavaScript中的如何建立Constructor(建構子)，並且透過Constructor來將物件實體化，並連結它的prototype。
+在[JavaScript的Prototype觀念](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/OOP/whatisoop.markdown)中有談到Prototype的觀念以及物件是如何調用methods，而在這裡會記錄JavaScript中的如何建立建構子 (Constructor) ，並且透過建構子來將物件實體化，並連結它的prototype。
 
 ## 建立Prototype並連結物件?
 
@@ -11,7 +11,7 @@
 
 ## 1. 函式建構式(function constructor)
 
-函式建構式類似函式敘述式(function expression)，但名稱第一個字母為大寫，已用來辨認為一般函式還是建構子，如下方程式碼，創建了一個 **Person** 建構子，並且透過 **this** 來定義物件內的property，必須注意的是，function constructor不能使用箭頭函式(arrow function)，因為它的this並不是指向物件本身。
+函式建構式類似函式敘述式(function expression)，但名稱第一個字母為大寫，已用來辨認是一般函式還是建構子，如下方程式碼，創建了一個 **Person** 建構子，並且透過 **this** 來定義物件內的property，必須注意的是，函式建構式不能使用箭頭函式(arrow function)，因為它的this並不是指向物件本身。
 
 ``` js
 const Person = function(firstName, birthYear) {
@@ -20,10 +20,10 @@ const Person = function(firstName, birthYear) {
 };
 const rick = new Person('Rick', 1992); // 透過 new operator創立新的物件
 console.log(rick); // Person {firstName: "Rick", birthYear: 1992}
-// 將methods建立在function constructor的prototype
+// 將methods建立在函式建構式的prototype
 ```
 
-## 物件、Constructor、Prototype的關係
+## 物件、建構子、Prototype的關係
 
 當我們在定義methods時，並不會在Person內建立，如上一篇提到，倘若創立10個由Person衍伸出的物件，10個物件內都會含有相同的methods，使的程式碼的重複性過高，為避免這種情況，會傾向將methods建立在它的prototype。此外，Person的prototype以及rick的prototype都會指向同一個物件，也因此，只要透過 **Person.prototype.methodName=function(){...}** 來定義需要使用的函式，物件在執行函式時，會透過Lookup機制，沿著Prototype Chain尋找函式名稱。
 ``` js
@@ -44,7 +44,7 @@ rick.__proto__ === ann.__proto__ //true
 ```
 ![relationship](https://github.com/ChiuWeiChung/IMGTANK/blob/main/prototype/relationship.jpg?raw=true)
 
-## Function Constructor之間的繼承
+## 函式建構式之間的繼承
 
 透過constructor之間的繼承，可以將實體化的物件被分類的更詳細，比如已經存在的Person Constructor具有**firstName**以及**birthYear**的性質，倘若想在物件內增加新的性質(如country)，又想維持Person的內容的情況下，雖然可以透過 **rick.country=...** 實現，但是若新增其他的物件(如mike, stella)時，這樣的動作仍需重複一次(mike.country=..., stella.country=...)，為了避免程式碼的重複，可以透過constructor的Inheritance來實現。
 

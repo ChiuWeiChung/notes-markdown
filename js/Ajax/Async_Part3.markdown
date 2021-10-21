@@ -1,5 +1,5 @@
 # JavaScript中的Asynchronous (PART 3)
-承接PART2的結尾，雖然Promise讓程式碼變得比較不難解讀，但ES8(ES2017)提供了更簡易、方便的方法，也就是Async Await，這次透過宣告Async Function (在函數前面加上`async`)，在內部將Promise的物件前面加上`await`，執行過程中，只要一遇到await的Promise會在background執行直到`resolve()`將資料傳回變數內(`IDs`、`recipe1`、`recipe2`)
+承接PART2的結尾，雖然Promise讓程式碼變得比較不難解讀，但ES8(ES2017)提供了更簡易、方便的方法，也就是Async Await，這次透過宣告Async Function (在函數前面加上**async**)，在內部將Promise的物件前面加上**await**，執行過程中，只要一遇到await的Promise會在背景下執行直到**resolve()** 將資料傳回變數內(**IDs**、**recipe1**、**recipe2**)
 
 
 ```js
@@ -42,7 +42,7 @@ async function getRecipesAW(){
 getRecipesAW();
 ```
 
-`需要注意的是，Await expression只能運用在Async Function` 
+> 需要注意的是，Await expression只能運用在Async Function 
 
 這裡展示在運用Async Await時可能會遇到的失誤，當我們想要Async Function執行完畢後回傳一個value，並輸出在console，如下方程式碼
 ```js
@@ -65,7 +65,7 @@ console.log(rec);
 // Mr.Jonas: Italian pizze
 ```
 
-很顯然，console並沒顯示rec的值，原因主要是最後兩行程式碼(`const rec = getRecipesAW()` & `console.log(rec)`)是以Synchronous形式進行，當`console.log(rec)`要執行的當下，我們的`getRecipesAW( )`尚未執行完畢，因此value還沒有被傳回rec; 但這樣的情況要如何解決呢? 其實可以透過`.then()`來解決
+很顯然，console並沒顯示rec的值，原因主要是最後兩行程式碼(**const rec = getRecipesAW()** 以及 **console.log(rec)**)是以Synchronous形式進行，當**console.log(rec)** 要執行的當下，我們的**getRecipesAW()** 尚未執行完畢，因此值尚未傳回rec; 但這樣的情況要如何解決呢? 其實可以透過**then()** 來解決
 
 ```js
 async function getRecipesAW(){

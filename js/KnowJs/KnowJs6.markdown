@@ -10,7 +10,7 @@
 
 ## 基本型別的存放位置: 
 
-如下方程式碼範例，宣告一變數名稱**dog1**，並將值"**Jumo**"傳入其中，事實上，**dog1**並非直接對應值"**Jumo**"，而是指向一個**adress(0001)**並且對應到值"**Jumo**"; 當我們將**dog1**傳入新變數**dog2**時，**dog2**也會指向同一**adress(0001)**，倘若將值"**Judas**"重新傳入**dog1**時，由於在**Exeuction Stack被adress對應的值是無法被改變**，**dog1**的adress會重新導向至 **adress(0002)**，並對應新值"**Judas**"。
+如下方程式碼範例，宣告一變數名稱**dog1**，並將值"**Jumo**"傳入其中，事實上，**dog1**並非直接對應值"**Jumo**"，而是指向一個**adress(0001)** 並且對應到值"**Jumo**"; 當我們將**dog1**傳入新變數**dog2**時，**dog2**也會指向同一**adress(0001)**，倘若將值"**Judas**"重新傳入**dog1**時，由於在Exeuction Stack被adress對應的值是無法被改變，**dog1**的adress會重新導向至 **adress(0002)**，並對應新值"**Judas**"。
 
 ```js
 // Primitives type
@@ -25,7 +25,7 @@ console.log(dog1, dog2;// Judas Jumo
 
 ## 物件型別的存放位置: 
 
-對於參考型別而言，如下方範例，當**物件rick**被宣告時，其值**{firstName:...,}**會被存放於**Heap**內部並由**adress(D30F)**對應，然而**物件rick**並不會直接指向**Heap**內的adress，而是先指向Execution Stack內的**adress(0003)**，**adress(0003)**才會對應**Heap**內的**adress D30F**，在宣告**物件anotherRick**後並且透過**anotherRick.lastName**傳入新值**"Chen"**時，事實上並不會重新導向**物件anotherRick**在**Heap**內的adress，而是直接改變**Heap**內的值，也因此**物件rick**內的lastName也會同步改變。
+如下方範例，對於參考型別而言，當**物件rick**被宣告時，其值 **{firstName:...,}** 會被存放於**Heap**內部並由 **adress(D30F)** 對應，然而**物件rick** 並不會直接指向Heap內的adress，而是先指向執行堆疊(ES)內的**adress(0003)**，**adress(0003)** 才會對應Heap內的**adress D30F**，在宣告**物件anotherRick**後並且透過**anotherRick.lastName**傳入新值"**Chen**"時，事實上並不會重新導向**物件anotherRick**在Heap內的adress，而是直接改變**Heap**內的值，也因此**rick**內的lastName也會同步改變。
 
 ```js
 // Reference type

@@ -2,7 +2,7 @@
 
 ## querySelectorAll 以及getElementsBy... 的差異
 
-進行DOM manipulation時，有許多方法可以選取html內的element，需要注意的是，透過 document.querySelectorAll()`所回傳的資料內容是靜態的，後續對該元素進行DOM操作不會改變該變數的內容。
+進行DOM manipulation時，有許多方法可以選取html內的element，需要注意的是，透過 **document.querySelectorAll()** 所回傳的資料內容是靜態的，後續對該元素進行DOM操作不會改變該變數的內容。
 
 ``` html
 <body>
@@ -21,7 +21,7 @@
 </body>
 ```
 
-但若透過 `document.getElementsBy...()` 回傳的資料是動態的，隨著DOM的操作會更新其內容，如下方範例。
+但若透過 **document.getElementsBy...()** 回傳的資料是動態的，隨著DOM的操作會更新其內容，如下方範例。
 
 ``` html
 <body>
@@ -42,7 +42,7 @@
 
 ## 創造或插入元素
 
-若要透過DOM創造新的element，可以透過 `document.createElement()` ，但需要注意的是，若將它傳入一變數時，它會是個獨立的個體，無法同時間存在於不同位置。
+若要透過DOM創造新的Element，可以透過 **document.createElement()**，但需要注意的是，若將它傳入一變數時，它會是個獨立的個體，無法同時間存在於不同位置。
 
 ``` html
 <body>
@@ -67,7 +67,7 @@
 
 ## 刪除元素
 
-透過 `remove()` 可去除html內的元素，在前期版本因為只有 `removeChild()` ，所以需要使用tricky的方法，透過 `parentElement` 選取其父層元素。
+透過 **remove()** 可去除html內的元素，在前期版本因為只有 **removeChild()** ，所以需要使用tricky的方法，透過 **parentElement** 選取其父層元素。
 
 ``` html
 <body>
@@ -90,7 +90,7 @@
 
 ## 改變/獲取Style資訊
 
-透過 `element.style.xxx` 來改變元素的style，倘若要獲取元素已存在的style資訊，可以透過 `getComputedStyle()` 來得到。
+透過 **element.style** 來改變元素的style，倘若要獲取元素已存在的style資訊，可以透過 **getComputedStyle()** 來得到。
 
 ``` html
 <body>
@@ -125,7 +125,7 @@ document.documentElement.style.setProperty('--color-primary', 'orangered');
 
 ## HTML 屬性(Attribute)
 
-要取得element內的attribute的方式有兩種，一種是為 `element.attributeName` 方式得到，另一種可以透過 `element.getAttribute(attributeName` )，兩種方式差異在於，若選取的attribute內容為文件位址時，第一種方式得到的是絕對位置，第二種得到的是相對位置。
+要取得element內的attribute的方式有兩種，一種是為 **element.attributeName** 方式得到，另一種可以透過 **element.getAttribute(attributeName** )，兩種方式差異在於，若選取的attribute內容為文件位址時，第一種方式得到的是絕對位置，第二種得到的是相對位置。
 
 ``` html
 <body>
@@ -140,7 +140,7 @@ document.documentElement.style.setProperty('--color-primary', 'orangered');
 
 ## HTML 資料屬性 (Data Attribute)
 
-算是經常被使用的功能，將一些簡單的資料以data attribute(data-xxx)形式儲存在html element之內，其中xxx可以任意命名，並且透過DOM()方式( `element.dataset.xxx` )來存取。
+我們可以將一些簡單的資料以data attribute形式儲存在HTML元素內，並且透過DOM操作( **element.dataset** )來存取。
 
 ``` html
 <body>
@@ -161,7 +161,7 @@ document.documentElement.style.setProperty('--color-primary', 'orangered');
 
 ## Class的用法
 
-透過 `element.classList.xxx` 對該元素做新增、刪除、切換class等功能。
+透過 **element.classList** 對該元素做新增、刪除、切換class等功能。
 
 ``` js
 
@@ -176,7 +176,7 @@ element.className = 'rick'; // 將會覆蓋元素既有的class，因此該元�
 
 ## 事件監聽的種類
 
-`addEventListener` 可以重複使用，而第二種方法 `.onevent` 重複使用會覆蓋前一個event，現在大多都使用第一種方式來定義元素的事件處理器。
+**addEventListener** 可以重複使用，而第二種方法 **.onevent** 重複使用會覆蓋前一個event，現在大多都使用第一種方式來定義元素的事件處理器。
 
 ``` js
 const h1 = document.querySelector('h1');
@@ -190,7 +190,7 @@ h1.onmouseenter = function(e) { // old school way
 };
 ```
 
-若要將Event Listener 移除的話可以透過 `removeEventListener` 來實現。
+若要將Event Listener 移除的話可以透過 **removeEventListener** 來實現。
 
 ``` html
 <body>
