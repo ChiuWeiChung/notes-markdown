@@ -1,5 +1,7 @@
 # 演算法筆記-代克思托演算法(Dijkstra's algorithm)
 
+> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 ## 甚麼是代克思托演算法?
 
 是由荷蘭電腦科學家艾茲赫爾·戴克斯特拉在1956年發現的演算法，主要用途在 `尋找Graph內兩節點(Vertex)間的最短路徑` ，因此可以運用在GPS、傳染病路徑、交通訂票系統(尋找最便宜的車票)上面。

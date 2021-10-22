@@ -1,4 +1,7 @@
 # 了解JavaScript_提升 (Hoisting)以及暫時死區（Temporal Dead Zone，TDZ）
+
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 ## 提升 (Hoisting)
  透過function declaration宣告的函式在宣告前就可以存取它，因為呼叫過程中會被hoist，如下方範例。
 

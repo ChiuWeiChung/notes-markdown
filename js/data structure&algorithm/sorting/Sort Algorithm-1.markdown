@@ -1,5 +1,8 @@
 # 排序法演算法筆記-1 (Bubble, Selection, Insertion)
 
+> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
+
 在這裡紀錄學習Data Structure& Algorithm的學習筆記，在這邊會記錄三種排序的演算法，分別為 1. Bubble Sort, 2. Selection Sort, 3. Insertion Sort.。
 
 ## 1. Bubble sort

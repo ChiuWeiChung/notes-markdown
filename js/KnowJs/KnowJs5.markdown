@@ -1,5 +1,9 @@
 # 了解JavaScript的背後Part5 (this keyword)
+
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 ## this keyword
+
 **this**這個主題在JavaScript中大概是最熱門及被討論的主題之一，在使用上有它的實用性，但也是最容易被誤解的keyword，這篇就針對JavaScript的this記錄學習筆記。
 this keyword，當物件在呼叫其內部的函式時就會出現this，而該函式的this會指向它的主人(owner)，如下方範例，在呼叫物件obj內的test函式之後，印出的this是指向obj物件，也就是擁有test這個函式的主人。
 ```js

@@ -1,5 +1,7 @@
 # 了解JavaScript_資料型別(基本型別 Primitive 與物件型別 Object)
 
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 在Javscript中大致上可分為兩大型別所組成。
 1. 基本型別 (Primitive Types):  
 包含**Number**、**String**、**Boolean**、**Undefined**、**Null**、**Symbol**、**BigInt**。

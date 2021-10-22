@@ -1,5 +1,7 @@
 # 資料結構筆記-雙向鏈結串列(Doubly linked list)
 
+> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 與[Singly linked list]()屬於同一類別的資料結構，差別在於Doubly linked list可以進行雙向溝通(head至tail或是tail至head)，由於雙向溝通的特性，因此在搜尋(Searching)方面相較Singly linked list所花費的時間就減少了一半，但也因此會增加記憶體上的空間佔據。
 
 ``` js

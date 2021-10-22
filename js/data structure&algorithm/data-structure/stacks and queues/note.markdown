@@ -1,5 +1,7 @@
 # 資料結構筆記-堆疊(Stack)&佇列(Queue)
 
+> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 ## 堆疊 (Stack)
 
 堆疊屬於LIFO(Last In, First Out)的線性資料結構: 也就是最後新增(add)的Stack的資料，在移除(remove)時也會是第一個被移出的。常見的Stack例子如 1. JavaScript中的function在[Call Stack]()中堆疊過程 2. 網頁的瀏覽紀錄(上一頁&下一頁)。

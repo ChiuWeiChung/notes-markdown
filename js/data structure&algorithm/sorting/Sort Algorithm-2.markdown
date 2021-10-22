@@ -1,5 +1,7 @@
 # 排序演算法筆記-2 (Merge, Quick , Radix)
 
+> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 * 關於數字排序的演算有許多種，但因為方法不同，其時間複雜度可以從O(n^2)變成O(nlogn)，(這裡的log是以2為底的對數)
 * 一般而言，越有效率的algorithm，其內部的觀念都很tricky，想法上並不是很直覺性的，也因此需要更多時間去理解。
 * 並沒有萬用的演算法，因為不同情況下(random排序, 近乎正排序, 近乎倒排序)，不同的演算法所展現的效率並不同，因此針對不同情況而選擇適合演算法才是最佳解。

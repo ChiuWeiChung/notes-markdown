@@ -1,5 +1,7 @@
 # 了解JavaScript__High-Level & JIT Compiled & One Single THread
 
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 ## Wikipedia 上的JavaScript的介紹
 如果搜尋維基百科上的JavaScript，第一段對他的解釋就是: 
 

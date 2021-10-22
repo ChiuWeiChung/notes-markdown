@@ -1,5 +1,7 @@
 # 資料結構筆記-單向鏈結串列(Singly linked list)
 
+> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 Singly linked list是Linked listed中最基本的版本，在這條Link上，每一個節點都儲存著資料(val)，且節點之間只能單向溝通(由head至tail)，透過Javascript中的Class可以用來實現這樣的資料結構，如下方code，建立了兩個class( `Node` & `SinglyLinkedList` )，而 `SinglyLinkedList` 即本體，內部可由多個 `Node` 所連結而成，每個 `Node` 可存放val以及通往下個 `Node` 的property(val, next)，詳細請參考[我的github]()。
 
 ``` js

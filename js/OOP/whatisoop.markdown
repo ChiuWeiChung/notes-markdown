@@ -1,4 +1,6 @@
-# JavaScript中的Prototype筆記心得
+# JavaScript中的原型 (Prototype)
+
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
 ## 物件導向語言(OOP)
 

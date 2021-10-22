@@ -1,4 +1,6 @@
-# DOM中的一些心得筆記整理
+# DOM中操作手法
+
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
 ## querySelectorAll 以及getElementsBy... 的差異
 
@@ -125,7 +127,7 @@ document.documentElement.style.setProperty('--color-primary', 'orangered');
 
 ## HTML 屬性(Attribute)
 
-要取得element內的attribute的方式有兩種，一種是為 **element.attributeName** 方式得到，另一種可以透過 **element.getAttribute(attributeName** )，兩種方式差異在於，若選取的attribute內容為文件位址時，第一種方式得到的是絕對位置，第二種得到的是相對位置。
+要取得元素內的attribute的方式有兩種，一種是為 **element.attributeName** 方式得到，另一種可以透過 **element.getAttribute(attributeName** )，兩種方式差異在於，若選取的attribute內容為文件位址時，第一種方式得到的是絕對位置，第二種得到的是相對位置。
 
 ``` html
 <body>

@@ -1,5 +1,7 @@
 # Javascript中的內建函式 (Call, Bind, Apply)筆記
 
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 物件之間，可以透過call, bind, apply來調用自身沒有的函式，並綁定this keyword。
 
 ``` js

@@ -1,5 +1,7 @@
 # 了解JavaScript_範疇(Scope)與範疇鏈(Scope Chain)
 
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 在學習JavaScript的初期，會時常出現的情況: "甚麼!，我明明有宣告它阿，為何無法透過console.log()印出來呢??"，後面才知道Scope(範疇 or 作用域)的觀念有多重要，深深影響我們在哪裡可以&不可以存取變數，有了這個觀念就可以大幅減少console中出現Reference error的悲劇，下面針對幾點專有名詞做紀錄:
 
 1. Scoping:  

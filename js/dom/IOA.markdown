@@ -1,5 +1,7 @@
 # Intersection Observer API
 
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 ## 提升使用者體驗
 當使用者開啟網頁時，瀏覽器會將所有的內容全部render出來，倘若頁面含有大量圖片時，會因為太多複雜資訊要存取而導致等待時間拉長，假如可以在一開始先將重要的資訊(如文字內容)呈現給使用者，待使用者滑動頁面到有圖片的元素時再渲染給使用者，如此一來可以減少使用者開啟網頁的等待時間。在過去，可以透過 `addEventListener()` 監聽 `scroll` 事件，並以 `getBoundingClientRect()` 得知目標元素的相對位置，如下方程式碼，然而卷軸每一次的滾動都會使callback function執行，滾動一次就會呼叫 `getBoundingClientRect()` 重新計算目標元素的位置，如此一來會降低網頁效能，造成不好的使用者體驗，也因此，Intersection Observer API的出現解決了這樣的窘境。
 

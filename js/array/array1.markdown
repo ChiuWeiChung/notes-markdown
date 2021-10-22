@@ -1,5 +1,8 @@
 # JavaScript中的各種陣列方法(Array Method)
 
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
+
 ## Slice Method
 擷取陣列內的元素，此方法不會改變原陣列內元素。
 ``` js

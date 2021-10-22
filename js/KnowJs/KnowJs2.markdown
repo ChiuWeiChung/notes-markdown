@@ -1,5 +1,6 @@
 # 了解JavaScript_執行堆疊與執行環境
 
+> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
 ## JavaScript Runtime
 JavaScript的source code需要被Interpreted成機器可以理解的語言，因此這篇文章就來記錄Code被Interpreted之後的machine code(0&1)是如何被執行的;

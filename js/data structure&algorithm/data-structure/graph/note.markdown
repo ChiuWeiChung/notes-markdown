@@ -1,5 +1,7 @@
 # 資料結構筆記-圖(Graph)
 
+> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 圖(Graph)的資料結構時常運用在1. 社群網站(Facebook, Instagram...)，2. 地圖系統(Google map)，路徑計算等方面，從[維基百科](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))的描述中對於圖(Graph)的解釋為: A graph data structure consists of a finite (and possibly mutable) set of vertices or nodes or points, together with a set of unordered pairs of these vertices for an undirected graph or a set of ordered pairs for a directed graph. 上面的解釋包含了許多的專有名詞，所以這裡針對專有名詞做紀錄。
 
 * Vertex : 就是圖的節點(node)。

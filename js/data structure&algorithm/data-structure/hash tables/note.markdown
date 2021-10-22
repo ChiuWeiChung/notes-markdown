@@ -1,5 +1,7 @@
 # 資料結構筆記-雜湊表 (Hash Table)
 
+> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+
 ## 雜湊表介紹
 
 雜湊表(Hash Table)是用來儲存 `key-value` pairs的一種資料結構，有點類似陣列(Array)，但它的 `key` 並沒有順序(order)可言，此外，雜湊表在Search、Insert、Remove方面的處理速度都比陣列(Array)快上許多; 幾乎所有的程式語言都具有類似Hash Table的資料結構(例如Python的Dictionary，JavaScript的Object以及Map，Java的Maps，Ruby的Hashes)。好的Hash Table必須具備:
