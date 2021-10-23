@@ -4,16 +4,18 @@
 
 在[JavaScript的Prototype觀念](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/OOP/whatisoop.markdown)中有談到Prototype的觀念以及物件是如何調用methods，而在這裡會記錄JavaScript中的如何建立建構子 (Constructor) ，並且透過建構子來將物件實體化，並連結它的prototype。
 
-## 建立Prototype並連結物件?
+## 如何建立Prototype並連結物件?
 
-在JS中，有三中方法可以做到: 
+在JS中，有3種方法可以做到: 
 1. 函式建構式(function constructor)
 2. ES6的Class 
 3. Object.create()
 
 ## 1. 函式建構式(function constructor)
 
-函式建構式類似函式敘述式(function expression)，但名稱第一個字母為大寫，已用來辨認是一般函式還是建構子，如下方程式碼，創建了一個 **Person** 建構子，並且透過 **this** 來定義物件內的property，必須注意的是，函式建構式不能使用箭頭函式(arrow function)，因為它的this並不是指向物件本身。
+函式建構式類似函式敘述式(function expression)，為了辨別是一般函式還是建構子，在命名時會將第一個字母作為大寫。
+
+如下方程式碼，創建了一個 **Person** 建構子，並且透過 **this** 來定義物件內的property，必須注意的是，函式建構式不能使用箭頭函式(arrow function)，因為它的this並不是指向物件本身。
 
 ``` js
 const Person = function(firstName, birthYear) {

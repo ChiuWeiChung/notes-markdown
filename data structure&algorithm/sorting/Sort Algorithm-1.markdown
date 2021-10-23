@@ -128,5 +128,5 @@ insertionSort(arr)
   Insertion Sort|     O(n)      |   O(n^2) |   O(n^2) |     O(1)
   Selection Sort|     O(n^2)    |   O(n^2) |   O(n^2) |     O(1)
 
-基本上Bubble, Selection, Insertion三種方法的時間複雜度在一般的情況下(隨機排列的數字)，都是一樣的(O(n^2))，若要將其降至O(n^2)以下，就需要靠較複雜的演算法，相關比較記錄在[排序法演算法筆記-2]()
+基本上Bubble, Selection, Insertion三種方法的時間複雜度在一般的情況下(隨機排列的數字)，都是一樣的(O(n^2))，若要將其降至O(n^2)以下，就需要靠較複雜的演算法，相關比較記錄在[排序法演算法筆記-2](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/data%20structure%26algorithm/sorting/Sort%20Algorithm-2.markdown)
 
