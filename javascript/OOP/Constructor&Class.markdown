@@ -2,7 +2,7 @@
 
 > 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
-在[JavaScript的Prototype觀念](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/OOP/whatisoop.markdown)中有談到Prototype的觀念以及物件是如何調用methods，而在這裡會記錄JavaScript中的如何建立建構子 (Constructor) ，並且透過建構子來將物件實體化，並連結它的prototype。
+在[JavaScript的Prototype觀念](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/OOP/Prototype&Inheritance.markdown)中有談到Prototype的觀念以及物件是如何調用methods，而在這裡會記錄JavaScript中的如何建立建構子 (Constructor) ，並且透過建構子來將物件實體化，並連結它的prototype。
 
 ## 如何建立Prototype並連結物件?
 

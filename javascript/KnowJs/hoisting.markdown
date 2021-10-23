@@ -1,5 +1,7 @@
 # Hoisting and TDZ
 
+
+
 ## Hoisting
 Makes some types of variables accessible/usable in the code before they are acrually declared. "Variables lifted to the top of their scope".
 
