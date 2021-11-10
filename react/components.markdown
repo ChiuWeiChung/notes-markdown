@@ -4,7 +4,7 @@
 
 Components可以說是建立React App的基礎，而React基本上可以理解方便建立components的Library。
 
-一個React App基本上是由不同的"components"所組成的一個Component Tree，而這棵Components Tree都是由名為App(根, root)的component所發展出許多子components(child components)所構成，每一個component會回傳類HTML語法的Code，稱為JSX，接著React會將JSX code轉為HTML，最後redner到DOM
+一個React App基本上是由不同的"Component"所組成的一個Component Tree，而這棵Components Tree都是由名為App(根, root)的component所發展出許多子components(child components)所構成，每一個component會回傳類HTML語法的Code，稱為JSX，接著React會將JSX code轉為HTML，最後redner到DOM
 
 ## JSX
 
@@ -38,7 +38,7 @@ const newComponent = () => {
 * class - based components: 又稱為 "container", "smart"或是 "stateful"components。
 
 ```js
-// class0-based components
+// class-based components
 const newComponent extends React.Component {
     render() {
         return (
@@ -91,7 +91,7 @@ const post = (props) => {
 
 ## State 
 
-State只能透過class-based component來定義或是修改，且state的改變會觸發component進行re-render，進而改變DOM，上述提到的props也允許將state傳遞到functional component，但是無法直接在functional component內部改變state(暫不討論React hook的UseState)，要改變state的內容只能在class-based component內透過 `this.setState({...})` 來改變
+State只能透過class-based component來定義或是修改，且state的改變會觸發component進行re-render，進而改變DOM，上述提到的props也允許將state傳遞到functional component，但是無法直接在functional component內部改變state (在沒有使用React hook的情況下) ，要改變state的內容只能在class-based component內透過 `this.setState({...})` 來改變
 
 ```js
 class NewPost extends React.Component {
