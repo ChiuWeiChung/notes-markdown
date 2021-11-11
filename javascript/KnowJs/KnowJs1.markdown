@@ -1,17 +1,15 @@
-# 了解JavaScript__High-Level & JIT Compiled & One Single THread
+# 了解JavaScript的背後Part 1 (High-Level & JIT Compiled & One Single Thread)
 
 > 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
 ## Wikipedia 上的JavaScript的介紹
-如果搜尋維基百科上的JavaScript，第一段對他的解釋就是: 
-
-「JavaScript often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is **High-Level**, often **just-in-time compiled**, and **multi-paradigm**. It has curly-bracket syntax, **dynamic typing**, **prototype-based object-orientation**, and **first-class functions**.」 
+如果搜尋維基百科上的JavaScript，第一段對他的解釋就是: 「JavaScript often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is **High-Level**, often **just-in-time compiled**, and **multi-paradigm**. It has curly-bracket syntax, **dynamic typing**, **prototype-based object-orientation**, and **first-class functions**.」 
 
 上述落落長的解釋用了許多專有名詞去形容JavaScript的特性，讓人看了眼花撩亂，在這篇我先針對JavaScript所擁有的**1.High-Level**、**2.JIT Compiled**、**3.One Single Thread**特性做心得分享。
 
 
 ## 1. High-Level Programming Language
-High-Level的語法偏向人類較看得懂但機器就看不懂的語言，若要與機器溝通需要透過翻譯(Compiler or Interpreter)轉換成機器看得懂的二進位文件(0&1); 
+High-Level的語法偏向人類較看得懂但機器就看不懂的語言，若要與機器溝通需要透過翻譯(Compiler or Interpreter)轉換成機器看得懂的二進位文件(0&1)。
 
 Low-level語法對人們而言較生硬但機器較看得懂的語言，也因此Low-Level可直接與機器溝通; 在執行上Low-Level較容易受硬體限制，而High-Level不會收到CPU的影響。
 
@@ -19,7 +17,8 @@ Low-level語法對人們而言較生硬但機器較看得懂的語言，也因�
 
 
 ## 2. Just-In-Time Compiled
-在上一段有談到因為High-Level是人類比較看得懂的語言，在執行過程需要透過翻譯才可以與電腦溝通，於是這邊來討論Source Code是如何透過翻譯轉成電腦可以理解的語言，一般而言可分為`Compilation(編譯)` & `Interpretation(直譯)` &`Just-In-Time Compilation(即時編譯)`:
+在上一段有談到因為High-Level是人類比較看得懂的語言，在執行過程需要透過翻譯才可以與電腦溝通，於是這邊來討論Source Code是如何透過翻譯轉成電腦可以理解的語言，一般而言可分為`Compilation(編譯)` & `Interpretation(直譯)` &`Just-In-Time Compilation(即時編譯)`。
+
 * Compiler:  
 在代碼執行前，先將Source Code全部一次轉換成機器可以理解的語言。 優點:速度快，可獨立運行; 缺點:除錯速度慢; 代表:C語言。
 * Interpreter:  
