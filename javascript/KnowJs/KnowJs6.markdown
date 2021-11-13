@@ -1,11 +1,14 @@
-# 了解JavaScript_資料型別(基本型別 Primitive 與物件型別 Object)
+# 基本型別 (Primitive)與物件型別 (Object)
 
 > 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
 在Javscript中大致上可分為兩大型別所組成。
+
 1. 基本型別 (Primitive Types):  
 包含**Number**、**String**、**Boolean**、**Undefined**、**Null**、**Symbol**、**BigInt**。
+
 2. 物件型別 (Object Types):  
+
 包含**Object Literal**、**Array**、**Functions**....。
 
 在JavaScript引擎內，兩大型別的值存放的位置不一樣，基本型別會存放在執行堆疊 (Execution Stack)，而物件型別則存放於堆內存(Heap)內部。
@@ -23,7 +26,6 @@ console.log(dog1, dog2;// Judas Jumo
 ```
 ![Primitive types](https://github.com/ChiuWeiChung/IMGTANK/blob/main/types/primitive.gif?raw=true)
 
-<br>
 
 ## 物件型別的存放位置: 
 
@@ -43,7 +45,6 @@ console.log("Another Rick:", anotherRick); //Another Rick: {firstName: "Rick", l
 ```
 ![Reference types](https://github.com/ChiuWeiChung/IMGTANK/blob/main/types/reference.gif?raw=true)
 
-<br>
 
 ## Object.assign()及其注意事項
 倘若要避免複製物件內容做改動時，連帶影響原物件，可以使用**Object.assign()** 的方式。
@@ -76,6 +77,7 @@ console.log(anotherRick.family); // ["Jason", "Emily", "Bob", "John"]
 ## 將物件轉成字串再轉回物件
 
 另外一種複製方法比較tricky，透過JSON.stringify()將物件轉成字串，再透過JSON.parse()將字串轉成物件傳入變數。
+
 ```js
 const rick = {
     firstName:"Rick",

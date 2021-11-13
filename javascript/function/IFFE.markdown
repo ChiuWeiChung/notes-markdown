@@ -7,7 +7,7 @@
 ## 數據封裝(Data Encapsulation)
 在編寫程式時，資料的保護是非常重要的事，我們需要盡可能地去避免資料(如variables)被外人存取、甚至是覆寫。
 
-下方程式碼在瀏覽器運行時，可以透過瀏覽器的console上存取**sayHi**這個函式，在資料安全上是有疑慮的。
+下方程式碼在瀏覽器運行時，可以透過瀏覽器的console上存取 `sayHi` 這個函式，在資料安全上是有疑慮的。
 
 ```js
 const sayHi = function(){
@@ -15,6 +15,7 @@ const sayHi = function(){
 };
 sayHi();
 ```
+
 透過IIFE(Immediately Invoked Function Expression)，在函式宣告的同時用**括號( )包覆住，在後方再加上()**，如此一來就可以立即執行，在瀏覽器的console上也無法存取該函式，達到保護變數的目的。
 
 ```js
@@ -25,6 +26,7 @@ sayHi();
 ```
 
 在ES6中，屬於[block scope](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/KnowJs/KnowJs3.markdown)的const、let出現之後，只要創造出block scope，就無法從外部存取以const、let宣告的變數，也因此IFFEs的使用率漸漸的下降。
+
 ```js
 {
     const isPrivate = 23;

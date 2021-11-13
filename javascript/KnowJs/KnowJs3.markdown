@@ -1,4 +1,4 @@
-# 了解JavaScript_範疇(Scope)與範疇鏈(Scope Chain)
+# 範疇 (Scope)與範疇鏈 (Scope Chain)
 
 > 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
@@ -18,6 +18,7 @@ Lexical Scoping的定義為: 變數在某個區域是否可/不可被存取主�
 
 ### 1.Global Scope
 簡單定義的話，就是在function及block以外所宣告的變數。
+
 ```js
 const cat = "Jumo";
 const weight = "15kg";
@@ -26,6 +27,7 @@ const age = 3;
 
 ### 2.Function Scope
 在函式內部所宣告的變數，僅能在該函式內部被存取，此規則在函式宣告(function declaration)、函式表示式(function expression)、函式箭頭式(arrow function)都成立。
+
 ```js
 function myCat(currentYear){
     const birthday = 2012;
@@ -53,7 +55,6 @@ if( age >= 18){
         console.log("you are adult, go to get a drive license!")
     };
 };
-
 console.log(isAdult); //ReferenceError  isAdult is not defined
 console.log(canVote); //ReferenceError canVote is not defined
 console.log(gotoBar); //true
@@ -92,6 +93,8 @@ calcAge(1991);
 ```
 
 ![Scope Chain](https://github.com/ChiuWeiChung/IMGTANK/blob/main/scope/scopechain.png?raw=true)
+
+
 ![variables in scope](https://github.com/ChiuWeiChung/IMGTANK/blob/main/scope/variables%20in%20scope.png?raw=true)
 
 scope內部與外部有相同名稱的變數時，如下方例子，在first()內部使用了const宣告了firstName="Rick"，而在if block scope內部又以const宣告了一次firstName="John"，此時若在if block scope印出firstName，得到的結果是"John"而非"Rick"，原因在於JavaScript在循著Scope Chain從內往外尋找變數時，在if block scope內部就已經找到firstName，因此停止向外尋找直接輸出結果。

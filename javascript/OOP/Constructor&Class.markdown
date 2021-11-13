@@ -15,7 +15,7 @@
 
 函式建構式類似函式敘述式(function expression)，為了辨別是一般函式還是建構子，在命名時會將第一個字母作為大寫。
 
-如下方程式碼，創建了一個 **Person** 建構子，並且透過 **this** 來定義物件內的property，必須注意的是，函式建構式不能使用箭頭函式(arrow function)，因為它的this並不是指向物件本身。
+如下方程式碼，創建了一個 `Person` 建構子，並且透過 `this` 來定義物件內的property，必須注意的是，函式建構式不能使用箭頭函式(arrow function)，因為它的 `this` 並不是指向物件本身。
 
 ``` js
 const Person = function(firstName, birthYear) {
@@ -29,7 +29,10 @@ console.log(rick); // Person {firstName: "Rick", birthYear: 1992}
 
 ## 物件、建構子、Prototype的關係
 
-當我們在定義methods時，並不會在Person內建立，如上一篇提到，倘若創立10個由Person衍伸出的物件，10個物件內都會含有相同的methods，使的程式碼的重複性過高，為避免這種情況，會傾向將methods建立在它的prototype。此外，Person的prototype以及rick的prototype都會指向同一個物件，也因此，只要透過 **Person.prototype.methodName=function(){...}** 來定義需要使用的函式，物件在執行函式時，會透過Lookup機制，沿著Prototype Chain尋找函式名稱。
+當我們在定義methods時，並不會在Person內建立，如上一篇提到，倘若創立10個由Person衍伸出的物件，10個物件內都會含有相同的methods，使的程式碼的重複性過高，為避免這種情況，會傾向將methods建立在它的prototype。
+
+此外，Person的prototype以及rick的prototype都會指向同一個物件，也因此只要透過 `Person.prototype.methodName=function(){...}` 來定義需要使用的函式，物件在執行函式時，會透過Lookup機制沿著Prototype Chain尋找函式名稱。
+
 ``` js
 // 物件的prototype以及constructor的prototype是同一個
 console.log(rick.__proto__ === Person.prototype) // true
@@ -50,9 +53,9 @@ rick.__proto__ === ann.__proto__ //true
 
 ## 函式建構式之間的繼承
 
-透過constructor之間的繼承，可以將實體化的物件被分類的更詳細，比如已經存在的Person Constructor具有**firstName**以及**birthYear**的性質，倘若想在物件內增加新的性質(如country)，又想維持Person的內容的情況下，雖然可以透過 **rick.country=...** 實現，但是若新增其他的物件(如mike, stella)時，這樣的動作仍需重複一次(mike.country=..., stella.country=...)，為了避免程式碼的重複，可以透過constructor的Inheritance來實現。
+透過constructor之間的繼承，可以將實體化的物件被分類的更詳細，比如已經存在的Person Constructor具有 `firstName` 以及 `birthYear` 的性質，倘若想在物件內增加新的性質(如country)，又想維持Person的內容的情況下，雖然可以透過 `rick.country=...` 實現，但是若新增其他的物件(如mike, stella)時，這樣的動作仍需重複一次(mike.country=..., stella.country=...)，為了避免程式碼的重複，可以透過constructor的繼承來實現。
 
-創建一個新的constructor(Taiwanese)，透過 **Object.create()** 將Peron的prototype傳入Taiwanese的prototype內，此時被Taiwanese實體化的物件mike。
+創建一個新的constructor( `Taiwanese` )，透過 `Object.create()` 將 `Peron` 的prototype傳入 `Taiwanese` 的prototype內。
 
 ``` js
 const Taiwanese = function(firstName, birthYear, country) {
@@ -110,7 +113,7 @@ console.log(stella); //Person {firstName: "Stella", birthYear: 1990}
 
 ``` js
 class Person {
-    constructor(firstName, birthYear) {
+    constructor(firstName , birthYear) {
         this.firstName = firstName;
         this.birthYear = birthYear;
     }
@@ -130,7 +133,7 @@ stella.__proto__.hasOwnProperty('whoAmI') // false
 
 ## class之間的繼承
 
-class之間的繼承，可以透過 **extedns < class-name > ** 來實現，
+class之間的繼承，可以透過 `extedns < class-name >` 來實現，
 
 ``` js
 class Taiwanese extends Person {

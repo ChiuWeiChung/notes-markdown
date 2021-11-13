@@ -1,4 +1,4 @@
-# 了解JavaScript__一級函式以及函式編程(First-class function & Functional Programming)
+# JavaScript簡介 Part2
 
 > 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 

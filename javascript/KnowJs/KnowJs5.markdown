@@ -1,11 +1,12 @@
-# 了解JavaScript的背後Part5 (this keyword)
+# JavaScript中的This
 
 > 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
-## this keyword
+## This keyword
 
 **this**這個主題在JavaScript中大概是最熱門及被討論的主題之一，在使用上有它的實用性，但也是最容易被誤解的keyword，這篇就針對JavaScript的this記錄學習筆記。
 this keyword，當物件在呼叫其內部的函式時就會出現this，而該函式的this會指向它的主人(owner)，如下方範例，在呼叫物件obj內的test函式之後，印出的this是指向obj物件，也就是擁有test這個函式的主人。
+
 ```js
 const obj = {
     firstName:"Rick",
@@ -18,8 +19,10 @@ const obj = {
 };
 obj.test();
 ```
+
 ## 在Regular Function內，this會指向呼叫它的物件
 只有呼叫物件內函式得當下，this才有意義，並且會指向呼叫它的物件(也就是owner)，倘若是一個不存在於物件內的函式，在strict mode的情況下會出現undefined，在非strict mode則會指向window。
+
 ```js
 'use strict'
 function test(){
@@ -29,6 +32,7 @@ test();
 ```
 
 當我們把物件A內的函式assign到另一個物件B時，物件B呼叫該函式時，this會指向呼叫它的物件，也就是物件B本身;若將物件A的函式assign到變數v之中，在strict mode呼叫該變數v會出現error，非strict mode則會將this指向window，由於window底下尚未存在firstName以及favorite的變數，故會出現undefined。
+
 ```js
 'use strict'
 const objA = {
@@ -50,6 +54,7 @@ v(); //在strict mode出現Cannot read property 'firstName' of undefined , 非st
 
 ## 箭頭函式(Arrow Function)的this
 this在箭頭函式的行為與regular function不同，箭頭函式沒有自己的this，因為它的this等同於上層函式或上層範疇的this，如下方範例，可以看到在test函式內部宣告了另一個箭頭函式test2，並在內部印出this，結果是指向obj這個物件，因為箭頭函式的this指向它上層函式test的this，也就是obj。
+
 ```js
 const obj = {
     firstName:"Rick",
@@ -66,6 +71,7 @@ obj.test();
 ## 一般函式 (Regular Function) VS. 箭頭函式 (Arrow Function)
 
 經過上面的心得介紹可以統整出一般函式的this指的是呼叫函式的物件本身，一般函式的this則與它的上層函式或上層範疇的this一樣，如下方範例，regularObj呼叫內部的一般函式，它的this指向regularObj本身;倘若是arrowObj呼叫內部的一般函式，它的this指向的是window。
+
 ```js
 const regularObj = {
     firstName:"Rick",
@@ -82,7 +88,10 @@ const arrowObj = {
 };
 arrowObj.arrow(); // Mary
 ```
+
 下方程式碼中，this keyword無法在isAdult中顯示，因為isAdult被宣告在calcAge內部，其內部的this會是undefined(strict mode)，然而有兩種辦法可以解決這樣的困境。
+
+
 ```js
 'use strict'
 const obj = {  
@@ -102,6 +111,7 @@ obj.calcAge();
 ```
 ### Solution 1 
 在isAdult外部先將this assign至另一個變數self，再從isAdult內部呼叫self即可解決。
+
 ```js
 const obj = {  
     firstName:"Rick",
@@ -119,8 +129,10 @@ const obj = {
 };
 obj.calcAge();
 ```
+
 ### Solution 2
 將isAdult改為箭頭函式，因為在內部的this會指向calcAge的this，也就是obj本身。
+
 ```js
 const obj = {  
     firstName:"Rick",
