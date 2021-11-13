@@ -7,6 +7,7 @@ Asynchronous JavaScript的應用最典型的範例就是在使用JavaScript向Se
 ## 何謂同步 (Synchronous)? 
 
 同步 (Synchronous) ，如下方程式碼，當我們呼叫**first()** 時，並以Execution Stack & Context來描述他的執行過程(gif圖)，由於[one single thread](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/KnowJs/KnowJs1.markdown)的特性，"**程式碼內的每一行code會逐行執行(line by line)**"，因此先看到'execute 1'，再來'execute 2'，最後是'The end'。這個就是Synchronous JavaScript。
+
 ```js
 const first = function (){
         console.log("execute 1");
@@ -21,11 +22,12 @@ first();
 // execute2
 // The end
 ```
+
 ![Synchronous Runtimie](https://github.com/ChiuWeiChung/IMGTANK/blob/main/eventloop/synchornous.gif?raw=true)
 
 ---
 
-<br>
+  
 
 ## 何謂非同步 (Asynchronous)?
 
@@ -53,6 +55,8 @@ one();
 // this is time callback
 
 ```
+  
+
 
 ### 執行過程發生了甚麼事? (Callback Queue &Event Loop)
 
@@ -68,9 +72,6 @@ JavaScript的[Runtime](https://github.com/ChiuWeiChung/notes-markdown/blob/main/
 
 
 ---
-
-<br>
-
 
 ## Asynchronous的回呼地獄 (Callback Hell)
     
@@ -100,9 +101,9 @@ getRecipe();
 //  789: Fresh tomato pasta
 //  456: Italian pizza
 ```
+
 ---
 
-<br>
 
 ## ES6__Promise (解決回呼地獄)
 
@@ -159,7 +160,8 @@ getIDs
 
 ---
 
-</br>
+  
+
 
 ## Async & Await
 
@@ -210,11 +212,12 @@ getRecipesAW();
 
 > 需要注意的是，Await expression只能運用在Async Function 
 
-<br>
+  
 
 ## Async Await 需注意的地方
 
 這裡展示在運用Async Await時可能會遇到的失誤，當我們想要Async Function執行完畢後回傳一個值，並輸出在console內，如下方程式碼
+
 ```js
 async function getRecipesAW(){
     const IDs = await getIDs;
@@ -223,7 +226,6 @@ async function getRecipesAW(){
     console.log(recipe1);
     const recipe2 = await getRelated("Mr.Rick"); 
     console.log(recipe2);
-
     return recipe1;  // The value I want to return
 };
 
@@ -248,7 +250,6 @@ async function getRecipesAW(){
     console.log(recipe1);
     const recipe2 = await getRelated("Mr.Rick"); 
     console.log(recipe2);
-
     return recipe1;  // The value I want to return
 };
 
@@ -258,7 +259,6 @@ getRecipesAW().then(result=>console.log(`show recipe1 ${result}`));
 // 432: Fresh tomato pasta
 // Mr.Jonas: Italian pizze
 // show recipe1 432: Fresh tomato pasta
-
 ```
 
 
