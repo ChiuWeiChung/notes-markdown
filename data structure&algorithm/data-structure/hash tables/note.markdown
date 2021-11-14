@@ -97,6 +97,7 @@ class HashTable {
 
 ## Keys and Values Method
 用來回傳Table內所有的key以及value(不重複)。
+
 ```js
 class HashTable {
     ...

@@ -195,7 +195,7 @@ class SinglyLinkedList {
 
 ## 同場加映 Reverse Method
 
-意即將整個linked list反轉，一開始先將 `head` 以及 `tail` 互換，在for loop過程中，i=0的情況下，temp=this.tail，但temp.next仍指向值為2的node，因此先將temp.next存放在next的變數，再將prev(null)傳入temp.next(意即將temp.next指向null)，為了下一步(i=1)做準備，故將temp傳入prev，將next傳入temp。
+意即將整個linked list反轉，一開始先將 `head` 以及 `tail` 互換，在for loop過程中，i=0的情況下， `temp=this.tail` ，但 `temp.next` 仍指向值為2的node，因此先將 `temp.next` 存放在next的變數，再將prev(null)傳入 `temp.next` (意即將temp.next指向null)，為了下一步(i=1)做準備，故將temp傳入prev，將next傳入temp。
 
 ``` js
 class SinglyLinkedList {
@@ -245,7 +245,7 @@ class SinglyLinkedList {
 
 ## 單向鏈結串列(Singly Linked List)的時間複雜度
 
-當一組資料需要頻繁的在前端或尾端(head, tail)進行新增(Insertion)或是刪除(Removal)的動作時，Singly Linked List可以是個很好的替代方案 (相較於使用Array而言)，原因在針對Array進行前端的新增(Array.shift( ))或刪減(Array.unshift( ))時，Array上所有的資料次序會因此變動(a[1]->a[0], a[2]->a[1]...)，因此時間複雜度為O(n)，若是透過Singly Linked List來操作時，時間複雜度為O(1)。 
+當一組資料需要頻繁的在前端或尾端 (head, tail) 進行新增 (Insertion) 或是刪除 (Removal) 的動作時，Singly Linked List可以是個很好的替代方案 (相較於使用Array而言) ，原因在針對Array進行前端的新增 (`Array.shift()`) 或刪減 (`Array.unshift()`) 時，Array上所有的資料次序會因此變動(a[1]->a[0], a[2]->a[1]...)，因此時間複雜度為O(n)，若是透過Singly Linked List來操作時，時間複雜度為O(1)。 
 
 Data Structure| Insertion| Removal  | Searching| Access
   ----------  |:--------:|:--------:|:--------:|:-------:

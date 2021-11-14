@@ -130,7 +130,7 @@ class WeightedGraph {
 
 ## 測試結果
 
-假設要尋找路徑的Graph結構如下圖，只要了解節點的數量以及各節點之間的路徑，即可透過Graph內的addVertex以及addEdge建構出來，如下方程式碼
+假設要尋找路徑的Graph結構如下圖，只要了解節點的數量以及各節點之間的路徑，即可透過Graph內的addVertex以及addEdge建構出來，如下方程式碼。
 
 ```js
 //             
@@ -152,6 +152,7 @@ graph.Dijkstra('A', 'F'); // ["A", "C", "D", "E", "F"]
 
 ## 優化Priority Queue
 由於上述的Priority Queue是透過JavaScript內的Array.prototoype.sort來實現，其時間複雜度為O(n log n)，因此可以將PriorityQueue改寫成Binary Heap的形式，此時的時間複雜度可以減少為O(log n)。
+
 ```js
 // 透過Binary Heap改寫Priority Queue
 

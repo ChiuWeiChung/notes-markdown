@@ -1,6 +1,6 @@
 # 排序演算法筆記-2 (Merge, Quick , Radix)
 
-> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文為課程內容經自己消化後歸納出來的心得。
 
 * 關於數字排序的演算有許多種，但因為方法不同，其時間複雜度可以從O(n^2)變成O(nlogn)，(這裡的log是以2為底的對數)
 * 一般而言，越有效率的algorithm，其內部的觀念都很tricky，想法上並不是很直覺性的，也因此需要更多時間去理解。
@@ -76,7 +76,8 @@ mergeSort(arr)
 
 ## 1-2 Merge Sort的 Big O notation
 
-由於Merge Sort是將一個陣列拆分成無數個長度為1的小陣列，此過程所需的次數為log(陣列總長)，其中的log為以2為底的對數，假如是長度為8的陣列，將其拆分成各個長度為1的小陣列所需次數為3次，再將所有小陣列組合成一個已排的大陣列所需的次數為8次(總長度)，因此對於一個長度為8的陣列而言，透過Merge Sort處理的時間複雜度為24次(8 X log8=24); 其時間複雜度相較於Bubble、Selection、Insertion的時間複雜度(O(n^2))，但犧牲的是空間複雜度提升至O(n)
+由於Merge Sort是將一個陣列拆分成無數個長度為1的小陣列，此過程所需的次數為log(陣列總長)，其中的log為以2為底的對數，假如是長度為8的陣列，將其拆分成各個長度為1的小陣列所需次數為3次，再將所有小陣列組合成一個已排的大陣列所需的次數為8次(總長度)，因此對於一個長度為8的陣列而言，透過Merge Sort處理的時間複雜度為24次(8 X log8=24); 其時間複雜度相較於Bubble、Selection、Insertion的時間複雜度(O(n^2))，但犧牲的是空間複雜度提升至O(n)。
+
 
   Algorithm     | Best condition| Average  |   Worst  | Space complexity
   ----------    |:-------------:|:--------:|:--------:|:-----------:

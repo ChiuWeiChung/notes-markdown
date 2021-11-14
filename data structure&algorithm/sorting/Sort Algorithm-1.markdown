@@ -1,6 +1,6 @@
 # 排序法演算法筆記-1 (Bubble, Selection, Insertion)
 
-> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文為課程內容經自己消化後歸納出來的心得。
 
 
 在這裡紀錄學習Data Structure& Algorithm的學習筆記，在這邊會記錄三種排序的演算法，分別為 1. Bubble Sort, 2. Selection Sort, 3. Insertion Sort.。
@@ -94,7 +94,9 @@ function insertionSort(arr) {
 const arr = [2, 1, 9, 7, 6, 4];
 insertionSort(arr)
 ```
+
 也可以寫成
+
 ``` js
 function insertionSort(arr) {
     for (let i = 1; i < arr.length; i++) {
@@ -128,5 +130,5 @@ insertionSort(arr)
   Insertion Sort|     O(n)      |   O(n^2) |   O(n^2) |     O(1)
   Selection Sort|     O(n^2)    |   O(n^2) |   O(n^2) |     O(1)
 
-基本上Bubble, Selection, Insertion三種方法的時間複雜度在一般的情況下(隨機排列的數字)，都是一樣的(O(n^2))，若要將其降至O(n^2)以下，就需要靠較複雜的演算法，相關比較記錄在[排序法演算法筆記-2](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/data%20structure%26algorithm/sorting/Sort%20Algorithm-2.markdown)
+基本上Bubble, Selection, Insertion三種方法的時間複雜度在一般的情況下(隨機排列的數字)，都是一樣的(O(n^2))，若要將其降至O(n^2)以下，就需要靠較複雜的演算法，相關比較記錄在[排序法演算法筆記-2](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/data%20structure%26algorithm/sorting/Sort%20Algorithm-2.markdown)。
 

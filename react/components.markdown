@@ -10,14 +10,11 @@ Components可以說是建立React App的基礎，而React基本上可以理解�
 
 JSX的語法看似與HTML類似，但需要注意的是他們是不同的!，尤其是在部分的細節上可以看出來，如下方的範例，兩者最後在DOM上redner的class雖然都是"div-1"，但是在語法上還是有所不同
 
-`
-
 ```html
 <!-- HTML Syntax -->
 <div class="div-1"></div>
 <!-- JSX Syntax -->
 <div className="div-1"></div>
-`
 ```
 
 ## Components的種類
@@ -48,7 +45,7 @@ const newComponent extends React.Component {
 }
 ```
 
-class based component提供比functional component更多的功能，也因此需要透過"extends"來繼承React. Component內的method。
+> class-based component提供比functional component更多的功能，也因此需要透過"extends"來繼承React. Component內的method。
 
 ## Classed-based 與Functional Component的比較
 
