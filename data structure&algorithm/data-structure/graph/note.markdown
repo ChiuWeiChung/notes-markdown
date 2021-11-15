@@ -1,23 +1,23 @@
-# 資料結構筆記-圖(Graph)
+# 資料結構筆記-圖 (Graph)
 
 > 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
-圖 (Graph)的資料結構時常運用在 1. 社群網站(Facebook, Instagram...) 2. 地圖系統(Google map)，路徑計算等方面。
+圖 (Graph)的資料結構時常運用在 1. 社群網站 (Facebook, Instagram...) 2. 地圖系統 (Google map)，路徑計算等方面。
 
-從[維基百科](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))的描述中對於圖(Graph)的解釋為:  
+從[維基百科](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))的描述中對於圖 (Graph)的解釋為: 「 A graph data structure consists of a finite (and possibly mutable) set of `vertices` or nodes or points, together with a set of unordered pairs of these `vertices` for an `undirected` graph or a set of ordered pairs for a `directed` graph.」  
 
-「 A graph data structure consists of a finite (and possibly mutable) set of `vertices` or nodes or points, together with a set of unordered pairs of these `vertices` for an `undirected` graph or a set of ordered pairs for a `directed` graph.」  
-
-上面的解釋包含了許多的專有名詞，所以這裡針對專有名詞做紀錄。
+上面的解釋包含了許多的專有名詞，所以這裡針對專有名詞做紀錄:
 
 * Vertex : 就是圖的節點 (node)。
 * Edge : Vertex與Vertex之間的連結。
-* Directed and Undirected: 對於Directed Graph而言，兩個vertex之間僅能進行單向溝通 (v1->v2)，對於Undirected Graph而言，兩個vertex之間可以雙向溝通 (v1->v2也可以v2->v1)。
-* Weighted and Unweighted : 若Edge上有儲存資訊，則稱為Weighted Graph，若無則稱為Unweighted Graph。
+* Directed與Undirected: 對於Directed Graph而言，兩個vertex之間僅能進行單向溝通 (v1->v2)，對於Undirected Graph而言，兩個vertex之間可以雙向溝通 (v1->v2也可以v2->v1)。
+* Weighted與Unweighted : 若Edge上有儲存資訊，則稱為Weighted Graph，若無則稱為Unweighted Graph。
 
-對於Directed Graph的應用，如Instagram，在A追蹤B，但B沒有追蹤A的情況下 (即A-->B)，因此A可以觀察到B所發出的貼文、動態，然而在B則無法觀察到A所發的貼文。
+### Directed Graph的應用
+如Instagram，在A追蹤B，但B沒有追蹤A的情況下 (即A-->B)，因此A可以觀察到B所發出的貼文、動態，然而在B則無法觀察到A所發的貼文。
 
-對於Undirected Graph而言，如Facebook，A與B互相是好友，也因此兩人所發出的貼文都可以互相被看到 (A<-->B)。另外在Weighted Graph的應用上如Google Map，倘若我要確認A點與B點之間的距離，負責連結A與的連結 (Edge)就會儲存著兩者的距離。
+### Undirected Graph的應用
+如Facebook，A與B互相是好友，也因此兩人所發出的貼文都可以互相被看到 (A<-->B)。另外在Weighted Graph的應用上如Google Map，倘若我要確認A點與B點之間的距離，負責連結A與的連結 (Edge)就會儲存著兩者的距離。
 
 ## 如何實現Graph(圖)
 

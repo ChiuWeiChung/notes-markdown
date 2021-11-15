@@ -9,7 +9,7 @@
 
 
 ## 1. High-Level Programming Language
-High-Level的語法偏向人類較看得懂但機器就看不懂的語言，若要與機器溝通需要透過翻譯(Compiler or Interpreter)轉換成機器看得懂的二進位文件(0&1)。
+High-Level的語法偏向人類較看得懂但機器就看不懂的語言，若要與機器溝通需要透過翻譯 (Compiler or Interpreter) 轉換成機器看得懂的二進位文件 (0&1) 。
 
 Low-level語法對人們而言較生硬但機器較看得懂的語言，也因此Low-Level可直接與機器溝通; 在執行上Low-Level較容易受硬體限制，而High-Level不會收到CPU的影響。
 
@@ -17,19 +17,19 @@ Low-level語法對人們而言較生硬但機器較看得懂的語言，也因�
 
 
 ## 2. Just-In-Time Compiled
-在上一段有談到因為High-Level是人類比較看得懂的語言，在執行過程需要透過翻譯才可以與電腦溝通，於是這邊來討論Source Code是如何透過翻譯轉成電腦可以理解的語言，一般而言可分為`Compilation(編譯)` & `Interpretation(直譯)` &`Just-In-Time Compilation(即時編譯)`。
+在上一段有談到因為High-Level是人類比較看得懂的語言，在執行過程需要透過翻譯才可以與電腦溝通，於是這邊來討論Source Code是如何透過翻譯轉成電腦可以理解的語言，一般而言可分為`Compilation (編譯) ` & `Interpretation (直譯) ` &`Just-In-Time Compilation (即時編譯) `。
 
-* Compiler:  
+* **Compiler** :  
 在代碼執行前，先將Source Code全部一次轉換成機器可以理解的語言。 優點:速度快，可獨立運行; 缺點:除錯速度慢; 代表:C語言。
-* Interpreter:  
-Source Code會一行一行的(step by step)轉為Machine Code。 優點:靈活性高; 缺點:速度較Compiler慢，需要執行環境(Execution context)才可執行; 代表:JavaScript。
-* Just-In-Time Compilation:  
-結合Compiler以及Interpreter的優點，並優化執行速度，近年有些瀏覽器(Google的V8 engine)已導入JIT Compiler。
+* **Interpreter** :  
+Source Code會一行一行的 (step by step) 轉為Machine Code。 優點:靈活性高; 缺點:速度較Compiler慢，需要執行環境 (Execution context) 才可執行; 代表:JavaScript。
+* **Just-In-Time Compilation** :  
+結合Compiler以及Interpreter的優點，並優化執行速度，近年有些瀏覽器 (Google的V8 engine) 已導入JIT Compiler。
 
 ## 3. One Single Thread & Non-blocking event loop
-One Single Thread主要是在描述JavaScript面對多項任務時是如何處理;在下方方程式碼輸出結果可以推論得知，輸出的順序與呼叫的順序是一致的，表現出JavaScript處理程式碼時是逐行進行(line by line)，所以在一個時間點只能夠處理一件事情，即為one single thread。
+One Single Thread主要是在描述JavaScript面對多項任務時是如何處理;在下方方程式碼輸出結果可以推論得知，輸出的順序與呼叫的順序是一致的，表現出JavaScript處理程式碼時是逐行進行 (line by line) ，所以在一個時間點只能夠處理一件事情，即為one single thread。
 
-這樣的特性可能會使人誤解，若遇到需要花時間處理的任務(ex: 透過Google Map提取地圖資訊，需要時間等待)，是不是就會拖延到後面的作業了呢? 其實不然，因為JavsScript特別之處在於擁有[事件循環(Event Loop)](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/KnowJs/KnowJs2.markdown)的機制，藉由事件循環機制將待執行的任務拖至背景下執行。
+這樣的特性可能會使人誤解，若遇到需要花時間處理的任務 (ex: 透過Google Map提取地圖資訊，需要時間等待) ，是不是就會拖延到後面的作業了呢? 其實不然，因為JavsScript特別之處在於擁有[事件循環 (Event Loop) ](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/KnowJs/KnowJs2.markdown)的機制，藉由事件循環機制將待執行的任務拖至背景下執行。
 
 ```js
 const first = function (){

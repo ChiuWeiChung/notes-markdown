@@ -11,8 +11,10 @@ function hi( ){
     console.log("hihi");
 }
 ```
+### var宣告的變數也會被提升
 
- 還有另外一個會被提升的東西，算是在JavaScript Hoisting機制中的副產物，那就是透過var宣告的變數，一般而言，若呼叫未被宣告的變數時，會出現*** is not defined的錯誤，但若在呼叫後才透過var宣告，則會出現undefined，因為執行過程中，var已經被偷偷提升至呼叫的前方，但是它的值並沒有一起被提升，等同於var sayHi被提升到console.log前面，但是="hihi"並沒有跟著上去。
+
+ 透過var宣告的變數也會被提升，算是在JavaScript Hoisting機制中的副產物，一般而言，若呼叫未被宣告的變數時，會出現 `*** is not defined` 的錯誤，但若呼叫後再透過var宣告 (如下方程式碼)，則會出現undefined，因為執行過程中，var已經被偷偷被提升至前方，但是它的值並沒有一起被提升，等同於 `var sayHi` 被提升到 `console.log`前面，但是 `="hihi"`並沒有跟著上去。
 
 ```js
 //var sayHi 執行過程被提升至console.log前方 
@@ -52,8 +54,8 @@ if (name==="Rick"){
  
 |                                                  |會不會被提升?|     INITIAL VALUE  |SCOPE              |
 |--------------------------------------------------|------------|---------------     |-------------------|
-|函式宣告 (function declaration)                    |YES         |Actual function     |Block@strict mode  |
-|函式運算式或箭頭函式(function expressions & arrows) |            Depend on var or const/let               |
+|函式宣告 (function declaration)                    |YES        |Actual function     |Block@strict mode  |
+|函式運算式或箭頭函式(function expressions & arrows) |            取決於是透過Var或是let/const宣告           |
 |以var宣告的變數                                    |YES         |undefined           |Function           |
 |以let 或 const宣告的變數                           |No          |uninitialized, TDZ  |Block              |
 

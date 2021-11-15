@@ -4,13 +4,13 @@
 
 在學習JavaScript的初期，會時常出現的情況: "甚麼!，我明明有宣告它阿，為何無法透過console.log()印出來呢??"，後面才知道Scope(範疇 or 作用域)的觀念有多重要，深深影響我們在哪裡可以&不可以存取變數，有了這個觀念就可以大幅減少console中出現Reference error的悲劇，下面針對幾點專有名詞做紀錄:
 
-1. Scoping:  
+1. **Scoping** :  
 定義我們宣告的變數在哪個區域我們可以被存取它、哪個區域不能存取它。
 
-2. 語法作用域 (Lexical scoping):  
+2. **語法作用域 (Lexical scoping)** :  
 Lexical Scoping的定義為: 變數在某個區域是否可/不可被存取主要是由**1.function(函式)** 以及**2.block(區塊)** 所宣告的位置所決定;可以存取的變數的區域稱為scope of a variable。
 
-3. 範疇 (Scope):  
+3. **範疇 (Scope)** :  
 在JavaScript內，有三種Scope，1. Global Scope 2. Function Scope 3. Block Scope，如下方筆記。
 
 
@@ -97,7 +97,7 @@ calcAge(1991);
 
 ![variables in scope](https://github.com/ChiuWeiChung/IMGTANK/blob/main/scope/variables%20in%20scope.png?raw=true)
 
-scope內部與外部有相同名稱的變數時，如下方例子，在first()內部使用了const宣告了firstName="Rick"，而在if block scope內部又以const宣告了一次firstName="John"，此時若在if block scope印出firstName，得到的結果是"John"而非"Rick"，原因在於JavaScript在循著Scope Chain從內往外尋找變數時，在if block scope內部就已經找到firstName，因此停止向外尋找直接輸出結果。
+scope內部與外部有相同名稱的變數時，如下方例子，在 `first()` 內部使用了const宣告了 `firstName="Rick"` ，而在if block scope內部又以const宣告了一次 `firstName="John"` ，此時若在if block scope印出firstName，得到的結果是"John"而非"Rick"，原因在於JavaScript在循著Scope Chain從內往外尋找變數時，在if block scope內部就已經找到firstName，因此停止向外尋找直接輸出結果。
 
 ```js
 const change = true;
@@ -116,7 +116,7 @@ first();
 ## Scope Chain VS. Execution Stack
 上面有提到，JavaScript會依照Scope Chain由所處scope位置由內而外尋找變數，而在[了解JavaScript的背後Part2]()心得中有提到**Execution Context堆疊方式是依照呼叫的順序**，這邊就兩者的關係來做探討。
 
-執行後我們以Execution Context的堆疊來看，順序為first() EC->second() EC->third() EC，但可以發現在third()內部無法存取a&b的資料，原因在於雖然執行環境是依照呼叫順序first->second->third堆疊，但呼叫的順序與是否可以存取scope內部的變數無關!，如此篇開頭所提到的Lexical Scoping，**變數是否可以被存取與宣告的位置有關**。
+執行後我們以Execution Context的堆疊來看，順序為 `first() EC`-> `second() EC` -> `third() EC` ，但可以發現在`third()`內部無法存取a&b的資料，原因在於雖然執行環境是依照呼叫順序 `first`-> `second` -> `third` 來堆疊，但呼叫的順序與是否可以存取scope內部的變數無關!，如此篇開頭所提到的Lexical Scoping，**變數是否可以被存取與宣告的位置有關**。
 
 ```js
 const starter = 1;
@@ -141,11 +141,16 @@ first();
 ## 重點回顧
 
 這邊就針對上面記錄的心得做重點回顧
-* JavaScript存在三種Scope: 1.Global Scope 2.Function Scope 3.Block Scope
-* let以及const屬於Block Scope; var屬於Function Scope
-* 在JavaScript中，變數在哪裡可以被存取主要是由Function Scope以及Block Scope所宣告的位置做決定
-* 每一個Scope都可以存取其外部的Scope的變數，即為Scope Chain
-* Scope Chain與函式被呼叫的順序無關，僅與宣告時所存在的位置有關
+
+* JavaScript存在三種Scope: 1.Global Scope 2.Function Scope 3.Block Scope。
+
+* let以及const屬於Block Scope; var屬於Function Scope。
+
+* 在JavaScript中，變數在哪裡可以被存取主要是由Function Scope以及Block Scope所宣告的位置做決定。
+
+* 每一個Scope都可以存取其外部的Scope的變數，即為Scope Chain。
+
+* Scope Chain與函式被呼叫的順序無關，僅與宣告時所存在的位置有關。
 
 ### 參考資料
 * [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)
