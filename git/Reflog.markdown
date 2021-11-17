@@ -1,4 +1,4 @@
-# Reflog
+# Git Reflog
 
 ## 後悔剛才的 Git 操作嗎? 使用 Reflog 吧!
 
@@ -14,7 +14,6 @@ Git總是記錄著我們在 Repo 內的各種操作，並將記錄存放在本�
 
 ```console 
 ~$ git reflog show HEAD
-
 ```
 
 `git reflog show` 或是 `git reflog show HEAD` 會列出在 HEAD 中的操作紀錄，其中 `HEAD@{ 0 }` 代表最新的操作， `HEAD@{ }` 內數字越大，代表時間越久遠。

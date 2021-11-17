@@ -1,8 +1,11 @@
-# Git Diff
+# Git Diff & Git Stash
+
+
+## Git Diff
 
 Git Diff 指令可以用來比對程式碼處於不同的 Commits、Branches 、工作目錄上的差異 (通常為了檢視過去與現在的歷程內容差異，因此常搭配 `git status` 以及 `git log` 一起使用)。
 
-## 內容資訊
+### **內容資訊**
 
 在比較兩文件的差異時，假如指令先輸入 A 文件，再輸入 B 文件，則 Git 提供的資訊會是 `由 A 演變至 B 的沿革` (若先 B 再 A ，則 B -> A 的沿革)，其內容以減號 ( - , 被刪出的內容) 以及加號 ( + , 被加入的內容) 分別代表 A 及 B 的變化，其內容僅顯示有差異的地方及部分前後文。
 
@@ -32,9 +35,9 @@ Git 所提供的資訊中，被@@前後包圍的內容( -1, 3 +1, 4 )表示:
 +guava
 ```
 
-# Git Diff 指令
+## Diff 指令
 
-## 比較 Unstaged 文件與前次 Commit 的差異
+### **比較 Unstaged 文件與前次 Commit 的差異**
 
 ```console
 ~$ git diff
@@ -44,7 +47,7 @@ Git 所提供的資訊中，被@@前後包圍的內容( -1, 3 +1, 4 )表示:
 
 > 文件若處於 Staged 的情況下， `git diff` 不會顯示差異
 
-## 比較 Working Directory 與前次 Commit 的差異
+### **比較 Working Directory 與前次 Commit 的差異**
 
 ```console
 git diff HEAD
@@ -68,7 +71,7 @@ index 0000000..a6472b7
 
 >  
 
-## 比較 Staged 文件與前次 Commit 差異
+### **比較 Staged 文件與前次 Commit 差異**
 
 ```console
 git diff --staged
@@ -77,7 +80,7 @@ git diff --cached
 
 `git diff --staged` 以及 `git diff --cached` 都可以用來列出文件在 Staging Area 中與前次 Commit 的差異。
 
-## 針對特定文件做比較
+### **針對特定文件做比較**
 
 ```console
 git diff HEAD [filename] 
@@ -86,7 +89,7 @@ git diff --staged [filename]
 
 在後方加入文件名稱可以針對該文件做比較。
 
-## 比較不同分支
+### **比較不同分支**
 
 ```console
 git diff branch1..branch2
@@ -94,7 +97,7 @@ git diff branch1..branch2
 
 `git diff branch1..branch2` 會列出兩分支 `末端` 的差異。
 
-## 比較不同 Commits
+### **比較不同 Commits**
 
 ```console
 git diff commit1..commit2
@@ -102,7 +105,7 @@ git diff commit1..commit2
 
 `git diff commit1..commit2` 會列出兩 Commit `末端` 的差異。
 
-### 與前次 Commit 比較
+### **與前次 Commit 比較**
 
 ```console
 git diff HEAD~1
@@ -112,9 +115,9 @@ git diff HEAD~1
 
 ---
 
-# Git Stash 
+## Git Stash 
 
-## 暫存
+### **暫存**
 
 當我們想要 Switch 到其他分支時，可能因工作目錄內的某些文件已被修改，但尚未被 commit 時，就會出現下方錯誤訊息:
 
@@ -137,7 +140,7 @@ Please commit your changes or stash them before you switch branches.
 
 在指令後方加入 `save "message"`，後續以 `git stash list` 檢視 stash 時，就可透過 message 來辨別 stash 的不同。
 
-## 復原
+### **復原**
 
 ```console
 git stash pop
@@ -153,7 +156,7 @@ git stash apply
 
 > 在進行多次的 Stash 後，回復的順序則會從最後一個被Stash的內容開始(Last In, First Out)
 
-## 檢視 Stash 資訊
+### **檢視 Stash 資訊**
 
 ```console
 ~$ git stash list
@@ -162,7 +165,7 @@ stash@{1}: WIP on master: 040d019 modified index.js file
 stash@{2}: WIP on master: 092ce08 modifex index.html file
 ```
 
-### 回復指定的 Stash
+### **回復指定的 Stash**
 
 `git stash apply` 預設回復最近一次 stash 的內容，我們也可以在指令後方加入 `stash@{id}` 來指定要回復的內容。
 
@@ -170,7 +173,7 @@ stash@{2}: WIP on master: 092ce08 modifex index.html file
 git stash apply stash@{2}
 ```
 
-## 丟棄Stash
+### **丟棄Stash**
 
 將 Stash 內的暫存特定內容丟棄。
 

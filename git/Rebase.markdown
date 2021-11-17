@@ -1,4 +1,4 @@
-# Rebase
+# Git Rebase
 
 Git Rebase 使一個使用時必須謹慎但又實用的指令， Rebase 有兩種功用:
 1. 用來合併
@@ -42,7 +42,7 @@ Rebase 會將與 main 有關的 commit (包含合併 commit ，如 Main 3 以及
 
 > Rebase 前後 的Feat 1 、 Feat 2 、 Feat 4 內容一樣， **但 commit-hash 已經完全不同，因為 Git Rebase 替它們建立新的 commit hash** 。
 
-## 直接幫你合併
+### 直接幫你合併
 
 事實上，我們也可以直到負責的 feature branch 內容完工後，直接在 feature branch 執行 `git rebase main` 的指令，此時 Git 會幫你直接進行合併、整理的動作，如下方範例:
 
@@ -83,7 +83,7 @@ Rebase 的好處在於可以使我們負責的分支有簡潔明瞭的 Hisotry �
 
 切勿將已經 Push 出去的 Github Repo 進行 Rebase，由於 Rebase 會修改 History ，會讓開發同仁非常困擾。因此我們應該盡量在 Push 之前(與他人共享前)執行 Reabse 。
 
-## Rewriting History
+## 2. Rewriting History
 
 除了作為合併的用途，Rebase 也可以用來將 commit 達到1. 刪除 2. 改寫 3. 重新命名 4. 重新排序 的用途。
 
