@@ -1,8 +1,8 @@
 # 資料結構筆記-單向鏈結串列(Singly linked list)
 
-> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
-Singly linked list是Linked listed中最基本的版本，在這條Link上，每一個節點都儲存著資料(val)，且節點之間只能單向溝通(由head至tail)，透過Javascript中的Class可以用來實現這樣的資料結構，如下方code，建立了兩個class( `Node` & `SinglyLinkedList` )，而 `SinglyLinkedList` 即本體，內部可由多個 `Node` 所連結而成，每個 `Node` 可存放val以及通往下個 `Node` 的property(val, next)，詳細請參考[我的github]()。
+Singly linked list 是 Linked listed 中最基本的版本，在這條 Link 上，每一個節點都儲存著資料 (val) ，且節點之間只能單向溝通 (由 head 至 tail )，透過 JavaScript 中的 Class 可以用來實現這樣的資料結構，如下方 code ，建立了兩個 class ( `Node` & `SinglyLinkedList` ) ，而 `SinglyLinkedList` 即本體，內部可由多個 `Node` 所連結而成，每個 `Node` 可存放val以及通往下個 `Node` 的 property (val, next) 。
 
 ``` js
 class Node {
@@ -23,16 +23,16 @@ const List = new SinglyLinkedList();
 console.log(List); //SinglyLinkedList {head: null, tail: null, length: 0}
 ```
 
-## Singly Linked List的基本方法
+## Singly Linked List 的基本方法
 
-* Push Method: 在List的後端(tail)新增一個新的節點(Node)。
-* Pop Method: 將List尾端Node去除。
-* Shift Method: 將List最前端Node去除。
-* Unshift Method: 在List最前端新增一個Node。
-* Get Method: 回傳在List中的特定的Node
-* Set Method: 修改List中特定Node的值
-* Insert Method: 在List插入特定index的Node。
-* Removed Method: 刪除List中特定index的Node。
+* Push Method: 在 List 的後端 (tail) 新增一個新的節點 (Node) 。
+* Pop Method: 將 List 尾端 Node 去除。
+* Shift Method: 將 List 最前端 Node 去除。
+* Unshift Method: 在 List 最前端新增一個 Node 。
+* Get Method: 回傳在 List 中的特定的 Node 
+* Set Method: 修改 List 中特定 Node 的值
+* Insert Method: 在 List 插入特定 index 的 Node 。
+* Removed Method: 刪除 List 中特定 index 的 Node 。
 
 ## 1. Push Method
 
@@ -40,21 +40,21 @@ console.log(List); //SinglyLinkedList {head: null, tail: null, length: 0}
 class SinglyLinkedList {
     ...
     push(val) {
-        // 將新的Node傳入名為newNode的變數
+        // 將新的 Node 傳入名為 newNode 的變數
         const newNode = new Node(val)
-        // 倘若head不存在，則在頭尾新增newNode，
+        // 倘若 head 不存在，則在頭尾新增 newNode ，
         if (!this.head) {
             this.head = newNode
             this.tail = this.head
-            // 此時的head以及tail都指向同一個reference(newNode)
+            // 此時的 hea 以及 tail 都指向同一個 reference (newNode)
         } else {
-            // 因此當this.tail.next指向newNode的同時，this.head.next也會指向newNode
+            // 因此當 this.tail.next 指向 newNode 的同時， this.head.next 也會指向 newNode
             this.tail.next = newNode;
-            // 再將this.tail重新指向newNode；
+            // 再將 this.tail 重新指向 newNode；
             this.tail = newNode;
-            //此時this.head.next以及this.tail都指向同一個reference (也就是newNode)，
-            // 若push method再度被執行的話，newNode除了會傳入this.tail.next
-            // ，也會同步傳入this.head.next.next
+            //此時 this.head.next 以及 this.tail 都指向同一個 reference (也就是 newNode )，
+            // 若 push method 再度被執行的話， newNode 除了會傳入 this.tail.next
+            // ，也會同步傳入 this.head.next.next
         }
         this.length++;
         return this;
@@ -195,7 +195,7 @@ class SinglyLinkedList {
 
 ## 同場加映 Reverse Method
 
-意即將整個linked list反轉，一開始先將 `head` 以及 `tail` 互換，在for loop過程中，i=0的情況下， `temp=this.tail` ，但 `temp.next` 仍指向值為2的node，因此先將 `temp.next` 存放在next的變數，再將prev(null)傳入 `temp.next` (意即將temp.next指向null)，為了下一步(i=1)做準備，故將temp傳入prev，將next傳入temp。
+意即將整個 linked list 反轉，一開始先將 `head` 以及 `tail` 互換，在 for loop 過程中， i= 0 的情況下， `temp=this.tail` ，但 `temp.next` 仍指向值為 2 的 node ，因此先將 `temp.next` 存放在 next 的變數，再將 prev (null) 傳入 `temp.next` ( 意即將 temp.next 指向 null ) ，為了下一步 ( i= 1 ) 做準備，故將 temp 傳入 prev ，將 next 傳入 temp 。
 
 ``` js
 class SinglyLinkedList {
@@ -243,9 +243,9 @@ class SinglyLinkedList {
 //                                 prev  temp  next
 ```
 
-## 單向鏈結串列(Singly Linked List)的時間複雜度
+## 單向鏈結串列 (Singly Linked List) 的時間複雜度
 
-當一組資料需要頻繁的在前端或尾端 (head, tail) 進行新增 (Insertion) 或是刪除 (Removal) 的動作時，Singly Linked List可以是個很好的替代方案 (相較於使用Array而言) ，原因在針對Array進行前端的新增 (`Array.shift()`) 或刪減 (`Array.unshift()`) 時，Array上所有的資料次序會因此變動(a[1]->a[0], a[2]->a[1]...)，因此時間複雜度為O(n)，若是透過Singly Linked List來操作時，時間複雜度為O(1)。 
+當一組資料需要頻繁的在前端或尾端 ( head, tail ) 進行新增 ( Insertion ) 或是刪除 ( Removal ) 的動作時， Singly Linked List 可以是個很好的替代方案 (相較於使用 Array 而言) ，原因在針對 Array 進行前端的新增 (`Array.shift()`) 或刪減 (`Array.unshift()`) 時， Array 上所有的資料次序會因此變動( a[1] -> a[0] , a[2]-> a[1]...)，因此時間複雜度為 O (n) ，若是透過 Singly Linked List 來操作時，時間複雜度為O (1) 。 
 
 Data Structure| Insertion| Removal  | Searching| Access
   ----------  |:--------:|:--------:|:--------:|:-------:

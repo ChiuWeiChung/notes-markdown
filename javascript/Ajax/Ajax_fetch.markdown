@@ -1,5 +1,5 @@
 # JavaScript-AJAX FETCH 
-這篇主要紀錄使用AJAX筆記，利用**fetch()** 來串接外部API，並以**then( )** 以及**catch()** 來做示範。
+這篇主要紀錄使用 AJAX 筆記，利用 **fetch()** 來串接外部API，並以**then( )** 以及**catch()** 來做示範。
 ```js
 function getWeather(woeid){
         fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`) // using cors proxy to bypss the cors issue

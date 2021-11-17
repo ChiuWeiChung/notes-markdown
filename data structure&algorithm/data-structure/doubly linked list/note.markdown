@@ -1,8 +1,8 @@
 # 資料結構筆記-雙向鏈結串列(Doubly linked list)
 
-> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
-與[Singly linked list]()屬於同一類別的資料結構，差別在於Doubly linked list可以進行雙向溝通(head至tail或是tail至head)，由於雙向溝通的特性，因此在搜尋(Searching)方面相較Singly linked list所花費的時間就減少了一半，但也因此會增加記憶體上的空間佔據。
+與 Singly linked list 屬於同一類別的資料結構，差別在於 Doubly linked list 可以進行雙向溝通 ( head 至 tail 或是 tail 至 head )，由於雙向溝通的特性，因此在搜尋 (Searching) 方面相較 Singly linked list 所花費的時間就減少了一半，但也因此會增加記憶體上的空間佔據。
 
 ``` js
 class Node {
@@ -23,16 +23,16 @@ class DoublyLinkedList {
 const List = new DoublyLinkedList();
 ```
 
-## Doubly Linked List的基本方法(與Singly Linked List相同)
+## Doubly Linked List 的基本方法 (與 Singly Linked List 相同)
 
-* Push Method: 在List的後端(tail)新增一個新的節點(Node)。
-* Pop Method: 將List尾端Node去除。
-* Shift Method: 將List最前端Node去除。
-* Unshift Method: 在List最前端新增一個Node。
-* Get Method: 回傳在List中的特定的Node
-* Set Method: 修改List中特定Node的值
-* Insert Method: 在List插入特定index的Node。
-* Removed Method: 刪除List中特定index的Node。
+* Push Method: 在 List 的後端(tail)新增一個新的節點 (Node)。
+* Pop Method: 將 List 尾端 Node 去除。
+* Shift Method: 將 List 最前端 Node 去除。
+* Unshift Method: 在 List 最前端新增一個 Node 。
+* Get Method: 回傳在 List 中的特定的 Node 
+* Set Method: 修改 List 中特定 Node 的值
+* Insert Method: 在 List 插入特定 index 的 Node 。
+* Removed Method: 刪除 List 中特定 index 的 Node 。
 
 ## Push Method
 
@@ -67,7 +67,7 @@ class DoublyLinkedList {
             this.head = null;
             this.tail = null;
         } else {
-            this.tail = poppedNode.prev; //將tail指向前一個Node
+            this.tail = poppedNode.prev; //將 tail 指向前一個 Node
             this.tail.next = null;
             poppedNode.prev = null;
         }
@@ -223,7 +223,7 @@ class DoublyLinkedList {
 
 ## 雙向鏈結串列(Doubly Linked List)的時間複雜度
 
-Doubly linked list在各項操作上的時間複雜度基本上與Singly linked list相當，比較特別的是在Searching部分，Doubly linked list由於可以依照index的大小來決定由前端(head)或是尾端(tail)開始尋找，因此所花的時間為Singly linked list的一半，也就是O(n/2)，但仍然寫成O(n)。
+Doubly linked list 在各項操作上的時間複雜度基本上與 Singly linked list 相當，比較特別的是在 Searching 部分， Doubly linked list 由於可以依照 index 的大小來決定由前端 (head) 或是尾端 (tail) 開始尋找，因此所花的時間為 Singly linked list 的一半，也就是 O (n/2)，但仍然寫成 O (n)。
 
 Data Structure| Insertion| Removal  | Searching| Access
   ----------  |:--------:|:--------:|:--------:|:-------:

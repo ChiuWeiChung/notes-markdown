@@ -1,31 +1,31 @@
 # 資料結構筆記-圖 (Graph)
 
-> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
 圖 (Graph)的資料結構時常運用在 1. 社群網站 (Facebook, Instagram...) 2. 地圖系統 (Google map)，路徑計算等方面。
 
-從[維基百科](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))的描述中對於圖 (Graph)的解釋為: 「 A graph data structure consists of a finite (and possibly mutable) set of `vertices` or nodes or points, together with a set of unordered pairs of these `vertices` for an `undirected` graph or a set of ordered pairs for a `directed` graph.」  
+從[維基百科](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))的描述中對於圖 (Graph) 的解釋為: 「 A graph data structure consists of a finite (and possibly mutable) set of `vertices` or nodes or points, together with a set of unordered pairs of these `vertices` for an `undirected` graph or a set of ordered pairs for a `directed` graph.」  
 
 上面的解釋包含了許多的專有名詞，所以這裡針對專有名詞做紀錄:
 
 * Vertex : 就是圖的節點 (node)。
-* Edge : Vertex與Vertex之間的連結。
-* Directed與Undirected: 對於Directed Graph而言，兩個vertex之間僅能進行單向溝通 (v1->v2)，對於Undirected Graph而言，兩個vertex之間可以雙向溝通 (v1->v2也可以v2->v1)。
-* Weighted與Unweighted : 若Edge上有儲存資訊，則稱為Weighted Graph，若無則稱為Unweighted Graph。
+* Edge :  vertex 與 Vertex 之間的連結。
+* Directed 與 Undirected : 對於 Directed Graph 而言，兩個 vertex 之間僅能進行單向溝通 ( v1 -> v2 )，對於 Undirected Graph 而言，兩個 vertex 之間可以雙向溝通 ( v1 -> v2 也可以 v2 -> v1 )。
+* Weighted與 Unweighted : 若 Edge 上有儲存資訊，則稱為 Weighted Graph ，若無則稱為 Unweighted Graph 。
 
-### Directed Graph的應用
-如Instagram，在A追蹤B，但B沒有追蹤A的情況下 (即A-->B)，因此A可以觀察到B所發出的貼文、動態，然而在B則無法觀察到A所發的貼文。
+### Directed Graph 的應用
+如 Instagram ，在 A 追蹤 B ，但 B 沒有追蹤 A 的情況下 (即 A --> B )，因此 A 可以觀察到 B 所發出的貼文、動態，然而在 B 則無法觀察到 A 所發的貼文。
 
-### Undirected Graph的應用
-如Facebook，A與B互相是好友，也因此兩人所發出的貼文都可以互相被看到 (A<-->B)。另外在Weighted Graph的應用上如Google Map，倘若我要確認A點與B點之間的距離，負責連結A與的連結 (Edge)就會儲存著兩者的距離。
+### Undirected Graph 的應用
+如 Facebook ， A 與 B 互相是好友，也因此兩人所發出的貼文都可以互相被看到 ( A <--> B )。另外在 Weighted Graph 的應用上如 Google Map ，倘若我要確認 A 點與 B 點之間的距離，負責 A 與 B 的連結 (Edge) 就會儲存著兩者的距離。
 
-## 如何實現Graph(圖)
+## 如何實現 圖 (Graph)
 
-可以透過 1. Adjacency Matrix (鄰接矩陣) 或是 2. Adjacency List (鄰接表) 兩種方法。假設有一Graph共有6個vertex (A-F)，它們互相的關係可以透過下方兩種範例的方式呈現。
+可以透過 1. Adjacency Matrix (鄰接矩陣) 或是 2. Adjacency List (鄰接表) 兩種方法。假設有一 Graph 共有 6 個 vertex ( A - F )，它們互相的關係可以透過下方兩種範例的呈現。
 
-其中的Adjacency Matrix是以矩陣來表示各vertex之間的關係，對於鬆散的圖結構 (Sparse Graph)而言會佔據較多的記憶體，也因此在遍歷所有Edges時，會花上較多的時間，但在搜尋特定的Edge時後，它的時間複雜度為O (1)。
+### **Adjacency Matrix**
 
-而Adjacency List是透過列表方式表示各vertex的關係，對於鬆散的圖結構而言，因為佔據較少的記憶體，在遍歷所有Edges時所花的時間較少，但是在搜尋特定的Edge時，它的時間複雜度為 (V+E)，其中V與E分別為Vertex與Edge的數量。
+Adjacency Matrix 是以矩陣來表示各 vertex 之間的關係，對於鬆散的圖結構 (Sparse Graph) 而言會佔據較多的記憶體，也因此在遍歷所有 Edges 時，會花上較多的時間，但在搜尋特定的 Edge 時後，它的時間複雜度為 O (1)。
 
 ```js
 //  ====Graph Structure====Adjacency Matrix方法====
@@ -39,6 +39,11 @@
 //            E            F |1  0  0  0  1  0
 ```
 
+### **Adjacency List**
+
+Adjacency List 是透過列表方式表示各 vertex 的關係，對於鬆散的圖結構而言，因為佔據較少的記憶體，在遍歷所有 Edges 時所花的時間較少，但是在搜尋特定的 Edge 時，它的時間複雜度為 O ( V + E )，其中 V 與 E 分別為 Vertex 與 Edge 的數量。
+
+
 ```js
 //  ====Graph Structur====Adjacency List方法====
 //            A       List={
@@ -51,11 +56,11 @@
 //                         } 
 ```
 
-## JavaScript實現Graph(圖)
+## JavaScript 實現 圖 (Graph)
 
-由於在現實生活上，透過Graph來描述現實生活上各種情況時，通常有很大機率傾向較鬆散的結構(Sparse Graph，也就是Vertex多，但Edge較少)，也因此在這裡透過Adjacency List方式來實現。
+由於在現實生活上，透過 Graph 來描述現實生活上各種情況時，通常有很大機率傾向較鬆散的結構 (Sparse Graph ，也就是 Vertex 多，但 Edge 較少) ，也因此在這裡透過 Adjacency List 方式來實現。
 
-## 新增Vertex以及Edge
+## 新增 Vertex 以及 Edge 
 
 ```js
 class Graph {
@@ -87,7 +92,7 @@ graph.addEdge("C", "E"), graph.addEdge("D", "F"), graph.addEdge("E", "F");
 // F: (2) ["D", "E"]
 ```
 
-## 移除Vertex以及Edge
+## 移除 Vertex 以及 Edge
 
 ```js
 class Graph {
@@ -126,12 +131,12 @@ graph.removeVertex("A");
 
 ## 圖遍歷 (Graph Traversal)
 
-圖的遍歷可以透過 1. Breadth First Search或是 2. Depth First Search來實現。
+圖的遍歷可以透過 1. Breadth First Search或是 2. Depth First Search 來實現。
 
 ```js
 class Graph {
     ...
-    //DFS透過遞迴方式實現
+    //DFS 透過遞迴方式實現
     depthFirstRecursive(start) {
         let visitedObj = {};
         let result = [];
@@ -147,9 +152,9 @@ class Graph {
         return result;
     }
 
-    //DFS也可以透過迭代方式(while)實現
+    //DFS 也可以透過迭代方式 (while) 實現
     depthFirstIterative(start) {
-        // 透過Stack控制遍歷的排程(Last In, First Out)
+        // 透過 Stack 控制遍歷的排程 (Last In, First Out)
         if (!this.adjacencyList[start]) return null;
         let stack = [start];
         let visitedObj = {};
@@ -169,7 +174,7 @@ class Graph {
     }
 
     breadthFirstSearch(start) {
-        // 透過Queue控制遍歷的排程(First In, First Out)
+        // 透過 Queue 控制遍歷的排程 (First In, First Out)
         if (!this.adjacencyList[start]) return null;
         const queue = [start];
         const result = [];
@@ -190,16 +195,16 @@ class Graph {
 }
 ```
 
-## 圖(Graph)的時間複雜度
+## 圖 (Graph) 的時間複雜度
 
   Opertaion     | Adjacency List| Adjacency Matrix  |
   ----------    |:-------------:|:-----------------:|
-  Add Vertex    |     O(1)      | O(V^2)            |
-  Add Edge      |     O(1)      | O(1)              |
-  Remove Vertex |     O(V+E)    | O(V^2)            |
-  Remove Edge   |     O(E)      | O(1)              |
-  Query         |     O(V+E)    | O(1)              |
-  Storage       |     O(V+E)    | O(V^2)            |
+  Add Vertex    |     O(1)     | O(V^2)           |
+  Add Edge      |     O(1)     | O(1)             |
+  Remove Vertex |     O(V+E)   | O(V^2)           |
+  Remove Edge   |     O(E)     | O(1)             |
+  Query         |     O(V+E)   | O(1)             |
+  Storage       |     O(V+E)   | O(V^2)           |
   
 
 > V : number of vertices, E : number of edges

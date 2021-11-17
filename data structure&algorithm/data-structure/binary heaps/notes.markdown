@@ -1,36 +1,36 @@
 # 資料結構筆記-二元堆積 (Binary heap)
 
-> 本文為[JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
 
 ## 介紹
 
 
-二元堆積(Binary Heap)的結構與二元搜尋樹(Binary Search Tree)非常相似，其中二元堆積又可以分成 1. Max Binary Heap以及 2. Min Binary Heap，Max Binary Heap的Parent Node的值永遠比他的Child Node還大，反之，Min Binary Heap的Child Node的值永遠比他的Parent Node還大。
+二元堆積 (Binary Heap) 的結構與二元搜尋樹 (Binary Search Tree) 非常相似，其中二元堆積又可以分成 1. **Max Binary Heap** 以及 2. **Min Binary Heap** ， Max Binary Heap 的 Parent Node 的值永遠比他的 Child Node 還大，反之， Min Binary Heap 的 Child Node 值永遠比他的 Parent Node 還大。
 
-## 二元堆積(Binary Heap)的特性
+## 二元堆積 (Binary Heap) 的特性
 
-* 每一個Parent至多只能有兩個Child Node。
-* 對於Max Heap而言，Parent Node的值永遠大於他的Child Node
-* 對於Min Heap而言，Parent Node的值永遠小於他的Child Node
-* 新增資料時，會優先從left node開始，因此Binary Heap會傾向呈現較緻密的結構，而非線性、鬆散的結構
+* 每一個Parent至多只能有兩個 Child Node 。
+* 對於 Max Heap 而言， Parent Node 的值永遠大於他的 Child Node。
+* 對於 Min Heap 而言， Parent Node 的值永遠小於他的 Child Node。
+* 新增資料時，會優先從 Left Node 開始，因此 Binary Heap 會傾向呈現較緻密的結構，而非線性、鬆散的結構。
 
 ```js
-// =====Max Binary Heap========
+// ===== Max Binary Heap ========
 //         41
 //        /  \
 //      39    33
 //     / \    /
 //    18 27  12 
 
-// =====Min Binary Heap========
+// ===== Min Binary Heap ========
 //          1
 //        /   \
 //       2      3
 //      / \    / \
 //     17 19  36  7
 
-// ======不是Binary Heap=====
+// ======不是 Binary Heap =====
 //          33
 //         /  \
 //       18    41
@@ -38,9 +38,9 @@
 //     12 27 39
 ```
 
-## 以JavaScript實現Max Binary Heap
+## 以 JavaScript 實現 Max Binary Heap
 
-Binary Heap可以透過Array的方式來模擬，假設某一個Node的index=N，則它兩個Child的index分別為(2N+1)以及(2N+2)，透過這樣的關係即可建構Binary Heap的資料結構
+Binary Heap 可以透過 Array 的方式來模擬，假設某一個Node的index=N，則它兩個 Child 的 index 分別為 (2 N + 1) 以及 (2 N + 2) ，透過這樣的關係即可建構 Binary Heap 的資料結構。
 
 ```js
 class MaxBinaryHeap {
@@ -49,7 +49,7 @@ class MaxBinaryHeap {
     }
 ```
 
-## 新增(Insert)及排序(Bubble Up)
+## 新增 (Insert) 及排序 (Bubble Up)
 
 ```js
 class MaxBinaryHeap {
@@ -78,7 +78,7 @@ class MaxBinaryHeap {
 }
 ```
 
-## 刪除根節點(Extract)以及排序(Bubble Down)
+## 刪除根節點 (Extract) 以及排序 (Bubble Down)
 
 ```js
 class MaxBinaryHeap {
@@ -115,11 +115,11 @@ class MaxBinaryHeap {
 }
 ```
 
-## 二元堆積(Binary Heap)的應用層面
+## 二元堆積 (Binary Heap) 的應用層面
 
-Binary Heap時常用來實現 1. 優先佇列(Priority Queue)以及 2.[圖遍歷(Graph Traversal Algorithm)]()的資料結構。其中的優先佇列(Priority Queue)是指資料內的每個元素都有優先值(Priority)的特性，因此可以透過優先值大小來決定哪一個元素要優先被處理，那些元素可以先擱置。
+Binary Heap時常用來實現 1. 優先佇列 (Priority Queue) 以及 2. [圖遍歷(Graph Traversal Algorithm)](https://github.com/ChiuWeiChung/notes-markdown/blob/main/data%20structure%26algorithm/data-structure/graph/note.markdown) 的資料結構。其中的優先佇列 (Priority Queue) 是指資料內的每個元素都有優先值 (Priority) 的特性，因此可以透過優先值大小來決定哪一個元素要優先被處理，那些元素可以先擱置。
 
-## Binary Heap(二元堆積)的時間複雜度
+## 二元堆積 (Binary Heap) 的時間複雜度
 
 * Insertion - O(log N)
 * Remove Max/Remove Min - O(log N)

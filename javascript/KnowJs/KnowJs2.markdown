@@ -1,96 +1,75 @@
-# 執行堆疊 (Execution Stack)與執行環境 (Execution Context)
+# JavaScript簡介 Part2
 
-> 本文為[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
-## JavaScript Runtime
-JavaScript的程式碼若要被執行，需先透過[直譯（interpret）](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/KnowJs1.markdown)將程式碼轉成"機器可以理解的語言"，也就是機器碼 (由0與1組成)。 程式碼逐句被直譯為機器碼 (machine code)後，需要在JavaScript引擎所提供的執行堆疊 (Execution Stack, ES)內執行，也就是說，沒有引擎就無法執行機器碼。
+## 一級函式 (First-class functions)
 
->不同的瀏覽器擁有不同JS引擎，Google Chrome瀏覽器的V8引擎是較著名的JS引擎之一。
+在 JavaScript 的函式屬於一級函式，意思是:
 
+* 函式屬於物件
+* 函式可存放於變數 (variable)、物件 (object)、陣列 (array) 
 
-## JavaScript引擎內的執行堆疊(Execution Stack) & 堆內存 (Heap)
-
-在引擎內部執行過程中，每個任務 (job) 都有自己的執行環境(Execution Context, EC)，JavaScript引擎會提供執行堆疊 (Execution Stack, ES) 讓執行的"任務們依序將EC堆疊在ES上頭"，其中執行環境由三種元素組成:
-
-1. **變數** : 例如var、let、const、functions、arguments...
-
-2. **範疇鏈 (Scope Chain)** :[Scope筆記](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/KnowJs3.markdown)
-
-3. **This**: [This筆記](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/KnowJs5.markdown)
-
->EC只有在任務被呼叫時才會堆疊在ES之上
-
-  
-
-如下方程式碼範例，在任務執行前 (`first()`被呼叫前)，`Global`、 `first`、 `second`的執行環境 (EC)各自儲存著不同的資料，Global的執行環境儲存的是背景資訊 (`myName="Rick"`及 `first` 以及 `second` 的程式碼)，first 的執行幻境儲存了scope (括號內部)的資訊，包含 `a=1`, `b=unknown`, `c=NaN`，其中unknown& NaN原因是任務尚未被呼叫，因此僅能知道執行前的資訊，而second的執行環境儲存了 `argument=[2,3]`以及 `d=4`的資訊。
-
-```js               
-const myName = "Rick";                        
-const first = function (){  
-    var a = 1                
-    b = second(2,3);        
-    const c = a+b
-    return c ;
-};  
-
-const second = (x,y)=>{
-    let d = 4
-    return d
-};
-first();  
-```
- 
-
-![execution context](https://github.com/ChiuWeiChung/IMGTANK/blob/main/eventloop/execution%20context.png?raw=true)
-
-  
-
-## 執行環境 (EC) 怎麼堆疊?
-如下方範例，在global environment (window) 內，first( )是第一個被呼叫的，其EC會第一個疊在Stack上，後續的任務們則依照執行順序將各自的EC堆疊上去，任務執行完畢後會被移出Stack。
-
-```js
-const first = function (){
-    console.log("execute 1");
-    b = second();
-    console.log("The end");
-};
-const second = ()=>{
-    console.log("execute 2");
-};
-
-first();  
-// execute1
-// execute2
-// The end
+``` js
+    // 函式可被存放於變數(variables)內
+    const square = (a) => a * a
 ```
 
-![Execution Stack](https://github.com/ChiuWeiChung/IMGTANK/blob/main/eventloop/simpleCallstack.gif?raw=true)
+* 可以做為參數傳入另一個函數當中 。
 
-> EC的堆疊以及移出遵循著LIFO原則 (Last In, First Out)。
+``` js
+    // 將函式作為參數傳入傳遞到另一個函式
+    const sayHi = () => console.log('Hi there')
+    button.addEventListener('click', sayHi)
+```
 
-  
+* 也可以被另外一個函式回傳。
 
-## JavaScript Runtime =JavaScript 引擎 + WEB APIs + Callback Queue.
+``` js
+const sayHi = () => {
+    console.log('Hi, how are you?');
+    return function() {
+        console.log('Find, thank you!')
+    }
+}
+const sayThanks = sayHi(); // Hi, how are you?
+sayThanks(); // Find, thank you!
+```
 
-然而僅有1. JavaScript 引擎是不夠的，還需要2. WEB APIs以及3. Callback Queue才可以建構完整的Runtime，原因是在進行DOM、 Timer function (如setTimeout)、 Fetch API method的時候，需要WEB APIs來提供並搭配Callback Queue。
+## Javascript 的函式編程 (Functional Programming ) 特性
 
-1. **JavaScript 引擎** :  
-為JavaScript提供執行堆疊 (ES)以及堆內存 (Heap)，其中ES用來執行環境的堆疊及儲存簡單數據 (基本型別的資料)，堆內存 (Heap)則負責儲存複雜數據如物件 (物件型別的資料); [Execution Stack&Heap筆記](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/KnowJs6.markdown)
+函式編程 (FP) 以及物件導向編程 (OOP) 屬於不同的編程範式 (Programming Paradigm) ，但是在 Javascript 中都可以看到 OOP 以及 FP 的特性出現，其中 FP 又是具有宣告範式 (Declarative Paradigm) 的特性。
 
-2. **WEB APIs** :  
-JavaScript可以透過瀏覽器的global window object與WEB APIs，使用DOM、call timer function等功能。
+### 命令式 ( Imperative ) & 宣告式 ( Declarative ) 範式
 
-3. **Callback Queue** :  
-用來存放準備執行的回呼函式 (callback function)。
+在編程的風格上，可以分為命令式 (Imperative)以及宣告式 (Declarative)，命令式風格偏向告知機器"如何去做" (告訴機器每一步要怎麼做)，而宣告式風格偏向告知"要做甚麼" (告訴機器完成的方法)。
 
->DOM、timer function (setTimeout)、navigator.geolocation method等方法是獨立於JavaScript之外，主要是由瀏覽器的WEB APIs所提供。
+``` js
+// 命令式
+const arr = [1, 3, 5, 7, 9]
+const imperativeArr = [];
+for (let i = 0; i < arr.length; i++) {
+    newArr[i] = arr[i] * 2
+}
+// 宣告式 
+const declarativeArr = arr.map(el => el * 2)
+```
+
+函式編程 (FP) 具有宣告式 (Declarative) 的風格，基於將許多 "pure functions" 結合起來，並避免 "side effects" 以及 "mutating data" 。
+
+* **Pure function** :  
+這裡指的 function ，只會有輸出 (expression) ，不能包含 Side effects ，且不可改變 Inputs (state) 的資料。
+
+* **Side effect** :  
+指的是修改 (mutate) 任何函式外部資料的行為 (修改函式外的變數) ，或是進行 console logging ， DOM Manipulation , http request 等等。
+
+* **Immutability** :  
+Data 不應該被修改 (modified or mutated) ，也就是所謂的 State， State 內的資料只能在被複製後才能進行修改並且回傳至原來的state。而在React 以及 Redux 中， State 不可被 mutated 的觀念就被大大的凸顯出來。
+
+透過上述的規則中，可以知道在函式編程過程應盡量避免資料變動 (data mutation) 的行為，並透過不會造成 side effects 的內建函式來達到想要的結果(如 `.map()` , `.filter()` , `.reduce()` ...)。
 
 
-### 執行流程:
-在下方，我參照了[Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)課程製作了一張gif來描述這個流程，我們知道JavaScript處理程式碼時是以one single thread方式，一行程式碼處理完再接著下一行; 例如:觸發了一個onClick的event (來自WEB APIs提供的DOM event listener) ，此時onClick的回呼函式會先被置放於Callback Queue當中排隊，此時透過Event loop (事件環) 的機制以偵測執行堆疊 (ES) 內部的任務 (Execution 1-3) 都被執行完畢後，回呼函式才會被移至Stack中執行。
 
-![eventloop](https://github.com/ChiuWeiChung/IMGTANK/blob/main/eventloop/eventloop.gif?raw=true)
-
-
-
-
+# 參考資料
+* [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/)
+* [Functional Programming 一文到底全紀錄]()
+* [Functional Programming with React/Redux]()
