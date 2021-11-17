@@ -1,9 +1,9 @@
-# 執行堆疊 (Execution Stack)與執行環境 (Execution Context)
+# 執行堆疊 (Execution Stack) 與執行環境 (Execution Context)
 
 > 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
 ## JavaScript Runtime
-JavaScript 的程式碼若要被執行，需先透過[直譯（interpret）](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/KnowJs1.markdown)將程式碼轉成"機器可以理解的語言"，也就是機器碼 (由 0 與 1 組成)。 程式碼逐句被直譯為機器碼 (machine code)後，需要在 JavaScript 引擎所提供的執行堆疊 (Execution Stack, ES )內執行，也就是說，沒有引擎就無法執行機器碼。
+JavaScript 的程式碼若要被執行，需先透過[直譯（interpret）](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/KnowJs1.markdown)將程式碼轉成"機器可以理解的語言"，也就是機器碼 (由 0 與 1 組成)。 程式碼逐句被直譯為機器碼 (machine code)後，需要在 JavaScript 引擎所提供的執行堆疊 (Execution Stack, ES) 內執行，也就是說，沒有引擎就無法執行機器碼。
 
 >不同的瀏覽器擁有不同JS引擎，Google Chrome瀏覽器的V8引擎是較著名的JS引擎之一。
 
@@ -14,9 +14,9 @@ JavaScript 的程式碼若要被執行，需先透過[直譯（interpret）](htt
 
 1. **變數** : 例如 var 、 let 、 const 、 functions 、 arguments ...
 
-2. **範疇鏈 (Scope Chain)** :[Scope筆記](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/KnowJs3.markdown)
+2. **範疇鏈 (Scope Chain)** :[Scope筆記](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/scope.markdown)
 
-3. **This**: [This筆記](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/KnowJs5.markdown)
+3. **This**: [This筆記](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/this-in-javascript.markdown)
 
 >EC 只有在任務被呼叫時才會堆疊在 ES 之上
 
@@ -93,7 +93,7 @@ JavaScript 可以透過瀏覽器的 global window object 與 WEB APIs ，使用 
 
 
 ### 執行流程:
-在下方，我參照了 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 課程製作了一張 gif 來描述這個流程，我們知道 JavaScript 處理程式碼時是以 one single thread 方式，一行程式碼處理完再接著下一行; 例如:觸發了一個 onClick 的 event (來自 WEB APIs 提供的 DOM event listener ) ，此時 onClick 的回呼函式會先被置放於 Callback Queue 當中排隊，此時透過 Event loop (事件環) 的機制以偵測執行堆疊 (ES) 內部的任務 (Execution 1-3) 都被執行完畢後，回呼函式才會被移至 Stack 中執行。
+在下方，我參照了 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 課程製作了一張 gif 來描述這個流程，我們知道 JavaScript 處理程式碼時是以 one single thread 方式，一行程式碼處理完再接著下一行; 例如:觸發了一個 onClick 的事件 (來自 WEB APIs 提供的 DOM event listener ) ，此時 onClick 的回呼函式會先被置放於 Callback Queue 當中排隊，此時透過事件環 (Event loop) 的機制以偵測執行堆疊 (ES) 內部的任務 (Execution 1-3) 都被執行完畢後，回呼函式才會被移至 Stack 中執行。
 
 ![eventloop](https://github.com/ChiuWeiChung/IMGTANK/blob/main/eventloop/eventloop.gif?raw=true)
 

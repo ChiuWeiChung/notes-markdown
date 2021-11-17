@@ -2,22 +2,22 @@
 
 > 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
-Asynchronous JavaScript 的應用最典型的範例就是在使用 JavaScript 向 Sever 端提取資料，由於提取資料是需要花費時間的，若還沒取得資料就執行下一行命令 (ex:處理資料的 code )，就會出現異常。也因此，我們需要使用 Asynchornous JavaScript 來解決問題。
+Asynchronous JavaScript 的應用最典型的範例就是在使用 JavaScript 向後端 (Sever) 提取資料，由於提取資料需要花費時間的，若還沒取得資料就執行下一行命令 (ex:處理資料的 code )，可能會出現異常。也因此，我們需要使用 Asynchornous JavaScript 來解決問題。
 
 ## 何謂同步 (Synchronous)? 
 
-同步 (Synchronous) ，如下方程式碼，當我們呼叫 `first()` 時，並以 Execution Stack & Context 來描述他的執行過程( gif 圖)，由於 [one single thread](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/KnowJs/KnowJs1.markdown) 的特性，"程式碼內的每一行會逐行執行 (line by line)"，因此先看到 `'execute 1'` ，再來 `execute 2` ，最後是 `The end` 。這個就是 Synchronous JavaScript 。
+同步 (Synchronous) ，如下方程式碼，當我們呼叫 `first()` 時，並以 Execution Stack & Context 來描述他的執行過程 (gif 圖) ，由於 [one single thread](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/KnowJs1.markdown) 的特性，"程式碼內的每一行會逐行執行 (line by line)" ，因此先看到 `'execute 1'` ，再來 `'execute 2'` ，最後是 `'The end'` 。這個就是 Synchronous JavaScript 。
 
 ```js
-const first = function (){
+const one = function (){
         console.log("execute 1");
-        second();
+        two();
         console.log("The end")
 };
-const second = ()=>{
+const two = ()=>{
         console.log("execute 2");
 };
-first();  
+one();  
 // execute1
 // execute2
 // The end
@@ -33,7 +33,7 @@ first();
 
 ### 模擬 Asynchronous JavaScript :
 
-了解 Synchronous 的運行後，下方程式碼利用 `setTimeout()` 來模擬向外部 API 提取資料的情境 ( 2 秒之後才拿到 data )。下方程式碼的結果顯示，因為透過 setTimeout 的第二個參數設為 2000 (即 2000 毫秒)，當 execute1-3 都透過 console 印出來並經過兩秒後才會執行 `setTimeout()` 內的回呼函式。
+了解 Synchronous 的運行後，這次來模擬非同步的情況，如下方程式碼利用 `setTimeout()` 來模擬向外部 API 提取資料的情境 ( 2 秒之後才拿到 data )。結果顯示，當 `execute1-3` 都透過 console 印出來並經過兩秒後才會執行 `setTimeout()` 內的回呼函式。
 
 ```js
 const one = function (){
@@ -58,20 +58,22 @@ one();
   
 ### 執行過程發生了甚麼事? (Callback Queue &Event Loop)
 
-JavaScript的[Runtime](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/KnowJs/KnowJs2.markdown) 來描述，過程如下方 GIF 顯示，當 `console.log("execute 2")` 結束之後隨即堆疊上 setTimeout ，其"內部的回呼函式會被暫時移置於 WEB APIs 等待 2 秒鐘倒數"，因此執行堆疊不需特地暫停兩秒鐘等待呼回函式的執行，內部仍能繼續執行接下來的 console.log ( 'The end' ) 。
+這邊以 JavaScript 的 [Runtime](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/execution-stack-context.markdown) 來描述，過程如下方 GIF 顯示，當 `console.log("execute 2")` 結束之後隨即堆疊上 `setTimeout` 的`執行環境`，其**內部的回呼函式會被暫時移置於 WEB APIs 等待 2 秒鐘倒數**，因此`執行堆疊`不需特地暫停兩秒鐘等待呼回函式的執行，內部仍能繼續執行接下來的 `console.log( 'The end' )` 。
 
-待兩秒倒數完畢後，回呼函式被置於 Callback Queue 排隊，此時我們的重要功臣 **Event Loop** 出現了， **Event Loop** 若偵測到執行堆疊內中只剩下 Global Execution Context 時，會立即把回呼函式拖進執行堆疊內執行;
+### 事件循環 (event loop）
 
- 因此可理解到， `SetTimeout()` 的回呼函式實際上並不在 `first()` 的內部執行"，而是被暫放於 Callback Queue ，等待其他的執行環境 (Execution Context) 們都結束後才在背景 (Global Execution Context) 下執行的。
+待兩秒倒數完畢後，回呼函式被置於 Callback Queue 排隊，此時我們的重要功臣 **事件循環 (event loop)** 出現了， **事件循環** 會在`執行堆疊`只剩下 Global 的`執行環境`時將 `setTimeout()` 的回呼函式拖進`執行堆疊`內執行;
+
+ 因此可理解到， `SetTimeout()` 的回呼函式實際上並不在 `first()` 的內部執行"，而是被暫放於 Callback Queue ，等待其他的`執行環境` (Execution Context) 們都結束後才在背景 (Global Execution Context) 下執行的。
         
 ![ASynchronous-like Runtimie](https://github.com/ChiuWeiChung/IMGTANK/blob/main/eventloop/eventloop2.gif?raw=true)
 
->`setTimeout()` 其實來自 Web APIs (獨立於 JavaScript engine 之外)，舉凡 DOM manipulation methos, SetTimeout, HTTP requests for AJAX , geolocation , local storage 等等都都是，所以整個 Execution Stack 在運行時不會受到阻擋。
+>`setTimeout()` 其實來自 Web APIs (獨立於 JavaScript engine 之外)，舉凡 DOM manipulation methos, SetTimeout, HTTP requests for AJAX , geolocation , local storage 等等都都是，所以整個`執行堆疊`在堆疊過程不會受到阻擋。
 
 
 ---
 
-## Asynchronous 的回呼地獄 (Callback Hell)
+## 非同步 (Asynchronous) 的回呼地獄 (Callback Hell)
     
 觀察到下方程式碼可以發現，若要處理的內容越複雜，就出現需要呼叫多次 `setTimeout()` 情況，如此一來就出現多層回呼函式的狀況 (回呼函式內部又有回呼函式)，後續在維護程式碼時就會非常頭痛，因此被稱為回呼地獄 (Callback Hell); 幸虧有 ES6 導入了 [**Promise**](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/Ajax/Async_Part2.markdown) 以解決 callback hell 的狀況，讓程式碼可以容易判讀。
 
@@ -153,7 +155,7 @@ getIDs
 // Mr.Jonas: Italian pizze
 ```
 
-可以發現利用 `Promise( )` 之後，沒有出現回呼函式內又有回呼函式的情況，取而代之的是使用 `then()` 以及 `return`來處理， getIDs 完成 Promise 後將 `resolve()` 內的資料傳出並以參數形式帶入 `then()` 處理，其內部的 `gerRecipes()` 完成Promise後又將 `resolve()` 內的資料傳出以參數形式帶入下一個 `then()` 處理，過程就像大隊接力一樣，一棒接著一棒跑完整個流程;雖然 `Promise` 讓程式碼更有組織以及容易閱讀，但 ES8 (ES2017) 提供了更簡易、方便的方法，也就是 **Async & Await**。
+可以發現利用 `Promise( )` 之後，沒有出現回呼函式內又有回呼函式的情況，取而代之的是使用 `then()` 以及 `return`來處理， getIDs 完成 Promise 後將 `resolve()` 內的資料傳出並以參數形式帶入 `then()` 處理，其內部的 `gerRecipes()` 完成 `Promise` 後又將 `resolve()` 內的資料傳出以參數形式帶入下一個 `then()` 處理，過程就像大隊接力一樣，一棒接著一棒跑完整個流程;雖然 `Promise` 讓程式碼更有組織以及容易閱讀，但 ES8 (ES2017) 提供了更簡易、方便的方法，也就是 **Async & Await**。
 
 
 ## Async & Await

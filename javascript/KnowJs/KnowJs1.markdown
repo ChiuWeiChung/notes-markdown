@@ -29,7 +29,7 @@ Source Code 會一行一行的 (step by step) 轉為 Machine Code 。 優點:靈
 ## 3. One Single Thread & Non-blocking event loop
 One Single Thread 主要是在描述 JavaScript 面對多項任務時是如何處理;在下方方程式碼輸出結果可以推論得知，輸出的順序與呼叫的順序是一致的，表現出 JavaScript 處理程式碼時是逐行進行 (line by line) ，所以在一個時間點只能夠處理一件事情，即為 one single thread 。
 
-這樣的特性可能會使人誤解，若遇到需要花時間處理的任務 (ex: 透過 Google Map 提取地圖資訊，需要時間等待) ，是不是就會拖延到後面的作業了呢? 其實不然，因為 JavsScript 特別之處在於擁有[事件循環 (Event Loop) ](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/KnowJs/KnowJs2.markdown)的機制，藉由事件循環機制將待執行的任務拖至背景下執行。
+這樣的特性可能會使人誤解，若遇到需要花時間處理的任務 (ex: 透過 Google Map 提取地圖資訊，需要時間等待) ，是不是就會拖延到後面的作業了呢? 其實不然，因為 JavsScript 特別之處在於擁有[事件循環 (Event Loop) ](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/execution-stack-context.markdown)的機制，藉由事件循環機制將待執行的任務拖至背景下執行。
 
 ```js
 const first = function (){

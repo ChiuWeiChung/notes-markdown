@@ -1,7 +1,7 @@
 # 立即呼叫函式表示式(IIFE) 
 > 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
-在 Scope 筆記當中有談到，函式會產生 scope ，因此在函式外部無法存取函式內部的變數，也因此，在 scope 內部的資料是安全、保有隱私的。
+在 Scope 筆記當中有談到，函式會產生 Scope ，因此在函式外部無法存取函式內部的變數，也因此，在 Scope 內部的資料是安全、保有隱私的。
 
 
 ## 數據封裝 (Data Encapsulation)
@@ -25,7 +25,7 @@ sayHi();
 })();
 ```
 
-在 ES6 中，屬於 block scope 的 `const` 、 `let` 出現之後，只要創造出 block scope ，就無法從外部存取以 `const` 、 `let` 宣告的變數，也因此 IFFEs 的使用率漸漸的下降。
+在 ES6 中，屬於 Block Scope 的 `const` 、 `let` 出現之後，只要創造出 Block Scope ，就無法從外部存取以 `const` 、 `let` 宣告的變數，也因此 IFFEs 的使用率漸漸的下降。
 
 ```js
 {

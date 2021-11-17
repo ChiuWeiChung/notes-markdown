@@ -2,7 +2,7 @@
 
 > 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
 
-在Javscript中大致上可分為兩大型別所組成。
+在Javscript中大致上可分為兩大型別所組成，兩大型別的值存放的位置不一樣，**基本型別會存放在執行堆疊 (Execution Stack)**，而**物件型別則存放於堆內存 (Heap) 內部**。
 
 1. 基本型別 (Primitive Types):  
 包含**Number** 、 **String** 、 **Boolean** 、 **Undefined** 、 **Null** 、 **Symbol** 、 **BigInt** 。
@@ -10,11 +10,10 @@
 2. 物件型別 (Object Types):  
 包含**Object Literal**、**Array**、**Functions**....。
 
-在 JavaScript 引擎內，兩大型別的值存放的位置不一樣，基本型別會存放在執行堆疊 (Execution Stack)，而物件型別則存放於堆內存 (Heap) 內部。
 
-## 基本型別的存放位置: 
+## 基本型別 (Primitive Type) 的存放位置: 
 
-如下方程式碼範例，宣告一變數名稱 `dog1` ，並將值 `"Jumo"` 傳入其中，事實上，  `dog1` 並非直接對應值 `"Jumo"`，而是指向一個 `adress(0001)` 並且對應到值`"Jumo"` ; 當我們將 `dog1` 傳入新變數 `dog2` 時， `dog2` 也會指向同一 `adress(0001)` ，倘若將值 `"Judas"` 重新傳入 `dog1` 時，由於在 Exeuction Stack 被 adress 對應的值是無法被改變， `dog1` 的 adress 會重新導向至 `adress(0002)` ，並對應新值 `"Judas"` 。
+如下方程式碼範例，宣告一變數名稱 `dog1` ，並將值 `"Jumo"` 傳入其中，事實上，  `dog1` 並非直接對應值 `"Jumo"`，而是指向一個 `adress(0001)` 並且對應到值`"Jumo"` ; 當我們將 `dog1` 傳入新變數 `dog2` 時， `dog2` 也會指向同一 `adress(0001)` ，倘若將值 `"Judas"` 重新傳入 `dog1` 時，由於在執行堆疊s內被 adress 對應的值是無法被改變，因此 `dog1` 的 adress 會重新導向至 `adress(0002)` ，並對應新值 `"Judas"` 。
 
 ```js
 // Primitives type
@@ -26,9 +25,9 @@ console.log(dog1, dog2;// Judas Jumo
 ![Primitive types](https://github.com/ChiuWeiChung/IMGTANK/blob/main/types/primitive.gif?raw=true)
 
 
-## 物件型別的存放位置: 
+## 物件型別 (Object Type) 的存放位置: 
 
-如下方範例，對於參考型別而言，當 `物件rick` 被宣告時，其值 `{firstName:...,}` 會被存放於 Heap 內部並由 `adress(D30F)` 對應，然而 `物件rick` 並不會直接指向 Heap 內的 adress ，而是先指向執行堆疊 (ES) 內的 `adress(0003)` ， `adress(0003)` 才會對應 Heap 內的 `adress D30F`，在宣告 `物件anotherRick` 後並且透過 `anotherRick.lastName` 傳入新值 `"Chen"` 時，事實上並不會重新導向 `物件anotherRick`  在 Heap 內的 adress ，而是直接改變 Heap 內的值，也因此 `rick.lastName` 也會同步改變。
+如下方範例，對於參考型別而言，當 `物件rick` 被宣告時，其值 `{firstName:...,}` 會被存放於 Heap 內部並由 `adress(D30F)` 對應，然而 `物件rick` 並不會直接指向 Heap 內的 adress ，而是先指向執行堆疊內的 `adress(0003)` ， `adress(0003)` 才會對應 Heap 內的 `adress D30F`，在宣告 `物件anotherRick` 後並且透過 `anotherRick.lastName` 傳入新值 `"Chen"` 時，事實上並不會重新導向 `物件anotherRick`  在 Heap 內的 adress ，而是直接改變 Heap 內的值，也因此 `rick.lastName` 也會同步改變。
 
 ```js
 // Reference type
