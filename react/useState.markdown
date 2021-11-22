@@ -48,9 +48,9 @@ setState(newState);
 setState(prevState => prevState - 1)
 ```
 
-## setState在Function與Class不同的地方
+## State Update : Function & Class 的差異
 
-### Class Component :  
+### **Class Component** :  
 
 在 Class Components 當中，由於 State 的形式一直都是 Object ，在更新過程中， React 會自動將更新的值合併 (merge) 到 State 內部。如下方程式碼。
 
@@ -63,7 +63,7 @@ this.setState({
 // state = {name:'Allen', age:30}
 ```
 
-### Function Component :  
+### **Function Component** :  
 
 由於 State 在 React Hooks 中可以是任何形式 ( Object, String , Number ...)，也因此在更新過程中， `useState` **不會自動將更新的值合併到 State 內部**。
 

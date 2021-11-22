@@ -15,6 +15,20 @@ Git 是在自身電腦運行的版本控制系統，而GitHub是在網路上託�
 
 > 與 GitHub 有著相同功能的服務有許多，如 Gitlab 、 Bitbucket ，但 GitHub 的使用者較多 
 
+
+### **GitHub**
+ GitHub 是一個基於Git的 repository 託管平台，可以用來存放 repository ，藉此我們可以隨時隨地存取或分享我們的 repo ，但它最大的賣點在於"與他人合作進行專案開發"。
+
+1. **合作**  
+透過 GitHub 平台，我們可以自己開啟一項專案，並邀請志同道合的朋友一起進行開發。
+
+2. **開源專案**  
+許多著名的開源專案都將repo部署在 GitHub 上，如[React](https://GitHub.com/facebook/react)也將 GitHub 作為他們的家，在上面有許多來自世界各地的人都一起對這個專案進行開發。也可
+
+3. **曝光**  
+我們可以將作品部署在 GitHub 上，藉此作為作品展示的平台
+
+
 ## 儲存庫 (Repository)
 
 又可以稱為 "Repo" ，是指在一個資料夾內，可以透過 Git 進行程式碼追蹤、維護的工作區域 (Workspace)，每當進行一個專案的開發時，會創立一個該專案的資料夾，並在該資料夾內建立新的 Repo 。每個專案應擁有自己專屬的 Repo，Repo 與 Repo 之間是獨立的，不會互相干涉其內容。
