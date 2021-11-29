@@ -1,4 +1,4 @@
-# React 的渲染 (render) & VDOM
+# React 的渲染 (render) 以及 Virtual DOM
 
 在介紹 React 的渲染 (render) 之前，先介紹 DOM 以及 React 的 Virtual DOM 之間的互動機制。
 
@@ -32,7 +32,7 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
-![DOM VDOM Illustration]()
+![DOM VDOM Illustration](https://github.com/ChiuWeiChung/IMGTANK/blob/main/react/DOM-VDOM-illustration.gif?raw=true)
 
 
 ## React 中的渲染 (render)
@@ -87,5 +87,3 @@ const App = () => {
 * [When does React re-render components?](https://felixgerschau.com/react-rerender-components/)
 * [How and when to force a React component to re-render](https://blog.logrocket.com/how-when-to-force-react-component-re-render/)
 * [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
-
-<!-- > Real DOM updates are slow because they cause an actual re-draw of the UI. React makes this more efficient by updating the smallest amount possible in the real DOM. -->

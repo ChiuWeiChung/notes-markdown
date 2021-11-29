@@ -1,6 +1,6 @@
 # 遠端 (Remote) 
 
-若我們想將 repo 從本地端 (local) 推送到 GitHub ，需先告知 Git 推送的"目的地"，目的地在 Git 內又被稱為遠端 (remote) ，"目的地"需包含兩個資訊，分別為1. 名稱 (remote name) 以及2. 地址 (remote URL) 。
+若我們想將 repo 從本地端 (local) 推送到 GitHub ，需先告知 Git 推送的"**目的地**"，目的地又被稱為遠端 (remote) ，"目的地"需包含兩個資訊，分別為 1. 名稱 (remote name) 以及 2. 地址 (remote URL) 。
 
 ### **檢視遠端**
 
@@ -26,7 +26,7 @@ origin  https://GitHub.com/Chiuweichung/xxx (push)
 
 ### **什麼是 Origin** ?
 
-origin 並非那麼特別，當我們從 GitHub 複製一項 repo 時，它的"預設 remote 名稱就是origi n"， origin 僅僅是 remote 名稱，用來代表該 URL ，事實上我們可以將 origin 改成任何名子。
+origin 並非那麼特別，當我們從 GitHub 複製一項 repo 時，它的"**預設 remote 名稱就是origin**"， origin 僅僅是 remote 名稱，用來代表該 URL ，事實上我們可以將 origin 改成任何名子。
 
 ---
 

@@ -1,4 +1,4 @@
-#  TypeScript 筆記 (Type System & Concept)
+#  TypeScript 筆記 - Part 1 (Type System & Concept)
 
 > 本文為 [ Typescript : The Complete Developer's Guide ](https://www.udemy.com/course/ typescript -the-complete-developers-guide/) 之筆記，內容經消化吸收後以自我理解之方式呈現，部分程式碼非原創，原創內容請參考上述課程連結
 

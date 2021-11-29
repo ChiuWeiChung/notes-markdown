@@ -2,9 +2,9 @@
 
 ## 什麼是 "Effect" (或稱 "Side Effect")?
 
-我們使用 React 的最終目的就是要將 Components 的內容呈現在頁面上， 並根據使用者的操作 (點擊按鈕、輸入欄位資訊..... 等等) 所造成 State、 Props 的變化，進行 UI 上的動態挑整。
+我們使用 React 的最終目的就是要將 Components 的內容呈現在頁面上， 並根據使用者的操作 (點擊按鈕、輸入欄位資訊..... 等等) 所造成 State、 Props 的變化，進行 UI 上的動態調整。
 
-而所謂的 "Side Effect" 指的是如 Http 請求、執行Timer Function ( `setTimeout` , `setInterval` ) ..... 等等， 由於上面有談到 React 的主要功能是將 Component 內容呈現在 DOM 上，因此 React 必須**透過某些機制來 "另外處理" 這些 "Side Effect"**。
+而所謂的 "Side Effect" 指的是如 **HTTP Request**、**執行Timer Function** ( `setTimeout` , `setInterval` ) ..... 等等， 由於上面有談到 React 的主要功能是將 Component 內容呈現在 DOM 上，因此 React 必須**透過某些機制來 "另外處理" 這些 "Side Effect"**。
 
 ## 疑慮 - 在 Component 內直接塞入 Side Effect
 

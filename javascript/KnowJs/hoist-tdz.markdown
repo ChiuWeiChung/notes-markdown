@@ -35,18 +35,15 @@ function deleteData() {
 }
 ```
 
-## Temporal Dead Zone (暫時死區, TDZ)
+## 暫時死區 ( Temporal Dead Zone, TDZ)
 
- 透過 `const` 、 `let` 宣告的變數，在所處的 Scope 內部且該變數被宣告之前區域被稱為 TDZ ，在這區域內無法存取該變數。如下方的範例，在 if Scope 內部，我在 `job` 被宣告之前先呼叫它就會出現錯誤， TDZ 的存在是為了避免以及捕捉錯誤的發生，並確保我們在存取之前就已經宣告該變數。
+ 如果我們在透過 `const`/`let` 宣告變數之前呼叫變數，會出現錯誤，因為在呼叫的位置處於暫時死區。如下方的範例，在 if Scope 內部，我在 `job` 被宣告之前先呼叫它，此時出現報錯，TDZ 的存在除了避免捕捉錯誤的發生，也是確保我們在存取之前就已經宣告該變數。
 
 ```js
 const name = "Rick";
-const date = new Date().getFullYear();
 if (name === "Rick") {
     console.log(`I am a ${job}`); //  Temporal Dead Zone for `job` variable
-    const age = date - 1992; //  Temporal Dead Zone for `job` variable
     const job = "engineer";
-    console.log(x) // x is not defined
 }
 //Uncaught ReferenceError: Cannot access 'job' before initialization
 ```

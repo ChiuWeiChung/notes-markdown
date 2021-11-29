@@ -50,45 +50,44 @@ setState(prevState => prevState - 1)
 
 ## State Update : Function & Class 的差異
 
-### **Class Component** :  
+* **Class Component** :  
+    在 Class Components 當中，由於 State 的形式一直都是 Object ，在更新過程中， React 會自動將更新的值合併 (merge) 到 State 內部。如下方程式碼。
 
-在 Class Components 當中，由於 State 的形式一直都是 Object ，在更新過程中， React 會自動將更新的值合併 (merge) 到 State 內部。如下方程式碼。
-
-```js
-// ------在Class Component內部------
-// state = {name:'Allen', age:25}
-this.setState({
-    age: 30
-})
-// state = {name:'Allen', age:30}
-```
-
-### **Function Component** :  
-
-由於 State 在 React Hooks 中可以是任何形式 ( Object, String , Number ...)，也因此在更新過程中， `useState` **不會自動將更新的值合併到 State 內部**。
-
-```js
-// ------在Function Component內部------
-// state = {name:'Allen', age:25}
-this.setState({
-    age: 30
-})
-// state = {age:30}
-```
-
-若 State 為 Object ，在更新過程中，我們可以透過 JavaScript 中的展開運算子 ( Spread Operator )來實現物件的更新
-
-```js
-// ------在Function Component內部------
-// state = {name:'Allen', age:25}
-this.setState((prevState) => {
-    return {
-        ...prevState,
+    ```js
+    // ------在Class Component內部------
+    // state = {name:'Allen', age:25}
+    this.setState({
         age: 30
-    }
-})
-// state = {name:'Allen', age:30}
-```
+    })
+    // state = {name:'Allen', age:30}
+    ```
+
+* **Function Component** :  
+
+    由於 State 在 React Hooks 中可以是任何形式 ( Object, String , Number ...)，也因此在更新過程中， `useState` **不會自動將更新的值合併到 State 內部**。
+
+    ```js
+    // ------在Function Component內部------
+    // state = {name:'Allen', age:25}
+    this.setState({
+        age: 30
+    })
+    // state = {age:30}
+    ```
+
+    若 State 為 Object ，在更新過程中，我們可以透過 JavaScript 中的展開運算子 ( Spread Operator )來實現物件的更新
+
+    ```js
+    // ------在Function Component內部------
+    // state = {name:'Allen', age:25}
+    this.setState((prevState) => {
+        return {
+            ...prevState,
+            age: 30
+        }
+    })
+    // state = {name:'Allen', age:30}
+    ```
 
 ## useState 在使用上更彈性
 
@@ -99,6 +98,12 @@ const [nameState, setNameState] = useState('Alice');
 const [ageState, setAgeState] = useState(30);
 const [country, setCountry] = useState('Taiwan');
 ```
+
+# 參考資料
+* [What the React? Sagas and side effects](https://smartcar.com/blog/what-the-react-sagas/)
+* [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
+* [使用 React Hook](https://zh-hant.reactjs.org/docs/hooks-effect.html)
+
 
 <!-- **useState always returns an array with exactly two elements** , the first element then alwasys is your current state snapshot, and whenver you state updated, the component will rebuild, so the functinal component  is really executed and useState executed again. But react internally saves that you already configured a state with the help of useState for functional component, and will not reinitialized it, but instead **useState** manages this state detached from you component, so independent from your component, so that the state survives renders of this functinal component. So the state suvives when functional component get executed again and therefore useState  does first value which is returned is our current state snapshot and it's a current state snapshot for this rerender cycle of this component. This means that when you update the state, you'll get the updated state here. -->
 

@@ -1,6 +1,6 @@
 # Components 優化 ( React.memo & useCallback)
 
-黨 React Component 中的 State 被觸發更新 ( `setState` or `useState` ) 後，除了本身Component 會重新渲染之外， 會連帶其內部的 Child Components 一起重新渲染，對於簡單平滑結構的 React App 而言，Parent Component 的重新渲染不會有太大影響，但若是相對複雜的結構 (眾多 Child Components) 而言， 效能上的差異就會變得非常明顯。
+當 React Component 中的 State 被觸發更新 ( `setState` or `useState` ) 後，除了本身Component 會重新渲染之外， 會連帶其內部的 Child Components 一起重新渲染，對於簡單平滑結構的 React App 而言，Parent Component 的重新渲染不會有太大影響，但若是相對複雜的結構 (眾多 Child Components) 而言， 效能上的差異就會變得非常明顯。
 
 ## Function Component 的重新渲染
 
@@ -45,7 +45,7 @@ const DemoOutput = React.memo((props) => {
 
 ![rerender-reactmemo-illustration](https://github.com/ChiuWeiChung/IMGTANK/blob/main/react/rerender-illustration-2.gif?raw=true)
 
-> ** `React.memo` 僅能使用在 Function Component** ，對於 Class Component 的而言，可以透過 `React.PureComponent` 達到相同效果。
+> **`React.memo` 僅能使用在 Function Component** ，對於 Class Component 的而言，可以透過 `React.PureComponent` 達到相同效果。
 
 ## 須注意的陷阱
 
@@ -99,8 +99,15 @@ const clickHandler = useCallback(() => {
     setShowParagraph((prevState) => !prevState);
   },[]);
 ```
+
 ![usecallback-illustration-2](https://github.com/ChiuWeiChung/IMGTANK/blob/main/react/usecallback-illustration-2.gif?raw=true)
 
+
+# 參考資料
+* [When does React re-render components?](https://felixgerschau.com/react-rerender-components/)
+* [How and when to force a React component to re-render](https://blog.logrocket.com/how-when-to-force-react-component-re-render/)
+* [React - Batch Updating](https://github.com/facebook/react/issues/10231#issuecomment-316644950)
+* [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
 
 
 

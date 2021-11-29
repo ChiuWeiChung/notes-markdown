@@ -55,7 +55,7 @@ JSX 的語法看似與 HTML 類似，但需要注意的是他們是不同的!，
 
 在 React 中，參數的控制主要透過 State 或是 Props， State/Props 的改變會觸發 React 進行重新渲染 (re-render) 的動作，進而改變DOM的內容。
 
-## Props
+### **Props**
 
 props 的功能在於透過 parent Component 將資料傳入 Child Component當中，如下方程式碼，透過名為 `title` 的 Props將字串 `"My Post"` 傳入 `Post` 內。
 
@@ -81,7 +81,7 @@ const Post = (props) => {
 }
 ```
 
-## State 
+### **State** 
 
 State 只能透過  Class Component 來定義或是修改，且 State 的改變會觸發Component進行 re-render，進而改變DOM，上述提到的 `props` 也允許將  State 傳遞到 Function Component，但是無法直接在 Function Component 內部改變 State (在沒有使用 React hook 的情況下) ，要改變 State 的內容只能在 Class Component 內透過 `this.setState({...})` 來改變。
 
@@ -97,3 +97,8 @@ class NewPost extends React.Component {
     }
 }
 ```
+
+
+# 參考資料
+* [React 手冊](https://zh-hant.reactjs.org/docs/react-component.html)
+* [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
