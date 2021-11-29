@@ -79,10 +79,10 @@ mergeSort(arr)
 由於 Merge Sort 是將一個陣列拆分成無數個長度為1的小陣列，此過程所需的次數為 log (陣列總長) ，其中的 log 為以 2 為底的對數，假如是長度為 8 的陣列，將其拆分成各個長度為 1 的小陣列所需次數為 3 次，再將所有小陣列組合成一個已排的大陣列所需的次數為8次 (總長度) ，因此對於一個長度為8的陣列而言，透過 Merge Sort 處理的時間複雜度為 24 次 (8 X log 8=24) ; 其時間複雜度相較於 Bubble、Selection 、 Insertion 的時間複雜度 (O(n^2)) ，但犧牲的是空間複雜度提升至 O(n) 。
 
 
-  Algorithm     | Best condition| Average  |   Worst  | Space complexity
-  ----------    |:-------------:|:--------:|:--------:|:-----------:
+  Algorithm  | Best condition| Average  |   Worst  | Space complexity
+  ---------- |:-------------:|:--------:|:--------:|:-----------:
+  Merge Sort |     O(nlogn)  | O(nlogn) | O(nlogn) |     O(n)
 
-    Merge Sort  |     O(nlogn)  | O(nlogn) | O(nlogn) |     O(n)
 
 ---
 

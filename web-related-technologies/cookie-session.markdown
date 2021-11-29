@@ -31,7 +31,7 @@ app.get('/getcookie', (req, res) => {
 })
 ```
 
-![cookie-session-1]()
+![cookie-session-1](https://github.com/ChiuWeiChung/IMGTANK/blob/main/cookie-session/cookie-session-1.png?raw=true)
 
 ### **接收 Cookie**
 
@@ -60,7 +60,7 @@ app.get('/takecookie', (req, res) => {
 
 由於 Cookies 的 `key/value pair` 是光明正大地躺在瀏覽器內，因此資料很容易被修改，只要在開發者模式就可以進行 Cookie 的修改，如下圖 ( `'Rick'` 被改成 `'Big Fat Duck'` )，因此在使用者在拜訪 `http://localhost:3000/takecookie` 時， Server 端所接收到的 Cookie 就會是 `{ name: 'Big Fat Duck' }` ，為了讓 Server 能夠偵測接收的 Cookie 是否已被"玷汙"了，我們可以將 Cookie 進行 Signing (簽署) 的動作，確保接收到的完整性。
 
-![cookie-session-2]()
+![cookie-session-2](https://github.com/ChiuWeiChung/IMGTANK/blob/main/cookie-session/cookie-session-2.png?raw=true)
 
 ## 簽署 Cookie (Signed Cookie)
 
@@ -94,7 +94,7 @@ app.get('/takecookie', (req, res) => {
 })
 ```
 
-![cookie-session-3]()
+![cookie-session-3](https://github.com/ChiuWeiChung/IMGTANK/blob/main/cookie-session/cookie-session-3.png?raw=true)
 
 如上圖顯示，Cookie 中的 `value` 仍然有 `Rick` 存在，因為 簽署 (Signing) 的目的並不是把內容進行加密，而是在 `value` 尾端加入一個字串 (如上圖的 `.9d7yr1vWTuWX1QsW....` )，在下次的 HTTP 請求時， Server 會將回傳的 `value` 搭配 Secret Key ( `ilovewebdevelopment` ) 執行再次簽署 (Re-Signing) 的動作，如果得到的字串仍是 `.9d7yr1vWTuWX1QsW....` ，則代表 Cookie 沒有被更改過，若 Cookie 被更改過，得到的 `value` 會是 `false` 。
 
@@ -161,9 +161,9 @@ app.get('/testpage', (req, res) => {
 ```
 > 在沒有設定 Session Store 的情況下，Session 存放的位置會在 Server Local Memory。
 
-![cookie-session-4]()
+![cookie-session-4](https://github.com/ChiuWeiChung/IMGTANK/blob/main/cookie-session/cookie-session-4.png?raw=true)
 
-![cookie-session-5]()
+![cookie-session-5](https://github.com/ChiuWeiChung/IMGTANK/blob/main/cookie-session/cookie-session-5.gif?raw=true)
 
 # 參考資料
 * [The Web Developer Bootcamp 2022](https://www.udemy.com/course/the-web-developer-bootcamp/)

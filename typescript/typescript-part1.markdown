@@ -1,6 +1,6 @@
 #  TypeScript 筆記 - Part 1 (Type System & Concept)
 
-> 本文為 [ Typescript : The Complete Developer's Guide ](https://www.udemy.com/course/ typescript -the-complete-developers-guide/) 之筆記，內容經消化吸收後以自我理解之方式呈現，部分程式碼非原創，原創內容請參考上述課程連結
+> 本文為 [Typescript : The Complete Developer's Guide](https://www.udemy.com/course/typescript-the-complete-developers-guide/) 之筆記，內容經消化吸收後以筆記方式歸納記錄下來，部分程式碼非原創，原創內容請參考上述課程連結
 
 ## Type System (型別系統) 與  TypeScript 
 
@@ -29,20 +29,22 @@ let signedIn:boolean = false;
 signedIn = 100; //程式碼出現錯誤(紅色底線)，Type 'number' is not assignable to type 'boolean'.
 ```
 
- ` TypeScript 只有在開發階段才有其意義，且無法對程式碼進行表現上的優化，此外因為瀏覽器只認得 JavaScript 程式碼， TypeScript 在執行後會透過 TypeScript  Compiler 編譯成 JavaScript 程式碼來讓瀏覽器看得懂。`
+ > TypeScript 只有在開發階段才有其意義，且無法對程式碼進行表現上的優化，此外因為瀏覽器只認得 JavaScript 程式碼， TypeScript 在執行後會透過 TypeScript  Compiler 編譯成 JavaScript 程式碼來讓瀏覽器看得懂。
 
 ## 型別註記 (Type Annotations)、型別推論 (Type Inference) 、型別斷言 (Type assertion)
 
-* 型別註記 (Type Annotations) : 我們**明確的告知 TypeScript 某變數應當為什麼型別**。
+* **型別註記 (Type Annotations)** : 我們明確的告知 TypeScript 某變數應當為什麼型別。
  
 
 ```ts
 //宣告變數 apple 時透過 Type Annotation 定義型別，此時 TypeScript 會透過 Type Inference 將變數 apples 定義為 Number type
+
 let applesNumber:number= 5;
-applesNumber = [1,2,3] //Type 'number[]' is not assignable to type 'number'.
+applesNumber = [1,2,3] 
+//Type 'number[]' is not assignable to type 'number'.
 ```
 
-* 型別推論 (Type Inference):  TypeScript 自行去**推斷某變數應該是什麼型別。**
+* **型別推論 (Type Inference)** : TypeScript 自行去推斷某變數應該是什麼型別。
 
  `Type Inference is used in default`
 
@@ -52,11 +54,11 @@ let applesNumber = 5;
 applesNumber = [1,2,3]; //Type 'number[]' is not assignable to type 'number'.
  ```
 
- * 型別斷言 (Type Assertions) : 當我們明確知道變數的型別，但 TypeScript 無法了解的時候。
+ * **型別斷言 (Type Assertions)** : 當我們明確知道變數的型別，但 TypeScript 無法了解的時候。
  
 
 ```ts
-//  TypeScript 只能知道 element 是一種 Element 型別，但無法知道其細節，
+//  TypeScript 只能知道 element 是一種 Element 型別，但無法知道其細節
 const btnElement =document.querySelector('.changeBtn') //const element: Element
 // 透過型別推段告知 TypeScript 所選取的元素為何種型別
 const toggleBtn = document.querySelector(".toggleBtn") as HTMLButtonElement; //const toggleBtn: HTMLButtonElement

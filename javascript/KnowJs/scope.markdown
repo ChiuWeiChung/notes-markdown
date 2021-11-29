@@ -10,10 +10,10 @@
 定義我們宣告的變數在哪個區域我們可以被存取它、哪個區域不能存取它。
 
 2. **語法作用域 (Lexical scoping)** :  
-Lexical Scoping的定義為: 變數在某個區域是否可/不可被存取主要是由 **1. function (函式)** 以及 **2. block (區塊)** 所宣告的位置所決定;可以存取的變數的區域稱為 Scope of a variable。
+Lexical Scoping的定義為: 變數在某個區域是否可/不可被存取主要是由 **function (函式)** 以及 **block (區塊)** 所宣告的位置所決定;可以存取的變數的區域稱為 Scope of a variable。
 
 3. **範疇 (Scope)** :  
-在JavaScript內，有三種 Scope，1. Global Scope 2. Function Scope 3. Block Scope，如下方筆記。
+在JavaScript內，有三種 Scope，1. Global Scope, 2. Function Scope, 3. Block Scope，如下方筆記。
 
 
 ## 在JavaScript的三個範疇種類
