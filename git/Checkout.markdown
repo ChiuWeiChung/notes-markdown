@@ -1,6 +1,12 @@
 # Git Checkout
 <!-- # Undoing Changes & Time Traveling -->
 
+> 本文為 [The Git & Github Bootcamp
+](https://www.udemy.com/course/git-and-github-bootcamp/
+) 之學習筆記，內容經消化吸收後以筆記方式歸納記錄下來。
+
+## 分支 (Branch)
+
 git checkout 指令的功能非常多，除了建立分支外，還可以還原文件內容、檢視歷史紀錄 (像時間旅行)。
 
 ## 檢視以前的Commit

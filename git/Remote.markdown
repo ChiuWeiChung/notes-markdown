@@ -1,5 +1,9 @@
 # 遠端 (Remote) 
 
+> 本文為 [The Git & Github Bootcamp
+](https://www.udemy.com/course/git-and-github-bootcamp/
+) 之學習筆記，內容經消化吸收後以筆記方式歸納記錄下來。
+
 若我們想將 repo 從本地端 (local) 推送到 GitHub ，需先告知 Git 推送的"**目的地**"，目的地又被稱為遠端 (remote) ，"目的地"需包含兩個資訊，分別為 1. 名稱 (remote name) 以及 2. 地址 (remote URL) 。
 
 ### **檢視遠端**

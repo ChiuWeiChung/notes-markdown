@@ -1,5 +1,10 @@
 # Git Rebase
 
+> 本文為 [The Git & Github Bootcamp
+](https://www.udemy.com/course/git-and-github-bootcamp/
+) 之學習筆記，內容經消化吸收後以筆記方式歸納記錄下來。
+
+
 Git Rebase 使一個使用時必須謹慎但又實用的指令， Rebase 有兩種功用:
 1. 用來合併
 2. 用來重塑 Git History (將 commit  刪除、改寫、重新命名、重新排序)

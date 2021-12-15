@@ -1,5 +1,9 @@
 # Git Restore & Git Revert & Git Reset
 
+> 本文為 [The Git & Github Bootcamp
+](https://www.udemy.com/course/git-and-github-bootcamp/
+) 之學習筆記，內容經消化吸收後以筆記方式歸納記錄下來。
+
 ## Git Resotre
 
 由於 `git checkout` 具備許多的功能， Git 為了不讓使用者產生混淆，推出了 `git restore` 指令，讓使用者避免特意去記 `git checkout blah blah blah` 的複雜指令。

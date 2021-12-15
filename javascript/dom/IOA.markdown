@@ -1,6 +1,6 @@
 # Intersection Observer API
 
-> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，內容經消化吸收後以筆記方式歸納記錄下來，部分程式碼非原創，原創內容請參考上述課程連結。
 
 ## 提升使用者體驗
 當使用者開啟網頁時，瀏覽器會將所有的內容全部渲染出來，倘若頁面含有大量圖片時，會因為太多複雜資訊要存取而導致等待時間拉長，假如可以在一開始先將重要的資訊 (如文字內容) 呈現給使用者，待使用者滑動頁面到有圖片的元素時再渲染給使用者，如此一來可以減少使用者開啟網頁的等待時間。  

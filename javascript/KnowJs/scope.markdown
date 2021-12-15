@@ -1,6 +1,6 @@
 # 範疇 (Scope)與範疇鏈 (Scope Chain)
 
-> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，內容經消化吸收後以筆記方式歸納記錄下來，部分程式碼非原創，原創內容請參考上述課程連結。
 
 在學習 JavaScript 的初期，會時常出現的情況: 「甚麼!，我明明有宣告的變數為什麼無法透過 `console.log()` 印出來呢?」
 

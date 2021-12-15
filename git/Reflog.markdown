@@ -1,5 +1,9 @@
 # Git Reflog
 
+> 本文為 [The Git & Github Bootcamp
+](https://www.udemy.com/course/git-and-github-bootcamp/
+) 之學習筆記，內容經消化吸收後以筆記方式歸納記錄下來。
+
 ## 後悔剛才的 Git 操作嗎? 使用 Reflog 吧!
 
 假設我們搞砸了某些事，例如不小心撤銷重要 commit 或是 Rebase 時弄亂了history ，此時反悔還來得及，因為 Git 總是記錄著我們在 Repo 內的各種操作 (在哪條分支、做了哪些事...)，因此可以透過 Git Reflog 指令來檢視我們的操作紀錄，並且用來恢復失誤的操作。

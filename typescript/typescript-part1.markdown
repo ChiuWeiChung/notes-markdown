@@ -1,6 +1,6 @@
 #  TypeScript 筆記 - Part 1 (Type System & Concept)
 
-> 本文為 [Typescript : The Complete Developer's Guide](https://www.udemy.com/course/typescript-the-complete-developers-guide/) 之筆記，內容經消化吸收後以筆記方式歸納記錄下來，部分程式碼非原創，原創內容請參考上述課程連結
+> 本文為 [Typescript : The Complete Developer's Guide](https://www.udemy.com/course/typescript-the-complete-developers-guide/) 之筆記，內容經消化吸收後以筆記方式歸納記錄下來，部分程式碼非原創，原創內容請參考上述課程連結。
 
 ## Type System (型別系統) 與  TypeScript 
 
@@ -58,11 +58,11 @@ applesNumber = [1,2,3]; //Type 'number[]' is not assignable to type 'number'.
  
 
 ```ts
-//  TypeScript 只能知道 element 是一種 Element 型別，但無法知道其細節
+//TypeScript 只能知道 element 是一種 Element 型別，但無法知道其細節
 const btnElement =document.querySelector('.changeBtn') //const element: Element
 // 透過型別推段告知 TypeScript 所選取的元素為何種型別
 const toggleBtn = document.querySelector(".toggleBtn") as HTMLButtonElement; //const toggleBtn: HTMLButtonElement
- ```
+```
 
 ## 使用型別註記 (Type annotations) 的時機
 
@@ -100,7 +100,7 @@ let numberAboveZero: boolean | number = false;
 for (let item of numbers) {
   if (item > 0) numberAboveZero = item;
 }
- ```
+```
 
 ## 函式的 Annotation
 

@@ -1,5 +1,8 @@
 # Git Diff & Git Stash
 
+> 本文為 [The Git & Github Bootcamp
+](https://www.udemy.com/course/git-and-github-bootcamp/
+) 之學習筆記，內容經消化吸收後以筆記方式歸納記錄下來。
 
 ## Git Diff
 

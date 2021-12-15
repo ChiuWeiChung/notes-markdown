@@ -1,5 +1,9 @@
 # Git Fetch & Git Pull
 
+> 本文為 [The Git & Github Bootcamp
+](https://www.udemy.com/course/git-and-github-bootcamp/
+) 之學習筆記，內容經消化吸收後以筆記方式歸納記錄下來。
+
 ## Git Fetch
 
 當我們只想確認 remote repo 的內容但不是真的想合併時，我們可以輸入 `git fetch < remote name >` 指令將 remote repo 內所有更新的資料 (含所有分支) 下載到 local repo ，這個動作僅會更新遠端追蹤分支 (Remote Checking Branch) 內的資料，也因此，"更新的內容不會自動整合到工作目錄內"，也就是說，我們能夠檢視 remote repo 內有哪些內容的改變，但不會合併 (merge) 到 local repo 之中。

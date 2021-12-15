@@ -1,6 +1,6 @@
 # 執行堆疊 (Execution Stack) 與執行環境 (Execution Context)
 
-> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，內容經消化吸收後以筆記方式歸納記錄下來，部分程式碼非原創，原創內容請參考上述課程連結。
 
 ## JavaScript Runtime
 JavaScript 的程式碼若要被執行，需先透過[直譯（interpret）](https://github.com/ChiuWeiChung/notes-markdown/blob/main/javascript/KnowJs/KnowJs1.markdown)將程式碼轉成"機器可以理解的語言"，也就是機器碼 (由 0 與 1 組成)。 程式碼逐句被直譯為機器碼 (machine code)後，需要在 JavaScript 引擎所提供的執行堆疊 (Execution Stack, ES) 內執行，也就是說，沒有引擎就無法執行機器碼。

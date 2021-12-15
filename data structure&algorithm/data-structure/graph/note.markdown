@@ -1,6 +1,6 @@
 # 資料結構筆記-圖 (Graph)
 
-> 本文為 [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) 之學習筆記，經自己理解歸納後以筆記形式記錄下來，部分程式碼非原創。
 
 圖 (Graph)的資料結構時常運用在 1. 社群網站 (Facebook, Instagram...) 2. 地圖系統 (Google map)，路徑計算等方面。
 

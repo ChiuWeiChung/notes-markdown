@@ -1,6 +1,6 @@
 # 演算法筆記-淺談動態規劃 (Dynamic Programming)
 
-> 本文為 [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) 之學習筆記，經自己理解歸納後以筆記形式記錄下來，部分程式碼非原創。
 
 動態規劃事實上不僅限於電腦科學，在其他領域上也有應用到; 動態規劃是將複雜問題切割成許多相對簡單的小問題後，再針對這些小問題進行著手的方法。在電腦科學的應用上，動態規劃時常運用在有 1. 重疊子問題  (Overlapping Subproblems) 以及 2. 最佳子結構 (Optimal Substructure) 兩特性的問題上。
 

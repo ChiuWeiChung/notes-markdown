@@ -1,5 +1,9 @@
 # 分支 (Branch) & 合併 (Merge)
 
+> 本文為 [The Git & Github Bootcamp
+](https://www.udemy.com/course/git-and-github-bootcamp/
+) 之學習筆記，內容經消化吸收後以筆記方式歸納記錄下來。
+
 ## 分支 (Branch)
 
 當進行一個網站的開發時，可能會面臨到下面幾種情況

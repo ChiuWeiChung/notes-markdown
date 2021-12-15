@@ -1,6 +1,6 @@
 # 函式建構式 (Function Constructor) 以及類別 (Class)
 
-> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，內容經消化吸收後以筆記方式歸納記錄下來，部分程式碼非原創，原創內容請參考上述課程連結。
 
 在 [JavaScript的Prototype觀念](https://github.com/ChiuWeiChung/notes-markdown/blob/main/js/OOP/Prototype&Inheritance.markdown) 中有談到 Prototype 的觀念以及物件是如何調用 methods ，而在這裡會記錄 JavaScript 中的如何建立建構子 (Constructor) ，並且透過建構子來將物件實體化，並連結它的 prototype。
 

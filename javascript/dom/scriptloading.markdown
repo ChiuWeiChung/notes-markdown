@@ -1,6 +1,6 @@
 # Script Tag及defer & async屬性
 
-> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，內容經消化吸收後以筆記方式歸納記錄下來，部分程式碼非原創，原創內容請參考上述課程連結。
 
 HTML檔案內的 script tag ，其存放位置會影響到 JavaScript 程式碼的執行時機，當開啟一網頁時， HTML 文件會從最頂部 (head) 開始並逐一往底部進行解析 (Parse) ，當解析完畢時，也就是 DOMcontentLoaded 事件發生的時機，而關於 DOMContentLoaded 事件，在 [MDN](https://developer.mozilla.org/zh-TW/docs/Web/Events/DOMContentLoaded) 中的解釋是 "**當 document 被完整的讀取跟解析後就會被觸發,不會等待 stylesheets , 圖片和subframes完成讀取**"，也就是 HTML 檔案由上至下完整被解析後才會觸發。
 

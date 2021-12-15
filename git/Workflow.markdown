@@ -1,5 +1,9 @@
 # Git 的工作流程 (Git Workflows):
 
+> 本文為 [The Git & Github Bootcamp
+](https://www.udemy.com/course/git-and-github-bootcamp/
+) 之學習筆記，內容經消化吸收後以筆記方式歸納記錄下來。
+
 ## 1. Centralized Workflow
 
 Centralized Workflow ，白話一點就是"全部的人都在 master branch 進行開發"的一種工作流程，這種方法優點是運作起來直覺、簡單，較適合運用在小型且開發人數少的專案上，但缺點就在於合併 (merge) 過程中會花許多時間在解決衝突的問題上，尤其是當專案的規模越來越龐大時，所需要檢閱的衝突資訊越多。

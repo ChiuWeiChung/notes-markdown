@@ -1,6 +1,6 @@
 # 同步 (Synchronous) 與非同步 (Asynchronous)
 
-> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，部分程式碼非原創，內文敘述為課程內容吸收後，透過自己的理解歸納記錄下來。
+> 本文為 [Jonas's JavaScript Course](https://www.udemy.com/course/the-complete-javascript-course/) 之課程筆記，內容經消化吸收後以筆記方式歸納記錄下來，部分程式碼非原創，原創內容請參考上述課程連結
 
 Asynchronous JavaScript 的應用最典型的範例就是在使用 JavaScript 向後端 (Sever) 提取資料，由於提取資料需要花費時間的，若還沒取得資料就執行下一行命令 (ex:處理資料的 code )，可能會出現異常。也因此，我們需要使用 Asynchornous JavaScript 來解決問題。
 
