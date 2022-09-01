@@ -52,7 +52,7 @@ applesNumber = [1,2,3]
  //宣告變數 apple 時沒有透過 Type Annotation 定義型別，此時 TypeScript 會透過 Type Inference將變數 apples 定義為 Number type
 let applesNumber = 5;
 applesNumber = [1,2,3]; //Type 'number[]' is not assignable to type 'number'.
- ```
+```
 
  * **型別斷言 (Type Assertions)** : 當我們明確知道變數的型別，但 TypeScript 無法了解的時候。
  
