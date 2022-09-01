@@ -111,10 +111,10 @@ pick 4ee208b initial commit
 
 1. pick:  
 "保留該 commit "
-2. rework  
+2. reword  
 "保留該 commit ，但重新修改它的 commit message " 。
 
-    > 替換成 rework 後儲存並離開該視窗後，會跳出另一個視窗，並要我們修改該 commit message 的內容。
+    > 替換成 reword 後儲存並離開該視窗後，會跳出另一個視窗，並要我們修改該 commit message 的內容。
 
 3. edit  
 "保留該 commit ，並修改其內容"
