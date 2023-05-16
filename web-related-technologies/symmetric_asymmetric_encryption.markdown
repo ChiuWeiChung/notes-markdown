@@ -1,0 +1,5 @@
+## 對稱加密 (symmetric encryption) 以及非對稱加密 (asymmetric encription)
+
+In some cases, Public key encryption is used to exchange keys and Symmetric key used to encrypt the data. The principle is that a strong algorithm with a large key should be used to encrypt the key. Public key encryption is very useful to perform key exchanges securely.  Once the key exchange is perfomred, another encryption algorithm can be used that is faster and uses a smaller key. This could be another public key encruption algorithm or a symmetric key algorithm. The next use of public key encryption with symmetric keys is to protect the symmetric key. Encryption, like windows file encryption, uses a symmetric key that is stored in the file. to protect the symmetric key, it is encrypted using a public key. this gives you a fast algorithm for encrypting files and keeps the key safe. Encryption systems like Bitlocker use similar methods. This is why you reformaat a computer or delete a user, you may lose access to encrypted files. the new OS or user doesn't have the private keys that were associated with the user or OS that are required to access the symmetric key.
+
+

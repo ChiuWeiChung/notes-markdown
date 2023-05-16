@@ -127,7 +127,7 @@ setTimeout(() => {
 | :-----------------------------------------: | :--------------------------------------: |
 |          Produces the data inside           | Multicasts the data from a common source |
 |          New subscriber - new data          |      All subscribers - common data       |
-| Set of values、HTTP Request、Timer/Interval |       Dom Events、State、Subjects        |
+| Set of values, HTTP Request, Timer/Interval |       Dom Events、State、Subjects         |
 
 We can say that the Observable is Cold when the data is produced inside of the Observable, so each new Subscription generates the data independently from other Subscriptions. The Observable is described as Hot when the data comes from some common source, so the Observable multicast the data to all of the active Subscriptions. 
 

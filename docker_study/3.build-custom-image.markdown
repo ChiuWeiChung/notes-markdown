@@ -1,0 +1,55 @@
+## 建立 Image
+
+```dockerfile
+# Dockerfile
+# 使用現有的 alpine Image 檔作為基底（base image）。
+FROM alpine
+
+# 在 Image 檔內執行指令來下載和安裝 redis 依賴庫。
+# apk 是 alpine 發行版上的套件管理器，add 是指令的參數，--update 是更新套件資訊，redis 是要安裝的套件名稱。
+RUN apk add --update redis
+
+# 設定 Container 啟動時的預設指令。告訴 Container 在啟動時執行 redis-server 指令來啟動 Redis 服務。
+CMD [ "redis-server" ]
+```
+
+
+> Alpine 是一個基於 musl libc 和 BusyBox 的輕量級 Linux 發行版，它的特點是體積小、安全性高、運行速度快。因此，Alpine 常被用於構建 Docker Container Image ，可以讓 Image 體積更小，從而提高 Image 的下載和部署速度，同時也有助於提升 Image 的安全性。Node.js 官方也提供了基於 alpine 的 Image ，可以用於開發和部署 Node.js 應用。
+
+
+## Building A Docker File and Run
+```console
+<!-- In terminal -->
+docker build .
+<!-- writing image sha256:234c6598823c6a5ff63b7008a1cc35b32de54c7452269164c7a9a01c293537d9 -->
+docker run 234c6598823c6a5ff63b7008a1cc35b32de54c7452269164c7a9a01c293537d9
+```
+
+## 指定 Image 的標籤（tag）
+
+在 docker build 指令中，-t 是用於指定 Image 的標籤（tag）的選項。透過 -t 選項，可以為我們建立的 Image 指定一個易於識別的名稱，以方便後續使用該 Image 。以下是 -t 選項的用法：
+
+```console
+$ docker build -t rickchiu/redis
+$ docker run rickchiu/redis
+```
+其中，`rickchiu/redis` 是我們為 Image 指定的名稱，可以自行命名，以便識別 Image 的用途、版本或其他相關資訊。另外，. 表示 Dockerfile 所在的目錄，表示要在當前目錄下建立 Image 。
+
+舉例來說，如果我們希望為 Dockerfile.dev 建立一個 Image ，並將其命名為 my-app:dev，可以執行以下指令：
+
+
+## Manual Image Generation with Docker commit
+
+```console
+docker run -it alpine sh
+apk add --update redis
+```
+
+create another terminal
+
+```console
+<!-- find the Container id with docker ps-->
+docker commit -c 'CMD ["redis-server"]' db57165dcafc
+<!-- and then a new contaienr id showup -->
+docker run d7caf8401299
+```

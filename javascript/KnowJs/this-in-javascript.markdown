@@ -142,7 +142,7 @@ const obj = {
         const self = this;
         const isAdult = function(){
             const now = new Date().getFullYear();
-            console.log(now-this.year);  //NaN (number -undefined = Not a Number )
+            console.log(now-self.year);  // number
         };
         isAdult();
     }
@@ -163,7 +163,7 @@ const obj = {
         const self = this;
         const isAdult = ()=>{
             const now = new Date().getFullYear();
-            console.log(now-this.year);  //NaN (number -undefined = Not a Number )
+            console.log(now-this.year);  // number
         };
         isAdult();
     }

@@ -12,8 +12,8 @@ This single graphic that you can see on the screen right now addresses all key e
       |      ↓            ↓         ↓
     Observer: next     Observer  Observer
            |           (error)   (complete)
-           ↓              ⬊        ⬋
-    .unsubscribe()──⟶     Teardown
+           ↓               ⬊        ⬋
+    .unsubscribe()──>       Teardown
 
 ```
 
