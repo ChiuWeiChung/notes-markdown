@@ -1,63 +1,151 @@
+# Docker 的簡介
 
--: Hello and welcome. In this section, I wanna start to tackle two very important questions that we're going to be answering throughout this entire course. The two important questions are, 
+## **Why Docker??**
+在介紹什麼是 Docker 之前呢，先反過來講解"**為什麼使用 Docker?**"會比較合適，在過去，我們應該有過在個人電腦上安裝軟體的經驗，並且八成都會遇到一些常見的過程，例如
 
-1. what is Docker? 
-2. why do we use Docker? 
+1. 我們下載了一個安裝程式。
+2. 運行該安裝程式，然後在`安裝過程中遇到了錯誤訊息`。
+3. 上網搜尋解決方案，嘗試找到解決辦法，最終解決問題。
+4. 重新運行安裝程式，卻發現又出現了其他錯誤。
+5. 重複上述步驟直到解決問題。
 
-We're gonna first tackle why we use Docker by going through a quick little demo right now. Now I'm gonna show you a little flow diagram and this is a flow of probably a process you've gone through at least once in your life before. It's a flow of installing software on your personal computer and I bet at least once for you, this is what has happened. Maybe you have downloaded some installer, you run that installer, and then inevitably at some point in time you end up getting an error message during installation. So what do you do? Well, you probably troubleshoot the issue by looking on Google. You try to find a solution, you eventually solve that issue. You then rerun the installer only to find, hey, ta-da, you have some other error appearing, and then you have to go through this entire troubleshooting process again. `So this is at its core what Docker is trying to fix.` 
+在傳統的安裝過程中，可能因為作業系統或是版本相容性等問題而遇到上述麻煩，為了解決這些問題，就需要在網上尋找解決方案。然而這是一個耗時且困擾的過程，特別是當我們在不同的電腦上進行安裝時，每台電腦都可能有不同的環境設定和相依性需求。為了避免上述的無限迴圈，這就是 Docker 的核心所在，它試圖解決以上的問題。
 
-Docker wants to make it really easy and really straightforward for you to install and run software on any given computer. Not just your computer, 
+Docker 的好處在於它使得`在不同的電腦上安裝和運行軟體變得非常簡單`。透過 Docker，我們可以將應用程式及其依賴的相關環境打包成一個稱為「Container」的獨立單元。這些 `Container 可以在不同的環境中執行，不需要擔心環境差異帶來的問題`。因此，使用 Docker 可以提高開發效率、減少部署問題，並確保應用程式在不同環境中的一致性。
 
-You kinda get into this endless cycle of trying to do all this troubleshooting as you are installing and running software. So let me now show you how easy it is to run Reddis, if you are making use of Docker instead. I'm gonna go back over to my command line and I'm gonna run one single command. I'll say Docker run, dash it, Reddis, like so. I'll hit enter, and then after a very brief pause, almost instantaneously I have an instance of Reddis up and running on my computer. And that's pretty much it. That is Docker in a nutshell, that is how easy it is to run software when you're making use of Docker. So to answer the question very directly of why we use Docker, well, we make use of it because it makes life really easy for installing and running software without having to go through a whole bunch of setup or installation of dependencies. Now, we're gonna learn many more reasons throughout this course of why we use Docker but I wanted to give you a very quick demo and show you how easy it can be to get up and running with some new piece of software when you are using Docker. Let's take a quick pause right here. We're gonna come back to the next section and start trying to answer the question of what Docker is. So I'll see you in just a minute.
+Docker Container 提供了一個獨立且一致的執行環境，可以在任何支援 Docker 的電腦上運行。這意味著我們不需要擔心不同環境的差異，也不需要擔心相依性的安裝和設定。只需運行 Docker  Container ，就能確保應用程式在任何地方以相同的方式運行，從而簡化了開發、部署和維護的流程。這大大提高了效率，減少了可能出現的錯誤和疑難排解的需要。
 
-* Wny use Docker : 
-    - Docker makes it really easy to install and run software without worrying about setup or dependencies.
+## **範例: 啟動簡單的 Container**
 
-# 什麼是 Docker
-
-we tried to answer the question of why use Docker? And we eventually said that we use Docker because it makes it really easy to install and run new software on our computer. We're not gonna try to answer the other big question here, which is, what is Docker? Well, this question is a lot more challenging to answer. Anytime you see someone refer to Docker in a blog post or an article or a forum or wherever it might be, they're kind of making reference to an entire ecosystem of different projects, tools, and pieces of software. So if someone says, "oh yeah, I use Docker on my project" they might be referring to Docker client or a Docker server. They might be referring to Docker hub or Docker Compose. Again, these are all projects, tools, pieces of software that come together to form a platform or ecosystem around creating and running something called containers. And so your immediate question might be, Okay well what's a container? That's a good question and that's a question that we're going to be trying to answer throughout this entire course. Just a moment ago, when I ran that command at my terminal of Docker run Redis, it went through a little series of actions behind the scenes and we're going to examine that entire series of actions very closely over time. But for right now, let me give you two important pieces of terminology. When I ran that command, something called the Docker CLI reached out to something called the Docker hub and it downloaded a single file called an image. An image is a single file containing all the dependencies and all the configuration required to run a very specific program. For example, Redis, which is what the image that I just downloaded was supposed to run. This is a single file that gets stored on your hard drive. And at some point in time, you can use this image to create something called a container. A container is an instance of an image and you can kind of think of it as being like a running program. We're gonna go into great detail over time, over behind to learn exactly how a container works exactly. But right now, all we really need to understand is that a container is a program with its own isolated set of hardware resources. So it kind of has its own little set or its own little space of memory, has its own little space of networking technology and its own little space of hard drive space as well. Okay, so I didn't really answer the question here of what Docker is, but we did learn at least that a reference to Docker is really talking about a whole collection of different projects and tools, and we also picked up two important pieces of terminology, a docker image and a container. Now these images and containers are the absolute backbone of what you and I are going to working with throughout the rest of this course. So let's take a quick pause right now. We're gonna come back to the next section and we're gonna start talking a little bit more about how we work with images and containers. So quick break and I'll see you in just a minute.
-
-
-05-redis & 04-what
-```console
-
-
-```
-
-We're going to be installing a piece of software called Docker for Windows, or Docker for Mac depending upon your operating system. Inside of this program are two very important tools that we're going to be making use of throughout this course. The first tool that's inside this package is something called the Docker client. The Docker client, also known as the Docker CLI is a program that you and I are going to interact with quite a bit from our terminal. We're going to enter in commands to our terminal, issue them to Docker client. It's gonna take our commands and figure out what to do with them. Now the Docker client itself doesn't actually do anything with containers or images. Instead, the Docker client is really just a tool or a portal of sorts to help us interact with another piece of software that is included in this Docker for Windows or Mac package called the Docker server. This is also frequently called the Docker Damon. This program right here is the actual tool or the actual piece of software that is responsible for creating containers, images, maintaining containers, uploading images, and doing just about everything you can possibly imagine around the world of Docker. So it's the Docker client that you and I issue commands to. It's a thing that we interact with. And behind the scenes, this client is interacting with the Docker server. You and I are never going to really reach directly out to this docker server. It's something that's just kind of running it behind the scenes. So again, we're gonna take a quick break right now. 
-
-05-docker cli
+為了確保電腦已正確安裝了 Docker，想快速確認 Docker 的版本號，可以使用 docker -v 或 docker --version 命令。
 
 ```console
-        Docker Ecosystem
-    ┌───────────────────────┐
-    │ ┌────────┐ ┌────────┐ │
-    │ │ Docker │ │ Docker │ │
-    │ │ Client │ │ Server │ │
-    │ └────────┘ └────────┘ │
-    │ ┌────────┐ ┌────────┐ │
-    │ │ Docker │ │ Docker │ │
-    │ │ Machine│ │ Images │ │
-    │ └────────┘ └────────┘ │
-    │ ┌────────┐ ┌────────┐ │
-    │ │ Docker │ │ Docker │ │
-    │ │ Hub    │ │ Compose│ │
-    │ └────────┘ └────────┘ │
-    └───────────────────────┘
+$ docker -v
+Docker version 20.10.21, build baeda1f
 ```
 
-## Using Docker Client
+此時就可以來透過 Docker 運行簡單的 Container，如下方的指令:
+```console
+$ docker run hello-world
+```
+當執行 `docker run hello-world` 時，Docker 將根據指令以及 Image 的名稱執行一個 Container。具體一點來說，`docker run` 是一個用於創建和啟動容器的 Docker CLI 命令，`hello-world` 則是一個 Image 的名稱。
+
+## **什麼是 Image?**
+
+在上面的範例中，我們透過 Docker 將基於一個名為 `hello-world` 的 Image 啟動了 Container，但是 Image 到底是什麼東西呢?事實上，Docker Image 是`一個唯讀的模板，用於創建 Docker Container`。它包含運行應用程式所需的配置。Docker Image 可以被視為一個快照或靜態的狀態。而所謂的 Docker Container 則是 Docker Image 的實例 (Instance)。當我們運行一個 Image 時，等同於創建了一個 Container。 此外，Container 是獨立的運行單元，可以在任何支援 Docker 的環境中運行。
+## **Docker Image 和 Docker Container 的關係：**
+
+1. 先後順序：Image 是在建立 Container 之前創建的。我們可以使用 Dockerfile 來定義 Image，然後使用 `docker build` 命令來構建 Image。並且使用 Image 來創建多個Docker容器。
+2. Image 的唯讀性： Image 是唯讀的，它包含了應用程式的靜態資源和配置。我們無法直接修改 Image，但可以使用 Container 來運行並修改應用程式的狀態。
+3. Container 是可寫入的： Container 是基於 Image 運行並具有可變的狀態。容器可以在運行時修改應用程式的狀態，例如寫入文件、更新數據庫等。容器允許我們在 Image 的基礎上進行自定義和修改。
+4. 生命週期： Image 是靜態的，可以在系統中保存和共享。容器是可執行的實例 (Instance)，有自己的生命週期。我們可以創建、啟動、停止、重新啟動和刪除容器，而不會影響 Image。
+
+```console           
+                     Image 的實體化，且
+  包含了應用程式的     每個 Container 都是
+  靜態資源和配置       獨立的運行單元
+  ┌─────────┐        ┌─────────────┐
+  │         │  ┌────►│ Container 1 │
+  │         │  │     └─────────────┘  
+  │         │  │     ┌─────────────┐
+  │  Image  │──┼────►│ Container 2 │
+  │         │  │     └─────────────┘  
+  │         │  │     ┌─────────────┐
+  │         │  └────►│ Container 3 │
+  └─────────┘        └─────────────┘                
+```
+
+更白話一點，透過日常生活的例子來比喻 Image 與 Container 的關係的話，可以想像我們正在烹飪一道美食，Image 就像是一道食譜，而 Container 則是根據這個食譜烹飪出來的一道具體的菜餚。也因此我們可以創建不同的食譜 (Image)，以製作不同的菜餚， `Image 就像是定義了菜餚製作過程的食譜，它是靜態的且可以被共享`。 `Container 則是根據食譜烹飪出來的具體菜餚，它是可執行的且有自己的生命週期`。
+## **構成 Docker 的基本元素**
+
+Docker 不僅僅是一個單一的軟體工具，而是一個完整的解決方案，提供了一個綜合的平台和相關的工具，使容器化應用程序的開發、交付和運行更加簡單和高效。除了上述介紹的 Image 以及 Container 之外，構成 Docker Ecosystem 還包括以下幾個重要元素：
+
+```console
+    ┌─────────────────────────────────────┐ 
+    │ ┌─────────┐ ┌─────────┐ ┌─────────┐ │
+    │ │ Docker  │ │ Docker  │ │ Docker  │ │
+    │ │ Client  │ │ Server  │ │Registry │ │
+    │ └─────────┘ └─────────┘ └─────────┘ │
+    │ ┌─────────┐ ┌─────────┐ ┌─────────┐ │
+    │ │ Docker  │ │Docker   │ │ Docker  │ │
+    │ │ Images  │ │Container│ │ Compose │ │
+    │ └─────────┘ └─────────┘ └─────────┘ │
+    │ ...........                         │
+    └─────────────────────────────────────┘
+```
+
+1. Docker Client：
+  * 是與用戶進行互動的命令行界面 (CLI)，`用戶可以使用 Docker Client 發送命令和請求`，例如運行 Container 、創建映像、管理網絡和卷等。
+  * 提供了一個簡單的介面，讓用戶能夠輕鬆地與 Docker 進行互動。
+  * 可以在本地機器上運行，也可以連接到遠程的 Docker Server。
+2. Docker Server：
+  * 負責管理 Container 、映像、網絡和 Volume 等資源，以及`處理 Docker Client 發送的命令和請求`。
+  * 還負責下載、創建和運行 Container 所需的映像，以及管理 Container 之間的通信和資源分配。
+3. Docker Registry：
+  * Docker Registry是用於存儲和共享Docker映像檔的中央儲存庫。其中的 Docker Hub是官方提供的公共註冊表，用戶可以在其中找到各種官方和社區維護的映像檔。
+  * 除了Docker Hub，還可以設置私有的Docker註冊表，用於組織內部或特定項目的映像檔共享
+4. Docker Image:
+  * 可執行的映像檔，它包含了執行特定應用程式所需的所有內容，如代碼、庫、執行時所需的依賴關係和配置文件等。Docker Image 是通過 Dockerfile 文件來創建的。  
+5. Docker Container:
+  * 是 Docker Image 的一個運行實例 (instance)，它包含了執行應用程式所需的所有內容，包括代碼、執行時所需的依賴關係和配置文件等。
+  * 可以在 Docker 環境中創建、啟動、停止、刪除。每個 Docker Container 都是獨立且可移植的，這意味著可以在任何 Docker 環境中運行，而不受任何限制。
+6. Docker Compose：
+  * 用於定義和運行多個 Docker  Container 的工具。
+  * 使用 YAML 文件定義 Container 、網絡和卷的配置，並可以通過單個命令來管理和操作這些 Container 。
+  * 簡化 Multi Containers 應用的開發、部署和管理過程，使得協作和服務之間的操作更加簡單。
 
 
+## **使用 Docker Client 執行指令**
+在上述的**啟動簡單的 Container** 範例中，我們運行一個非常簡單的 Image，叫做 `hello-world`，它是一個非常簡單的示範性映像檔，用於檢查 Docker 安裝是否正常運作。
 
-## What is Container??
+```console
+$ docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+70f5ac315c5a: Pull complete
+Digest: sha256:fc6cf906cbfa013e80938cdf0bb199fbdbb86d6e3e013783e5a766f50f5dbce0
+Status: Downloaded newer image for hello-world:latest
 
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+```
 
-Okay, so this is a quick overview of the operating system on your computer. Most operating systems have something called a kernel. This kernel is a running software process that governs access between all the programs that are running on your computer and all the physical hardware that is connected to your computer as well. So, up here at the top of this diagram, We have different programs that your computer is running such as Chrome, or Terminal, Spotify, or Node.js. If you've ever made use of Node.js before and you've written a file to the hard drive, it's technically not Node.jS that is speaking directly to the physical device. Instead, Node.js says to your kernel, "Hey, I want to write a file to the hard drive." The kernel then takes that information and eventually persist it to the hard disc. 
+上述的指令完整的敘述 Docker CLI 是如何將指令帶給 Docker Server 處理，我們來逐行確認輸出的每一行訊息所代表的意思: 
+1. `Unable to find image 'hello-world:latest' locally`: 
+  * 首先，Docker 檢查本地主機上是否已經存在名為 hello-world 的映像檔。這個訊息表示在本地找不到該映像檔。
+2. `latest: Pulling from library/hello-world`: 
+  * 由於在本地找不到映像檔，Docker 開始從預設的映像檔倉庫（如 Docker Hub）中下載 hello-world 映像檔。這個訊息表示 Docker 正在從 library/hello-world 庫中下載。  
+3. `Digest: sha256:fc6cf906cbfa013e80938cdf0bb199fbdbb86d6e3e013783e5a766f50f5dbce0`: 
+  * 這是映像檔的數字指紋（Digest），用於驗證映像檔的完整性。
+4. `Status: Downloaded newer image for hello-world:latest`: 
+  * 這個訊息表示 hello-world 映像檔已經成功下載並存儲在本地主機中。
 
+由此可知，執行 `docker run hello-world` 命令時，Docker 首先在本地尋找 hello-world 映像檔，但未找到，因此從映像檔倉庫下載該映像檔。下載完成後，執行映像檔並輸出歡迎訊息，表示 Docker 的安裝正常運作。
 
-So, the `kernel is always kind of this intermediate layer that governs access between these programs and your actual hard drive`. The other important thing to understand here is that these running programs interact with the kernel through things called `system calls`. These are essentially like function invocations. The kernel exposes different endpoints to say, "Hey, if you want to write a file to the hard drive, call this endpoint or this function right here." It takes some amount of information and then that information will be eventually written to the hard disc, or memory, or whatever else is required. 
+```console
+1. Docker Client 將 run hello world 命令告知 Docker Server
+2. Docker Server 首先在本地的 Image Cache 尋找 hello-world 映像檔
+3. 若未找到，Docker Server 改從 Docker Hub 尋找該 Image，並且存放在 Image Cache。
+4. 在 Docker Hub 找到 hello-world，並下載至本地端的 Image Cache
+┌──────Docker Container──────┐       ┌─────Docker Hub────┐
+│ ┌────────────────────────┐ │       │ ┌───────────────┐ │
+│ │    Docker Client       │ │       │ │ redis         │ │
+│ └┬───────────────────────┘ │       │ └───────────────┘ │
+│  │ 1 run hello-world       │       │ ┌───────────────┐ │
+│  ▼                         │       │ │ nginx         │ │
+│ ┌────────────────────────┐ │       │ └───────────────┘ │
+│ │   Docker Server        │─┼──3───►│ ┌───────────────┐ │
+│ └┬───────────────────────┘ │       │ │ busybox       │ │
+│  │2 Find Correspond Image  │       │ └───────────────┘ │
+│  ▼                         │       │ ┌───────────────┐ │
+│ ┌───────Image Cache──────┐ │   ┌───┼─│ Docker Client │ │
+│ │                        │◄┼─4─┘   │ └───────────────┘ │
+│ └────────────────────────┘ │       └───────────────────┘
+└────────────────────────────┘
+```
+## **Container 是如何啟動的?**
 
+在介紹 Container 啟動的原理之前，先介紹一些電腦操作系統的概述。大部分操作系統 (OS) 都有一個稱為 Kernel 的部分。 Kernel 是一個正在運行的軟體程式，`負責管理所有程式與硬體之間的溝通`。如下圖表所示，在圖表的頂部，有不同程式正在運行，例如 Chrome、Apple Podcast、Spotify 以及 Node.js。如果我們透過 Node.js，將一個檔案寫入硬碟，技術上來說，`並不是 Node.js 直接與硬體設備溝通`。相反，Node.js 向 Kernel 發出指令：“嘿，我想將一個檔案寫入硬碟。”然後 Kernel 接收這個指令，最終將資訊寫入硬碟。
 
 ```console
 ┌────────────────────────────────────────────────────┐
@@ -65,32 +153,57 @@ So, the `kernel is always kind of this intermediate layer that governs access be
 │ │  Spotify  │ │Apple Podcast│ │ Chrome │ │ NodeJS ││
 │ └───────────┘ └─────────────┘ └────────┘ └────────┘│
 └──────────┬──────────────┬────────────────┬─────────┘
-           │              │                │
            ▼              ▼                ▼              
     ┌─────────────┐  ┌─────────────┐ ┌─────────────┐
     │ System Call │  │ System Call │ │ System Call │
     └──────┬──────┘  └────┬────────┘ └─────┬───────┘
-           │              │                │  
            ▼              ▼                ▼  
  ┌────────────────────────────────────────────────┐
  │                     Kernel                     │
- └────────┬───────────────┬────────────────┬──────┘
-          │               │                │
-          ▼               ▼                ▼     
+ └─────────┬──────────────┬────────────────┬──────┘
+           ▼              ▼                ▼     
     ┌────────────┐  ┌─────────────┐ ┌────────────┐
     │     CPU    │  │  Hard Disk  │ │   Memory   │
     └────────────┘  └─────────────┘ └────────────┘
 ```
 
-Now, thinking about this entire system right here, I wanna post a kind of hypothetical situation to you. I want you to imagine for just a second that you and I have two programs running on our computer. Maybe one of them is Chrome, like Chrome the web browser and the other is Node.js, the JavaScript Service-side run time. I want you to imagine that we're in a crazy world where Chrome, in order to work properly, has to have Python version 2 installed and Node.js has to have version 3 installed. However, on our hard disc, we only have access to Python version 2. And for whatever crazy reason, `we are not allowed to have two identical installations of Python at the same time`. So, as it stands right now, Chrome would work properly because it has access to version 2, but Node.js would not because we do not have a version or a copy of Python version 3.
+因此，「 Kernel 是負責管理程式和實際硬碟之間的一位仲介」。另一個重要的事情是這些運行的程式是通過稱為 `system call` 的方式與 Kernel 互動的。 `system call` 本質上就像函式呼叫一樣。 Kernel 提供了不同的 endpoint 給運行中的程式，以便說：“嘿，如果你想將一個檔案寫入硬碟，通過 system call與我溝通，利用 endpoint 提供的功能來執行特定的操作。
 
-So, how could we solve this issue? Well, one way to do it would be used to make use of a `operating system feature known as namespacing`. With namespacing, we can look at all of the different hardware resources connected to our computer and we can essentially segment out portions of those resources. So, we could create a segment of our hard disc specifically dedicated to housing Python version 2. And we could make a second segment specifically dedicated to a housing Python version 3. Then, to make sure that Chrome has access to this segment over here and Node.js has access to this segment over here, anytime that either of them issues a system call to read information off the hard drive, the kernel will look at that incoming system call and try to figure out which process it is coming from. So, the kernel could say, "Okay, if Chrome is trying to read some information off the hard drive, I'm gonna direct that call over to this little segment of the hard disc over here, the segment that has Python version 2 and Node.js." Anytime that makes a system call to read the hard drive, the kernel can redirect that over to this segment for Python version 3. And so by making use of this kind of namespacing or segmenting feature, we can have the ability to make sure that Chrome and Node.js are able to work on the same machine.
+
+假設有一個的情境。有兩個 App 所需要運行的 Node.js 版本不同(App 1 需要 Node.js 14，App 2 需要 Node.js 16)，然而，困難點在於`我們的硬碟上無法同時存在 Node.js 14 以及 Node.js 16`。那麼，我們該如何解決這個問題呢？
+
+```console
+┌───────────────────────────────────────────────┐
+│ ┌───────────────────┐   ┌───────────────────┐ │
+│ │ App1 (Node.js 14) │   │ App2 (Node.js 16) │ │
+│ └───────────────────┘   └───────────────────┘ │
+└──────────────────────┬────────────────────────┘
+                       ▼                                
+                ┌─────────────┐ 
+                │ System Call │ 
+                └──────┬──────┘ 
+                       ▼         
+ ┌──────────────────────────────────────────────┐
+ │                   Kernel                     │
+ └─────────────────────┬────────────────────────┘
+                       ▼               
+ ┌────────────┐──────────────────────┌────────────┐
+ │ Node.js 14 │     Hard Disk        │ Node.js 16 │
+ │────────────┘                      └────────────│
+ └────────────────────────────────────────────────┘
+```
+
+解決方法是利用作業系統的一個特性，稱為 `Namespacing（命名空間）`。透過 NameSpacing，我們可以查看連接到電腦的各種硬體資源，並`將這些資源分割成不同的部分`。因此，我們可以創建一個專門用於存放 Node.js 14 的硬碟分割區，並創建另一個專門用於存放 Node.js 16 的分割區。然後，為了確保 App1 以及 App2 可以存取對應的分割區，每當它們中的任何一個發出 system call 來從硬碟讀取資訊時，Kernel 將檢查 system call 以確定它是來自哪個程式。透過 OS 中的 NameSpacing feature，我們可以確保 App1 和 App2 能夠在同一台電腦上運作。
+
 
 ## Namespacing & Contorl Groups(cgroups)
 
-So, this entire process of kind of segmenting a hard, excuse me, a hardware resource based on the process that is asking for it is known as namespacing. With namespacing, we are allowed to isolate resources per a process or a group of processes, and we're essentially saying that anytime this particular process asks for a resource, we're gonna direct it to this one little specific area of the given piece of hardware. Now, namespacing is not only used for hardware, it can be also used for software elements as well. So for example, we can namespace a process to restrict the area of a hard drive that'd be available, or the network devices that are available, or the ability to talk to in other processes, or the ability to see other processes. These are all things that we can use namespacing for to essentially limit the resources or kind of redirect request for resource from a particular process. Very closely related to this idea of namespacing is another feature called control groups. A control group can be used to limit the amount of resources that a particular process can use. So, namespacing is for saying, "Hey, this area of the hard drive is for this process." A control group can be used to limit the amount of memory that a process can use, the amount of CPU, the amount of hard drive input, input. Or excuse me, input output, and the amount of network bandwidth as well. So, these two features put together can be used to really kind of isolate a single process and limit the amount of resources it can talk to, and the amount of bandwidth essentially, that it can make use of. 
+在 Docker 中，Namespacing （命名空間）和 Control Groups（控制群組）是兩個核心功能，用於提供容器的隔離和資源限制。雖然它們是獨立的功能，但通常一起使用以實現更強大的容器化環境。
 
 ```console
+  Namespacing 用於隔離資源，以提供每個進程（process）獨立的環境。
+  包括進程（processes）、硬碟（Hard Drive）、網路（Network）等。
+  透過 Namespacing 的隔離，process 可以在自己的環境中運行。
                       ┌─────────────────────────────────────────┐
                       │ ┌──────────┐ ┌───────────┐  ┌─────────┐ │
                       │ │processes │ │Hard Drive │  │ Network │ │
@@ -101,6 +214,9 @@ So, this entire process of kind of segmenting a hard, excuse me, a hardware reso
     per process       │ └───────┘  └─────────┘ └───────────────┘│
                       └─────────────────────────────────────────┘
 
+  Control Groups 用於限制容器中進程可以使用的資源量。
+  包括記憶體、CPU 使用、硬碟輸入輸出和網路頻寬。
+  透過 Control Groups，系統管理者可以對容器中的進程進行資源限制。                      
                       ┌─────────────────────────────────────────┐
                       │  ┌─────────┐ ┌─────────┐ ┌─────────┐    │
    ┌──────────────┐   │  │ Memory  │ │CPU Usage│ │ HD I/O  │    │
@@ -110,10 +226,16 @@ So, this entire process of kind of segmenting a hard, excuse me, a hardware reso
   resources used per  │  │Bandwidth│                            │
         process       │  └─────────┘                            │
                       └─────────────────────────────────────────┘
-
 ```
 
-Now, as you might imagine, this entire kind of little section right here, this entire vertical of a running process, plus this little segment of a resource that it can talk to is what we refer to as a container. And so, when people say, "Oh yeah, I have a Docker Container." You really should not think of these as being like a physical construct that exists inside of your computer. Instead, a container is really a process or a set of processes that have a grouping of resources specifically assigned to it. And so, this is the diagram that we're gonna be looking at quite a bit anytime that we think about a container. We've got some running process that sends a system call to a kernel. The kernel is going to look at that incoming system call and direct it to a very specific portion of the hard drive, the RAM, CPU or whatever else it might need. And a portion of each of these resources is made available to that singular process. Now, the last question you might have here is, "Okay. Well, I get what a container is, but with that in mind, what is the real relation between one of those containers or that kind of singular process and grouping of resources to an image? How is that single file eventually create this container?" That's a good question. One more quick diagram. Anytime that we talk about an image, we're really talking about a file system snapshot. So, this is essentially kind of like a copy paste of a very specific set of directories or files. And so we might have an image that contains just Chrome and Python. An image will also contain a specific startup command. So, here's what happens behind the scenes when we take an image and turn it into a container. First off, the kernel is going to isolate a little section of the hard drive and make it available to just this container. And so we can kind of imagine that after that little subset is created, the file snapshot inside the image is taken and placed into that little segment of the hard drive. And so, now, inside of this very specific grouping of resources, we've got a little section of the hard drive that has just Chrome and Python installed and essentially, nothing else. The startup command is then executed which we can kind of imagine this case is like startup Chrome, just Chrome for me. And so Chrome is invoked, we created a new instance of that process and that created process is then isolated to this set of resources inside the container. So, that's pretty much it. That is the relationship between a container and an image, and it's how an image is eventually taken and turned into a running container. Now, there's still a tremendous amount more to learn
+
+Namespacing 主要用於為每個 process 提供了一個獨立的環境，使每個 Container 都擁有自己獨立的 Namespacing 。這包括 Process ID（PID）、網路（network）、檔案系統（mount）、使用者 ID（UID）等。通過Namespacing 的隔離，Container 內的進程可以感知到自己獨立運行在一個環境中，與其他 Container 和主機上的進程相互隔離。這有助於確保 Container 的運行環境獨立且安全。
+
+而 Control Groups 則`用於限制 Container 可以使用的資源量`。它通過將 Container 中的 process 分組並賦予這些群組特定的資源限制，如 CPU 使用、記憶體使用、網路頻寬等。這使得系統管理者可以對 Container 的資源使用進行精細調節，`防止某個 Container 佔用過多資源影響其他 Container 或主機的性能`。 Control Groups 還提供了控制和監視 Container 資源使用的工具，方便管理 Container 的運行狀態。
+
+因此，Namespacing 和 Control Groups 是 Docker 中兩個相互補充的功能，Namespacing 提供隔離環境， Control Groups 提供資源限制和管理。它們一起確保 Container 能夠運行在一個獨立且受控的環境中，實現了高效且安全的應用程式部署和運行。
+
+<!-- Now, as you might imagine, this entire kind of little section right here, this entire vertical of a running process, plus this little segment of a resource that it can talk to is what we refer to as a container. And so, when people say, "Oh yeah, I have a Docker Container." You really should not think of these as being like a physical construct that exists inside of your computer. Instead, a container is really a process or a set of processes that have a grouping of resources specifically assigned to it. And so, this is the diagram that we're gonna be looking at quite a bit anytime that we think about a container. We've got some running process that sends a system call to a kernel. The kernel is going to look at that incoming system call and direct it to a very specific portion of the hard drive, the RAM, CPU or whatever else it might need. And a portion of each of these resources is made available to that singular process. Now, the last question you might have here is, "Okay. Well, I get what a container is, but with that in mind, what is the real relation between one of those containers or that kind of singular process and grouping of resources to an image? How is that single file eventually create this container?" That's a good question. One more quick diagram. Anytime that we talk about an image, we're really talking about a file system snapshot. So, this is essentially kind of like a copy paste of a very specific set of directories or files. And so we might have an image that contains just Chrome and Python. An image will also contain a specific startup command. So, here's what happens behind the scenes when we take an image and turn it into a container. First off, the kernel is going to isolate a little section of the hard drive and make it available to just this container. And so we can kind of imagine that after that little subset is created, the file snapshot inside the image is taken and placed into that little segment of the hard drive. And so, now, inside of this very specific grouping of resources, we've got a little section of the hard drive that has just Chrome and Python installed and essentially, nothing else. The startup command is then executed which we can kind of imagine this case is like startup Chrome, just Chrome for me. And so Chrome is invoked, we created a new instance of that process and that created process is then isolated to this set of resources inside the container. So, that's pretty much it. That is the relationship between a container and an image, and it's how an image is eventually taken and turned into a running container. Now, there's still a tremendous amount more to learn
 
 
 ```console
@@ -135,4 +257,4 @@ Now, as you might imagine, this entire kind of little section right here, this e
   │ │      Hard Drive         ││
   │ └─────────────────────────┘│
   └────────────────────────────┘
-```
+``` -->
