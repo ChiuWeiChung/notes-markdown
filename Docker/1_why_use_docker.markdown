@@ -1,7 +1,7 @@
 # Docker 的簡介
 
 ## **Why Docker??**
-在介紹什麼是 Docker 之前呢，先反過來講解"**為什麼使用 Docker?**"會比較合適，在過去，我們應該有過在個人電腦上安裝軟體的經驗，並且八成都會遇到一些常見的過程，例如
+在介紹什麼是 Docker 之前呢，先講解"**為什麼使用 Docker?**"應該會比較容易理解~在過去，我們應該有過在個人電腦上安裝軟體的經驗，並且八成都會遇到一些常見的過程，例如
 
 1. 我們下載了一個安裝程式。
 2. 運行該安裝程式，然後在`安裝過程中遇到了錯誤訊息`。
@@ -28,17 +28,17 @@ Docker version 20.10.21, build baeda1f
 ```console
 $ docker run hello-world
 ```
-當執行 `docker run hello-world` 時，Docker 將根據指令以及 Image 的名稱執行一個 Container。具體一點來說，`docker run` 是一個用於創建和啟動容器的 Docker CLI 命令，`hello-world` 則是一個 Image 的名稱。
+當執行 `docker run hello-world` 時，Docker 將根據指令以及 Image 的名稱執行一個 Container。具體一點來說，`docker run` 是一個用於創建和啟動 Container 的 Docker CLI 命令，`hello-world` 則是一個 Image 的名稱。
 
 ## **什麼是 Image?**
 
 在上面的範例中，我們透過 Docker 將基於一個名為 `hello-world` 的 Image 啟動了 Container，但是 Image 到底是什麼東西呢?事實上，Docker Image 是`一個唯讀的模板，用於創建 Docker Container`。它包含運行應用程式所需的配置。Docker Image 可以被視為一個快照或靜態的狀態。而所謂的 Docker Container 則是 Docker Image 的實例 (Instance)。當我們運行一個 Image 時，等同於創建了一個 Container。 此外，Container 是獨立的運行單元，可以在任何支援 Docker 的環境中運行。
 ## **Docker Image 和 Docker Container 的關係：**
 
-1. 先後順序：Image 是在建立 Container 之前創建的。我們可以使用 Dockerfile 來定義 Image，然後使用 `docker build` 命令來構建 Image。並且使用 Image 來創建多個Docker容器。
+1. 先後順序：Image 是在建立 Container 之前創建的。我們可以使用 Dockerfile 來定義 Image，然後使用 `docker build` 命令來構建 Image。並且使用 Image 來創建多個Docker Containers。
 2. Image 的唯讀性： Image 是唯讀的，它包含了應用程式的靜態資源和配置。我們無法直接修改 Image，但可以使用 Container 來運行並修改應用程式的狀態。
-3. Container 是可寫入的： Container 是基於 Image 運行並具有可變的狀態。容器可以在運行時修改應用程式的狀態，例如寫入文件、更新數據庫等。容器允許我們在 Image 的基礎上進行自定義和修改。
-4. 生命週期： Image 是靜態的，可以在系統中保存和共享。容器是可執行的實例 (Instance)，有自己的生命週期。我們可以創建、啟動、停止、重新啟動和刪除容器，而不會影響 Image。
+3. Container 是可寫入的： Container 是基於 Image 運行並具有可變的狀態。Container 可以在運行時修改應用程式的狀態，例如寫入文件、更新數據庫等。Container 允許我們在 Image 的基礎上進行自定義和修改。
+4. 生命週期： Image 是靜態的，可以在系統中保存和共享。Container 是可執行的實例 (Instance)，有自己的生命週期。我們可以創建、啟動、停止、重新啟動和刪除 Container ，而不會影響 Image。
 
 ```console           
                      Image 的實體化，且
@@ -58,7 +58,7 @@ $ docker run hello-world
 更白話一點，透過日常生活的例子來比喻 Image 與 Container 的關係的話，可以想像我們正在烹飪一道美食，Image 就像是一道食譜，而 Container 則是根據這個食譜烹飪出來的一道具體的菜餚。也因此我們可以創建不同的食譜 (Image)，以製作不同的菜餚， `Image 就像是定義了菜餚製作過程的食譜，它是靜態的且可以被共享`。 `Container 則是根據食譜烹飪出來的具體菜餚，它是可執行的且有自己的生命週期`。
 ## **構成 Docker 的基本元素**
 
-Docker 不僅僅是一個單一的軟體工具，而是一個完整的解決方案，提供了一個綜合的平台和相關的工具，使容器化應用程序的開發、交付和運行更加簡單和高效。除了上述介紹的 Image 以及 Container 之外，構成 Docker Ecosystem 還包括以下幾個重要元素：
+Docker 不僅僅是一個單一的軟體工具，而是一個完整的解決方案，提供了一個綜合的平台和相關的工具，使開發、交付和運行更加簡單。除了上述介紹的 Image 以及 Container 之外，構成 Docker Ecosystem 還包括以下幾個重要元素：
 
 ```console
     ┌─────────────────────────────────────┐ 
@@ -75,28 +75,28 @@ Docker 不僅僅是一個單一的軟體工具，而是一個完整的解決方�
 ```
 
 1. Docker Client：
-  * 是與用戶進行互動的命令行界面 (CLI)，`用戶可以使用 Docker Client 發送命令和請求`，例如運行 Container 、創建映像、管理網絡和卷等。
+  * 是與用戶進行互動的命令行界面 (CLI)，`用戶可以使用 Docker Client 發送命令和請求`，例如運行 Container 、創建 Image 、管理網絡和卷等。
   * 提供了一個簡單的介面，讓用戶能夠輕鬆地與 Docker 進行互動。
   * 可以在本地機器上運行，也可以連接到遠程的 Docker Server。
 2. Docker Server：
-  * 負責管理 Container 、映像、網絡和 Volume 等資源，以及`處理 Docker Client 發送的命令和請求`。
-  * 還負責下載、創建和運行 Container 所需的映像，以及管理 Container 之間的通信和資源分配。
+  * 負責管理 Container 、 Image 、網絡和 Volume 等資源，以及`處理 Docker Client 發送的命令和請求`。
+  * 還負責下載、創建和運行 Container 所需的 Image ，以及管理 Container 之間的通信和資源分配。
 3. Docker Registry：
-  * Docker Registry是用於存儲和共享Docker映像檔的中央儲存庫。其中的 Docker Hub是官方提供的公共註冊表，用戶可以在其中找到各種官方和社區維護的映像檔。
-  * 除了Docker Hub，還可以設置私有的Docker註冊表，用於組織內部或特定項目的映像檔共享
+  * Docker Registry是用於存儲和共享Docker Image 檔的中央儲存庫。其中的 Docker Hub是官方提供的公共註冊表，用戶可以在其中找到各種官方和社區維護的 Image 檔。
+  * 除了Docker Hub，還可以設置私有的Docker註冊表，用於組織內部或特定項目的 Image 檔共享
 4. Docker Image:
-  * 可執行的映像檔，它包含了執行特定應用程式所需的所有內容，如代碼、庫、執行時所需的依賴關係和配置文件等。Docker Image 是通過 Dockerfile 文件來創建的。  
+  * 可執行的Image，它包含了執行特定應用程式所需的所有內容，如代碼、庫、執行時所需的依賴關係和配置文件等。Docker Image 是通過 Dockerfile 文件來創建的。  
 5. Docker Container:
   * 是 Docker Image 的一個運行實例 (instance)，它包含了執行應用程式所需的所有內容，包括代碼、執行時所需的依賴關係和配置文件等。
   * 可以在 Docker 環境中創建、啟動、停止、刪除。每個 Docker Container 都是獨立且可移植的，這意味著可以在任何 Docker 環境中運行，而不受任何限制。
 6. Docker Compose：
   * 用於定義和運行多個 Docker  Container 的工具。
-  * 使用 YAML 文件定義 Container 、網絡和卷的配置，並可以通過單個命令來管理和操作這些 Container 。
+  * 使用 YAML 文件定義 Container 、網絡和 volumes 的配置，並可以通過單個命令來管理和操作這些 Container 。
   * 簡化 Multi Containers 應用的開發、部署和管理過程，使得協作和服務之間的操作更加簡單。
 
 
 ## **使用 Docker Client 執行指令**
-在上述的**啟動簡單的 Container** 範例中，我們運行一個非常簡單的 Image，叫做 `hello-world`，它是一個非常簡單的示範性映像檔，用於檢查 Docker 安裝是否正常運作。
+在上述的**啟動簡單的 Container** 範例中，我們運行一個非常簡單的 Image，叫做 `hello-world`，它是 Docker 官方所提供，一個非常簡單的，用來 Demo 的 Image，用於檢查 Docker 安裝是否正常運作。
 
 ```console
 $ docker run hello-world
@@ -112,21 +112,22 @@ This message shows that your installation appears to be working correctly.
 
 上述的指令完整的敘述 Docker CLI 是如何將指令帶給 Docker Server 處理，我們來逐行確認輸出的每一行訊息所代表的意思: 
 1. `Unable to find image 'hello-world:latest' locally`: 
-  * 首先，Docker 檢查本地主機上是否已經存在名為 hello-world 的映像檔。這個訊息表示在本地找不到該映像檔。
+  * 首先，Docker 檢查本地主機上是否已經存在名為 hello-world 的 Image。這個訊息表示在本地找不到該 Image。
 2. `latest: Pulling from library/hello-world`: 
-  * 由於在本地找不到映像檔，Docker 開始從預設的映像檔倉庫（如 Docker Hub）中下載 hello-world 映像檔。這個訊息表示 Docker 正在從 library/hello-world 庫中下載。  
+  * 由於在本地找不到 Image，Docker Server 嘗試從 Docker Hub中下載 hello-world Image。這個訊息表示 Docker 正在從 library/hello-world 庫中下載。  
 3. `Digest: sha256:fc6cf906cbfa013e80938cdf0bb199fbdbb86d6e3e013783e5a766f50f5dbce0`: 
-  * 這是映像檔的數字指紋（Digest），用於驗證映像檔的完整性。
+  * 這是 Image 檔的數字指紋（Digest），用於驗證 Image 檔的完整性。
 4. `Status: Downloaded newer image for hello-world:latest`: 
-  * 這個訊息表示 hello-world 映像檔已經成功下載並存儲在本地主機中。
+  * 這個訊息表示 hello-world  Image 檔已經成功下載並存儲在本地主機中。
 
-由此可知，執行 `docker run hello-world` 命令時，Docker 首先在本地尋找 hello-world 映像檔，但未找到，因此從映像檔倉庫下載該映像檔。下載完成後，執行映像檔並輸出歡迎訊息，表示 Docker 的安裝正常運作。
+由此可知，執行 `docker run hello-world` 命令時，Docker 首先在本地尋找 hello-world  Image ，但未找到，因此從 Docker Hub 下載該 Image 檔。下載完成後，執行 Image 並輸出訊息，表示 Docker 的安裝正常運作。
 
 ```console
 1. Docker Client 將 run hello world 命令告知 Docker Server
-2. Docker Server 首先在本地的 Image Cache 尋找 hello-world 映像檔
+2. Docker Server 首先在本地的 Image Cache 尋找 hello-world Image
 3. 若未找到，Docker Server 改從 Docker Hub 尋找該 Image，並且存放在 Image Cache。
 4. 在 Docker Hub 找到 hello-world，並下載至本地端的 Image Cache
+
 ┌──────Docker Container──────┐       ┌─────Docker Hub────┐
 │ ┌────────────────────────┐ │       │ ┌───────────────┐ │
 │ │    Docker Client       │ │       │ │ redis         │ │
@@ -198,11 +199,11 @@ This message shows that your installation appears to be working correctly.
 
 ## Namespacing & Contorl Groups(cgroups)
 
-在 Docker 中，Namespacing （命名空間）和 Control Groups（控制群組）是兩個核心功能，用於提供容器的隔離和資源限制。雖然它們是獨立的功能，但通常一起使用以實現更強大的容器化環境。
+在 Docker 中，Namespacing （命名空間）和 Control Groups（控制群組）是兩個核心功能，用於提供 Container 的隔離和資源限制。雖然它們是獨立的功能，但通常一起使用以實現更強大的且多功能的環境。
 
 ```console
-  Namespacing 用於隔離資源，以提供每個進程（process）獨立的環境。
-  包括進程（processes）、硬碟（Hard Drive）、網路（Network）等。
+  Namespacing 用於隔離資源，以提供每個 process （process）獨立的環境。
+  包括 process （processes）、硬碟（Hard Drive）、網路（Network）等。
   透過 Namespacing 的隔離，process 可以在自己的環境中運行。
                       ┌─────────────────────────────────────────┐
                       │ ┌──────────┐ ┌───────────┐  ┌─────────┐ │
@@ -214,9 +215,9 @@ This message shows that your installation appears to be working correctly.
     per process       │ └───────┘  └─────────┘ └───────────────┘│
                       └─────────────────────────────────────────┘
 
-  Control Groups 用於限制容器中進程可以使用的資源量。
+  Control Groups 用於限制 Container 中 process 可以使用的資源量。
   包括記憶體、CPU 使用、硬碟輸入輸出和網路頻寬。
-  透過 Control Groups，系統管理者可以對容器中的進程進行資源限制。                      
+  透過 Control Groups，系統管理者可以對 Container 中的 process 進行資源限制。                      
                       ┌─────────────────────────────────────────┐
                       │  ┌─────────┐ ┌─────────┐ ┌─────────┐    │
    ┌──────────────┐   │  │ Memory  │ │CPU Usage│ │ HD I/O  │    │
@@ -229,7 +230,7 @@ This message shows that your installation appears to be working correctly.
 ```
 
 
-Namespacing 主要用於為每個 process 提供了一個獨立的環境，使每個 Container 都擁有自己獨立的 Namespacing 。這包括 Process ID（PID）、網路（network）、檔案系統（mount）、使用者 ID（UID）等。通過Namespacing 的隔離，Container 內的進程可以感知到自己獨立運行在一個環境中，與其他 Container 和主機上的進程相互隔離。這有助於確保 Container 的運行環境獨立且安全。
+Namespacing 主要用於為每個 process 提供了一個獨立的環境，使每個 Container 都擁有自己獨立的 Namespacing 。這包括 Process ID（PID）、網路（network）、檔案系統（mount）、使用者 ID（UID）等。通過Namespacing 的隔離，Container 內的 process 可以感知到自己獨立運行在一個環境中，與其他 Container 和主機上的 process 相互隔離。這有助於確保 Container 的運行環境獨立且安全。
 
 而 Control Groups 則`用於限制 Container 可以使用的資源量`。它通過將 Container 中的 process 分組並賦予這些群組特定的資源限制，如 CPU 使用、記憶體使用、網路頻寬等。這使得系統管理者可以對 Container 的資源使用進行精細調節，`防止某個 Container 佔用過多資源影響其他 Container 或主機的性能`。 Control Groups 還提供了控制和監視 Container 資源使用的工具，方便管理 Container 的運行狀態。
 

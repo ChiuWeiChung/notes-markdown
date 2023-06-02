@@ -15,14 +15,14 @@ Git Diff 指令可以用來比對程式碼處於不同的 Commits、Branches 、
 如下方範例，若透過 `git diff`顯示 oldFruit 及 newFruit 的變化:
 
 ```console
- ________________________________
-| oldFruit.txt      newFruit.txt |
-|                                |
-|   apple              apple     |
-|   strawberry ----->  orange    |
-|   grape              grape     |
-|                      guava     |
-|________________________________|                      
+┌────────────────────────────────┐
+│ oldFruit.txt      newFruit.txt │
+│                                │
+│   apple              apple     │
+│   strawberry ----->  orange    │
+│   grape              grape     │
+│                      guava     │
+└────────────────────────────────┘                      
 ```
 
 Git 所提供的資訊中，被@@前後包圍的內容( -1, 3 +1, 4 )表示:

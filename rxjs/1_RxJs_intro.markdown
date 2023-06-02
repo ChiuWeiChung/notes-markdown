@@ -10,7 +10,7 @@ RxJS is a library for composing **asynchronous and event-based programs** by usi
 
 簡而言之，RxJS 提供了許多工具來幫助我們處理`一連串的「非同步」的事件`，而這邊所謂的`一連串的「非同步」的事件`，又被稱為 Stream (資料流/事件流)。
 
-# What is stream?
+# 什麼是 Stream?
 
 ## Stream vs Array
 
@@ -38,7 +38,6 @@ const coordinates = [
 
 又或者將 `input` 的 click 事件監聽器透過 Observable 包裝後並 Subscribe，當使用者在輸入的過程中，其值也會透過 Observable 發送出來，也可以將 HTTP Request 加入 Observable 之中，並觀察所發送回來的 HTTP Response。
 
->[捲軸滑動DEMO](https://codesandbox.io/s/xenodochial-farrell-deep4c?file=/src/index.ts)
 
 ```console
 
@@ -54,6 +53,16 @@ HTTP response
 ───────────────────────────────╂──────────>Time Line
                           {response:...}
 ```
+
+>[捲軸滑動DEMO](https://codesandbox.io/s/xenodochial-farrell-deep4c?file=/src/index.ts)
+<iframe src="https://codesandbox.io/embed/xenodochial-farrell-deep4c?fontsize=14&hidenavigation=1&theme=dark"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="xenodochial-farrell-deep4c"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
+
+
 
 
 

@@ -106,6 +106,6 @@ queue.shift(); //1
 
 ## 堆疊 (Stack) & 佇列 (Queue) 的時間複雜度
 Data Structure| Insertion| Removal  | Searching| Access
-  ----------  |:--------:|:--------:|:--------:|:-------:
-    Stack     |   O(1)   |   O(1)   |   O(n)   | O(n)
-    Queue     |   O(1)   |   O(1)   |   O(n)   | O(n)
+|:----------:|:--------:|:--------:|:--------:|:-------:
+|   Stack    |   O(1)   |   O(1)   |   O(n)   | O(n)
+|   Queue    |   O(1)   |   O(1)   |   O(n)   | O(n)

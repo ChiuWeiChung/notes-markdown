@@ -1,6 +1,6 @@
 # Nginx 的 timeout 配置
 
-Nginx 作為一個 Web 伺服器和反向代理伺服器，支援處理大量並發連線和高流量負載。當 Nginx 處理請求時，可能會發生請求超時的情況，這可能是由於`用戶端的連線問題`、`網路延遲`或`後端 server 未能及時回應`等因素所引起的。
+Nginx 作為一個 Web 伺服器和反向代理伺服器，支援處理大量並發連線和高流量負載。當 Nginx 處理請求時，可能會發生請求超時的情況，這可能是由於`用戶端的連線問題`、`網路延遲`或`後端 server 未能及時回應`等因素所引起的。Nginx 可以通過設定不同的 timeout 參數來控制超時行為。以下是一些常用的 timeout 參數：
 
 ```console
 ┌───────────────────────────┬────────────────────────────────┐
@@ -19,8 +19,6 @@ Nginx 作為一個 Web 伺服器和反向代理伺服器，支援處理大量並
 │    resolver_timeout       │                                │
 └───────────────────────────┴────────────────────────────────┘
 ```
-
-Nginx 可以通過設定不同的 timeout 參數來控制超時行為。以下是一些常用的 timeout 參數：
 
 # Frontend_timeout
 
@@ -274,6 +272,11 @@ proxy_next_upstream_timeout 是一個 Nginx 配置指令，用於設置 Nginx �
 3. 較長的回應時間：如果代理伺服器與後端伺服器之間的回應時間較長，例如在處理大型文件或數據庫操作時，增加 keepalive_timeout 可以減少與後端伺服器的 TCP 連線建立次數，並且可以減少代理與後端伺服器之間的 TCP 連線的重建時間。
 
 
+---
 
+# 參考資料
+* [Udemy Course: Introduction to NGINX](https://www.udemy.com/course/nginx-crash-course/)
+* [Udemy Course: NGINX Fundamentals: High Performance Servers from Scratch](https://www.udemy.com/course/nginx-fundamentals/)
+* [Nginx Documentation](https://nginx.org/en/docs/http/ngx_http_core_module.html)
 
 

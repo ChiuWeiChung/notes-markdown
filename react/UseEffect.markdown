@@ -145,6 +145,14 @@ const App = () => {
 ![useeffect-cleanup-illustration-2](https://github.com/ChiuWeiChung/IMGTANK/blob/main/react/useEffect-cleanup-illustration-2.gif?raw=true) 
 
 
+## React 如何針對 dependencies 進行比較 (comparsion)?
+React 在進行 dependencies 的比較時使用的是 shallow comparison（淺層比較）。
+
+* 當進行原始型別（Primitive Types）的比較時，React 會比較它們的值（value），但是當比較物件（Object）時，則是比較它們的 reference（例如：它們是否指向同一個記憶體）。
+* 淺層比較是指使用 "===" 對比對象的屬性，並且不會深入比較屬性中的值。因此，如果我們對一個 nested object (內含多層屬性的物件)進行淺層比較，它只會檢查 reference，而不會比較該物件內部的值。
+
+---
+
 ## 總結
 
 綜合上述的特性，我們可以把 `useEffect` 當作 Class Component 中的 `componentDidMount` + `componentDidUpdate` + `componentWillUnmount` 的集合體。
