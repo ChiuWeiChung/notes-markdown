@@ -141,12 +141,12 @@ This message shows that your installation appears to be working correctly.
 
 ```mermaid
 sequenceDiagram
-    box rgb(33,66,99) Docker Container
+    box rgb(50,100,200) Docker Container
     participant Docker Client
     participant Docker Server
     participant Image Cache
     end
-    box rgb(100,66,99) Docker Registry
+    box rgb(200,66,99) Docker Registry
     participant Docker Hub
     end
 
