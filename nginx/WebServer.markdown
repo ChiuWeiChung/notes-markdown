@@ -8,7 +8,7 @@
 
 ```console            
 ┌─────────────────────────┐
-│ https://www.google.com  │             Dev Environment
+│ http://localhost:3000/  │             Dev Environment
 │─────────────────────────│      ┌────────────────────────────┐
 │                         │      │      Web Container         │
 │                         │      │ ┌────────────┬───────────┐ │
@@ -27,7 +27,7 @@
 
 ```console            
 ┌─────────────────────────┐
-│ https://www.google.com  │             Prod Environment
+│ http://localhost:3000/  │             Prod Environment
 │─────────────────────────│      ┌────────────────────────────┐
 │                         │      │      Web Container         │
 │                         │      │ ┌────────────┬───────────┐ │
@@ -53,3 +53,11 @@
 此外，使用靜態資源服伺服器還具有其他好處。它可以輕鬆地處理高流量的請求，提供高可用性和可靠性。它還支援瀏覽器快取和緩存機制，這可以減少對後端伺服器的壓力，提高整體效能。同時，Nginx 還提供了安全性功能，例如 SSL/TLS 加密，以保護敏感資料的傳輸。
 
 總而言之，透過使用 npm run build 建構了一個 production 版本的應用程式後，我們需要使用網頁伺服器 (如 Nginx) 來提供靜態檔案。Nginx 的靜態資源服務功能能夠高效地回應客戶端的請求，並提供快速、可靠的靜態檔案傳送。同時，Nginx 還具有負載均衡、緩存和安全性等功能，提供了更好的效能和安全性。
+
+
+---
+
+# 參考資料
+* [Udemy Course: Introduction to NGINX](https://www.udemy.com/course/nginx-crash-course/)
+* [Udemy Course: NGINX Fundamentals: High Performance Servers from Scratch](https://www.udemy.com/course/nginx-fundamentals/)
+* [Nginx Documentation](https://nginx.org/en/docs/http/ngx_http_core_module.html)

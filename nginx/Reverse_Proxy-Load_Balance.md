@@ -91,3 +91,44 @@ Canary Deployment通常涉及將新版本的應用程式或服務逐步引入生
 
 
 當客戶端在 https 協議下對一個 Nginx (reverse proxy server) 發出 Request 時，客戶與 Nginx 之間需要建立 TCP 連線。一旦 TCP 連線建立完成後，客戶端和 Nginx 之間的 TCP 連接將進行 TLS/SSL 握手並交換密鑰進行加密，客戶就會將 HTTP request 發送到 Nginx。Nginx 接收 request 後需要進行解密並解析出 Request 的內容，並根據設定的規則進行重寫 URL、靜態資源緩存，然後進行負載平衡與反向代理，決定轉發到哪個 Backend server，再建立 TCP 連接到 Backend server，轉發 Request ，並等待 Backend server 的 Response 。一旦收到 Response ，Nginx 會將 Response 重新傳送給客戶端。由於這個過程涉及到`解密加密`、`解析 Request `、`負載平衡`、`TCP 連接`等複雜的操作，因此會消耗大量的 CPU 資源和記憶體，尤其是當有大量的客戶端發送 Request 時，Nginx 很容易變得過載。
+
+## Reverse Proxy Load Balancers
+
+在 Nginx 中，有幾種可用的負載均衡方法，可以根據需要選擇最適合的方法。下面是三種常見的負載均衡方法：
+
+1. **Round-robin（輪詢）** : round-robin 是一種最常見的負載均衡方法，也是 nginx 的預設值。它**將請求按照順序分發到可用的伺服器**。當有多個伺服器時，每個連續的請求都會被分發到下一個伺服器，直到再次從頭開始。這種方法確保了每個伺服器在相同的請求量下都能接收到相似的流量。
+
+2. **ip_hash**: ip_hash 方法根據 client 端的 IP Address 進行分發。每個客戶端的 IP 地址都會被 **hash**，然後根據 hash value 將請求分發到對應的伺服器。這樣做的好處是，當同一個 client 端發送多個請求時，它們將始終被分發到同一個伺服器，從而確保 session 的一致性。這對於需要保持特定狀態或 session 的應用程式相當重要。
+
+3. **least_conn（最少連接）**: least_conn 方法會根據當前的連接數量來選擇具有最少連接數的伺服器。當請求到達時，Nginx 將根據伺服器的當前連接數量選擇一個具有最少連接的伺服器來處理該請求。這種方法有助於在伺服器之間均衡分配負載，並確保連接數盡可能均勻。
+
+這些負載均衡方法可在 Nginx 的配置中使用 upstream 指令來定義。例如：
+
+```nginx
+http {
+    upstream backend {
+        round-robin; 
+        #ip_hash
+        #least_conn
+        server backend1.example.com;
+        server backend2.example.com;
+    }
+
+    server {
+        listen 80;
+        location / {
+            proxy_pass http://backend;
+        }
+    }
+}
+
+```
+
+
+
+---
+
+# 參考資料
+* [Udemy Course: Introduction to NGINX](https://www.udemy.com/course/nginx-crash-course/)
+* [Udemy Course: NGINX Fundamentals: High Performance Servers from Scratch](https://www.udemy.com/course/nginx-fundamentals/)
+* [Nginx Documentation](https://nginx.org/en/docs/http/ngx_http_core_module.html)

@@ -1,15 +1,26 @@
 # Docker 的簡介
 
 ## **Why Docker??**
-在介紹什麼是 Docker 之前呢，先講解"**為什麼使用 Docker?**"應該會比較容易理解~在過去，我們應該有過在個人電腦上安裝軟體的經驗，並且八成都會遇到一些常見的過程，例如
+在介紹什麼是 Docker 之前呢，先講解"**為什麼使用 Docker?**"應該會比較容易理解~在過去，我們應該有過在個人電腦上安裝軟體的經驗，並且八成都會遇到一些挫折，如下圖的流程表。
 
-1. 我們下載了一個安裝程式。
-2. 運行該安裝程式，然後在`安裝過程中遇到了錯誤訊息`。
-3. 上網搜尋解決方案，嘗試找到解決辦法，最終解決問題。
-4. 重新運行安裝程式，卻發現又出現了其他錯誤。
-5. 重複上述步驟直到解決問題。
+```mermaid
+flowchart TD
+    step1([下載安裝程式])
+    step2(執行安裝程式)
+    step3(出現錯誤)
+    step4(尋求並執行解決方案)
+    isSuccess{是否成功}
+    step6([完成安裝])
+    
+    step1-->step2
+    step2-->step3
+    step3-->step4
+    step4-->isSuccess
+    isSuccess-->|Yes| step6
+    isSuccess-->|NO| step3
+```
 
-在傳統的安裝過程中，可能因為作業系統或是版本相容性等問題而遇到上述麻煩，為了解決這些問題，就需要在網上尋找解決方案。然而這是一個耗時且困擾的過程，特別是當我們在不同的電腦上進行安裝時，每台電腦都可能有不同的環境設定和相依性需求。為了避免上述的無限迴圈，這就是 Docker 的核心所在，它試圖解決以上的問題。
+在傳統的安裝過程中，可能因為作業系統或是版本相容性等問題而遇到上述麻煩，為了解決這些問題，就需要在網上尋找解決方案。然而這是一個耗時且困擾的過程，尤其是在不同的電腦上進行安裝時，每台電腦都有不同的環境設定和相依性需求。為了避免上述的無限迴圈，這就是 Docker 的核心所在，它試圖解決以上的問題。
 
 Docker 的好處在於它使得`在不同的電腦上安裝和運行軟體變得非常簡單`。透過 Docker，我們可以將應用程式及其依賴的相關環境打包成一個稱為「Container」的獨立單元。這些 `Container 可以在不同的環境中執行，不需要擔心環境差異帶來的問題`。因此，使用 Docker 可以提高開發效率、減少部署問題，並確保應用程式在不同環境中的一致性。
 
@@ -40,19 +51,25 @@ $ docker run hello-world
 3. Container 是可寫入的： Container 是基於 Image 運行並具有可變的狀態。Container 可以在運行時修改應用程式的狀態，例如寫入文件、更新數據庫等。Container 允許我們在 Image 的基礎上進行自定義和修改。
 4. 生命週期： Image 是靜態的，可以在系統中保存和共享。Container 是可執行的實例 (Instance)，有自己的生命週期。我們可以創建、啟動、停止、重新啟動和刪除 Container ，而不會影響 Image。
 
-```console           
-                     Image 的實體化，且
-  包含了應用程式的     每個 Container 都是
-  靜態資源和配置       獨立的運行單元
-  ┌─────────┐        ┌─────────────┐
-  │         │  ┌────►│ Container 1 │
-  │         │  │     └─────────────┘  
-  │         │  │     ┌─────────────┐
-  │  Image  │──┼────►│ Container 2 │
-  │         │  │     └─────────────┘  
-  │         │  │     ┌─────────────┐
-  │         │  └────►│ Container 3 │
-  └─────────┘        └─────────────┘                
+```mermaid
+flowchart TD
+    Image["Image
+    (包含應用程式的所需之配置，類似「食譜」的概念)
+    "]
+    Container1(Container 1)
+    Container2(Container 2)
+    Container3(Container 3)
+    ContainerN(Container N)
+    instantiating("Instantiating
+    (將 Image 的實體化，每個 Container 都是獨立的)
+    ")
+    
+    Image-->instantiating
+    
+    instantiating-->Container1
+    instantiating-->Container2
+    instantiating-->Container3
+    instantiating-->ContainerN
 ```
 
 更白話一點，透過日常生活的例子來比喻 Image 與 Container 的關係的話，可以想像我們正在烹飪一道美食，Image 就像是一道食譜，而 Container 則是根據這個食譜烹飪出來的一道具體的菜餚。也因此我們可以創建不同的食譜 (Image)，以製作不同的菜餚， `Image 就像是定義了菜餚製作過程的食譜，它是靜態的且可以被共享`。 `Container 則是根據食譜烹飪出來的具體菜餚，它是可執行的且有自己的生命週期`。
@@ -74,9 +91,9 @@ Docker 不僅僅是一個單一的軟體工具，而是一個完整的解決方�
     └─────────────────────────────────────┘
 ```
 
+
 1. Docker Client：
-  * 是與用戶進行互動的命令行界面 (CLI)，`用戶可以使用 Docker Client 發送命令和請求`，例如運行 Container 、創建 Image 、管理網絡和卷等。
-  * 提供了一個簡單的介面，讓用戶能夠輕鬆地與 Docker 進行互動。
+  * 是與用戶進行互動的命令行界面 (CLI)，`用戶可以使用 Docker Client 發送命令和請求`，例如運行 Container 、創建 Image 等命令。
   * 可以在本地機器上運行，也可以連接到遠程的 Docker Server。
 2. Docker Server：
   * 負責管理 Container 、 Image 、網絡和 Volume 等資源，以及`處理 Docker Client 發送的命令和請求`。
@@ -85,7 +102,7 @@ Docker 不僅僅是一個單一的軟體工具，而是一個完整的解決方�
   * Docker Registry是用於存儲和共享Docker Image 檔的中央儲存庫。其中的 Docker Hub是官方提供的公共註冊表，用戶可以在其中找到各種官方和社區維護的 Image 檔。
   * 除了Docker Hub，還可以設置私有的Docker註冊表，用於組織內部或特定項目的 Image 檔共享
 4. Docker Image:
-  * 可執行的Image，它包含了執行特定應用程式所需的所有內容，如代碼、庫、執行時所需的依賴關係和配置文件等。Docker Image 是通過 Dockerfile 文件來創建的。  
+  * 可執行的Image，它包含了執行特定應用程式所需的所有內容，如代碼、執行時所需的依賴關係和配置文件等。Docker Image 是通過 Dockerfile 文件來創建的。  
 5. Docker Container:
   * 是 Docker Image 的一個運行實例 (instance)，它包含了執行應用程式所需的所有內容，包括代碼、執行時所需的依賴關係和配置文件等。
   * 可以在 Docker 環境中創建、啟動、停止、刪除。每個 Docker Container 都是獨立且可移植的，這意味著可以在任何 Docker 環境中運行，而不受任何限制。
@@ -122,79 +139,116 @@ This message shows that your installation appears to be working correctly.
 
 由此可知，執行 `docker run hello-world` 命令時，Docker 首先在本地尋找 hello-world  Image ，但未找到，因此從 Docker Hub 下載該 Image 檔。下載完成後，執行 Image 並輸出訊息，表示 Docker 的安裝正常運作。
 
-```console
+```mermaid
+sequenceDiagram
+    box rgb(33,66,99) Docker Container
+    participant Docker Client
+    participant Docker Server
+    participant Image Cache
+    end
+    box rgb(100,66,99) Docker Registry
+    participant Docker Hub
+    end
+
+    Docker Client->>Docker Server:『 run hello-word 』
+    Docker Server-->>Image Cache: Give me「hello-world」image
+    Image Cache-->> Docker Server: Couldn't find image
+
+    Note right of Docker Hub: ngrok
+    Note right of Docker Hub: nginx
+    Note right of Docker Hub: ...
+    Note right of Docker Hub: hello-world
+    Docker Server->>Docker Hub: Give me「hello-world」Image
+    Docker Hub->>Image Cache: Ok! Here you go!
+    Docker Server-->>Image Cache: Give me「hello-world」image
+    Image Cache->>Docker Server: Here you go!
+```
+在上面的流程中: 
 1. Docker Client 將 run hello world 命令告知 Docker Server
 2. Docker Server 首先在本地的 Image Cache 尋找 hello-world Image
 3. 若未找到，Docker Server 改從 Docker Hub 尋找該 Image，並且存放在 Image Cache。
 4. 在 Docker Hub 找到 hello-world，並下載至本地端的 Image Cache
-
-┌──────Docker Container──────┐       ┌─────Docker Hub────┐
-│ ┌────────────────────────┐ │       │ ┌───────────────┐ │
-│ │    Docker Client       │ │       │ │ redis         │ │
-│ └┬───────────────────────┘ │       │ └───────────────┘ │
-│  │ 1 run hello-world       │       │ ┌───────────────┐ │
-│  ▼                         │       │ │ nginx         │ │
-│ ┌────────────────────────┐ │       │ └───────────────┘ │
-│ │   Docker Server        │─┼──3───►│ ┌───────────────┐ │
-│ └┬───────────────────────┘ │       │ │ busybox       │ │
-│  │2 Find Correspond Image  │       │ └───────────────┘ │
-│  ▼                         │       │ ┌───────────────┐ │
-│ ┌───────Image Cache──────┐ │   ┌───┼─│ Docker Client │ │
-│ │                        │◄┼─4─┘   │ └───────────────┘ │
-│ └────────────────────────┘ │       └───────────────────┘
-└────────────────────────────┘
-```
 ## **Container 是如何啟動的?**
 
 在介紹 Container 啟動的原理之前，先介紹一些電腦操作系統的概述。大部分操作系統 (OS) 都有一個稱為 Kernel 的部分。 Kernel 是一個正在運行的軟體程式，`負責管理所有程式與硬體之間的溝通`。如下圖表所示，在圖表的頂部，有不同程式正在運行，例如 Chrome、Apple Podcast、Spotify 以及 Node.js。如果我們透過 Node.js，將一個檔案寫入硬碟，技術上來說，`並不是 Node.js 直接與硬體設備溝通`。相反，Node.js 向 Kernel 發出指令：“嘿，我想將一個檔案寫入硬碟。”然後 Kernel 接收這個指令，最終將資訊寫入硬碟。
 
-```console
-┌────────────────────────────────────────────────────┐
-│ ┌───────────┐ ┌─────────────┐ ┌────────┐ ┌────────┐│
-│ │  Spotify  │ │Apple Podcast│ │ Chrome │ │ NodeJS ││
-│ └───────────┘ └─────────────┘ └────────┘ └────────┘│
-└──────────┬──────────────┬────────────────┬─────────┘
-           ▼              ▼                ▼              
-    ┌─────────────┐  ┌─────────────┐ ┌─────────────┐
-    │ System Call │  │ System Call │ │ System Call │
-    └──────┬──────┘  └────┬────────┘ └─────┬───────┘
-           ▼              ▼                ▼  
- ┌────────────────────────────────────────────────┐
- │                     Kernel                     │
- └─────────┬──────────────┬────────────────┬──────┘
-           ▼              ▼                ▼     
-    ┌────────────┐  ┌─────────────┐ ┌────────────┐
-    │     CPU    │  │  Hard Disk  │ │   Memory   │
-    └────────────┘  └─────────────┘ └────────────┘
+```mermaid
+flowchart TD
+    
+    subgraph Software
+    sp[Spotify]
+    ap[Apple Podcast]
+    chrome[Chrome]
+    node[NodeJS]
+    end
+    
+    kernel(((Kernel))):::k  
+    
+    subgraph Hardware
+    cpu[CPU]
+    hd[Hard Disk]
+    ram[RAM]
+    end
+
+    sp-.system call.->kernel
+    ap-.system call.->kernel
+    chrome-.system call.->kernel
+    node-.system call.->kernel
+    kernel-.->cpu
+    kernel-.->hd
+    kernel-.->ram
 ```
 
 因此，「 Kernel 是負責管理程式和實際硬碟之間的一位仲介」。另一個重要的事情是這些運行的程式是通過稱為 `system call` 的方式與 Kernel 互動的。 `system call` 本質上就像函式呼叫一樣。 Kernel 提供了不同的 endpoint 給運行中的程式，以便說：“嘿，如果你想將一個檔案寫入硬碟，通過 system call與我溝通，利用 endpoint 提供的功能來執行特定的操作。
 
 
-假設有一個的情境。有兩個 App 所需要運行的 Node.js 版本不同(App 1 需要 Node.js 14，App 2 需要 Node.js 16)，然而，困難點在於`我們的硬碟上無法同時存在 Node.js 14 以及 Node.js 16`。那麼，我們該如何解決這個問題呢？
+假設有一個的情境。有兩個 App 所需要運行的 Node.js 版本不同(App 1 需要 Node.js 14，App 2 需要 Node.js 18)，然而，困難點在於`我們的硬碟上無法同時存在 Node.js 14 以及 Node.js 18`。那麼，我們該如何解決這個問題呢？
 
-```console
-┌───────────────────────────────────────────────┐
-│ ┌───────────────────┐   ┌───────────────────┐ │
-│ │ App1 (Node.js 14) │   │ App2 (Node.js 16) │ │
-│ └───────────────────┘   └───────────────────┘ │
-└──────────────────────┬────────────────────────┘
-                       ▼                                
-                ┌─────────────┐ 
-                │ System Call │ 
-                └──────┬──────┘ 
-                       ▼         
- ┌──────────────────────────────────────────────┐
- │                   Kernel                     │
- └─────────────────────┬────────────────────────┘
-                       ▼               
- ┌────────────┐──────────────────────┌────────────┐
- │ Node.js 14 │     Hard Disk        │ Node.js 16 │
- │────────────┘                      └────────────│
- └────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Software
+      sp["App 1 (Node.js 14)"]
+      ap["App 2 (Node.js 18)"]
+    end
+        
+    subgraph Hardware
+      subgraph HardDisk
+        node18["Node.js 14
+          (Couldn't Run App 2)
+        "]
+      end
+    end
+
+    sp-.system call.->Kernel
+    ap-.system call.->Kernel
+    
+    Kernel-.->node18
 ```
 
-解決方法是利用作業系統的一個特性，稱為 `Namespacing（命名空間）`。透過 NameSpacing，我們可以查看連接到電腦的各種硬體資源，並`將這些資源分割成不同的部分`。因此，我們可以創建一個專門用於存放 Node.js 14 的硬碟分割區，並創建另一個專門用於存放 Node.js 16 的分割區。然後，為了確保 App1 以及 App2 可以存取對應的分割區，每當它們中的任何一個發出 system call 來從硬碟讀取資訊時，Kernel 將檢查 system call 以確定它是來自哪個程式。透過 OS 中的 NameSpacing feature，我們可以確保 App1 和 App2 能夠在同一台電腦上運作。
+
+解決方法是利用作業系統的一個特性，稱為 `Namespacing（命名空間）`。透過 NameSpacing，我們可以查看連接到電腦的各種硬體資源，並`將這些資源分割成不同的部分`。因此，我們可以創建一個專門用於存放 Node.js 14 的硬碟分割區，並創建另一個專門用於存放 Node.js 18 的分割區。然後，為了確保 App1 以及 App2 可以存取對應的分割區，每當它們中的任何一個發出 system call 來從硬碟讀取資訊時，Kernel 將檢查 system call 以確定它是來自哪個程式。透過 OS 中的 NameSpacing feature，我們可以確保 App1 和 App2 能夠在同一台電腦上運作。
+
+
+```mermaid
+flowchart TD
+    subgraph Software
+      sp["App 1 (Node.js 14)"]
+      ap["App 2 (Node.js 18)"]
+    end
+    
+    subgraph Hardware
+      subgraph HardDisk
+      node14["Node.js 14"]
+      node18["Node.js 18"]
+      end
+    end
+
+    sp-.system call.->Kernel
+    ap-.system call.->Kernel
+    
+    Kernel-.->node14
+    Kernel-.->node18
+```
 
 
 ## Namespacing & Contorl Groups(cgroups)
@@ -236,26 +290,3 @@ Namespacing 主要用於為每個 process 提供了一個獨立的環境，使�
 
 因此，Namespacing 和 Control Groups 是 Docker 中兩個相互補充的功能，Namespacing 提供隔離環境， Control Groups 提供資源限制和管理。它們一起確保 Container 能夠運行在一個獨立且受控的環境中，實現了高效且安全的應用程式部署和運行。
 
-<!-- Now, as you might imagine, this entire kind of little section right here, this entire vertical of a running process, plus this little segment of a resource that it can talk to is what we refer to as a container. And so, when people say, "Oh yeah, I have a Docker Container." You really should not think of these as being like a physical construct that exists inside of your computer. Instead, a container is really a process or a set of processes that have a grouping of resources specifically assigned to it. And so, this is the diagram that we're gonna be looking at quite a bit anytime that we think about a container. We've got some running process that sends a system call to a kernel. The kernel is going to look at that incoming system call and direct it to a very specific portion of the hard drive, the RAM, CPU or whatever else it might need. And a portion of each of these resources is made available to that singular process. Now, the last question you might have here is, "Okay. Well, I get what a container is, but with that in mind, what is the real relation between one of those containers or that kind of singular process and grouping of resources to an image? How is that single file eventually create this container?" That's a good question. One more quick diagram. Anytime that we talk about an image, we're really talking about a file system snapshot. So, this is essentially kind of like a copy paste of a very specific set of directories or files. And so we might have an image that contains just Chrome and Python. An image will also contain a specific startup command. So, here's what happens behind the scenes when we take an image and turn it into a container. First off, the kernel is going to isolate a little section of the hard drive and make it available to just this container. And so we can kind of imagine that after that little subset is created, the file snapshot inside the image is taken and placed into that little segment of the hard drive. And so, now, inside of this very specific grouping of resources, we've got a little section of the hard drive that has just Chrome and Python installed and essentially, nothing else. The startup command is then executed which we can kind of imagine this case is like startup Chrome, just Chrome for me. And so Chrome is invoked, we created a new instance of that process and that created process is then isolated to this set of resources inside the container. So, that's pretty much it. That is the relationship between a container and an image, and it's how an image is eventually taken and turned into a running container. Now, there's still a tremendous amount more to learn
-
-
-```console
-  ┌────────────────────────────┐
-  │ ┌────────────────────────┐ │
-  │ │        Chrome          │ │
-  │ └──────────┬─────────────┘ │
-  │            │               │
-  │            ▼               │
-  │ ┌──────────────────────────┼───┐
-  │ │        Kernel            │   │
-  │ └──────────┬───────────────┼───┘
-  │            │               │
-  │            ▼               │
-  │ ┌─────┐ ┌─────┐ ┌─────────┐│
-  │ │ CPU │ │ RAM │ │ Network ││  
-  │ └─────┘ └─────┘ └─────────┘│ CPU/RAM/Network/Hard Drive
-  │ ┌─────────────────────────┐│ made available to process   
-  │ │      Hard Drive         ││
-  │ └─────────────────────────┘│
-  └────────────────────────────┘
-``` -->

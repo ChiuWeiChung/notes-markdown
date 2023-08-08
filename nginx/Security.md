@@ -86,3 +86,11 @@ http {
 }
 
 ```
+
+
+---
+
+# 參考資料
+* [Udemy Course: Introduction to NGINX](https://www.udemy.com/course/nginx-crash-course/)
+* [Udemy Course: NGINX Fundamentals: High Performance Servers from Scratch](https://www.udemy.com/course/nginx-fundamentals/)
+* [Nginx Documentation](https://nginx.org/en/docs/http/ngx_http_core_module.html)

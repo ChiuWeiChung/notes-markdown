@@ -9,7 +9,7 @@
 * **`Context`**: 
     * 是指定 `Directive` 的執行範圍或上下文環境，類似 Scope 的概念，`用來告訴 Nginx 指令應該在什麼條件下被應用`。`Context` 可以是全局或局部的。全局上下文會影響整個服務器，而局部上下文只會影響該上下文所在的範圍。
 
-如下方的範例，當客戶端訪問 example.com 時，Nginx 會將請求轉發到本地的 8080 端口。在 location 上下文中，我們可以使用許多不同的 `Directive` 來配置 server 行為，例如 rewrite、proxy_pass、return 等等。
+如下方的例子，當 client 端訪問 example.com 時，Nginx 會將請求轉發到本地的 8080 端口。在 location 上下文中，我們可以使用許多不同的 `Directive` 來配置 server 行為，例如 rewrite、proxy_pass、return 等等。
 
 ```nginx
 server { # -> Context
@@ -28,7 +28,7 @@ server { # -> Context
 
 ## **2. Location**
 
-`location` 在 nginx.conf 中用來匹配客戶端請求的 URL，告訴 Nginx 該如何處理這個請求。`location` 需要指定一個 URI，可以是一個精確的 URI，也可以是一個模式匹配的 URI。當收到一個請求時，Nginx 會依次將這個請求的 URI 與配置中的 `location` 遍歷匹配，並將匹配的 `location` 設定應用到這個請求上。`location` 可以包含各種指令，例如代理請求、設置緩存、設置反向代理、redirect 等等。
+`location` 在 nginx.conf 中用來匹配 client 端請求的 URL，告訴 Nginx 該如何處理這個請求。`location` 需要指定一個 URI，可以是一個精確的 URI，也可以是一個模式匹配的 URI。當收到一個請求時，Nginx 會依次將這個請求的 URI 與配置中的 `location` 遍歷匹配，並將匹配的 `location` 設定應用到這個請求上。`location` 可以包含各種指令，例如代理請求、設置緩存、設置反向代理、redirect 等等。
 
 
 ```nginx
@@ -37,7 +37,7 @@ location / {
 }
 ```
 
-上方是一個簡單的 location 配置範例，用來告訴 Nginx 當收到請求的 URL 路徑為 / 時，回傳 status code 200 (OK 狀態)和 "Hello World" 的內容。這個 location 配置沒有使用正則表達式或修飾符，因此這是一個 prefix match 的配置，表示當 URL 路徑以 / 開頭時，這個 location 會被匹配到。
+上方是一個簡單的 location 配置，用來告訴 Nginx 當收到請求的 URL 路徑為 / 時，回傳 status code 200 (OK 狀態)和 "Hello World" 的內容。這個 location 配置沒有使用正則表達式或修飾符，因此這是一個 prefix match 的配置，表示當 URL 路徑以 / 開頭時，這個 location 會被匹配到。
 
 ### **2.1 Location 匹配優先度**
 在 nginx.conf 中的 location 設定中，不同的匹配方式會有不同的優先度，**優先度由高到低依次是**：
@@ -80,10 +80,10 @@ http {
 }
 ```
 
-在上方的範例中，我們使用 set 指令定義一個名稱為 $my_variable 的變數，其值為 "hello world"。在 server 块的 location 段中，我們使用 $my_variable 變數作為 return 指令的回應內容。當客戶端發出請求時，Nginx 會回應 "hello world"。
+在上方的例子中，我們使用 set 指令定義一個名稱為 $my_variable 的變數，其值為 "hello world"。在 server 块的 location 段中，我們使用 $my_variable 變數作為 return 指令的回應內容。當 client 端發出請求時，Nginx 會回應 "hello world"。
 
 
-### **3.1 另一個範例**
+### **3.1 另一個例子**
 ```nginx
 events {}
 
@@ -125,9 +125,9 @@ http {
 3. $query_string: 請求參數部分，即 ? 後面的部分。
 4. $args: 請求參數，即 $query_string 去掉 ? 的部分。
 5. $request_method: 請求方法，如 GET、POST 等。
-6. $remote_addr: 客戶端 IP 地址。
+6. $remote_addr: client 端 IP 地址。
 7. $server_name: 服務器名稱。
-8. $http_user_agent: 客戶端瀏覽器標識。
+8. $http_user_agent: client 端瀏覽器標識。
 9. $http_referer: 上一個網頁的 URL。
 10. $status: HTTP 狀態碼，如 200、404 等。
 
@@ -135,7 +135,7 @@ http {
 
 ## **4. 重新導向 (Redirect)**
 
-當客戶端請求 URL 為 /logo 時，Nginx 會返回一個 307 redirect 狀態碼，讓客戶端轉到 /thumb.png 這個 URL，即從 /logo 重新導向到 /thumb.png。
+當 client 端請求 URL 為 /logo 時，Nginx 會返回一個 307 redirect 狀態碼，讓 client 端轉到 /thumb.png 這個 URL，即從 /logo 重新導向到 /thumb.png。
 
 ```nginx
 location /logo {
@@ -154,8 +154,8 @@ location /greet {
 }
 ```
 
-在上方的配置中，只要客戶端請求 URL 為 /user/[任意字母或數字] 時，Nginx 會將該請求 URL 改寫成 /greet 這個 URL。
-當客戶端請求 `/user/rick` 或是 `/user/123` 時，會被 `rewrite` 指令重新寫成 /greet，隨即被 `location /greet` 捕捉並返回 "Hello user"，客戶端最終會看到 "Hello user" 的訊息。
+在上方的配置中，只要 client 端請求 URL 為 /user/[任意字母或數字] 時，Nginx 會將該請求 URL 改寫成 /greet 這個 URL。
+當 client 端請求 `/user/rick` 或是 `/user/123` 時，會被 `rewrite` 指令重新寫成 /greet，隨即被 `location /greet` 捕捉並返回 "Hello user"， client 端最終會看到 "Hello user" 的訊息。
 
 ```nginx
 # 正則表達式 ^/user/(\w+) 使用括號 () 捕獲了匹配的部分，而 $1 代表第一個捕獲的結果。
@@ -205,7 +205,7 @@ location /loc3 {
 }
 
 ```
-在上述的配置中，使用 `break` 或 `last` flag 時，Nginx 都會停止處理任何後續的重寫條件，若客戶端發出 `/loc1` 的請求時，nginx 會對 URI 進行重寫，將 `/loc1` 改寫為 `/loc2`，並使用 `last`（或是 `break`）確定重寫後的 URI ，忽略接下來的 rewrite 程序，**直接尋找對應的 location block**。因此，nginx 會匹配到 `location /loc2`，並 status code 200 和字串 "loc 2" 給客戶端。
+在上述的配置中，使用 `break` 或 `last` flag 時，Nginx 都會停止處理任何後續的重寫條件，若 client 端發出 `/loc1` 的請求時，nginx 會對 URI 進行重寫，將 `/loc1` 改寫為 `/loc2`，並使用 `last`（或是 `break`）確定重寫後的 URI ，忽略接下來的 rewrite 程序，**直接尋找對應的 location block**。因此，nginx 會匹配到 `location /loc2`，並 status code 200 和字串 "loc 2" 給 client 端。
 
 
 ### **5.3 在 location block 內部，使用 `last`**
@@ -220,7 +220,7 @@ location /loc2 {
 }
 ```
 
-在上述的配置中，當客戶端發出 `/loc1` 的請求時，會先匹配到 `location /loc1` 時，`rewrite ^/loc1 /loc2 last` 會將 URL 重寫為 `/loc2`，**此時 Nginx 會重新處理新的 URL (跳脫原本的 `location block`，重新尋找匹配的 location)**。因此，新的 URL `/loc2` 將匹配到 `location /loc2`，並 status code 200 和字串 "loc 2" 給客戶端。。
+在上述的配置中，當 client 端發出 `/loc1` 的請求時，會先匹配到 `location /loc1` 時，`rewrite ^/loc1 /loc2 last` 會將 URL 重寫為 `/loc2`，**此時 Nginx 會重新處理新的 URL (跳脫原本的 `location block`，重新尋找匹配的 location)**。因此，新的 URL `/loc2` 將匹配到 `location /loc2`，並 status code 200 和字串 "loc 2" 給 client 端。。
 
 ### **5.4 在 location block 內部使用 `break`**
 ```nginx
@@ -230,7 +230,7 @@ location /loc1 {
     echo "loc 1, url: $uri";
 }
 ```
-使用 `break` 時，雖然會停止處理後續的重寫條件，**並不會跳脫原本的 `location block`**。如果透過客戶端進行 `/loc1` 的請求時，Nginx 的結果仍是 `loc 1, url: /loc100`。
+使用 `break` 時，雖然會停止處理後續的重寫條件，**並不會跳脫原本的 `location block`**。如果透過 client 端進行 `/loc1` 的請求時，Nginx 的結果仍是 `loc 1, url: /loc100`。
 
 ## **6. Named Location**
 在 nginx.conf 中，Named Location 是一種自定義的 Nginx 配置，可以在指定的 URI 位置設置一組較複雜的指令序列。它通常用於需要在多個地方使用相同的指令序列的情況，例如在多個 location 中都需要使用相同的反向代理配置或者認證配置等。
@@ -248,7 +248,7 @@ location @名稱 {
 
 在 nginx.conf 中，`try_files` 是一個常用的指令，告訴 Nginx 該如何嘗試讀取一個檔案或資料夾。`try_files` 指令可以**包含一個或多個文件路徑，以及一個最終的 URI**。當收到請求時，Nginx 會依序嘗試這些文件路徑，如果存在，則返回該文件的內容；如果所有文件都不存在，則將請求重新定向到指定的 URI。
 
-如下方的範例:
+如下方的例子:
 ```nginx
 try_files $uri /cat.png /greet @friend_404;
 
@@ -284,3 +284,10 @@ location /greet {
 |kilobytes |1k or 1K  |second    |s         |week      |w         |year      |
 |megabytes |1m or 1M  |minute    |m         |month     |M         
 
+
+---
+
+# 參考資料
+* [Udemy Course: Introduction to NGINX](https://www.udemy.com/course/nginx-crash-course/)
+* [Udemy Course: NGINX Fundamentals: High Performance Servers from Scratch](https://www.udemy.com/course/nginx-fundamentals/)
+* [Nginx Documentation](https://nginx.org/en/docs/http/ngx_http_core_module.html)

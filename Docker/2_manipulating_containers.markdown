@@ -212,7 +212,7 @@ $ docker exec [OPTIONS] <container id> COMMAND [ARG...]
 * [OPTIONS]：這是 docker exec 命令的選項，用於指定額外的選項和標誌來自定義命令的行為。一些常見的選項包括:
   * -i: 保持 STDIN 開啟，允許我們與命令進行交互
   * -t: 為執行的命令分配一個虛擬終端（TTY）。
-  * -e: 設定環境變量。
+  * -e: 設定環境變數。
 * COMMAND：這是要在 Container 內執行的命令。它可以是任何有效的命令，例如 shell 命令、應用程序命令等。
 * [ARG...]：這是可選的命令參數，用於傳遞給命令的附加參數
 

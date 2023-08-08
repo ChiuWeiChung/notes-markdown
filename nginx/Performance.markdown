@@ -2,7 +2,7 @@
 
 ## **1. 設定 Cache-Control**
 
-對於靜態資源（如圖片、CSS 和 JavaScript 檔案），設定 `add_header Cache-Control public` 的好處是，當使用者再次訪問相同的靜態資源時，瀏覽器可以直接從緩存中加載該資源，而不需要再次向伺服器發送請求，這可以節省帶寬和加快網頁載入速度。
+對於靜態資源（如圖片、CSS 和 JavaScript 檔案），設定 `add_header Cache-Control public` 的好處是，當使用者再次訪問相同的靜態資源時，瀏覽器可以直接從緩存中加載該資源，而不需要再次向伺服器發送請求，這可以節省頻寬和加快網頁載入速度。
 
 如下方的範例，主要是對指定的資源進行快取和一些相關的 HTTP header 配置:
 ```nginx
@@ -198,3 +198,10 @@ HTTP/1.1 仍然是目前廣泛使用的協議版本，儘管 HTTP/2 提供了一
 4. 傳輸層加密要求：HTTP/2 要求使用 TLS（Transport Layer Security）進行傳輸層加密。這意味著網站必須使用 HTTPS，並獲得有效的 SSL/TLS 憑證。這可能增加了一些成本和複雜性，對於一些網站運營者來說可能是個障礙。
 
 
+
+---
+
+# 參考資料
+* [Udemy Course: Introduction to NGINX](https://www.udemy.com/course/nginx-crash-course/)
+* [Udemy Course: NGINX Fundamentals: High Performance Servers from Scratch](https://www.udemy.com/course/nginx-fundamentals/)
+* [Nginx Documentation](https://nginx.org/en/docs/http/ngx_http_core_module.html)
