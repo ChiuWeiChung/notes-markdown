@@ -239,3 +239,25 @@ $ docker exec -it mycontainer bash
 * `-i`：表示分配一個虛擬終端讓使用者輸入命令和並且與 Container 內的應用程序進行通信。如果不使用 -i flag ，docker exec 命令將沒有交互式的輸入，並且不會等待輸入命令。
 * `-t`：這個 flag 是用來控制輸出的格式，讓輸出以漂亮的方式顯示在終端上。如果不使用 -t flag ，則輸出將以一種非交互式的方式呈現，可能會讓輸出難以閱讀。
 
+## **實時追蹤 Docker Container 的日誌**
+
+`docker logs -f <container-id>` 是用來實時追蹤 Docker 容器的日誌的命令。這個命令的一部分解釋如下：
+* docker logs: 用來檢視容器的日誌。
+* -f: 跟蹤（Follow）日誌的最新內容，即實時更新顯示新的日誌輸出。
+* containerid: 是你想要查看日誌的容器的 ID。
+這樣的命令對於查看容器內發生的事情、排錯以及觀察應用程序的運行狀態都很有用。
+
+
+## **將本地檔案複製到指定的 Docker Container**
+
+這條指令的語法是：
+
+```console
+docker cp [本地檔案或目錄] [container-id]:[容器內目的地路徑]
+```
+
+
+
+
+
+

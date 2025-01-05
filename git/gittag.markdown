@@ -1,45 +1,49 @@
-# Git Tags
+# Git 標籤（Tags）
 
-Tags are pointers that refer to particular points in Git history. We can mark a particular moment in time with a tag. Tags are most often used to mark version releases in projects(v2.0.0, v.2.1.0, etc.) Think of tags as branch references that do NOT CHANGE. Once a tag is created, it always refers to the same commit. It's just a label for a commit.
+標籤是指向 Git 歷史中特定點的指標。我們可以透過標籤來標記某一時間點。標籤最常用來標記專案的版本發佈（如 v2.0.0、v2.1.0 等）。可以將標籤視為不會改變的分支參考。一旦建立標籤，它將永遠指向相同的提交（commit），僅作為該提交的標籤。
 
-## The Two Types
 
-There are two types of Git tags we can use: lightweight and annotated tags
+## 兩種類型的標籤
 
-* lightweight tags:  
-They are just a name/label that points to a particular commit.
+Git 提供兩種類型的標籤：輕量標籤（lightweight tag）和註解標籤（annotated tag）。
 
-* annotated tags:  
-They store extra meta data including the author's name and email, the date, and a tagging message(like a commit message)
+* 輕量標籤（lightweight tag）：
+這只是簡單的名稱或標籤，用來指向特定的提交。
 
-## Semantic Versioning
+* 註解標籤（annotated tag）：
+此類標籤會儲存額外的 meta data，包括作者姓名和電子郵件、日期，以及類似提交訊息的標籤訊息。
 
-The semantic versioning spec outlines a standardized versioning system for software releases. It provides a consistent way for developers to give meaning to their software releases(how big of a change is this release??) Versions consist of three numbers separated by periods.
+## 語意化版本控制（Semantic Versioning）
 
-> Typically, The first release is 1.0.0
 
-1. Patch Release:  
-Patch release (ex:1.0.0 -> 1.0.1) normally don't contain new features or significant changes. They typically **signify bug fixes and other changes that don't impact how the code is used**.
+語意化版本控制規範提供了一種標準化的版本控制系統，讓開發者能為軟體發佈賦予意義（例如：這次發佈的變更程度如何？）。版本號由三個數字組成，以句點分隔。
 
-2. Minor Release:  
-Minor releases (ex:1.0.0 -> 1.1.0) signify that new features or functionality have been added, but the project is still backwards compatible. No breaking changes. The new functionality is optional and should not force users to rewrite their code.
+> 通常，第一次發佈的版本號為 1.0.0。
 
-3. Major Release:  
-Major release (ex:1.0.0 -> 2.0.0) signify significant changes that is no longer backwards compatible. Features may be removed or changed substantially.
+1. 修補版本（Patch Release）：
+修補版本（如：1.0.0 -> 1.0.1）通常不包含新功能或重大變更，只是進行一些錯誤修復或其他不影響使用方式的變更。
 
-## Viewing Tags  
+2. 次要版本（Minor Release）：
+次要版本（如：1.0.0 -> 1.1.0）表示新增了新功能，但仍向下相容，不會造成破壞性變更。這些新增功能是可選的，不需要使用者重寫程式碼。
+
+3. 主要版本（Major Release）：
+主要版本（如：1.0.0 -> 2.0.0）表示有重大變更且不再向下相容。某些功能可能被移除或大幅變更。
+
+
+## 查看標籤
 
 ```console
 ~$ git tag
 ```
 
-git tag will print a list of all the tags in the current repository.
+此命令會列出當前儲存庫中的所有標籤。
 
 ```console
 ~$ git tag -l "*beta*"
 ```
 
-We can search for tags that match a particular pattern by using **"git tag -l"** and then passing in a wildcard pattern. For example, **"git tag -l * beta * "** will print a list of tags that include "beta" in their name.
+我們可以使用 git tag -l 並傳入萬用字元模式來搜尋符合條件的標籤。例如：git tag -l *beta* 會列出名稱中包含 “beta” 的所有標籤。
+
 
 ## Checking out Tags
 
@@ -47,37 +51,42 @@ We can search for tags that match a particular pattern by using **"git tag -l"**
 ~$ git checkout <tag>
 ```
 
-To view the state of a repo at a particular tag, we can use **"git checkout < tag >"**. This purts us in detached HEAD!
+要查看特定標籤時的專案狀態，可以使用 git checkout <tag>。這會使你進入分離的 HEAD 狀態。
 
-## Creating Lightweight Tags
+
+## 建立輕量標籤
 
 ```console
 ~$ git tag <tagname>
 ```
 
-to create a lightweight tag, use **"git tag < tagname >"**. By default, Git will create the tag referring to the commit that HEAD is referencing.
+使用 git tag <tagname> 來建立輕量標籤，該標籤會指向當前 HEAD 所指的提交。
 
-## Creating Annotated Tags
+
+## 建立註解標籤
 
 ```console
 ~$ git tag -a <tagname>
 ```
+使用 git tag -a <tagname> 來建立新的註解標籤。Git 會開啟預設的文字編輯器，提示你輸入標籤訊息。類似於 git commit，也可以使用 -m 參數直接傳入訊息，省去編輯器的操作。
 
-Use **"git tag -a < tagname >** to create a new annotated tag. Git will then open your default text editor and prompt you for additional information. Similar to git commit, we can also use the -m option to pass a message directly and forgo the opening of the text editor.
 
-## View Annotated Tag MetaData
+## 查看註解標籤的 metadata
 
 ```console
 ~$ git show <tagname>
 ```
+此命令會顯示特定註解標籤的詳細元資料。
 
-## Tagging Previous Commits
+
+## 標記過去的提交
 
 ```console
 ~$ git tag <tagname> <commit>
 ```
 
-So far we've seen how to tag the commit that HEAD references. We can also tag an older commit by providing the commit hash: **"git tag -a < tagname > < commit-hash >"**
+我們可以不只標記當前 HEAD 的提交，也可以傳入提交雜湊值（commit hash）來標記較早的提交，例如：`git tag -a <tagname> <commit-hash>`。
+
 
 ## Forcing Tags
 
@@ -85,26 +94,29 @@ So far we've seen how to tag the commit that HEAD references. We can also tag an
 ~$ git tag -f <tagname>
 ```
 
-Git will yell at us if we try to reuse a tag that is already referring to a commit. If we use the -f option, we can force our tag through.
+如果嘗試重用已存在的標籤，Git 會拒絕並顯示錯誤訊息。使用 -f 參數可以強制覆蓋原標籤。
 
-## Deleting Tags
+
+## 刪除標籤
 
 ```console
 ~$ git tag -d <tagname>
 ```
 
-To delete a tag, use **"git tag -d < tagname > "**
+要刪除標籤，可以使用 git tag -d <tagname>。
 
-## Pushing Tags
+## 推送標籤
 
 ```console
 ~$ git push --tags
 ```
 
-By default, the **"git push"** command doesn't transfer tags to remote servers. If you have a lot of tags that you want to push up at once, you can use the --tags option to the **"git push"** command. This will transfer all of your tags to the remote server that are not already there.
+預設情況下，git push 不會將標籤傳送到遠端伺服器。如果有大量標籤需要推送，可以使用 --tags 選項，將所有本地尚未推送的標籤傳送至遠端。
 
 ```console
 ~$ git push <remote> <tagname>
 ```
 
-We can only push one tag by using **"git push < remote > < tagname >"**
+也可以只推送單一標籤，使用 `git push <remote> <tagname>`。
+
+以上內容說明了如何使用 Git 標籤來管理專案的版本，並提供輕量和註解標籤的差異及使用方法。透過標籤，我們能有效標記和管理版本歷史，使開發流程更加有條理。
