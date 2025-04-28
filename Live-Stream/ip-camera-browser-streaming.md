@@ -38,7 +38,7 @@
 如果你的 IP Camera 有提供 MJPEG 的串流網址，直接用 HTML 播就好：
 
 ```html
-<img src="http://192.168.1.100/video.mjpg" />
+<img src="http://<IP>:<PORT>/xxxx" />
 ```
 
 - **優點**：超級簡單、不需要轉格式、不用加 JS
