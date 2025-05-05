@@ -169,35 +169,3 @@ app.get('/testpage', (req, res) => {
 * [The Web Developer Bootcamp 2022](https://www.udemy.com/course/the-web-developer-bootcamp/)
 * [白話 Session 與 Cookie：從經營雜貨店開始](https://hulitw.medium.com/session-and-cookie-15e47ed838bc)
 * [[不是工程師] 會員系統用Session還是Cookie? 你知道其實他們常常混在一起嗎？](https://progressbar.tw/posts/92)
-
-<!-- 
-
-OK, so if we go to the cookie password document documentation, there's this line at the beginning. It says, optionally, you may enable signed cookie support by passing a secret string. OK, so what is this talking about? What is signed cookie support or just signed cookies?
-Well, the idea behind signing something in programming, we're usually referring to a digital signature or a cryptographic signature.
-The idea is not to encrypt or hide information. Instead, it is to be able to verify its integrity, verify that something hasn't changed.
-Think of a wax seal on an old letter. You put that wax seal on there. And if that letter makes it to you or to your whoever you're sending it to and that seal is not broken, then you know you know that the integrity of that letter is still intact. Nobody has read it.
-
-And what that will do is have Cookie Parcher sign it using a secret code that I'm going to specify. basically it's going to sign it and then
-send this weirder looking version of our cookie to the client. Then on the client side, that weird looking version, the signed version will be sent back just like
-any other cookie. That's all it is. It's just a regular old cookie. But on the server side, when we're looking at the cookies that have been sent to us, we'll be able
-to verify or cookie parser will be able to verify and tell us if any of those signed cookies have been tampered with, essentially, if they're the exact same value that was sent. You know, if if somebody screwed them in any way, we'll be able to tell because they won't match.
-
-> So signing is not about hiding the information. It's not about encrypting it. It is about making sure that the original data that we sent to the client, to the browser is still the data being sent back to us. -->
-
-<!-- Session -->
-
-<!-- Sessions are kind of similar to the idea of cookies in that we're trying to add in some state fullness to HTTP, which is inherently a stateless protocol. We're trying to save or share some information from one request to the next.
-
- Now, of course, we have databases where we can persist information. So that's not the the idea. It's not just to store data permanently. We can use a database on the server side to do that. What we're trying to do is persist something from one request to the next to keep track of, you know, who's currently logged in, what's the person's user name, who's logged in or what's in somebody's shopping cart before they check out. So cookies and sessions can be used to accomplish this. But sessions are on the server side. **So sessions, we store the actual data itself on the server side, not in the browser, which is what we do with cookies.**
-
- What's wrong with cookies? Nothing's really wrong with them, but there are a couple of considerations. 
- 
- 1. One is that cookies have a maximum size in your browser. Most browsers, at least there is a limit, first of all, on the number of cookies you can have per domain and the size of each cookie, how much information they can store. So that's one consideration. If we have a lot of information we wanted to associate with a user or that we wanted to persist from one request to the next cookies may not be the best choice. 
- 
- 2. But second of all, cookies are just not as secure as storing information on the server side. So this is where sessions come in. The idea of a session is that we store information on the server side and then we send a little cookie back to the client that says, here's your key, here's the ID you need to unlock that session. So sessions are kind of similar to the idea of cookies in that we're trying to add in some statefullness to HTTP, which is inherently a stateless protocol.
-
- So what we do or what we can do is have a session. And in that session we have some ID that we associate your information with your shopping cart data with in the Sessions store. So here's a little subset. You know, I've got ID three, four and five. Usually these IDs are not going to be single digit numbers, but whatever that ID is, one of them will be associated with me. 
- 
- Let's say I'm browsing with my browser. OK, so the server is going to send back to me just a little ID as a cookie. It's not going to send back the shopping cart, is not going to send back whatever other information I have in the session itself. It simply sends me back the key to unlock my data and my browser stores that. So then on subsequent requests, my browser can say, hey, I have a cookie. It's a really small one. Just says my session idea is for what does that mean? And then the server gets that on every single request, just one little cookie. I sometimes will have more, but you know, all we need is one for the session. The server can then take that ID and then go to the the session data store and retrieve all relevant information so we can store a ton of information on the server side that will persist. We'll have some state from one request to the next, but all we need to store in the browser is some sort of ID or key to unlock that session. 
-
-  -->

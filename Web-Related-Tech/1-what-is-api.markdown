@@ -1,11 +1,11 @@
 # 了解 WEB SERVICE API 應用
 
 ## 記錄自身對 Web Service Api 的理解
-在網路世界中時常聽到 API ，英文全名是 Application Programming Interfer (應用程式介面) ，網路上解釋有很多種;若要一句話簡單介紹的話，大概就是"**軟體與軟體之間的互動橋樑**"，開發者 (developers) 可以透過 API 將特定的功能添加到自己開發的軟體當中(想要海釣可以租借釣具，不必自己製作釣竿的概念)。
+在網路世界中時常聽到 API ，英文全名是 Application Programming Interface (應用程式介面) ，網路上解釋有很多種;若要一句話簡單介紹的話，大概就是"**軟體與軟體之間的互動橋樑**"，開發者 (developers) 可以透過 API 將特定的功能添加到自己開發的軟體當中(想要海釣可以租借釣具，不必自己製作釣竿的概念)。
 
 >Web Service  Api 是 API 的一種，但在其他領域中的 Api 不見得就是 Web Service  Api 
 
-在前後端網頁工程當中，一談到 API ，大多指的是 web service  api ，簡單而言就是透過adress (ex: URL ) 向遙遠的 Server 端請求服務、提取資料等等...，又可以根據協定、資料形式的不同將分成:
+在前後端網頁工程當中，一談到 API ，大多指的是 web service  api ，簡單而言就是透過 address (ex: URL ) 向遙遠的 Server 端請求服務、提取資料等等...，又可以根據協定、資料形式的不同將分成:
 
 1. SOAP (Simple Object Access Protocol) : data format 為Proprietary XML format，頻寬需求較高，多應用於資安層面高的情況
 2. REST (Representational State Transfer) : data format 較多元，可以是JSON、XML
