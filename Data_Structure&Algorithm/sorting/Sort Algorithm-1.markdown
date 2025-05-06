@@ -3,7 +3,7 @@
 > 本文為 [JavaScript Algorithms and Data Structures Masterclass](https://www.udemy.com/course/js-algorithms-and-data-structures-masterclass/) 之學習筆記，經自己理解歸納後以筆記形式記錄下來，部分程式碼非原創。
 
 
-在這裡紀錄學習 Data Structur & Algorithm 的學習筆記，在這邊會記錄三種排序的演算法，分別為 1. Bubble Sort , 2. Selection Sort , 3. Insertion Sort 。
+在這裡紀錄學習 Data Structure & Algorithm 的學習筆記，在這邊會記錄三種排序的演算法，分別為 1. Bubble Sort , 2. Selection Sort , 3. Insertion Sort 。
 
 ## 1. Bubble sort
 
