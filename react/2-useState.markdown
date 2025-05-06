@@ -99,38 +99,48 @@ const [ageState, setAgeState] = useState(30);
 const [country, setCountry] = useState('Taiwan');
 ```
 
+## State 更新與批量更新
+
+當我們在 Class Component 透過 `setState` 或在 Function Component 透過 `useState` 進行 State 的更新時，都會觸發 React 安排 Component 進行重新渲染 (re-render)。
+
+### 什麼是批量更新 (Batch Updating) ?
+
+該機制**主要在 Event Handler 內發生**，如下方程式碼，當點擊 `<button>` 觸發 `clickHandler` 時，並執行 `setName()` 以及 `setAge()` 兩個 State 的更新， 但在 `clickHandler` 內的 `name` 並沒有在 `setName()` 之後馬上更新 ( `name` 仍為 `'Andy'` )。
+
+```jsx  
+const Component = (props)=>{
+
+    const[name, setName] = useState('Andy'); 
+    const[age, setAge] = useState(25); 
+
+    const clickHandler = () => {
+        setName('Rick');
+        console.log(name) // 仍會是 'Andy'
+        setAge(30);
+        console.log(age) // 仍會是 25
+    }
+
+    return(
+        <button onClick={clickHandler}>Click Me!</button>
+    )
+}
+
+```
+
+#### **為什麼 State 不會再 Event Handler 內立刻更新?** 
+
+
+上面的程式碼中，我們可能會認為 `name='Andy'` 應該要在 `setName('Rick')` 之後馬上更新成 `name='Rick'`，但事實上， 我們只能在 Component 重新渲染之後才可以存取新的 State。
+
+### Scheduling 機制
+
+React 在處理 Event Handler 內的 State 更新時，假設有 N 次的 `setState` (或`useState`)在其內部， React 會將這些 `setState` 們 (或 `useState`) 在[合適的時機點 (Scheduling)](https://felixgerschau.com/react-rerender-components/#when-does-react-re-render) 進行批量更新 (Batch Updating) ，此時的 Component 只需要重新渲染 1 次即可，這樣的機制主要可以避免 Component 重新渲染 N 次的情況出現，也因此我們無法在 Event Handler 內部立刻觀察到 State 更新後的結果。
+
 # 參考資料
 * [What the React? Sagas and side effects](https://smartcar.com/blog/what-the-react-sagas/)
 * [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
 * [使用 React Hook](https://zh-hant.reactjs.org/docs/hooks-effect.html)
+* [When does React re-render components?](https://felixgerschau.com/react-rerender-components/)
+* [How and when to force a React component to re-render](https://blog.logrocket.com/how-when-to-force-react-component-re-render/)
+* [React - Batch Updating](https://github.com/facebook/react/issues/10231#issuecomment-316644950)
 
-
-<!-- **useState always returns an array with exactly two elements** , the first element then alwasys is your current state snapshot, and whenver you state updated, the component will rebuild, so the functinal component  is really executed and useState executed again. But react internally saves that you already configured a state with the help of useState for functional component, and will not reinitialized it, but instead **useState** manages this state detached from you component, so independent from your component, so that the state survives renders of this functinal component. So the state suvives when functional component get executed again and therefore useState  does first value which is returned is our current state snapshot and it's a current state snapshot for this rerender cycle of this component. This means that when you update the state, you'll get the updated state here. -->
-
-<!-- ---
-
-## The Problem With React 16 And Earlier:
-
-### Event Pooling:
-
-When we're passing a function into the **setState** function, the anonymous function in the **setState** function is a closure.  That is a simply function that closes over surrounding values.
- In this case, it closes over our event here. The **event** is fed into the **onChange** anonymous function, and in that funciton which we have herre upon a change, we're calling these **setState** function, then we also defing another nested function inside setState function.
-
- The problem with that is that in the inner function, We use something from the outer function, we using the event, then the event will be locked in for the first keystroke.
- Which means that for subsequent keystrokes we don't use the new keystroke event, but the previous one, which of course is then reused and which caused this error.
-
- Normally that wouldn't be a problem, because the inner function is state updating function (**setState**), and therefore it closes over a event object, which means it saves this event object for its execution so that when does inter state updating cuntion runs, which happens asynchronously, we're guaranteed to use the event that was triggered for that keystorkes, so it was created for the keystroke. The problem with evetns and that's now really exclusive to evetns and react.  Just is that **React event** are not the native theme events, but special sysnthetic evets created by React, which basically replicate the native DOM events it would normally get, but react adds a special factor to that. It pulls these event objects, which simply means it reuses event objects. So instead of creating a new event object for every keystroke, it instead reuses the previous object. and the consequence of this is that for the second keystroke, since we have a closure and we locked in the event for the first keystroke, for the second keystroke, we still reuse the same object we had for the first keystroke and that simply the problem here, we're reusing the wrong event object because of the way react handles event objects.
-
-```js
-function handleChange(e) {
-    setData(data => ({
-        ...data,
-        // This crashes in React 16 and earlier:
-        text: e.target.value
-    }));
-}
-```
-
-From [React Org](https://reactjs.org/blog/2020/08/10/react-v17-rc.html#no-event-pooling): This is because React reused the event objects between different events for performance in old browsers, and set all event fields to null in between them. With React 16 and earlier, you have to call e.persist() to properly use the event, or read the property you need earlier. 
-
-React 17 removes the “event pooling” optimization from React. It doesn’t improve performance in modern browsers and confuses even experienced React users:. In React 17, this code works as you would expect. The old event pooling optimization has been fully removed, so you can read the event fields whenever you need them. This is a behavior change, which is why we’re marking it as breaking, but in practice we haven’t seen it break anything at Facebook. (Maybe it even fixed a few bugs!) Note that e.persist() is still available on the React event object, but now it doesn’t do anything. -->
