@@ -68,25 +68,44 @@ git revert <commit-hash>
 
 目前的 commit 歷史紀錄:
 
-```js        
-//  (target)         Master(HEAD)   
-//  de42dc7---be2dde---7a0926
+```mermaid        
+flowchart LR
+    C1["de42dc7"]
+    C2["be2dde"]
+    C3["7a0926<br>(master, HEAD)"]
 
-```
-若使用 `git reset --hard de42dc7` 之後:
-
-```js        
-//  Master(HEAD)                   
-//    de42dc7---X---X
-//    (de42dc7後方的commit都已不存在)
+    C1 --> C2 --> C3
 ```
 
-若使用 `git revert de42dc7` 之後:
+**情境: 若使用 `git reset --hard de42dc7` 之後:**
 
-```js        
-//                           Master(HEAD)   
-//  de42dc7---be2dde---7a0926---d3e6f0
-// (在該分支末端新增新commit(d3e6f0)，但僅保留de42dc7的內容)
+```mermaid
+flowchart LR
+    A["de42dc7"]
+    B["X (commit lost)"]
+    C["X (commit lost)"]
+
+    HEAD["master (HEAD)"]
+
+    HEAD --> A
+    A --> B
+    B -.-> C
+
+    B:::lost
+    C:::lost
+```
+
+---
+
+**情境: 若使用 `git revert de42dc7` 之後:**
+```mermaid
+flowchart LR
+    C1["de42dc7"]
+    C2["be2dde"]
+    C3["7a0926"]
+    C4["d3e6f0<br>(master, HEAD)"]
+
+    C1 --> C2 --> C3 --> C4
 ```
 
 ### **Revert 使用時機**

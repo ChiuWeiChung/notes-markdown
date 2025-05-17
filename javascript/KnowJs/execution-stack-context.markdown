@@ -49,6 +49,17 @@ first();
 
 ![Execution Context](https://github.com/ChiuWeiChung/IMGTANK/blob/main/eventloop/execution%20context.png?raw=true)
 
+```plaintext
++-----------------------+  +-----------------------+  +-----------------------+
+|   Execution Context   |  |   Execution Context   |  |   Execution Context   |
+|        Global         |  |        first()        |  |        second()       |
+|-----------------------|  |-----------------------|  |-----------------------|
+| myName = "Rick"       |  | a = 1                 |  | d = 4                 |
+| first = <function>    |  | b = <unknown>         |  | arguments = [2, 3]    |
+| second = <function>   |  | c = <NaN>             |  |                       |
++-----------------------+  +-----------------------+  +-----------------------+
+```
+
 ---
 
 ## 執行環境 (EC) 的堆疊方式

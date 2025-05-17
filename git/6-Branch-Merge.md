@@ -123,13 +123,14 @@
 ~$ git switch master
 ```
 
-```js
-//         
-//          Master(HEAD)   
-//  de4a8f0---b2d79c0
-//                 \
-//                  ---7a0b2e9---f3c8a5c
-//                               Navbar
+```mermaid
+gitGraph
+    commit id: "de4a8f0"
+    commit id: "b2d79c0" tag: "master, HEAD"
+    branch navbar
+    checkout navbar
+    commit id: "7a0b2e9"
+    commit id: "f3c8a5c" tag: "Navbar"
 ```
 
 透過 `git merge navbar` 進行合併後，目前位置 (HEAD) 會移動到被合併的 commit 位置。
@@ -138,32 +139,36 @@
 ~$ git merge navbar
 ```
 
-```js              
-//                             
-//  de4a8f0---b2d79c0                 
-//                 \          Master(HEAD)
-//                  ---7a0b2e9---f3c8a5c
-//                               Navbar
-
+```mermaid
+gitGraph
+    commit id: "de4a8f0"
+    commit id: "b2d79c0"
+    branch navbar
+    checkout navbar
+    commit id: "7a0b2e9"
+    commit id: "f3c8a5c" tag: "Navbar, main, HEAD"
 ```
 
 ### **非 Fast Forward Merge**
 
-假如開發同仁在 master 分支上添增新的功能或是搶先一步將其他分支合併到 master 上，進而出現新的 commit ，此時我們再去進行合併，就不會是 Fast Forward Merge ，而且 Git 會要求我們額外新增一個新的 commit (merge commit) 。 如下方範例: 
+假如開發同仁在 main 分支上添增新的功能或是搶先一步將其他分支合併到 main 上，進而出現新的 commit ，此時我們再去進行合併，就不會是 Fast Forward Merge ，而且 Git 會要求我們額外新增一個新的 commit (merge commit) 。 如下方範例: 
 
-將 Navbar 分支合併到 Master 分支上，必須先移動到 Master 的 root commit (3e6a4c) 上。
+將 Navbar 分支合併到 main 分支上，必須先移動到 main 的 root commit (3e6a4c) 上。
 
 ```console
-~$ git switch master
+~$ git switch main
 ```
 
-```js
-//         
-//                    Master(HEAD)   
-//  de4a8f0---b158d7a---3e6a4c9
-//             \
-//              ---7a0926e---d5c2e59
-//                           Navbar
+```mermaid
+gitGraph
+    commit id: "de4a8f0"
+    commit id: "b158d7a"
+    branch navbar
+    checkout navbar
+    commit id: "7a0926e"
+    commit id: "d5c2e59" tag: "Navbar"
+    checkout main
+    commit id: "3e6a4c9" tag: "main, HEAD"
 ```
 
 進行合併時，由於 Navbar 分支是從 master 上的舊 commit (b158d7a) 延伸出去，而目前所處位置為新 commit (3e6a4c9)，此時的合併就不是 Fast Forward Merge 。 Git 會跳出 Merge Message 視窗要你為這次的合併做一個 commit 。
@@ -172,13 +177,17 @@
 ~$ git merge navbar
 ```
 
-```js
-//         
-//                               Master(HEAD)   
-//  de4a8f0---b158d7a---3e6a4c9---New commit
-//             \                /
-//              ---7a0926e---d5c2e59
-//                           Navbar
+```mermaid
+gitGraph
+    commit id: "de4a8f0"
+    commit id: "b158d7a"
+    branch navbar
+    checkout navbar
+    commit id: "7a0926e"
+    commit id: "d5c2e59" tag: "Navbar"
+    checkout main
+    commit id: "3e6a4c9"
+    merge navbar tag: "main, HEAD" id:"e21acd6"
 ```
 
 ### 合併衝突 (Merge Conflict)

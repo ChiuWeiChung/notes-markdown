@@ -21,12 +21,12 @@
 
 ### 建立資料表
 
-```SQL
+```sql
 CREATE TABLE cities (
-    name VARCHAR(50),
-    country VARCHAR(50),
-    population INTEGER,
-    area INTEGER
+  name VARCHAR(50),
+  country VARCHAR(50),
+  population INTEGER,
+  area INTEGER
 );
 ```
 
@@ -37,32 +37,34 @@ CREATE TABLE cities (
 
 ### 插入資料到資料表
 
-```SQL
-INSERT INTO cities (name, country, population, area)
-VALUES('Tokyo', 'Japan', 37468000, 8223);
+```sql
+INSERT INTO
+  cities (name, country, population, area)
+VALUES('Tokyo', 'Japan', 37468000, 8223
 ```
 
 #### 插入多筆資料
 
-```SQL
-INSERT INTO cities (name, country, population, area)
+```sql
+INSERT INTO
+  cities (name, country, population, area)
 VALUES
-    ('Delhi', 'India', 28514000, 1484),
-    ('Shanghai', 'China', 25582000, 6341),
-    ('Sao Paulo', 'Brazil', 21650000, 1521);
+  ('Delhi', 'India', 28514000, 1484),
+  ('Shanghai', 'China', 25582000, 6341),
+  ('Sao Paulo', 'Brazil', 21650000, 1521);
 ```
 
 ### 使用 SELECT 查詢資料
 
 取得資料表中的所有欄位
 
-```SQL
+```sql
 SELECT * FROM cities;
 ```
 
 可以選擇特定欄位進行查詢：
 
-```SQL
+```sql
 SELECT area, name FROM cities;
 SELECT area, population FROM cities;
 SELECT name, name, name FROM cities;
@@ -76,7 +78,7 @@ SELECT name, name, name FROM cities;
 
 可以在查詢中進行計算並為計算結果命名：
 
-```SQL
+```sql
 SELECT name, population / area AS density FROM cities;
 ```
 
@@ -90,7 +92,7 @@ SELECT name, population / area AS density FROM cities;
 
 1. `||` 運算子：連接兩個或多個字串
 
-```SQL
+```sql
 SELECT
   name || ', ' || country AS location
 FROM
@@ -107,7 +109,7 @@ FROM
 
 2. `CONCAT()` 函數：連接多個字串，功能與 `||` 相似
 
-```SQL
+```sql
 SELECT
   CONCAT(name, ', ', country) AS location
 FROM
@@ -132,7 +134,7 @@ PostgreSQL 提供多種實用的字串處理函數：
 
 這些函數可以組合使用：
 
-```SQL
+```sql
 SELECT
   UPPER(CONCAT(name, ', ', country)) AS location,
   LENGTH(name) AS name_length
@@ -156,7 +158,7 @@ FROM
 
 範例：
 
-```SQL
+```sql
 SELECT
   name,
   SUBSTRING(name, 1, 3) AS first_three_chars,

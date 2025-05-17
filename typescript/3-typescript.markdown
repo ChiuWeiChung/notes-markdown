@@ -71,7 +71,7 @@ const user: User = {
 
 參考來源：[Type vs Interface: Which Should You Use?](https://www.totaltypescript.com/type-vs-interface-which-should-you-use)
 
-### 我的實務選擇建議
+### 我的想法
 
 - 實際上，**該使用哪一個，還是需要依照團隊的 coding style 來決定**。
   - 畢竟每個團隊的開發習慣、專案需求、技術偏好、以及歷史包袱都不太一樣，有些團隊會統一規定全部用 `type`，有些則傾向盡量用 `interface`。

@@ -54,13 +54,13 @@ Git Workflow 可以想像成單機遊戲的存檔流程，謹慎的玩家會在�
 3. `提交 (Commit)` :  
 將暫存區域的內容提交給 Repo，如此一來就完成存檔的作業
 
-```js
-//  _________         _______          ______
-// |         |  git  |       |  git   |      |
-// | Working |  add  |Staging| commit |      | 
-// |Directory| ----->| Area  |------->| Repo |  
-// |         |       |       |        |      |
-// |_________|       |_______|        |______|
+```mermaid
+flowchart LR
+    WD["📂 Working Directory"]
+    SA["📦 Staging Area"]
+    REPO["🗃️ Git Repository"]
+
+    WD -->|git add| SA -->|git commit| REPO
 ```
 
 > 只要在 Repo 底下，內部的文件、資料夾 (包括資料夾中的資料夾及文件) 都會被 Git 追蹤

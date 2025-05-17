@@ -45,19 +45,16 @@ Centralized Workflow ，白話一點就是"全部的人都在 master branch 進�
 3. 在 Local Repo 進行修改，並 Push 到 Fork Repo 
 4. 若想將改內容併入原專案，在 GitHub Fork Repo 向原作者提出 Pull Request 
 
-```js        
-//             原作者的Repo
-//               /   \        
-//              /     \        
-//             /       \        
-//          Fork &      \        
-//      Pull Request    Pull
-//          /             \
-//         /               \
-//        /       Push      \
-//  Fork Repo------ & ------Local Repo
-//    (GitHub)    Clone     (我的電腦)
+```mermaid
+flowchart TD
+    upstream["原作者的 Repo"]
+    fork["Fork Repo<br>(GitHub)"]
+    local["Local Repo<br>(我的電腦)"]
 
+    upstream -->|Fork & Pull Request| fork
+    fork -->|Clone| local
+    local -->|Push| fork
+    upstream -->|Pull| local
 ```
 
 GitHub 允許我們透過 Fork 機制"複製"他人的 Repo ，並在自己的 GitHub Repo 上開發，而後再像原作者提出 Pull Request ，就像是在告訴原作者「 Hi ，我針對了某某功能進行了添加/優化，我認為這使該專案更加完善，如果你認為不錯，請收下它。」的概念。

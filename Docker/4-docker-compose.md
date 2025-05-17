@@ -2,7 +2,9 @@
 
 ## **執行多個彼此協作的 Docker Containers?**
 
-在下方的範例中，根據提供的指令，可以看出我想要執行兩個Container：`rickchiu/nodewithredis` 和 `reids`，但是實際上執行後會發現，會發現執行上出現錯誤:`Error: getaddrinfo ENOTFOUND redis-server`。會出現錯誤主要是因為`nodewithredis Container` 和 `redis Container` 位於不同的網絡所導致，
+在下方的範例中，根據提供的指令，可以看出我想要執行兩個Container：`rickchiu/nodewithredis` 和 `reids`，但是實際上執行後會發現，會發現執行上出現錯誤:`Error: getaddrinfo ENOTFOUND redis-server`。
+
+會出現錯誤主要是因為`nodewithredis Container` 和 `redis Container` 位於不同的網絡所導致，
 
 ```console
 $ docker build -t nodewithredis .
@@ -14,6 +16,8 @@ Error: getaddrinfo ENOTFOUND redis-server
 每個 Container 都有自己的獨立網絡命名空間 (Namespace)。當執行 `docker run redis` 時，Docker 會創建一個新的 redis Container ，這個 Container 會有自己的 Namespace 和 IP address。因此，在 nodewithredis Container 中，使用 "redis" 這個名稱是找不到 redis  Container 的 IP 地址的。
 
 為了讓這兩個 Container 能夠連結，我們需要將它們放在同一個網絡中。我們可以通過創建一個新的網絡，並將這兩個 Container 添加到該網絡中來實現這一點。例如，我們可以使用 `docker-compose` 創建一個包含兩個 Container 的應用程序，然後將它們放在同一個網絡中，讓它們能夠相互連結。
+
+---
 
 ## **Docker Compose**
 
@@ -30,7 +34,7 @@ services:
     ports:
       -  "4001:8081"
 ```
-上述文件的用途是定義和管理兩個 Docker Container，其中的 `redis-server` 和 `node-app` 是自定義的服務名稱，其中 `redis-server` 服務使用指定的 redis Image 執行 Redis 服務。而 `node-app` 服務透過當前目錄下的 Docker Image 使用 `build .` 來執行一個 Node.js 應用程序，並在 ports 中指定了 Container 與主機之間的 Port 連接，將主機的 4001 Port 映射到容器的 8081 Port 。
+上述文件的用途是定義和管理兩個 Docker Container，其中的 `redis-server` 和 `node-app` 是自定義的服務名稱，其中 `redis-server` 服務使用指定的 redis Image 執行 Redis 服務。而 `node-app` 服務透過當前目錄下的 Docker Image 使用 `build .` 來執行一個 Node.js 應用程序，並在 ports 中指定了 Container 與主機之間的 Port 連接，將主機的 4001 Port 鏡像到容器的 8081 Port 。
 
 
 
@@ -112,7 +116,7 @@ services:
     * build: 定義如何構建服務的 Image。
       * dockerfile: 指定用於構建服務 Image 的 Dockerfile 的路徑。
       * context: 指定構建服務 Image 時的上下文路徑。上下文包括構建 Image 所需的文件和資源。
-    * ports: 指定容器與主機之間的 Port 映射關係。格式為 "主機 Port :容器 Port "。
+    * ports: 指定容器與主機之間的 Port 鏡像關係。格式為 "主機 Port :容器 Port "。
     * volumes: 定義容器與主機之間資料共享的配置選項。可以指定共享的目錄或文件。
     * environment: 定義容器的環境變數。可以使用鍵值對的形式指定變數名稱和值。
 
@@ -154,8 +158,13 @@ $  docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app <container-id>
 * `-v $(pwd):/app` : 則是將目前 local 端的目錄掛載到 Container 的 /app 路徑，這樣 Container 內的 /app 目錄就會和 local 端的目錄同步， Container 內對 /app 的讀寫操作就會反映到 local 端。通常在開發時會採用這種方式來將 local 端的應用程式代碼掛載到 Container 內進行開發、測試。
 
 ### **還需要在 Dockerfile 內 RUN npm install 嗎?**
-是的，即使我們使用了 -v /app/node_modules 將本地端的 node_modules 鏡像到 Container 的 /app/node_modules 目錄下，我們仍然需要在 Dockerfile 中執行 RUN npm install 命令，以確保 Container 中安裝了應用程序所需的所有依賴項。這是因為 -v /app/node_modules 只是將 Container 中 /app/node_modules 目錄與本地端的 node_modules 目錄做鏡像，而不是直接將本地端的 node_modules 目錄複製到 Container 中。因此，我們仍需要在 Dockerfile 中執行 RUN npm install 命令來安裝所有依賴項。
+是的，即使我們使用 `-v /app/node_modules` 將本機的 `node_modules` 鏡像到 Container 的 /app/node_modules 目錄，仍然需要在 Dockerfile 中執行 RUN npm install 指令，以確保 Container 安裝了所有應用所需的依賴。
+
+這是因為 `-v /app/node_modules` 僅是將本機與 Container 的資料夾做路徑鏡像（mount），而非將本機的 node_modules 目錄內容複製進 Container。因此，鏡像本身不會自動提供所有依賴項，也無法保證鏡像目錄在建構階段已存在或內容完整。
+
 
 ### **如果 local 的 node_modules 被刪除了，還可以啟動嗎?**
 
-如果我們刪除了 local 端的 node_modules，透過 `-v /app/node_modules` 將 Container 內的 /app/node_modules 掛載到 local 端的 node_modules 會沒有作用，因為在 local 端的 node_modules 已經不存在了，所以 Container 的應用程式會找不到需要的 Node.js 模組。 **`但是`** ，如果我們的 Dockerfile 中已經有 npm install 的指令，當我們在沒有 /app/node_modules 的情況下啟動 Container ，Docker 在啟動 Container 時會先執行 npm install，重新安裝所需的模組，因此我們的應用程式仍然可以正常執行。
+若本機端的 node_modules 目錄已被刪除，使用 `-v /app/node_modules` 將本機掛載到 Container 的 /app/node_modules 將失效。這是因為本機掛載目錄不存在時，Container 將無法正確讀取該目錄，導致應用程式找不到所需的 Node.js 模組，進而無法啟動。
+
+不過， 如果 Dockerfile 中已包含 RUN npm install 指令，則在建構映像時會自動安裝所有依賴模組。此時，即便本機沒有 node_modules，Container 仍然可以正常運行，因為依賴已在映像中安裝完成，不再依賴本機的模組目錄。

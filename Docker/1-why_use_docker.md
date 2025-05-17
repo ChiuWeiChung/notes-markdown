@@ -30,7 +30,7 @@ Docker Container 提供了一個獨立且一致的執行環境，可以在任何
 
 為了確保電腦已正確安裝了 Docker，想快速確認 Docker 的版本號，可以使用 docker -v 或 docker --version 命令。
 
-```console
+```linux
 $ docker -v
 Docker version 20.10.21, build baeda1f
 ```
@@ -53,23 +53,19 @@ $ docker run hello-world
 
 ```mermaid
 flowchart TD
-    Image["Image
-    (包含應用程式的所需之配置，類似「食譜」的概念)
-    "]
+    Image["Image<br>(包含應用程式的所需之配置，類似「食譜」的概念)"]
+    instantiating["Instantiating<br>(將 Image 實體化，每個 Container 都是獨立的)"]
+    
     Container1(Container 1)
     Container2(Container 2)
     Container3(Container 3)
     ContainerN(Container N)
-    instantiating("Instantiating
-    (將 Image 的實體化，每個 Container 都是獨立的)
-    ")
-    
-    Image-->instantiating
-    
-    instantiating-->Container1
-    instantiating-->Container2
-    instantiating-->Container3
-    instantiating-->ContainerN
+
+    Image --> instantiating
+    instantiating --> Container1
+    instantiating --> Container2
+    instantiating --> Container3
+    instantiating --> ContainerN
 ```
 
 更白話一點，透過日常生活的例子來比喻 Image 與 Container 的關係的話，可以想像我們正在烹飪一道美食，Image 就像是一道食譜，而 Container 則是根據這個食譜烹飪出來的一道具體的菜餚。也因此我們可以創建不同的食譜 (Image)，以製作不同的菜餚， `Image 就像是定義了菜餚製作過程的食譜，它是靜態的且可以被共享`。 `Container 則是根據食譜烹飪出來的具體菜餚，它是可執行的且有自己的生命週期`。
@@ -77,7 +73,7 @@ flowchart TD
 
 Docker 不僅僅是一個單一的軟體工具，而是一個完整的解決方案，提供了一個綜合的平台和相關的工具，使開發、交付和運行更加簡單。除了上述介紹的 Image 以及 Container 之外，構成 Docker Ecosystem 還包括以下幾個重要元素：
 
-```console
+```plaintext
     ┌─────────────────────────────────────┐ 
     │ ┌─────────┐ ┌─────────┐ ┌─────────┐ │
     │ │ Docker  │ │ Docker  │ │ Docker  │ │
@@ -87,7 +83,6 @@ Docker 不僅僅是一個單一的軟體工具，而是一個完整的解決方�
     │ │ Docker  │ │Docker   │ │ Docker  │ │
     │ │ Images  │ │Container│ │ Compose │ │
     │ └─────────┘ └─────────┘ └─────────┘ │
-    │ ...........                         │
     └─────────────────────────────────────┘
 ```
 
@@ -142,27 +137,30 @@ This message shows that your installation appears to be working correctly.
 ```mermaid
 sequenceDiagram
     box rgb(50,100,200) Docker Container
-    participant Docker Client
-    participant Docker Server
-    participant Image Cache
+        participant DockerClient as Docker Client
+        participant DockerServer as Docker Server
+        participant ImageCache as Image Cache
     end
+
     box rgb(200,66,99) Docker Registry
-    participant Docker Hub
+        participant DockerHub as Docker Hub
     end
 
-    Docker Client->>Docker Server:『 run hello-word 』
-    Docker Server-->>Image Cache: Give me「hello-world」image
-    Image Cache-->> Docker Server: Couldn't find image
+    DockerClient->>DockerServer: 『run hello-world』
+    DockerServer->>ImageCache: Give me「hello-world」image
+    ImageCache-->>DockerServer: Couldn't find image
 
-    Note right of Docker Hub: ngrok
-    Note right of Docker Hub: nginx
-    Note right of Docker Hub: ...
-    Note right of Docker Hub: hello-world
-    Docker Server->>Docker Hub: Give me「hello-world」Image
-    Docker Hub->>Image Cache: Ok! Here you go!
-    Docker Server-->>Image Cache: Give me「hello-world」image
-    Image Cache->>Docker Server: Here you go!
+    Note right of DockerHub: ngrok
+    Note right of DockerHub: nginx
+    Note right of DockerHub: ...
+    Note right of DockerHub: hello-world
+
+    DockerServer->>DockerHub: Give me「hello-world」Image
+    DockerHub-->>ImageCache: Ok! Here you go!
+    DockerServer->>ImageCache: Give me「hello-world」image
+    ImageCache-->>DockerServer: Here you go!
 ```
+
 在上面的流程中: 
 1. Docker Client 將 run hello world 命令告知 Docker Server
 2. Docker Server 首先在本地的 Image Cache 尋找 hello-world Image
@@ -173,30 +171,31 @@ sequenceDiagram
 在介紹 Container 啟動的原理之前，先介紹一些電腦操作系統的概述。大部分操作系統 (OS) 都有一個稱為 Kernel 的部分。 Kernel 是一個正在運行的軟體程式，`負責管理所有程式與硬體之間的溝通`。如下圖表所示，在圖表的頂部，有不同程式正在運行，例如 Chrome、Apple Podcast、Spotify 以及 Node.js。如果我們透過 Node.js，將一個檔案寫入硬碟，技術上來說，`並不是 Node.js 直接與硬體設備溝通`。相反，Node.js 向 Kernel 發出指令：“嘿，我想將一個檔案寫入硬碟。”然後 Kernel 接收這個指令，最終將資訊寫入硬碟。
 
 ```mermaid
-flowchart TD
-    
+flowchart TD    
     subgraph Software
-    sp[Spotify]
-    ap[Apple Podcast]
-    chrome[Chrome]
-    node[NodeJS]
-    end
-    
-    kernel(((Kernel))):::k  
-    
-    subgraph Hardware
-    cpu[CPU]
-    hd[Hard Disk]
-    ram[RAM]
+        sp[Spotify]
+        ap[Apple Podcast]
+        chrome[Chrome]
+        node[NodeJS]
     end
 
-    sp-.system call.->kernel
-    ap-.system call.->kernel
-    chrome-.system call.->kernel
-    node-.system call.->kernel
-    kernel-.->cpu
-    kernel-.->hd
-    kernel-.->ram
+    kernel(((Kernel)))
+    class kernel k;
+
+    subgraph Hardware
+        cpu[CPU]
+        hd[Hard Disk]
+        ram[RAM]
+    end
+
+    sp -->|system call| kernel
+    ap -->|system call| kernel
+    chrome -->|system call| kernel
+    node -->|system call| kernel
+
+    kernel --> cpu
+    kernel --> hd
+    kernel --> ram
 ```
 
 因此，「 Kernel 是負責管理程式和實際硬碟之間的一位仲介」。另一個重要的事情是這些運行的程式是通過稱為 `system call` 的方式與 Kernel 互動的。 `system call` 本質上就像函式呼叫一樣。 Kernel 提供了不同的 endpoint 給運行中的程式，以便說：“嘿，如果你想將一個檔案寫入硬碟，通過 system call與我溝通，利用 endpoint 提供的功能來執行特定的操作。
@@ -207,22 +206,22 @@ flowchart TD
 ```mermaid
 flowchart TD
     subgraph Software
-      sp["App 1 (Node.js 14)"]
-      ap["App 2 (Node.js 18)"]
+        sp["App 1 (Node.js 14)"]
+        ap["App 2 (Node.js 18)"]
     end
         
     subgraph Hardware
-      subgraph HardDisk
-        node18["Node.js 14
-          (Couldn't Run App 2)
-        "]
-      end
+        subgraph HardDisk
+            node18["Node.js 14<br>(Couldn't Run App 2)"]
+        end
     end
 
-    sp-.system call.->Kernel
-    ap-.system call.->Kernel
+    Kernel(((Kernel)))
+
+    sp -->|system call| Kernel
+    ap -->|system call| Kernel
     
-    Kernel-.->node18
+    Kernel -.-> node18
 ```
 
 
@@ -232,61 +231,90 @@ flowchart TD
 ```mermaid
 flowchart TD
     subgraph Software
-      sp["App 1 (Node.js 14)"]
-      ap["App 2 (Node.js 18)"]
+        sp["App 1 (Node.js 14)"]
+        ap["App 2 (Node.js 18)"]
     end
-    
+
     subgraph Hardware
-      subgraph HardDisk
-      node14["Node.js 14"]
-      node18["Node.js 18"]
-      end
+        subgraph HardDisk
+            node14["Node.js 14"]
+            node18["Node.js 18"]
+        end
     end
 
-    sp-.system call.->Kernel
-    ap-.system call.->Kernel
-    
-    Kernel-.->node14
-    Kernel-.->node18
+    Kernel(((Kernel)))
+
+    sp -->|system call| Kernel
+    ap -->|system call| Kernel
+
+    Kernel -.-> node14
+    Kernel -.-> node18
 ```
 
 
-## Namespacing & Contorl Groups(cgroups)
+## Namespacing & Control Groups(cgroups)
 
-在 Docker 中，Namespacing （命名空間）和 Control Groups（控制群組）是兩個核心功能，用於提供 Container 的隔離和資源限制。雖然它們是獨立的功能，但通常一起使用以實現更強大的且多功能的環境。
+在 Docker 中，**Namespacing（命名空間）與Control Groups（控制群組)** 是兩項核心技術，分別用於實現 Container 的環境隔離與資源限制。
+雖然這兩者在設計上是獨立的功能，但通常會搭配使用，以打造更強大且具彈性的執行環境。
 
-```console
-  Namespacing 用於隔離資源，以提供每個 process （process）獨立的環境。
-  包括 process （processes）、硬碟（Hard Drive）、網路（Network）等。
-  透過 Namespacing 的隔離，process 可以在自己的環境中運行。
-                      ┌─────────────────────────────────────────┐
-                      │ ┌──────────┐ ┌───────────┐  ┌─────────┐ │
-                      │ │processes │ │Hard Drive │  │ Network │ │
-   ┌──────────────┐   │ └──────────┘ └───────────┘  └─────────┘ │
-   │ Namespacing  │   │                        ┌───────────────┐│
-   └──────────────┘   │ ┌───────┐  ┌─────────┐ │ Inter Process ││
-  Isolating resources │ │ Users │  │Hostnames│ │ Communication ││
-    per process       │ └───────┘  └─────────┘ └───────────────┘│
-                      └─────────────────────────────────────────┘
+### Namespacing
+Namespacing 用於資源隔離，為每個 Process 提供獨立的執行環境，包括 Process（PID）、檔案系統（Mount）、網路（Network）、使用者 ID（UID）等。透過 Namespacing，Process 可以在自己的環境中運行，與其他 Container 或主機上的 Process 相互隔離，確保執行環境的獨立性與安全性。
 
-  Control Groups 用於限制 Container 中 process 可以使用的資源量。
-  包括記憶體、CPU 使用、硬碟輸入輸出和網路頻寬。
-  透過 Control Groups，系統管理者可以對 Container 中的 process 進行資源限制。                      
-                      ┌─────────────────────────────────────────┐
-                      │  ┌─────────┐ ┌─────────┐ ┌─────────┐    │
-   ┌──────────────┐   │  │ Memory  │ │CPU Usage│ │ HD I/O  │    │
-   │Control Groups│   │  └─────────┘ └─────────┘ └─────────┘    │
-   └──────────────┘   │  ┌─────────┐                            │
-    Limit amount of   │  │Network  │                            │
-  resources used per  │  │Bandwidth│                            │
-        process       │  └─────────┘                            │
-                      └─────────────────────────────────────────┘
+
+```mermaid
+flowchart TD
+    subgraph Namespacing["Namespacing<br>Isolating resources<br>per process"]
+        direction LR
+    end
+
+    subgraph Resources[ ]
+        direction LR
+        subgraph Group1[ ]
+            direction TB
+            proc[processes]
+            hd[Hard Drive]
+            net[Network]
+            users[Users]
+            host[Hostnames]
+            ipc[Inter Process<br>Communication]
+        end
+    end
+
+    Namespacing --> proc
+    Namespacing --> hd
+    Namespacing --> net
+    Namespacing --> users
+    Namespacing --> host
+    Namespacing --> ipc
+```  
+
+### Control Groups
+Control Groups（cgroups） 則用於限制 Container 中 Process 可使用的資源量，例如 CPU、記憶體、磁碟 I/O、網路頻寬等。系統管理員可透過 Control Groups 對 Container 的資源使用進行精細控管，避免單一 Container 佔用過多資源，進而影響其他 Container 或主機效能。此外，Control Groups 也提供資源使用的監控工具，有助於掌握 Container 的執行狀態。
+
+```mermaid
+flowchart TD
+    subgraph ControlGroups["Control Groups<br>Limit amount of<br>resources used per process"]
+        direction LR
+    end
+
+    subgraph Resources[ ]
+        direction TB
+
+        subgraph Row1[ ]
+            direction LR
+            mem[Memory]
+            cpu[CPU Usage]
+            io[HD I/O]
+            net[Network<br>Bandwidth]
+        end
+
+    end
+
+    ControlGroups --> mem
+    ControlGroups --> cpu
+    ControlGroups --> io
+    ControlGroups --> net
 ```
 
 
-Namespacing 主要用於為每個 process 提供了一個獨立的環境，使每個 Container 都擁有自己獨立的 Namespacing 。這包括 Process ID（PID）、網路（network）、檔案系統（mount）、使用者 ID（UID）等。通過Namespacing 的隔離，Container 內的 process 可以感知到自己獨立運行在一個環境中，與其他 Container 和主機上的 process 相互隔離。這有助於確保 Container 的運行環境獨立且安全。
-
-而 Control Groups 則`用於限制 Container 可以使用的資源量`。它通過將 Container 中的 process 分組並賦予這些群組特定的資源限制，如 CPU 使用、記憶體使用、網路頻寬等。這使得系統管理者可以對 Container 的資源使用進行精細調節，`防止某個 Container 佔用過多資源影響其他 Container 或主機的性能`。 Control Groups 還提供了控制和監視 Container 資源使用的工具，方便管理 Container 的運行狀態。
-
-因此，Namespacing 和 Control Groups 是 Docker 中兩個相互補充的功能，Namespacing 提供隔離環境， Control Groups 提供資源限制和管理。它們一起確保 Container 能夠運行在一個獨立且受控的環境中，實現了高效且安全的應用程式部署和運行。
-
+>Namespacing 負責環境的「隔離」，Control Groups 負責資源的「限制與管理」，兩者在 Docker 中相輔相成，共同建立一個獨立且受控的 Container 執行環境，實現高效、安全的應用部署與運行。

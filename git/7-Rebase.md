@@ -15,18 +15,31 @@ Git Rebase 使一個使用時必須謹慎但又實用的指令， Rebase 有兩�
 
 隨著時間的推移，倘若main的合併越活躍，就會越多合併 commit 出現在所負責的分支 History ，多次合併動作 (main branch->feature branch) ，會導致冗長的 commit History (如 Feat 3 、 Feat 5 ) ，許多的commit僅僅代表合併的操作，而非該分支內容的開發歷程，所幸 Git Rebase 可以幫我們將分支內的歷史重新整理，此舉僅僅是將 commit History 內的 commit 重新排列組合，不會改變程式碼內容，但又可以讓 commit History 看起來更有條理。
 
-```js
-//          Before Rebase
-//         
-//                                (main branch)
-//  Main1--- -Main2---------Main3---------Main4
-//              |             |            |
-//              |            Merge       Merge
-//              |             |            |
-//              v             v            v
-//            Feat1--Feat2--Feat3--Feat4--Feat5
-//                                    (feature branch)
+```mermaid
+gitGraph
+    commit id: "Main1"
+    branch feature
+    checkout feature
+    commit id: "Feat1"
+    commit id: "Feat2"
+    checkout main
+    commit id: "Main2"
+    merge feature
+
+    checkout feature
+    commit id: "Feat3"
+    checkout main
+    commit id: "Main3"
+    merge feature
+
+    checkout feature
+    commit id: "Feat4"
+    commit id: "Feat5"
+    checkout main
+    commit id: "Main4"
+    merge feature tag: "main (HEAD)"
 ```
+
 
 將位置移動到要重整 History 的分支位置，並輸入 `git rebase main` 。
 
@@ -37,12 +50,17 @@ Git Rebase 使一個使用時必須謹慎但又實用的指令， Rebase 有兩�
 
 Rebase 會將與 main 有關的 commit (包含合併 commit ，如 Main 3 以及 Main 4 )移到 feature branch 之前，將原本存在於 feature branch 內的合併 commit (如上方的Feat3以及Feat5) 移除，剩餘尾端的就是真正與 feature branch 內容有關的 commit 。該方法僅會讓 feature branch 內的 commit hash 改變，但不會改變其內容。
 
-```js
-//          After Rebase
-//         
-//                       (main)                   
-//  Main1--Main2--Main3--Main4--Feat1--Feat2--Feat4
-//                                           (feature)
+```mermaid
+gitGraph
+    commit id: "Main1"
+    commit id: "Main2"
+    commit id: "Main3"
+    commit id: "Main4"
+    branch feature
+    checkout feature
+    commit id: "Feat1"
+    commit id: "Feat2"
+    commit id: "Feat4" tag: "feature, HEAD"
 ```
 
 > Rebase 前後 的Feat 1 、 Feat 2 、 Feat 4 內容一樣， **但 commit-hash 已經完全不同，因為 Git Rebase 替它們建立新的 commit hash** 。
@@ -53,16 +71,22 @@ Rebase 會將與 main 有關的 commit (包含合併 commit ，如 Main 3 以及
 
 feature branch 一路上都沒有進行合併的動作，直到完工 (Feat 5 )
 
-```js
-//          Before Rebase
-//                                        main
-//  Main#1----Main#2-------Main#3--------Main#4
-//              \
-//               \
-//                \
-//             Feat#1--Feat#2--Feat#3--Feat#4--Feat#5
-//                                             feature
+```mermaid
+gitGraph
+    commit id: "Main#1"
+    commit id: "Main#2"
+    branch feature
+    checkout feature
+    commit id: "Feat#1"
+    commit id: "Feat#2"
+    commit id: "Feat#3"
+    commit id: "Feat#4"
+    commit id: "Feat#5" tag: "feature"
+    checkout main
+    commit id: "Main#3"
+    commit id: "Main#4" tag: "main, HEAD"
 ```
+
 
 在 feature branch 位置進行 Rebase 作業
 
@@ -72,12 +96,19 @@ feature branch 一路上都沒有進行合併的動作，直到完工 (Feat 5 )
 
 執行指令後， commit history 已經被重整，且 main branch 被合併至 feature branch 內部。
 
-```js
-//          After Rebase
-//         
-//                              main
-//  Main#1---Main#2---Main#3---Main#4---Feat#1---Feat#2---Feat#3
-//                                                        feature
+```mermaid
+gitGraph
+    commit id: "Main#1"
+    commit id: "Main#2"
+    commit id: "Main#3"
+    commit id: "Main#4" tag: "main"
+    branch feature
+    checkout feature
+    commit id: "Feat#1"
+    commit id: "Feat#2"
+    commit id: "Feat#3"
+    commit id: "Feat#4"
+    commit id: "Feat#5" tag: "feature, HEAD"
 ```
 
 ### **Rebase 的好處**
