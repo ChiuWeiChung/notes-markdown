@@ -2,21 +2,20 @@
 
 前言：在學習 PostgreSQL 的過程中，我開始好奇資料庫在執行查詢時，背後是如何提升搜尋效率的。這讓我接觸到了 B-tree 這種常用的資料結構，也因此產生了濃厚的興趣。以下是我針對 B-tree 所整理的學習筆記，並輔以 JavaScript 的實作來說明。
 
-## 📘 B-tree 基本概念（根據 JavaScript 實作）
+## 📘 B-tree 基本概念
 
-* **階數（order）t**：定義 B-tree 的最小度數，每個節點的子節點數與 key 數受其限制。
-* **t ≥ 2**：階數至少為 2，否則無法維持 B-tree 的平衡特性。
-* **每個節點最多可插入 `2t - 2` 個 key，最多有 `2t` 個子節點**。
+1. **鍵值排序**：每個節點中的鍵值都按照遞增順序儲存。
+2. **葉節點標記**：每個節點都有一個布林值 `leaf`，當該節點是葉節點時，此值為 true。
+3. **節點容量**：如果 n 是樹的階數（order），每個內部節點最多可以包含 n-1 個鍵值，並且有指向每個子節點的指標。
+4. **子節點數量限制**：除了根節點外，每個內部節點最多可以有 n 個子節點，最少要有 ⌈n/2⌉ 個子節點（向上取整）。對於葉節點，最多有 n-1 個鍵值，最少有 ⌈n/2⌉-1 個鍵值。
+5. **葉節點深度一致**：所有葉節點都位於相同的深度（即樹的高度 h）。
+6. **根節點特性**：如果根節點不是葉節點，則至少有 2 個子節點；如果是葉節點，則至少包含 1 個鍵值。根節點不受最小鍵值數量限制。
+7. **高度公式**：如果 n ≥ 1，對於任何包含 n 個鍵值的 B-tree，其高度 h 和最小度數 t ≥ 2，滿足：h ≥ log_t((n+1)/2)。
 
-  * 當節點即將插入第 `2t - 1` 個 key 時，就會預先分裂，因此正常情況下節點永遠不會實際擁有 `2t - 1` 個 key。
-* **每個非根節點至少要有 `t - 1` 個 key**。
-* **根節點可以少於 `t - 1` 個 key**，甚至在初始化時為空。
-* **Key 值會維持遞增排序**，以支援快速搜尋與插入。
-* **節點型態**：
-
-  * **葉節點（leaf node）**：無子節點
-  * **內部節點（internal node）**：有子節點
-
+### 💡 重點說明
+- **階數（Order）**：決定了節點可以擁有的最大子節點數量
+- **最小度數（Minimum Degree）**：通常記為 t，階數 n 與最小度數 t 的關係為 n = 2t，或 t = ⌈n/2⌉
+- **平衡性**：B-tree 透過分裂和合併操作保持所有葉節點在同一層，確保查詢效率
 
 ## 🌐 B-tree 常見應用場景
 
@@ -43,40 +42,52 @@ B-tree 的設計重點是 **每層節點都儲存多個 key**，這讓整棵樹�
 高度為 3 的 B-tree（每個節點最多有 3 個子節點）
 ```mermaid
 graph TD
-    R["[20, 50]"]
-    A["[5, 10]"]
-    B["[25, 30]"]
-    C["[60, 70]"]
+    %% Level 0
+    L0["[28, 45]"]
 
-    A1["..."]
-    A2["..."]
-    B1["..."]
-    B2["..."]
-    C1["..."]
-    C2["..."]
+    %% Level 1 nodes
+    L1A["[15]"]
+    L1B["[32, 35]"]
+    L1C["[55]"]
 
-    R --> A
-    R --> B
-    R --> C
+    %% Level 2 leaf nodes
+    L2A1["[5, 10] (leaf)"]
+    L2A2["[20, 25] (leaf)"]
 
-    A --> A1
-    A --> A2
-    B --> B1
-    B --> B2
-    C --> C1
-    C --> C2
+    L2B1["[30, 31] (leaf)"]
+    L2B2["[33] (leaf)"]
+    L2B3["[40] (leaf)"]
+
+    L2C1["[50] (leaf)"]
+    L2C2["[60, 65] (leaf)"]
+
+    %% Connections
+    L0 --> L1A
+    L0 --> L1B
+    L0 --> L1C
+
+    L1A --> L2A1
+    L1A --> L2A2
+
+    L1B --> L2B1
+    L1B --> L2B2
+    L1B --> L2B3
+
+    L1C --> L2C1
+    L1C --> L2C2
 ```
 
 假設你要找的是數字 25：
-1. 從 root 節點 \[20, 50] 開始，25 在 20 與 50 之間 → 走中間那條路。
-2. 進入中間節點 \[25, 30] → 找到 25！
+1. 從 root 節點 \[28, 45] 開始，25 < 28 → 走左邊的路徑。
+2. 進入左子節點 \[15]，25 > 15 → 走右邊的路徑。
+3. 到達葉節點 \[20, 25]，找到 25！
 
 即使資料筆數變多，只要維持樹的平衡與分裂規則，層數也不會爆增，因此搜尋時間通常維持在 O(log N) 的效率，非常適合大量資料的快速查詢。
 
 
 
 
-# B-tree 基本概念與插入示意（階數 t=2, bottom-up 分裂）
+# B-tree 基本概念與插入示意（階數 =3, bottom-up 分裂）
 
 插入順序: `[10, 20, 5, 6, 12, 30, 7, 17]`
 
@@ -267,227 +278,427 @@ class BTreeNode {
     this.keys = [];          // 存放鍵值（遞增）
     this.children = [];      // 子節點指標
     this.isLeaf = isLeaf;    // 是否為葉節點
+    this.n = 0;              // 當前鍵值數量
   }
 }
 
 class BTree {
-  constructor(order = 2) {   // order = t (最小度數)
-    this.order = order;
-    this.root = new BTreeNode(true);
+  constructor(maxDegree = 3) {   // Max Degree (每個節點最多 maxDegree-1 個鍵值)
+    this.maxDegree = maxDegree;
+    this.maxKeys = maxDegree - 1;  // 最多鍵值數量
+    this.root = null;
   }
 
-  /* ---------- INSERT（與你原本相同） ---------- */
-
+  // 插入鍵值
   insert(key) {
-    const res = this._insert(this.root, key);
-    if (res) {                      // root overflow → split 並長高
-      const newRoot = new BTreeNode(false);
-      newRoot.keys = [res.promote];
-      newRoot.children = [res.left, res.right];
-      this.root = newRoot;
-    }
-  }
-
-  _insert(node, key) {
-    const t = this.order;
-
-    if (node.isLeaf) {
-      // 1) 插入到葉子
-      let i = node.keys.length - 1;
-      while (i >= 0 && key < node.keys[i]) i--;
-      node.keys.splice(i + 1, 0, key);
-
-      // 2) 若葉子滿 (2t-1)，回傳 split 資訊
-      return node.keys.length === 2 * t - 1 ? this._split(node) : null;
+    if (this.root === null) {
+      this.root = new BTreeNode(true);
+      this.root.keys[0] = key;
+      this.root.n = 1;
     } else {
-      // 找到要遞迴的 child
-      let i = node.keys.length - 1;
-      while (i >= 0 && key < node.keys[i]) i--;
-      i++;
-
-      const res = this._insert(node.children[i], key);
-
-      // 若 child split，插入 promote
-      if (res) {
-        node.keys.splice(i, 0, res.promote);
-        node.children.splice(i, 1, res.left, res.right);
-        if (node.keys.length === 2 * t - 1) return this._split(node);
+      // 先插入到適當位置
+      this.insertToNode(this.root, key);
+      
+      // 插入後檢查根節點是否需要分裂
+      if (this.root.n > this.maxKeys) {
+        this.splitRoot();
       }
-      return null;
     }
   }
 
-  _split(node) {
-    const t = this.order;
-    const mid = t - 1;                    // promote index
-    const promote = node.keys[mid];
+  // 插入到節點
+  insertToNode(node, key) {
+    if (node.isLeaf) {
+      // 葉節點：直接插入並保持排序
+      let i = node.n - 1;
+      while (i >= 0 && node.keys[i] > key) {
+        node.keys[i + 1] = node.keys[i];
+        i--;
+      }
+      node.keys[i + 1] = key;
+      node.n++;
+    } else {
+      // 內部節點：找到適當的子節點
+      let i = 0;
+      while (i < node.n && key > node.keys[i]) {
+        i++;
+      }
 
-    const left = new BTreeNode(node.isLeaf);
-    const right = new BTreeNode(node.isLeaf);
-    left.keys = node.keys.slice(0, mid);
-    right.keys = node.keys.slice(mid + 1);
+      // 遞歸插入到子節點
+      this.insertToNode(node.children[i], key);
+      
+      // 插入後檢查子節點是否需要分裂
+      if (node.children[i].n > this.maxKeys) {
+        this.splitChild(node, i);
+      }
+    }
+  }
+
+  // 分裂根節點
+  splitRoot() {
+    const oldRoot = this.root;
+    const newRoot = new BTreeNode(false);
+    
+    // 創建新的右子節點
+    const rightChild = new BTreeNode(oldRoot.isLeaf);
+    
+    // 計算中間位置
+    const middleIndex = Math.floor(oldRoot.n / 2);
+    const middleKey = oldRoot.keys[middleIndex];
+    
+    // 右子節點獲得後半部分的鍵值
+    for (let j = middleIndex + 1; j < oldRoot.n; j++) {
+      rightChild.keys[j - middleIndex - 1] = oldRoot.keys[j];
+    }
+    rightChild.n = oldRoot.n - middleIndex - 1;
+    
+    // 左子節點保留前半部分的鍵值
+    oldRoot.n = middleIndex;
+    oldRoot.keys.length = middleIndex;
+    
+    // 如果不是葉節點，需要分配子節點
+    if (!oldRoot.isLeaf) {
+      // 右子節點獲得後半部分的子節點
+      for (let j = middleIndex + 1; j <= oldRoot.children.length - 1; j++) {
+        rightChild.children[j - middleIndex - 1] = oldRoot.children[j];
+      }
+      // 左子節點保留前半部分的子節點
+      oldRoot.children.length = middleIndex + 1;
+    }
+    
+    // 設置新根
+    newRoot.keys[0] = middleKey;
+    newRoot.n = 1;
+    newRoot.children[0] = oldRoot;
+    newRoot.children[1] = rightChild;
+    
+    this.root = newRoot;
+  }
+
+  // 分裂子節點
+  splitChild(parent, index) {
+    const fullChild = parent.children[index];
+    const newChild = new BTreeNode(fullChild.isLeaf);
+    
+    // 計算中間位置
+    const middleIndex = Math.floor(fullChild.n / 2);
+    const middleKey = fullChild.keys[middleIndex];
+    
+    // 右子節點獲得後半部分的鍵值
+    for (let j = middleIndex + 1; j < fullChild.n; j++) {
+      newChild.keys[j - middleIndex - 1] = fullChild.keys[j];
+    }
+    newChild.n = fullChild.n - middleIndex - 1;
+    
+    // 左子節點保留前半部分的鍵值
+    fullChild.n = middleIndex;
+    fullChild.keys.length = middleIndex;
+    
+    // 如果不是葉節點，分配子節點
+    if (!fullChild.isLeaf) {
+      // 右子節點獲得後半部分的子節點
+      for (let j = middleIndex + 1; j <= fullChild.children.length - 1; j++) {
+        newChild.children[j - middleIndex - 1] = fullChild.children[j];
+      }
+      // 左子節點保留前半部分的子節點
+      fullChild.children.length = middleIndex + 1;
+    }
+    
+    // 在父節點中為新子節點騰出空間
+    for (let j = parent.n; j > index; j--) {
+      parent.children[j + 1] = parent.children[j];
+    }
+    parent.children[index + 1] = newChild;
+    
+    // 在父節點中插入中間鍵值
+    for (let j = parent.n - 1; j >= index; j--) {
+      parent.keys[j + 1] = parent.keys[j];
+    }
+    parent.keys[index] = middleKey;
+    parent.n++;
+  }
+
+  // 刪除鍵值
+  delete(key) {
+    if (!this.root) {
+      console.log("Tree is empty");
+      return;
+    }
+
+    this.deleteFromNode(this.root, key);
+
+    // 如果根節點變空了
+    if (this.root.n === 0) {
+      if (!this.root.isLeaf && this.root.children[0]) {
+        this.root = this.root.children[0];
+      } else {
+        this.root = null;
+      }
+    }
+  }
+
+  // 從節點中刪除鍵值
+  deleteFromNode(node, key) {
+    const idx = this.findKey(node, key);
+
+    if (idx < node.n && node.keys[idx] === key) {
+      // 找到了要刪除的鍵值
+      if (node.isLeaf) {
+        this.removeFromLeaf(node, idx);
+      } else {
+        this.removeFromNonLeaf(node, idx);
+      }
+    } else {
+      // 鍵值不在當前節點中
+      if (node.isLeaf) {
+        console.log(`Key ${key} not found in tree`);
+        return;
+      }
+
+      // 判斷鍵值是否在子樹中
+      const isInSubtree = (idx === node.n) ? true : false;
+
+      // 如果子節點的鍵值數量等於最小值，需要先填充
+      if (node.children[idx].n === Math.ceil(this.maxKeys / 2)) {
+        this.fill(node, idx);
+      }
+
+      // 遞歸刪除
+      if (isInSubtree && idx > node.n) {
+        this.deleteFromNode(node.children[idx - 1], key);
+      } else {
+        this.deleteFromNode(node.children[idx], key);
+      }
+    }
+  }
+
+  // 查找鍵值在節點中的位置
+  findKey(node, key) {
+    let idx = 0;
+    while (idx < node.n && node.keys[idx] < key) {
+      idx++;
+    }
+    return idx;
+  }
+
+  // 從葉節點刪除鍵值
+  removeFromLeaf(node, idx) {
+    // 將後面的鍵值前移
+    for (let i = idx + 1; i < node.n; i++) {
+      node.keys[i - 1] = node.keys[i];
+    }
+    node.n--;
+  }
+
+  // 從非葉節點刪除鍵值
+  removeFromNonLeaf(node, idx) {
+    const key = node.keys[idx];
+
+    if (node.children[idx].n > Math.ceil(this.maxKeys / 2)) {
+      // 從左子樹獲取前驅
+      const pred = this.getPredecessor(node, idx);
+      node.keys[idx] = pred;
+      this.deleteFromNode(node.children[idx], pred);
+    } else if (node.children[idx + 1].n > Math.ceil(this.maxKeys / 2)) {
+      // 從右子樹獲取後繼
+      const succ = this.getSuccessor(node, idx);
+      node.keys[idx] = succ;
+      this.deleteFromNode(node.children[idx + 1], succ);
+    } else {
+      // 合併鍵值和右子節點
+      this.merge(node, idx);
+      this.deleteFromNode(node.children[idx], key);
+    }
+  }
+
+  // 獲取前驅鍵值
+  getPredecessor(node, idx) {
+    let curr = node.children[idx];
+    while (!curr.isLeaf) {
+      curr = curr.children[curr.n];
+    }
+    return curr.keys[curr.n - 1];
+  }
+
+  // 獲取後繼鍵值
+  getSuccessor(node, idx) {
+    let curr = node.children[idx + 1];
+    while (!curr.isLeaf) {
+      curr = curr.children[0];
+    }
+    return curr.keys[0];
+  }
+
+  // 填充子節點
+  fill(node, idx) {
+    const minKeys = Math.ceil(this.maxKeys / 2);
+
+    // 如果前一個兄弟節點有多餘的鍵值，從前面借
+    if (idx !== 0 && node.children[idx - 1].n > minKeys) {
+      this.borrowFromPrev(node, idx);
+    }
+    // 如果後一個兄弟節點有多餘的鍵值，從後面借
+    else if (idx !== node.n && node.children[idx + 1].n > minKeys) {
+      this.borrowFromNext(node, idx);
+    }
+    // 如果兄弟節點都沒有多餘的鍵值，合併
+    else {
+      if (idx !== node.n) {
+        this.merge(node, idx);
+      } else {
+        this.merge(node, idx - 1);
+      }
+    }
+  }
+
+  // 從前一個兄弟節點借一個鍵值
+  borrowFromPrev(node, childIdx) {
+    const child = node.children[childIdx];
+    const sibling = node.children[childIdx - 1];
+
+    // 將父節點的鍵值下移到子節點
+    for (let i = child.n - 1; i >= 0; i--) {
+      child.keys[i + 1] = child.keys[i];
+    }
+
+    if (!child.isLeaf) {
+      for (let i = child.n; i >= 0; i--) {
+        child.children[i + 1] = child.children[i];
+      }
+    }
+
+    child.keys[0] = node.keys[childIdx - 1];
+
+    if (!child.isLeaf) {
+      child.children[0] = sibling.children[sibling.n];
+    }
+
+    node.keys[childIdx - 1] = sibling.keys[sibling.n - 1];
+
+    child.n++;
+    sibling.n--;
+  }
+
+  // 從後一個兄弟節點借一個鍵值
+  borrowFromNext(node, childIdx) {
+    const child = node.children[childIdx];
+    const sibling = node.children[childIdx + 1];
+
+    child.keys[child.n] = node.keys[childIdx];
+
+    if (!child.isLeaf) {
+      child.children[child.n + 1] = sibling.children[0];
+    }
+
+    node.keys[childIdx] = sibling.keys[0];
+
+    for (let i = 1; i < sibling.n; i++) {
+      sibling.keys[i - 1] = sibling.keys[i];
+    }
+
+    if (!sibling.isLeaf) {
+      for (let i = 1; i <= sibling.n; i++) {
+        sibling.children[i - 1] = sibling.children[i];
+      }
+    }
+
+    child.n++;
+    sibling.n--;
+  }
+
+  // 合併子節點
+  merge(node, idx) {
+    const child = node.children[idx];
+    const sibling = node.children[idx + 1];
+
+    // 將父節點的鍵值和右兄弟的所有鍵值拉到左子節點
+    child.keys[child.n] = node.keys[idx];
+
+    for (let i = 0; i < sibling.n; i++) {
+      child.keys[i + child.n + 1] = sibling.keys[i];
+    }
+
+    if (!child.isLeaf) {
+      for (let i = 0; i <= sibling.n; i++) {
+        child.children[i + child.n + 1] = sibling.children[i];
+      }
+    }
+
+    // 將父節點的鍵值前移
+    for (let i = idx + 1; i < node.n; i++) {
+      node.keys[i - 1] = node.keys[i];
+    }
+
+    // 將子節點指針前移
+    for (let i = idx + 2; i <= node.n; i++) {
+      node.children[i - 1] = node.children[i];
+    }
+
+    child.n += sibling.n + 1;
+    node.n--;
+  }
+
+  // 打印 B-tree（層序遍歷）
+  print() {
+    if (!this.root) {
+      console.log('Empty B-Tree');
+      return;
+    }
+
+    console.log(`B-Tree structure (Max Degree = ${this.maxDegree}):`);
+    this.printLevel(this.root, 0);
+  }
+
+  // 遞歸打印每一層
+  printLevel(node, level) {
+    if (!node) return;
+
+    const indent = '  '.repeat(level);
+    const keys = node.keys.slice(0, node.n);
+    const keyStr = keys.length > 0 ? keys.join(', ') : 'empty';
+    console.log(`${indent}Level ${level}: [${keyStr}]${node.isLeaf ? ' (leaf)' : ''}`);
 
     if (!node.isLeaf) {
-      left.children = node.children.slice(0, t);
-      right.children = node.children.slice(t);
-    }
-    return { promote, left, right };
-  }
-
-  /* ---------- DELETE  (完整)  ---------- */
-
-  delete(key) {
-    this._delete(this.root, key);
-
-    // root 若被清空且非葉 → 樹高下降
-    if (!this.root.isLeaf && this.root.keys.length === 0) {
-      this.root = this.root.children[0];
-    }
-  }
-
-  /**
-   * 刪除 key，確保遞迴前 child 皆有 >= t keys
-   */
-  _delete(node, key) {
-    const t = this.order;
-
-    /* ---------- STEP 1：找 key 在 node 的位置 ---------- */
-    let idx = 0;
-    while (idx < node.keys.length && key > node.keys[idx]) idx++;
-
-    /* ---------- 情況 A：key 在當前節點 ---------- */
-    if (idx < node.keys.length && node.keys[idx] === key) {
-      if (node.isLeaf) {
-        /* A-1：葉節點 → 直接刪 */
-        node.keys.splice(idx, 1);
-      } else {
-        /* A-2：內部節點 → 用 predecessor / successor 取代，再遞迴刪除 */
-        const leftChild = node.children[idx];
-        const rightChild = node.children[idx + 1];
-
-        // 若左子樹有 ≥ t keys，用前驅取代
-        if (leftChild.keys.length >= t) {
-          const pred = this._getPredecessor(leftChild);
-          node.keys[idx] = pred;
-          this._delete(leftChild, pred);
-        }
-        // 否則若右子樹有 ≥ t keys，用後繼取代
-        else if (rightChild.keys.length >= t) {
-          const succ = this._getSuccessor(rightChild);
-          node.keys[idx] = succ;
-          this._delete(rightChild, succ);
-        }
-        // 兩邊都只剩 t-1 → 合併再遞迴
-        else {
-          this._merge(node, idx);            // 左＋key＋右 → 左
-          this._delete(leftChild, key);
+      for (let i = 0; i <= node.n; i++) {
+        if (node.children[i]) {
+          this.printLevel(node.children[i], level + 1);
         }
       }
-      return;                               // 刪除完成
-    }
-
-    /* ---------- 情況 B：key 不在此節點 ---------- */
-    if (node.isLeaf) return;                // 到葉子仍沒找到 ⇒ 不存在
-
-    // 確保遞迴 child 前，其 keys ≥ t
-    const child = node.children[idx];
-
-    if (child.keys.length === t - 1) this._fill(node, idx);
-
-    // 重新定位 child（_fill 可能改變 children 結構）
-    const next = node.children[
-      idx >= node.keys.length + 1 ? node.keys.length : idx
-    ];
-    this._delete(next, key);
-  }
-
-  /* ---------- 工具函式（predecessor / successor） ---------- */
-  _getPredecessor(node) {
-    while (!node.isLeaf) node = node.children[node.children.length - 1];
-    return node.keys[node.keys.length - 1];
-  }
-  _getSuccessor(node) {
-    while (!node.isLeaf) node = node.children[0];
-    return node.keys[0];
-  }
-
-  /* ---------- 借位（from prev / next） ---------- */
-  _borrowFromPrev(parent, idx) {
-    const child = parent.children[idx];
-    const sibling = parent.children[idx - 1];      // 左兄弟
-
-    // 把 parent 的分隔 key 下移到 child，兄弟最後一 key 上提
-    child.keys.unshift(parent.keys[idx - 1]);
-    if (!sibling.isLeaf) child.children.unshift(sibling.children.pop());
-    parent.keys[idx - 1] = sibling.keys.pop();
-  }
-  _borrowFromNext(parent, idx) {
-    const child = parent.children[idx];
-    const sibling = parent.children[idx + 1];      // 右兄弟
-
-    child.keys.push(parent.keys[idx]);
-    if (!sibling.isLeaf) child.children.push(sibling.children.shift());
-    parent.keys[idx] = sibling.keys.shift();
-  }
-
-  /* ---------- 合併 child[idx] 與 child[idx+1] ---------- */
-  _merge(parent, idx) {
-    const child = parent.children[idx];
-    const sibling = parent.children[idx + 1];
-
-    child.keys.push(parent.keys[idx], ...sibling.keys);
-    if (!child.isLeaf) child.children.push(...sibling.children);
-
-    parent.keys.splice(idx, 1);
-    parent.children.splice(idx + 1, 1);           // 移掉右兄弟
-  }
-
-  /**
-   * 確保 child[idx] 在遞迴前有 ≥ t keys  
-   * 若不足：先嘗試向左右兄弟借位；若借不到則與兄弟合併
-   */
-  _fill(parent, idx) {
-    const t = this.order;
-    const leftOk =
-      idx > 0 && parent.children[idx - 1].keys.length >= t;
-    const rightOk =
-      idx < parent.children.length - 1 &&
-      parent.children[idx + 1].keys.length >= t;
-
-    if (leftOk) this._borrowFromPrev(parent, idx);
-    else if (rightOk) this._borrowFromNext(parent, idx);
-    else {
-      // 兩邊都只有 t-1 → 必須合併
-      if (idx < parent.children.length - 1) {
-        this._merge(parent, idx);           // 與右兄弟合併
-      } else {
-        this._merge(parent, idx - 1);       // 與左兄弟合併
-      }
     }
   }
 
-  /* ---------- SEARCH (保留原實作) ---------- */
-  search(key) { return this._search(this.root, key); }
-  _search(node, key) {
+  // 中序遍歷打印（排序輸出）
+  inorderTraversal() {
+    const result = [];
+    if (this.root) {
+      this.traverse(this.root, result);
+    }
+    console.log('Inorder traversal:', result.join(', '));
+    return result;
+  }
+
+  traverse(node, result) {
+    if (!node) return;
+
     let i = 0;
-    while (i < node.keys.length && key > node.keys[i]) i++;
-    if (i < node.keys.length && key === node.keys[i]) return { node, index: i };
-    if (node.isLeaf) return null;
-    return this._search(node.children[i], key);
-  }
-
-  /* ---------- DEBUG PRINT ---------- */
-  print(node = this.root, level = 0) {
-    console.log("  ".repeat(level) + `[${node.keys.join(", ")}]`);
-    node.children.forEach(c => this.print(c, level + 1));
+    for (i = 0; i < node.n; i++) {
+      if (!node.isLeaf && node.children[i]) {
+        this.traverse(node.children[i], result);
+      }
+      result.push(node.keys[i]);
+    }
+    
+    if (!node.isLeaf && node.children[i]) {
+      this.traverse(node.children[i], result);
+    }
   }
 }
-
 ```
 
 
 ## 🔗 參考資源與延伸閱讀
 
-1. [B-trees in 10 Minutes – YouTube 教學影片](https://youtu.be/K1a2Bk8NrYQ?si=901s5UgagT-XbkY3) - 這部影片提供了清晰的視覺化流程，幫助我建立 B-tree 的基本認知與操作方式。
+1. [Understanding B-Trees: The Data Structure Behind Modern Databases](https://youtu.be/K1a2Bk8NrYQ?si=901s5UgagT-XbkY3) - 這部影片提供了清晰的視覺化流程，幫助我建立 B-tree 的基本認知與操作方式。
 2. [PostgreSQL 官方文件：索引與 B-tree](https://www.postgresql.org/docs/current/indexes.html) - 深入了解 B-tree 在實際資料庫系統（如 PostgreSQL）中的應用與最佳化策略。
-3. 本篇 JavaScript 實作部分，為了幫助理解整體邏輯與插入／刪除操作，我透過 AI（ChatGPT）輔助生成與優化程式碼，並根據實際學習需求進行調整。
+3. [Rogramiz](https://www.programiz.com/dsa/b-tree)
+4. 本篇 JavaScript 實作部分，為了幫助理解整體邏輯與插入／刪除操作，我透過 AI（ChatGPT）輔助生成與優化程式碼，並根據實際學習需求進行調整。
