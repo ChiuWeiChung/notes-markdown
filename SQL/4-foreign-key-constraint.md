@@ -73,7 +73,7 @@ WHERE id = 1;
 
 ### 3. `ON DELETE CASCADE`
 
-* 當我們刪除被參考的資料時，所有參考此資料的子資料也會一併自動刪除。
+* 當我們刪除被參考的資料時，所有參考該資料的子資料也會一併自動刪除，這稱為 ON DELETE CASCADE。
 
 ```sql
 CREATE TABLE photos (

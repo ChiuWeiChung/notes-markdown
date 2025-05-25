@@ -13,14 +13,22 @@
 * Leaf: B-D Nodes 沒有 Child ，所以稱為 Leaf 。
 * Edge:  Node 與 Node 之間的連結稱為 Edge 。
 
-```js
-//      Tree Data Structure
-// 
-//           Node(Root)
-//           /     \
-//       A-Node    D-Node
-//       /     \
-//    B-Node  C-Node
+```mermaid
+graph TD
+    Root["Root Node"]
+    A["A-Node"]
+    B["B-Node"]
+    C["C-Node"]
+    D["D-Node"]
+    E["E-Node"]
+    F["F-Node"]
+
+    Root --> A
+    Root --> D
+    A --> B
+    A --> C
+    D --> E
+    D --> F
 ```
 
 ## 樹的常見應用
@@ -164,16 +172,22 @@ Tree.insert(2)
 Tree.insert(3)
 Tree.insert(4)
 Tree.insert(5)
-//  ========此時的 Tree ======
-//          Root(1)
-//              \
-//           right(2)
-//                \
-//             right(3)
-//                  \
-//                right(4)
-//                    \
-//                  right(5)
+```
+
+```mermaid
+graph TD
+    A[1]
+    B[undefined]
+    C[2]
+    D[3]
+    E[4]
+    F[5]
+
+    A --> B
+    A --> C
+    C --> D
+    D --> E
+    E --> F
 ```
 
 ## 樹的遍歷 (Tree Traversal)
@@ -183,13 +197,32 @@ Tree Traversal 可以透過兩種方式達到，分別是 1. 廣度優先搜尋 
 假設一開始的樹結構如下圖:
 
 ```js
-//建構二元搜尋樹==========結構=========
-Tree.insert(10);  //      10
-Tree.insert(6)    //     /   \
-Tree.insert(15)   //    6    15
-Tree.insert(3)    //   / \     \
-Tree.insert(8)    //  3   8    20
-Tree.insert(20)   // =================
+//建構二元搜尋樹
+Tree.insert(10); 
+Tree.insert(6)   
+Tree.insert(15)  
+Tree.insert(3)   
+Tree.insert(8)   
+Tree.insert(14)   
+Tree.insert(20)  
+```
+
+```mermaid
+graph TD
+    A[10]
+    B[6]
+    C[15]
+    D[3]
+    E[8]
+    F[14]
+    G[20]
+
+    A --> B
+    A --> C
+    B --> D
+    B --> E
+    C --> F
+    C --> G
 ```
 
 ## 1. 廣度優先搜尋 (Breadth-first Search, BFS):  
@@ -214,7 +247,7 @@ class BinarySearchTree {
         return data;
     }
 }
-Tree.BFS(); //[10, 6, 15, 3, 8, 20]
+Tree.BFS(); //[10, 6, 15, 3, 8, 14, 20]
 ```
 
 `queue` 陣列 在 BFS 內的演變如下:  
@@ -231,7 +264,7 @@ Tree.BFS(); //[10, 6, 15, 3, 8, 20]
 ```
 
 ## 2. **深度優先搜尋 (Depth-first Search, DFS)** :  
- 深度優先搜尋 (DFS) 則是以樹的縱向先進行遍歷，而後才是橫向;兩者的時間複雜度是一樣的，然而對於`結構較寬`的樹而言，廣度優先搜尋會消耗較多的記憶體，而深度優先搜尋則是在`結構較深`的樹會佔據較多的記憶體。
+ 深度優先搜尋 (DFS) 則是以樹的縱向先進行遍歷，而後才是橫向，兩者的時間複雜度是一樣的，然而對於`結構較寬`的樹而言，廣度優先搜尋會消耗較多的記憶體，而深度優先搜尋則是在`結構較深`的樹會佔據較多的記憶體。
 
 ### 2-1 深度優先搜尋 (Depth-first Search, DFS) -前序遍歷 (PreOrder)
 
@@ -255,7 +288,7 @@ class BinarySearchTree {
         return data;
     }
 }
-Tree.DFSPreOrder(); //[10, 6, 3, 8, 15, 20]
+Tree.DFSPreOrder(); //[10, 6, 3, 8, 15, 14, 20]
 ```
 
 ### 2-2 深度優先搜尋 (Depth-first Search, DFS) -後序遍歷 (PostOrder)
@@ -277,7 +310,7 @@ class BinarySearchTree {
         return data;
     }
 }
-Tree.DFSPostOrder(); //[3, 8, 6, 20, 15, 10]
+Tree.DFSPostOrder(); //[3, 8, 6, 14, 20, 15, 10]
 ```
 
 ### 2-3 深度優先搜尋 (Depth-first Search, DFS) -中序遍歷 (InOrder)
@@ -299,5 +332,5 @@ class BinarySearchTree {
         return data;
     }
 }
-Tree.DFSInOrder(); //[3, 6, 8, 10, 15, 20]
+Tree.DFSInOrder(); //[3, 6, 8, 10, 14, 15, 20]
 ```
