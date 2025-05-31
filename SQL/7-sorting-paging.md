@@ -1,4 +1,4 @@
-# 資料排序 Sorting（ORDER BY、LIMIT、OFFSET）
+# PostgreSQL 學習筆記 - 排序（Sorting）與分割（OFFSET）與限制數量（LIMIT）
 
 ## 接下來的範例會使用以下兩個資料表：
 

@@ -1,4 +1,4 @@
-# Joins & Aggregation in PostgreSQL
+# PostgreSQL 學習筆記 - 交叉查詢（Join）
 
 資料庫中常用的兩大操作分別是 Join 和 Aggregation，透過這兩個方式，我們能有效地合併或分析資料。
 
@@ -11,7 +11,7 @@
 
 ## 2. Aggregation
 
-* 聚合函數是將多個列（rows）的資料，計算成一個單一數值。
+* Aggregation 是將多個列（rows）的資料，計算成一個單一數值。
 * 當需求中出現「最多」、「最少」、「平均」等描述時，就是使用 Aggregation。
 
 ---

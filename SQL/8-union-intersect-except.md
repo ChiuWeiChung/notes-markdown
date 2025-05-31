@@ -1,4 +1,4 @@
-# UNION、INTERSECT 與 EXCEPT（資料合併、交集與差集查詢）
+# PostgreSQL 學習筆記 - 資料合併（Union）與交集(Intersect)與差集（Except）
 
 ## 本文會用下方的資料表作為範例：
 

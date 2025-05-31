@@ -1,111 +1,202 @@
-# Data Types
+# PostgreSQL 學習筆記 - 資料型別
 
-下方內容如果有 markdown 語法 & 排版上不適合的地方，請協助修正，以方便讀者閱讀
+## 概述
 
-## Numbers Types
-### PostgreSQL Numeric Types 對照表
-
-### 1. 整數型（無小數點）
-
-| 型別       | 範圍                                      |
-|------------|-------------------------------------------|
-| `smallint` | -32,768 到 +32,767                        |
-| `integer`  | -2,147,483,648 到 +2,147,483,647          |
-| `bigint`   | -9,223,372,036,854,775,808 到 +9,223,372,036,854,775,807 |
-
-### 2.浮點數型（有小數點）
-
-| 型別              | 精度 / 範圍                                                |
-|-------------------|-------------------------------------------------------------|
-| `decimal`         | 最多 131072 位於小數點前，16383 位於小數點後               |
-| `numeric`         | 同 `decimal`，為精確數值型                                   |
-| `real`            | 約 6 位有效數字，範圍 1E-37 到 1E37                         |
-| `double precision`| 約 15 位有效數字，範圍 1E-307 到 1E308                      |
-| `float`           | 等同於 `real` 或 `double precision`，依實現細節而定         |
-
-### 3.自動遞增整數（無小數點，自動遞增）
-
-| 型別          | 範圍                                      |
-|---------------|-------------------------------------------|
-| `smallserial` | 1 到 32,767                               |
-| `serial`      | 1 到 2,147,483,647                        |
-| `bigserial`   | 1 到 9,223,372,036,854,775,807            |
-
-### Numeric Types Fast Rules
-
-* 'id' column of any table : Mark the column as `SERIAL`.
-* Need to store a number without a decimal: Mark the column as `INTEGER`.
-* Need to store a number with a decimal and this data need to be very accurate: Mark the column as `NUMERIC`.
-  * ex: Bank balance, grams of gold, scientific calculations.
-* Need to store a number with a decimal and the decimal doesn't make a big difference: Mark the column as `DOUBLE PRECISION`.
-  * ex: Kilograms of trash in a landfill, liters of water in a lake, air pressure in a tire.
+資料型別（Data Types）是資料庫設計的基礎。選擇正確的資料型別關係到查詢效能和資料完整性。
 
 
-```sql
-SELECT (1.99999::REAL - 1.99998::REAL)
-SELECT (1.99999::DOUBLE PRECISION - 1.99998::DOUBLE PRECISION)
-SELECT (1.99999::FLOAT - 1.99998::FLOAT)
-```
+## Numbers Types（數字型別）
 
-的結果與
+### PostgreSQL 數字型別對照表
 
-```sql
-SELECT (1.99999::DECIMAL - 1.99998::DECIMAL)
-SELECT (1.99999::NUMERIC - 1.99998::NUMERIC)
-```
+### 1. 整數型別（無小數點）
 
-不同，原因在 Performance 與 Precision 之間的考量
+| 型別       | 儲存大小 | 範圍                                      |
+|------------|----------|-------------------------------------------|
+| `smallint` | 2 bytes  | -32,768 到 +32,767                        |
+| `integer`  | 4 bytes  | -2,147,483,648 到 +2,147,483,647          |
+| `bigint`   | 8 bytes  | -9,223,372,036,854,775,808 到 +9,223,372,036,854,775,807 |
+
+### 2. 浮點數型別（有小數點）
+
+| 型別              | 儲存大小    | 精度 / 範圍                                                |
+|-------------------|-------------|-------------------------------------------------------------|
+| `decimal`         | 變動        | 最多 131,072 位於小數點前，16,383 位於小數點後               |
+| `numeric`         | 變動        | 同 `decimal`，為精確數值型                                   |
+| `real`            | 4 bytes     | 約 6 位有效數字，範圍 1E-37 到 1E37                         |
+| `double precision`| 8 bytes     | 約 15 位有效數字，範圍 1E-307 到 1E308                      |
+| `float`           | 4 或 8 bytes| 等同於 `real` 或 `double precision`，依實現細節而定         |
+
+### 3. 自動遞增型別（無小數點，自動遞增）
+
+| 型別          | 儲存大小 | 範圍                                      |
+|---------------|----------|-------------------------------------------|
+| `smallserial` | 2 bytes  | 1 到 32,767                               |
+| `serial`      | 4 bytes  | 1 到 2,147,483,647                        |
+| `bigserial`   | 8 bytes  | 1 到 9,223,372,036,854,775,807            |
 
 ---
 
-## Character Types
+### 數字型別選擇指南
 
-| Type          | Range                                                                               |
-|---------------|-------------------------------------------------------------------------------------|
-| `CHAR`        | Store some characters, length will always be 5 even if PG has to insert spaces      |
-| `VARCHAR`     | Store any length of string                                                          |
-| `VARCHAR(40)` | Store a string up to 40 characters, automatically remove extra characters           |
-| `TEXT`        | Store any length of string                                                          |
+以下是選擇數字型別的快速規則：
 
-> There is no performance difference between theses character types.
+#### **Primary Key 欄位**
+- **建議**：使用 `SERIAL`
+- **原因**：自動遞增，適合大多數情況
 
+#### **整數**
+- **建議**：使用 `INTEGER`
+- **原因**：平衡儲存空間和範圍需求
 
-## Boolean Types
+#### **高精度小數（金融、科學計算）**
+- **建議**：使用 `NUMERIC` 或 `DECIMAL`
+- **適用場景**：銀行餘額、黃金重量、科學計算
+- **優點**：精確計算，無浮點數誤差
 
-| VALUE                        | RESULT     |
-|------------------------------|-----------|
-| `true`, `'yes'`, on, 1, t, y |  TRUE     |
-| `false`, `'no'`, off, 0, f, n|  TRUE     |
-| null                         |  NULL     |
+#### **一般精度小數**
+- **建議**：使用 `DOUBLE PRECISION`
+- **適用場景**：垃圾場垃圾重量、湖泊水量、輪胎氣壓
+- **優點**：計算速度快，適合統計分析
 
+---
 
-## Date Types
+### 精度差異示範
 
-### DATE
-| VALUE                  | RESULT              |
+**浮點數型別**（可能有精度誤差）：
+
+```sql
+SELECT (1.99999::REAL - 1.99998::REAL);
+SELECT (1.99999::DOUBLE PRECISION - 1.99998::DOUBLE PRECISION);
+SELECT (1.99999::FLOAT - 1.99998::FLOAT);
+```
+
+**精確數值型別**（無精度誤差）：
+
+```sql
+SELECT (1.99999::DECIMAL - 1.99998::DECIMAL);
+SELECT (1.99999::NUMERIC - 1.99998::NUMERIC);
+```
+
+> **重要差異**：浮點數型別追求效能，精確數值型別追求準確性。
+
+---
+
+## Character Types（字元型別）
+
+### 字元型別對照表
+
+| 型別          | 說明                                                                |
+|---------------|---------------------------------------------------------------------|
+| `CHAR(n)`     | 固定長度字串，不足部分會以空格填充                                      |
+| `VARCHAR(n)`  | 變動長度字串，最多 n 個字元，超出部分自動截斷                           |
+| `VARCHAR`     | 變動長度字串，無長度限制                                              |
+| `TEXT`        | 變動長度字串，無長度限制                                              |
+
+> 💡 **效能提醒**：這些字元型別之間沒有效能差異，選擇主要基於業務需求。
+
+### 使用建議
+
+#### **固定長度資料**
+- **使用**：`CHAR(n)`
+- **適用**：國家代碼、產品編號
+- **範例**：`country_code CHAR(2)` -- 'TW', 'US'
+
+#### **有長度限制的變動字串**
+- **使用**：`VARCHAR(n)`
+- **適用**：使用者名稱、電子郵件
+- **範例**：`username VARCHAR(50)`
+
+#### **長文本內容**
+- **使用**：`TEXT`
+- **適用**：文章內容、描述欄位
+- **範例**：`article_content TEXT`
+
+---
+
+## Boolean Types（布林型別）
+
+### 布林值對應表
+
+| 輸入值                        | 結果     |
+|------------------------------|----------|
+| `true`, `'yes'`, `'on'`, `1`, `'t'`, `'y'` |  `TRUE`  |
+| `false`, `'no'`, `'off'`, `0`, `'f'`, `'n'`|  `FALSE` |
+| `null`                       |  `NULL`  |
+
+### 使用範例
+
+```sql
+-- 各種布林值的輸入方式
+INSERT INTO users (name, is_active) VALUES 
+    ('Alice', true),
+    ('Bob', 'yes'),
+    ('Charlie', 1),
+    ('Diana', false),
+    ('Eve', 'no'),
+    ('Frank', 0);
+```
+
+---
+
+## Date Types（日期時間型別）
+
+### DATE（日期型別）
+
+支援多種輸入格式，以下都會解析為 1980年11月20日：
+
+| 輸入格式                | 解析結果              |
 |------------------------|---------------------|
-| `1980-11-20`           | 20 November 1980    |
-| `Nov-20-1980`          | 20 November 1980    |
-| `20-Nov-1980`          | 20 November 1980    |
-| `1980-November-20`     | 20 November 1980    |
-| `November 20, 1980`    | 20 November 1980    |
+| `'1980-11-20'`         | 1980年11月20日        |
+| `'Nov-20-1980'`        | 1980年11月20日        |
+| `'20-Nov-1980'`        | 1980年11月20日        |
+| `'1980-November-20'`   | 1980年11月20日        |
+| `'November 20, 1980'`  | 1980年11月20日        |
 
-### TIME
-| VALUE                  | RESULT              |
-|------------------------|---------------------|
-| `01:23 AM`             | 01:23:00            |
-| `05:23 PM`             | 17:23:00            |
-| `23:12`                | 23:12:00            |
+### TIME（時間型別）
 
-### TIME WITH TIME ZONE
-| VALUE                  | RESULT              |
+| 輸入格式                | 解析結果              |
 |------------------------|---------------------|
-| `01:23 AM EST`         | 01:23:00-05:00      |
-| `05:23 PM PST`         | 17:23:00-08:00      |
-| `05:23 PM UTC`         | 17:23:00+00:00      |
+| `'01:23 AM'`           | 01:23:00            |
+| `'05:23 PM'`           | 17:23:00            |
+| `'23:12'`              | 23:12:00            |
 
-### INTERVAL
-| VALUE                  | RESULT              |
+### TIME WITH TIME ZONE（含時區的時間）
+
+| 輸入格式                | 解析結果              |
 |------------------------|---------------------|
-| `1 day`                | 1 day               |
-| `1 D 20 H 30 M 45 S`   | 1 day 20:30:45      |
+| `'01:23 AM EST'`       | 01:23:00-05:00      |
+| `'05:23 PM PST'`       | 17:23:00-08:00      |
+| `'05:23 PM UTC'`       | 17:23:00+00:00      |
+
+### INTERVAL（時間間隔）
+
+| 輸入格式                | 解析結果              |
+|------------------------|---------------------|
+| `'1 day'`              | 1 day               |
+| `'1 D 20 H 30 M 45 S'` | 1 day 20:30:45      |
+| `'2 weeks'`            | 14 days             |
+| `'3 months'`           | 3 mons              |
+
+### 日期時間使用建議
+
+#### **純日期儲存**
+- **使用**：`DATE`
+- **適用**：生日、事件日期
+- **格式**：'YYYY-MM-DD'
+
+#### **含時間的日期**
+- **使用**：`TIMESTAMP`
+- **適用**：記錄建立時間、更新時間
+- **建議**：加上 `DEFAULT CURRENT_TIMESTAMP`
+
+#### **跨時區應用**
+- **使用**：`TIMESTAMP WITH TIME ZONE`
+- **適用**：國際化應用、多時區系統
+- **優點**：自動處理時區轉換
+
+#### **時間間隔計算**
+- **使用**：`INTERVAL`
+- **適用**：持續時間、年齡計算
+- **範例**：`age('2023-01-01', '1990-05-15')`
+

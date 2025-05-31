@@ -1,4 +1,4 @@
-# PostgreSQL 分組（Grouping）與彙總（Aggregating）
+# PostgreSQL 學習筆記 - 分組（Grouping）與彙總（Aggregating）
 
 ## 接下來的範例，我會用下列這三個資料表作為說明基礎：
 
@@ -26,7 +26,7 @@ FROM comments
 GROUP BY user_id;
 ```
 
-### 👀 舉例來看：
+### 舉例來看：
 
 原本的 comments 表看起來像這樣：
 
