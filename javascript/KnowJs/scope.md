@@ -140,6 +140,91 @@ function third(){
 first();
 ```
 
+## 經典題目
+
+### JavaScript：var vs let 在 setTimeout 中的差異
+
+### 問題描述
+
+```js
+for (var a = 0; a < 5; a++) {
+  setTimeout(() => {
+    console.log('a', a);
+  }, 1000);
+}
+
+for (let a = 0; a < 5; a++) {
+  setTimeout(() => {
+    console.log('a', a);
+  }, 1000);
+}
+```
+
+兩段程式碼看似相同，但輸出結果卻不同。原因在於 `var` 與 `let` 的 **作用域 (scope)** 行為不同。
+
+---
+
+### var 的行為
+
+* `var` 是 **函式作用域（function scope）**，不具備 block scope。
+* 在 `for` 迴圈中，變數 `a` 是共用的。
+* 所以當 `setTimeout` 執行時（1秒後），`a` 已經變成 `5`。
+
+#### 結果：
+
+```
+a 5
+a 5
+a 5
+a 5
+a 5
+```
+
+---
+
+### let 的行為
+
+* `let` 是 **區塊作用域（block scope）**。
+* 每次迴圈執行都會建立一個新的 `a` 綁定。
+* `setTimeout` 捕捉的是當下那一輪的 `a` 值。
+
+#### 結果：
+
+```
+a 0
+a 1
+a 2
+a 3
+a 4
+```
+
+---
+
+### 對照表
+
+| 關鍵字 | 作用域類型 | setTimeout 執行時的值 |
+| --- | ----- | ---------------- |
+| var | 函式作用域 | 共用最後一個值（5）       |
+| let | 區塊作用域 | 各次獨立值（0 \~ 4）    |
+
+---
+
+### 若使用 var，但希望模擬 let 的行為？
+
+可以使用 **IIFE（Immediately Invoked Function Expression）** 包裹每次的變數值：
+
+```js
+for (var a = 0; a < 5; a++) {
+  ((i) => {
+    setTimeout(() => {
+      console.log('a', i);
+    }, 1000);
+  })(a);
+}
+```
+
+---
+
 ## 重點回顧
 
 這邊就針對上面記錄的心得做重點回顧
