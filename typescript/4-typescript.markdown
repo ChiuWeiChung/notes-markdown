@@ -16,6 +16,8 @@
    1. 待舉例
 6. Record<>
    1. 待舉例
+   2. 與 {} 之間的差異
+   3. 與 {[key in string]:any} 的差異
 
 7. 讓型別更容易判讀的 Prettify 
 
@@ -39,3 +41,5 @@ type Prettify<T> = {
 
 type ShowMe = Prettify<ComplexType>
 ```
+
+## 補充： as const 與 Object.freeze() 的差異

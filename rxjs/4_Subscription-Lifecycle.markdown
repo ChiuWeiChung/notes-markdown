@@ -14,7 +14,17 @@ This single graphic that you can see on the screen right now addresses all key e
            |           (error)   (complete)
            ↓               ⬊        ⬋
     .unsubscribe()──>       Teardown
+```
 
+```mermaid
+graph TD
+    Sub["subscribe"] --> Exec["Subscription <br/> (Observable execution)"]
+
+    Exec -->|error| E["error"] --> ObsE["Observer <br/>(error)"] --> Tear1["Teardown"]
+    Exec -->|next| N["next"] --> ObsN["Observer <br/>(next)"]
+    Exec -->|complete| C["complete"] --> ObsC["Observer <br/>(complete)"] --> Tear1["Teardown"]
+
+    ObsN --> Unsub["unsubscribe"] --> Tear1["Teardown"]
 ```
 
 Let's now go through the whole Subscription's lifecycle. At first we have some Observable which, as we know, doesn't do anything by itself. It just has some logic stored inside. Sometimes this logic can be very simple.

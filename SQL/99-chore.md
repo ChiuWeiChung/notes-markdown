@@ -91,3 +91,24 @@ SELECT COALESCE((NULL)::BOOLEAN::INTEGER, 0 )
 -- 3
 ```
 待解釋
+
+
+
+## STRING_AGG
+
+若我們希望「一篇文章的所有 tag 變成一行」，可使用 string_agg 聚合
+```sql
+SELECT 
+  posts.id, 
+  posts.title, 
+  posts.visible, 
+  STRING_AGG(tags.name, ', ') AS tag_names
+FROM 
+  posts
+LEFT JOIN post_tags ON posts.id = post_tags.post_id
+LEFT JOIN tags ON post_tags.tag_id = tags.id
+GROUP BY posts.id
+ORDER BY posts.id;
+```
+
+這樣每篇文章會變成一行，tag_names 為逗號分隔的字串。

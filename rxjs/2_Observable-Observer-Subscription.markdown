@@ -27,7 +27,7 @@
  
 ```
 
-在 RxJs 當中，Observalbe 可以透過 `new Observable` 這個 constructor 來建立，並提供一個 callback function 給它，這個 callback function 主要就是讓我們將 stream 的來源放入其中，並且透過 callback function 所提供的 `subscriber` 物件來控制 stream 的發送以及終止，其中 `subscriber` 物件可以被解構成三種 `notification` ，其分別是:
+在 RxJs 當中，Observable 可以透過 `new Observable` 這個 constructor 來建立，並提供一個 callback function 給它，這個 callback function 主要就是讓我們將 stream 的來源放入其中，並且透過 callback function 所提供的 `subscriber` 物件來控制 stream 的發送以及終止，其中 `subscriber` 物件可以被解構成三種 `notification` ，其分別是:
 1. **next notification:**
     * 發送資料，在上述舉例中就像是出水的動作。
 2. **error notification:**
@@ -54,7 +54,7 @@ const observable$ = new Observable((subscriber) => {
 
 ### **step 2 - 執行 Subscribe 以及建立 Observer**
 
-此時我們要將建立完成的 Observable 進行 Subscribe 的動作，所謂的 Subscribe 基本上就是再執行 Observable 內的 callback function，在 callback function 內部會透過 `subscriber.next` 將資料發送給 Observer，而 Observable 在被 Subscribe 之後就成了一個 Subscription，而為了觀察 Observavle 所丟出來的 stream，我們必須提供 Subscription 一個 Observer，由於上述提到 `subscriber` 包含了 1.next 2.error 3.complete 這三種 notification 來分別進行資料的發送/錯誤通知/完成通知，因此當我們在定義 Observer 的時候，也理所當然地會針對這三種 notification 做出不同的應對，如下方程式碼中定義的 `observer` 的物件。
+此時我們要將建立完成的 Observable 進行 Subscribe 的動作，所謂的 Subscribe 基本上就是再執行 Observable 內的 callback function，在 callback function 內部會透過 `subscriber.next` 將資料發送給 Observer，而 Observable 在被 Subscribe 之後就成了一個 Subscription，而為了觀察 Observable 所丟出來的 stream，我們必須提供 Subscription 一個 Observer，由於上述提到 `subscriber` 包含了 1.next 2.error 3.complete 這三種 notification 來分別進行資料的發送/錯誤通知/完成通知，因此當我們在定義 Observer 的時候，也理所當然地會針對這三種 notification 做出不同的應對，如下方程式碼中定義的 `observer` 的物件。
  
 再完成 Observable 以及 Observer 的建立並且將其 Subscribe 之後，如下方程式碼，Observable 會依照其內部的 callback function **依序**把三組字串透過 `next notification` 丟給 observer 內的 `next handler` 接受，因此我們可以看到 console.log 出來的結果分別是 `Pasta` 、 `Steak` 以及 `Sushi`。
 
@@ -142,7 +142,7 @@ setTimeout(() => {
  │   data      ┃     │ │   data      ┃     │ │   data      ┃     │       
  │    ↓        ┃     │ │    ↓        ┃     │ │    ↓        ┃     │                     
  │  ┌─────────────┐  │ │ ┌──────────────┐  │ │ ┌──────────────┐  │ 
- │  │  bserver A  │  │ │ │  Observer B  │  │ │ │  Observer C  │  │
+ │  │ Observer A  │  │ │ │  Observer B  │  │ │ │  Observer C  │  │
  │  └─────────────┘  │ │ └──────────────┘  │ │ └──────────────┘  │
  └───────────────────┘ └───────────────────┘ └───────────────────┘
     Subscription A         Subscription B        Subscription C
