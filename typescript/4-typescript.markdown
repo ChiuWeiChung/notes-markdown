@@ -1,4 +1,4 @@
-# TypeScript筆記 - 其他 Utility Type
+# TypeScript筆記 - 其他 Utility Type 以及小技巧
 
 ## 前言
 待補稱

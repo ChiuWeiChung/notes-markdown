@@ -202,7 +202,7 @@ const method2 = show('halo') //const method2: "halo"
 
  `< T > 內部的 T 可以是任何名稱 (Type、Tp...) ，可依照個人 (團隊) 使用習慣變更`
 
-### Generics 函式運用實例
+### Generics (泛型) 函式運用實例
 
 下方程式碼中，函式 listMemberName 以及函式 listMemberAge 都可列出陣列內的資料，其差異僅在於列出的資料是字串陣列或是數字陣列，為了讓程式碼更簡潔、彈性，可以宣告一個 generic function (listInfo) 來避免程式碼內容重複性高的函式出現。
 
@@ -236,6 +236,53 @@ function listInfo<T>(arr: T[]): void {
 listInfo(["Sarah", "Ted", "Hank", "John"]); //function listInfo<string>(arr: string[]): void
 listInfo([25, 30, 22, 31]); //function listInfo<number>(arr: number[]): void
 ```
+
+## 使用 Arrow Function 搭配 Generics
+
+這是最基本的泛型函式：傳入什麼，就回傳什麼。
+
+```ts
+const identity = <T,>(value: T): T => value;
+const num = identity(42);        // 推斷為 number
+const str = identity("hello");   // 推斷為 string
+```
+
+函式可針對不同型別的陣列進行處理：
+
+```ts
+const getFirst = <T,>(arr: T[]): T | undefined => arr[0];
+const n = getFirst([1, 2, 3]);           // 推斷為 number
+const s = getFirst(["a", "b", "c"]);     // 推斷為 string
+```
+
+使用 extends 限制泛型的條件（此處要求必須包含 .length 屬性）：
+
+```ts
+const logLength = <T extends { length: number }>(item: T): T => {
+  console.log(item.length);
+  return item;
+};
+
+logLength([1, 2, 3]);        // OK
+logLength("hello");         // OK
+// logLength(123);          // ❌ 錯誤：number 沒有 length 屬性
+```
+
+泛型函式也可以用來處理物件屬性
+
+```ts
+const getProperty = <T, K extends keyof T>(obj: T, key: K): T[K] => {
+  return obj[key];
+};
+
+const user = { name: "Alice", age: 30 };
+
+const name = getProperty(user, "name"); // 推斷為 string
+const age = getProperty(user, "age");   // 推斷為 number
+```
+
+> 為什麼 <T,> 要加逗號？ 
+> 在 arrow function + generic 的語法中，若省略逗號，TypeScript 在某些情境（如 React 環境）會把 <T> 誤判為 JSX 元素，導致語法錯誤。因此建議寫成 <T,>。
 
 ###  Generics 延伸至 Classes 的運用
 
